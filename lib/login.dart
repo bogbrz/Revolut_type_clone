@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
         child: TextButton(
             onPressed: () {
               Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const HomePage()));
+                  MaterialPageRoute(builder: (context) =>  HomePage()));
             },
             child: Text("HomePage")),
       ),
