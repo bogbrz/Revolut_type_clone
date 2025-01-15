@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/home.dart';
 
+import 'package:portfolio/login.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -10,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.dark(),
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
