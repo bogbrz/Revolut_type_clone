@@ -1,4 +1,3 @@
-
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -14,33 +13,40 @@ class SecondPage extends StatefulWidget {
   State<SecondPage> createState() => _SecondPageState();
 }
 
-class _SecondPageState extends State<SecondPage>with TickerProviderStateMixin {
-   late final AnimationController animationControllerTwo =
+class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
+  late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
-       @override
+  @override
   void initState() {
-    animationControllerTwo.repeat();
+    animationController.repeat();
     super.initState();
   }
 
   @override
   void dispose() {
- 
-  
     super.dispose();
     print("DUPA22");
   }
+
   @override
   Widget build(BuildContext context) {
     return AnimateGradient(
-          controller: animationControllerTwo,
-                  duration: Duration(seconds: 2),
-                  primaryBegin: Alignment.topLeft,
-                  primaryEnd: Alignment.bottomLeft,
-                  secondaryBegin: Alignment.bottomLeft,
-                  secondaryEnd: Alignment.topRight,
-                  primaryColors: [Colors.black38, Colors.yellowAccent],
-                  secondaryColors: [Colors.lightGreen, Colors.black],
+      reverse: true,
+      controller: animationController,
+      duration: Duration(seconds: 2),
+      primaryBegin: Alignment.topLeft,
+      primaryEnd: Alignment.bottomLeft,
+      secondaryBegin: Alignment.centerLeft,
+      secondaryEnd: Alignment.bottomRight,
+      textDirectionForGeometry: TextDirection.ltr,
+      primaryColors: [
+        const Color.fromARGB(95, 70, 154, 6),
+        const Color.fromARGB(255, 22, 123, 29)
+      ],
+      secondaryColors: [
+        Colors.lightGreen,
+        const Color.fromARGB(255, 11, 185, 101)
+      ],
       child: Column(
         children: [
           Padding(
@@ -273,7 +279,8 @@ class _SecondPageState extends State<SecondPage>with TickerProviderStateMixin {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Column(
-                            spacing: MediaQuery.of(context).size.height * 0.0125,
+                            spacing:
+                                MediaQuery.of(context).size.height * 0.0125,
                             children: [
                               ListTile(
                                 tileColor:

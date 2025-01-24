@@ -39,68 +39,21 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return AnimateGradient(
+      reverse: true,
       controller: animationController,
       duration: Duration(seconds: 2),
-      primaryBegin: Alignment.topCenter,
-      primaryEnd: Alignment.bottomCenter,
-      secondaryBegin: Alignment.topCenter,
-      secondaryEnd: Alignment.bottomCenter,
-      primaryColors: [Colors.black38, Colors.purple],
+      primaryBegin: Alignment.topLeft,
+      primaryEnd: Alignment.bottomLeft,
+      secondaryBegin: Alignment.centerLeft,
+      secondaryEnd: Alignment.bottomRight,
+      textDirectionForGeometry: TextDirection.ltr,
+      primaryColors: [const Color.fromARGB(88, 219, 77, 198), Colors.purple],
       secondaryColors: [Colors.pink, Colors.purpleAccent],
       child: Stack(
         children: [
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: IconButton.filled(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.person,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      child: SearchAnchor(builder: (context, controller) {
-                        return SearchBar(
-                          leading: Icon(Icons.search),
-                        );
-                      }, suggestionsBuilder: (context, controller) {
-                        return List<ListTile>.generate(
-                          5,
-                          (int index) {
-                            return ListTile(
-                              title: Text("item"),
-                            );
-                          },
-                        );
-                      }),
-                    ),
-                    IconButton.filled(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.auto_graph_rounded,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton.filled(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.ballot,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              AppBarWidget(),
               Expanded(
                 child: ListView(
                   children: [
@@ -179,59 +132,9 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
                               ],
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: [
-                                  IconButton.filled(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  InvestPage()));
-                                    },
-                                    icon: Icon(Icons.line_axis),
-                                  ),
-                                  Text("Invest")
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  IconButton.filled(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DepositPage()));
-                                    },
-                                    icon: Icon(Icons.add),
-                                  ),
-                                  Text("Deposit")
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  IconButton.filled(
-                                    onPressed: () {
-                                      slidingUpPanelController.anchor();
-                                    },
-                                    icon: Icon(Icons.arrow_downward),
-                                  ),
-                                  Text("Withdraw")
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  IconButton.filled(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.extension_sharp),
-                                  ),
-                                  Text("More")
-                                ],
-                              )
-                            ],
-                          ),
+                          ActionButtonsWidget(
+                              slidingUpPanelController:
+                                  slidingUpPanelController),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height * 0.35,
@@ -366,6 +269,128 @@ class _FirstPageState extends State<FirstPage> with TickerProviderStateMixin {
           )
         ],
       ),
+    );
+  }
+}
+
+class AppBarWidget extends StatelessWidget {
+  const AppBarWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CircleAvatar(
+            backgroundColor: Colors.transparent,
+            child: IconButton.filledTonal(
+              onPressed: () {},
+              icon: Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.height * 0.05,
+            child: SearchAnchor(builder: (context, controller) {
+              return SearchBar(
+                leading: Icon(Icons.search),
+              );
+            }, suggestionsBuilder: (context, controller) {
+              return List<ListTile>.generate(
+                5,
+                (int index) {
+                  return ListTile(
+                    title: Text("item"),
+                  );
+                },
+              );
+            }),
+          ),
+          IconButton.filledTonal(
+            onPressed: () {},
+            icon: Icon(
+              Icons.auto_graph_rounded,
+              color: Colors.white,
+            ),
+          ),
+          IconButton.filledTonal(
+            onPressed: () {},
+            icon: Icon(
+              Icons.ballot,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ActionButtonsWidget extends StatelessWidget {
+  const ActionButtonsWidget({
+    super.key,
+    required this.slidingUpPanelController,
+  });
+
+  final SlidingUpPanelController slidingUpPanelController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Column(
+          children: [
+            IconButton.filledTonal(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => InvestPage()));
+              },
+              icon: Icon(Icons.line_axis),
+            ),
+            Text("Invest")
+          ],
+        ),
+        Column(
+          children: [
+            IconButton.filledTonal(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DepositPage()));
+              },
+              icon: Icon(Icons.add),
+            ),
+            Text("Deposit")
+          ],
+        ),
+        Column(
+          children: [
+            IconButton.filledTonal(
+              onPressed: () {
+                slidingUpPanelController.anchor();
+              },
+              icon: Icon(Icons.arrow_downward),
+            ),
+            Text("Withdraw")
+          ],
+        ),
+        Column(
+          children: [
+            IconButton.filledTonal(
+              onPressed: () {},
+              icon: Icon(Icons.extension_sharp),
+            ),
+            Text("More")
+          ],
+        )
+      ],
     );
   }
 }
