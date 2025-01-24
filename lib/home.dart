@@ -1,7 +1,9 @@
-import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/firstpage.dart';
-import 'package:portfolio/secondpage.dart';
+import 'package:portfolio/features/pages/account_page.dart';
+import 'package:portfolio/features/pages/crypto_page.dart';
+import 'package:portfolio/features/pages/investments_page.dart';
+import 'package:portfolio/features/pages/networth_page.dart';
+import 'package:portfolio/features/pages/savings_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -15,8 +17,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   PageController controller = PageController();
 
-
-
   @override
   Widget build(BuildContext context) {
     var pageIndex = 0;
@@ -28,7 +28,13 @@ class _HomePageState extends State<HomePage> {
           PageView(
             controller: controller,
             scrollDirection: Axis.horizontal,
-            children: [FirstPage(), SecondPage()],
+            children: [
+              NetWorthPage(),
+              AccountPage(),
+              SavingsPage(),
+              InvestmentsPage(),
+              CryptoPage()
+            ],
           ),
           BottomNavigationBar(
               onTap: (value) {

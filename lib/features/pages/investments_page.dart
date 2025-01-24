@@ -1,19 +1,20 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:portfolio/invest_page.dart';
+import 'package:portfolio/features/pages/invest_page.dart';
 import 'package:unicons/unicons.dart';
 
-class SecondPage extends StatefulWidget {
-  const SecondPage({
+class InvestmentsPage extends StatefulWidget {
+  const InvestmentsPage({
     super.key,
   });
 
   @override
-  State<SecondPage> createState() => _SecondPageState();
+  State<InvestmentsPage> createState() => _InvestmentsPageState();
 }
 
-class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
+class _InvestmentsPageState extends State<InvestmentsPage>
+    with TickerProviderStateMixin {
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
   @override
@@ -40,12 +41,12 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
       secondaryEnd: Alignment.bottomRight,
       textDirectionForGeometry: TextDirection.ltr,
       primaryColors: [
-        const Color.fromARGB(95, 70, 154, 6),
-        const Color.fromARGB(255, 22, 123, 29)
+        const Color.fromARGB(95, 213, 17, 14),
+        const Color.fromARGB(255, 240, 57, 57)
       ],
       secondaryColors: [
-        Colors.lightGreen,
-        const Color.fromARGB(255, 11, 185, 101)
+        const Color.fromARGB(255, 228, 96, 14),
+        const Color.fromARGB(255, 177, 88, 15)
       ],
       child: Column(
         children: [
@@ -123,7 +124,7 @@ class _SecondPageState extends State<SecondPage> with TickerProviderStateMixin {
                                     children: [
                                       Text(
                                         textAlign: TextAlign.center,
-                                        "Networth\n2137\$",
+                                        "Investments\n2137\$",
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineLarge,
