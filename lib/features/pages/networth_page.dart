@@ -1,6 +1,7 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
+import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
@@ -112,15 +113,7 @@ class _NetWorthPageState extends State<NetWorthPage> with TickerProviderStateMix
                         ],
                       ),
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 8),
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-                      ),
-                    )
+                   PageEndTextWidget()
                   ],
                 ),
               ),

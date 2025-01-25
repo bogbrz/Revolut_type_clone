@@ -24,7 +24,7 @@ class _SavingsPageState extends State<SavingsPage>
       AnimationController(vsync: this, duration: Duration(seconds: 5));
   @override
   void initState() {
-    animationController.repeat();
+    animationController.resync(this);
     super.initState();
   }
 
@@ -184,15 +184,7 @@ class _SavingsPageState extends State<SavingsPage>
                         ],
                       ),
                     ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 8),
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-                      ),
-                    )
+                    PageEndTextWidget()
                   ],
                 ),
               ),
@@ -203,6 +195,25 @@ class _SavingsPageState extends State<SavingsPage>
                 slidingUpPanelController: slidingUpPanelController),
           )
         ],
+      ),
+    );
+  }
+}
+
+class PageEndTextWidget extends StatelessWidget {
+  const PageEndTextWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 7),
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
       ),
     );
   }
