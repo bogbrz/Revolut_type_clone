@@ -34,8 +34,12 @@ class _SavingsPageState extends State<SavingsPage>
     print("DUPA22");
   }
 
+  final int currentValue = 2137;
+  final int goalValue = 38000;
+
   @override
   Widget build(BuildContext context) {
+    double progress = currentValue / goalValue;
     return AnimateGradient(
       reverse: true,
       controller: animationController,
@@ -61,9 +65,6 @@ class _SavingsPageState extends State<SavingsPage>
               Expanded(
                 child: ListView(
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.075,
-                    ),
                     Expanded(
                       child: Column(
                         spacing: MediaQuery.of(context).size.height * 0.01,
@@ -102,8 +103,11 @@ class _SavingsPageState extends State<SavingsPage>
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromARGB(55, 146, 146, 146),
+                            ),
                             margin: const EdgeInsets.symmetric(horizontal: 16),
-                            color: const Color.fromARGB(55, 146, 146, 146),
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             child: Padding(
                               padding:
@@ -113,13 +117,14 @@ class _SavingsPageState extends State<SavingsPage>
                                     MediaQuery.of(context).size.height * 0.0125,
                                 children: [
                                   ListTile(
-                                    leading: Icon(Icons.backpack),
+                                    onTap: () {},
+                                    leading: Icon(Icons.calendar_today),
                                     title: Text("Interest"),
                                     trailing: Text("1.23 \$"),
                                     subtitle: Text("Today, 00:00"),
                                   ),
                                   ListTile(
-                                    leading: Icon(Icons.backpack),
+                                    leading: Icon(Icons.calendar_today),
                                     title: Text("Interest"),
                                     trailing: Text("1.23 \$"),
                                     subtitle: Text("Yesterday, 00:00"),
@@ -130,49 +135,51 @@ class _SavingsPageState extends State<SavingsPage>
                               ),
                             ),
                           ),
+                          InterestWidgets(),
                           Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.15,
-                                    width: (MediaQuery.of(context).size.width /
-                                            2) -
-                                        24,
-                                    color:
-                                        const Color.fromARGB(55, 146, 146, 146),
-                                    child: Column(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: () {},
+                              child: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:
+                                      const Color.fromARGB(55, 146, 146, 146),
+                                ),
+                                child: Column(
+                                  spacing: 16,
+                                  children: [
+                                    Row(
                                       children: [
-                                        Text("Interests this month"),
-                                        Text("1111 \$"),
-                                        Text("Since begining"),
-                                        Text("9999 \$")
+                                        Text(
+                                          "Goal >",
+                                          textAlign: TextAlign.left,
+                                        ),
                                       ],
-                                    )),
-                                Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.15,
-                                    width: (MediaQuery.of(context).size.width /
-                                            2) -
-                                        24,
-                                    color:
-                                        const Color.fromARGB(55, 146, 146, 146),
-                                    child: Column(
+                                    ),
+                                    Row(
                                       children: [
-                                        Text("Increase since begining"),
-                                        Text("9999 \$"),
-                                        Transform.scale(
-                                          scale: 0.5,
-                                          child: LineChartWidget(),
-                                        )
+                                        Text(
+                                          "2137.00zł out of 38000.00zł",
+                                          textAlign: TextAlign.left,
+                                        ),
                                       ],
-                                    ))
-                              ],
+                                    ),
+                                    LinearProgressIndicator(
+                                      minHeight:
+                                          MediaQuery.of(context).size.height *
+                                              0.0075,
+                                      borderRadius: BorderRadius.circular(5),
+                                      value: progress,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
+                          AutomationWidget(),
                           AssetsListWidget()
                         ],
                       ),
@@ -198,5 +205,107 @@ class _SavingsPageState extends State<SavingsPage>
         ],
       ),
     );
+  }
+}
+
+class InterestWidgets extends StatelessWidget {
+  const InterestWidgets({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {},
+            child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromARGB(55, 146, 146, 146),
+                ),
+                padding: const EdgeInsets.all(16),
+                height: MediaQuery.of(context).size.height * 0.18,
+                width: (MediaQuery.of(context).size.width / 2) - 24,
+                child: Text(
+                    "Interests this month\n1111 \$\nSince begining\n9999 \$")),
+          ),
+          InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () {},
+            child: Container(
+                padding: const EdgeInsets.all(16),
+                width: (MediaQuery.of(context).size.width / 2) - 24,
+                height: MediaQuery.of(context).size.height * 0.18,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color.fromARGB(55, 146, 146, 146),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text("Increase since begining"),
+                    Text("9999 \$"),
+                    Transform.scale(
+                      scale: 0.5,
+                      child: LineChartWidget(),
+                    )
+                  ],
+                )),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class AutomationWidget extends StatelessWidget {
+  const AutomationWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(55, 146, 146, 146),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text("Automation"),
+              ],
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.calendar_month_outlined),
+              title: Text("Cyclical transfer"),
+              trailing: Icon(Icons.arrow_right),
+              subtitle: Text("Deposit money periodically"),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.recycling_outlined),
+              title: Text("Income distribution"),
+              trailing: Icon(Icons.arrow_right),
+              subtitle: Text("Automaticlly save part of income"),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.savings_outlined),
+              title: Text("Pocket change"),
+              trailing: Icon(Icons.arrow_right),
+              subtitle: Text("Save rounded transaction amounts "),
+            ),
+          ],
+        ));
   }
 }

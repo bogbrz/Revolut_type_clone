@@ -29,9 +29,9 @@ class _HomePageState extends State<HomePage> {
             controller: controller,
             scrollDirection: Axis.horizontal,
             children: [
+              SavingsPage(),
               NetWorthPage(),
               AccountPage(),
-              SavingsPage(),
               InvestmentsPage(),
               CryptoPage()
             ],
