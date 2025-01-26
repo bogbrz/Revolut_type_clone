@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
-import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 
 class NetWorthPage extends StatefulWidget {
- const NetWorthPage({
+  const NetWorthPage({
     super.key,
   });
 
@@ -17,7 +16,8 @@ class NetWorthPage extends StatefulWidget {
   State<NetWorthPage> createState() => _NetWorthPageState();
 }
 
-class _NetWorthPageState extends State<NetWorthPage> with TickerProviderStateMixin {
+class _NetWorthPageState extends State<NetWorthPage>
+    with TickerProviderStateMixin {
   final slidingUpPanelController = SlidingUpPanelController();
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
@@ -55,7 +55,6 @@ class _NetWorthPageState extends State<NetWorthPage> with TickerProviderStateMix
         children: [
           Column(
             children: [
-              AppBarWidget(),
               Expanded(
                 child: ListView(
                   children: [
@@ -113,7 +112,7 @@ class _NetWorthPageState extends State<NetWorthPage> with TickerProviderStateMix
                         ],
                       ),
                     ),
-                   PageEndTextWidget()
+                    PageEndTextWidget()
                   ],
                 ),
               ),
@@ -128,5 +127,3 @@ class _NetWorthPageState extends State<NetWorthPage> with TickerProviderStateMix
     );
   }
 }
-
-

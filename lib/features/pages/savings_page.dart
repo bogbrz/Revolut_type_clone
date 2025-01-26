@@ -1,8 +1,6 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
-import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
-import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
 import 'package:portfolio/features/pages/widgets/saving_action_buttons.dart';
@@ -61,10 +59,13 @@ class _SavingsPageState extends State<SavingsPage>
         children: [
           Column(
             children: [
-              AppBarWidget(),
+             
               Expanded(
                 child: ListView(
                   children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.075,
+                    ),
                     Expanded(
                       child: Column(
                         spacing: MediaQuery.of(context).size.height * 0.01,

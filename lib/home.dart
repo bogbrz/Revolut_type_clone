@@ -3,10 +3,12 @@ import 'package:portfolio/features/pages/account_page.dart';
 import 'package:portfolio/features/pages/crypto_page.dart';
 import 'package:portfolio/features/pages/investments_page.dart';
 import 'package:portfolio/features/pages/networth_page.dart';
+import 'package:portfolio/features/pages/news_page.dart';
 import 'package:portfolio/features/pages/savings_page.dart';
+import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({
+  const HomePage({
     super.key,
   });
 
@@ -16,42 +18,53 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PageController controller = PageController();
-
+  var pageIndex = 0;
   @override
   Widget build(BuildContext context) {
-    var pageIndex = 0;
     return SafeArea(
       child: Scaffold(
           body: Stack(
         alignment: AlignmentDirectional.bottomStart,
         children: [
-          PageView(
-            controller: controller,
-            scrollDirection: Axis.horizontal,
+          Builder(builder: (context) {
+            if (pageIndex == 0) {
+              return PageView(
+                controller: controller,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  SavingsPage(),
+                  NetWorthPage(),
+                  AccountPage(),
+                  InvestmentsPage(),
+                  CryptoPage()
+                ],
+              );
+            }
+            return NewsPage();
+          }),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SavingsPage(),
-              NetWorthPage(),
-              AccountPage(),
-              InvestmentsPage(),
-              CryptoPage()
+              pageIndex == 0 ? AppBarWidget() : SizedBox.shrink(),
+              BottomNavigationBar(
+                  onTap: (value) {
+                    setState(() {
+                      pageIndex = value;
+
+                      print(pageIndex);
+                    });
+                  },
+                  currentIndex: pageIndex,
+                  landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+                  backgroundColor: Colors.transparent,
+                  items: [
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.money), label: "Money"),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.money), label: "News"),
+                  ]),
             ],
           ),
-          BottomNavigationBar(
-              onTap: (value) {
-                setState(() {
-                  pageIndex = value;
-                  print(pageIndex);
-                });
-              },
-              currentIndex: pageIndex,
-              landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
-              backgroundColor: Colors.transparent,
-              items: [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.money), label: "Money"),
-                BottomNavigationBarItem(icon: Icon(Icons.money), label: "News"),
-                BottomNavigationBarItem(icon: Icon(Icons.money), label: "News"),
-              ]),
         ],
       )),
     );
