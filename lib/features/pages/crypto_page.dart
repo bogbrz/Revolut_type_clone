@@ -62,58 +62,51 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                 child: ListView(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.075,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Expanded(
-                      child: Column(
-                        spacing: MediaQuery.of(context).size.height * 0.1,
-                        children: [
-                          SizedBox(
-                            child: Column(
+                    Column(
+                      spacing: MediaQuery.of(context).size.height * 0.01,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          child: ListTile(
+                            tileColor: Colors.transparent,
+                            title: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.15,
-                                  child: ListTile(
-                                    tileColor: Colors.transparent,
-                                    title: Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            textAlign: TextAlign.center,
-                                            "Crypto currency\n2137\$",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text("-0,45\$"),
-                                              Icon(Icons.arrow_drop_down),
-                                              Text("-0,45%"),
-                                            ],
-                                          )
-                                        ],
-                                      ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      textAlign: TextAlign.center,
+                                      "Cryptocurrency \n2137\$",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineLarge,
                                     ),
-                                  ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("-0,45\$"),
+                                        Icon(Icons.arrow_drop_down),
+                                        Text("-0,45%"),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                LineChartWidget(),
+                                LineChartWidget()
                               ],
                             ),
                           ),
-                          ActionButtonsWidget(
-                              slidingUpPanelController:
-                                  slidingUpPanelController),
-                          PieChartWidget(),
-                          AssetsListWidget()
-                        ],
-                      ),
+                        ),
+                        ActionButtonsWidget(
+                            slidingUpPanelController: slidingUpPanelController),
+                        Column(
+                          spacing: MediaQuery.of(context).size.height * 0.075,
+                          children: [PieChartWidget(), AssetsListWidget()],
+                        ),
+                      ],
                     ),
                     PageEndTextWidget()
                   ],

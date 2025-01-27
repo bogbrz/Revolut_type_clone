@@ -32,9 +32,9 @@ class _HomePageState extends State<HomePage> {
                 controller: controller,
                 scrollDirection: Axis.horizontal,
                 children: [
+                  AccountPage(),
                   SavingsPage(),
                   NetWorthPage(),
-                  AccountPage(),
                   InvestmentsPage(),
                   CryptoPage()
                 ],
@@ -59,9 +59,9 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.transparent,
                   items: [
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.money), label: "Money"),
+                        icon: Icon(Icons.home_filled), label: "Money"),
                     BottomNavigationBarItem(
-                        icon: Icon(Icons.money), label: "News"),
+                        icon: Icon(Icons.newspaper), label: "News"),
                   ]),
             ],
           ),

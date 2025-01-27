@@ -2,6 +2,7 @@ import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:portfolio/features/pages/savings_page.dart';
+import 'package:portfolio/features/pages/widgets/account_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
@@ -56,63 +57,41 @@ class _AccountPageState extends State<AccountPage>
         children: [
           Column(
             children: [
-              // AppBarWidget(),
               Expanded(
                 child: ListView(
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.075,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    Expanded(
-                      child: Column(
-                        spacing: MediaQuery.of(context).size.height * 0.1,
-                        children: [
-                          SizedBox(
-                            child: Column(
+                    Column(
+                      spacing: MediaQuery.of(context).size.height * 0.01,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.25,
+                          child: ListTile(
+                            tileColor: Colors.transparent,
+                            title: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.15,
-                                  child: ListTile(
-                                    tileColor: Colors.transparent,
-                                    title: Center(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            textAlign: TextAlign.center,
-                                            "Account\n2137\$",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text("-0,45\$"),
-                                              Icon(Icons.arrow_drop_down),
-                                              Text("-0,45%"),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  "Personal account - all\n2137\$",
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
                                 ),
-                                LineChartWidget(),
+                                ElevatedButton(
+                                    onPressed: () {}, child: Text("Accounts"))
                               ],
                             ),
                           ),
-                          ActionButtonsWidget(
-                              slidingUpPanelController:
-                                  slidingUpPanelController),
-                          PieChartWidget(),
-                          AssetsListWidget()
-                        ],
-                      ),
+                        ),
+                        AccountActionButtons(
+                            slidingUpPanelController: slidingUpPanelController),
+                        TransactionsHistoryWidget(),
+                        AutomationWidget(),
+                        AssetsListWidget()
+                      ],
                     ),
                     PageEndTextWidget()
                   ],
