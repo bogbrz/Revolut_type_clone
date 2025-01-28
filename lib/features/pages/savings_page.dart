@@ -193,7 +193,7 @@ class SavingGoalWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Goal >",
+                    "Goal > 24.12.2024",
                     textAlign: TextAlign.left,
                   ),
                 ],

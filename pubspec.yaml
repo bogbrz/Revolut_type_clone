@@ -38,6 +38,7 @@ dependencies:
   unicons: ^3.0.0
   animate_gradient: ^0.0.3
   flutter_sliding_up_panel: ^2.1.1
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
