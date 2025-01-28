@@ -59,7 +59,7 @@ class _NetWorthPageState extends State<NetWorthPage>
                 child: ListView(
                   children: [
                     SizedBox(
-                       height: MediaQuery.of(context).size.height * 0.04,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Column(
                       spacing: MediaQuery.of(context).size.height * 0.01,
@@ -91,18 +91,14 @@ class _NetWorthPageState extends State<NetWorthPage>
                                     )
                                   ],
                                 ),
-                               LineChartWidget(),
-                               
+                                LineChartWidget(),
                               ],
                             ),
                           ),
                         ),
                         ActionButtonsWidget(
                             slidingUpPanelController: slidingUpPanelController),
-                        Column(
-                          spacing: MediaQuery.of(context).size.height * 0.075,
-                          children: [PieChartWidget(), AssetsListWidget()],
-                        ),
+                        PieChartWidget(),
                       ],
                     ),
                     PageEndTextWidget()
