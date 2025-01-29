@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:segmented_button_slide/segmented_button_slide.dart';
 
-
-class InvestPage extends StatelessWidget {
+class InvestPage extends StatefulWidget {
   const InvestPage({super.key});
 
+  @override
+  State<InvestPage> createState() => _InvestPageState();
+}
+
+class _InvestPageState extends State<InvestPage> {
+  int selectedSegment = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,14 +35,29 @@ class InvestPage extends StatelessWidget {
                 },
               );
             }),
-            Row(
-              spacing: 8,
-              children: [
-                ElevatedButton(onPressed: () {}, child: Text("Stocks")),
-                ElevatedButton(onPressed: () {}, child: Text("Commodities")),
-                ElevatedButton(onPressed: () {}, child: Text("Bonds"))
+            SegmentedButtonSlide(
+              colors: SegmentedButtonSlideColors(
+                  barColor: Colors.transparent,
+                  backgroundSelectedColor: Colors.transparent),
+              onChange: (p0) {
+                setState(() {
+                  selectedSegment = p0;
+                });
+              },
+              selectedEntry: selectedSegment,
+              slideShadow: [
+                BoxShadow(
+                  color: const Color.fromARGB(125, 235, 231, 231),
+                  blurRadius: 5,
+                  spreadRadius: 1,
+                )
               ],
-            )
+              entries: [
+                SegmentedButtonSlideEntry(label: "Stocks"),
+                SegmentedButtonSlideEntry(label: "Commodities"),
+                SegmentedButtonSlideEntry(label: "Bonds")
+              ],
+            ),
           ],
         ),
       ),
