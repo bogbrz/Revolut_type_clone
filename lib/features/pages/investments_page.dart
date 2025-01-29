@@ -6,6 +6,7 @@ import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
+import 'package:unicons/unicons.dart';
 
 class InvestmentsPage extends StatefulWidget {
   const InvestmentsPage({
@@ -60,7 +61,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                 child: ListView(
                   children: [
                     SizedBox(
-                   height: MediaQuery.of(context).size.height * 0.04,
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
                     Column(
                       spacing: MediaQuery.of(context).size.height * 0.01,
@@ -100,10 +101,8 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                         ),
                         ActionButtonsWidget(
                             slidingUpPanelController: slidingUpPanelController),
-                        Column(
-                          spacing: MediaQuery.of(context).size.height * 0.075,
-                          children: [PieChartWidget(), AssetsListWidget()],
-                        ),
+                      
+                        PieChartWidget(),
                       ],
                     ),
                     PageEndTextWidget()

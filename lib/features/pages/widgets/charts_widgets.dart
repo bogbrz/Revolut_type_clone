@@ -19,12 +19,17 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       return List.generate(5, (i) {
         final isTouched = i == touchedSectionIndex;
         final iconSize = isTouched ? 35.0 : 25.0;
-        final touchedColor = Color.fromARGB(255, 49, 44, 44);
+        final touchedColor = Colors.black;
 
         final fontSize = isTouched ? 25.0 : 20.0;
         switch (i) {
           case 0:
             return ListTile(
+              onTap: () {
+                setState(() {
+                  touchedSectionIndex = i;
+                });
+              },
               selected: isTouched,
               selectedColor: touchedColor,
               tileColor: touchedColor,
@@ -37,6 +42,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             );
           case 1:
             return ListTile(
+              onTap: () {
+                setState(() {
+                  touchedSectionIndex = i;
+                });
+              },
               selected: isTouched,
               selectedColor: touchedColor,
               leading: Icon(
@@ -49,6 +59,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             );
           case 2:
             return ListTile(
+              onTap: () {
+                setState(() {
+                  touchedSectionIndex = i;
+                });
+              },
               selected: isTouched,
               selectedColor: touchedColor,
               leading: Icon(
@@ -60,6 +75,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             );
           case 3:
             return ListTile(
+              onTap: () {
+                setState(() {
+                  touchedSectionIndex = i;
+                });
+              },
               selected: isTouched,
               selectedColor: touchedColor,
               tileColor: touchedColor,
@@ -73,12 +93,17 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             );
           case 4:
             return ListTile(
+              onTap: () {
+                setState(() {
+                  touchedSectionIndex = i;
+                });
+              },
               selected: isTouched,
               selectedColor: touchedColor,
 
               // tileColor: touchedColor,
               leading: Icon(
-                Icons.money,
+                UniconsLine.dollar_alt,
                 size: iconSize,
               ),
               title: Text("Cash", style: TextStyle(fontSize: fontSize)),
@@ -95,7 +120,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         final isTouched = i == touchedSectionIndex;
         final fontSize = isTouched ? 20.0 : 15.0;
         final badgeWidgetSize = isTouched ? 35.0 : 25.0;
-        final borderWidth = isTouched ? 2.0 : 0.0;
+        final borderWidth = isTouched ? 1.5 : 0.0;
+        final fontColor = isTouched ? Colors.black : Colors.white;
+        final fontWeight = isTouched ? FontWeight.bold : null;
         final radius = isTouched
             ? MediaQuery.of(context).size.height * 0.17
             : MediaQuery.of(context).size.height * 0.15;
@@ -106,14 +133,18 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 radius: radius,
                 borderSide: BorderSide(width: borderWidth),
                 title: "15%",
-                titleStyle: TextStyle(fontSize: fontSize, color: Colors.black),
+                titleStyle: TextStyle(
+                    fontSize: fontSize,
+                    color: fontColor,
+                    fontWeight: fontWeight),
                 value: 15,
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
                     icon: Icon(
-                      Icons.access_alarm,
+                      Icons.savings,
                       size: badgeWidgetSize,
+                      color: fontColor,
                     )),
                 color: Colors.deepOrange);
           case 1:
@@ -124,8 +155,13 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.access_alarm, size: badgeWidgetSize)),
-                titleStyle: TextStyle(fontSize: fontSize, color: Colors.black),
+                    icon: Icon(UniconsLine.paperclip,
+                        size: badgeWidgetSize, color: fontColor)),
+                titleStyle: TextStyle(
+                  fontSize: fontSize,
+                  color: fontColor,
+                  fontWeight: fontWeight,
+                ),
                 value: 35,
                 color: Colors.redAccent);
           case 2:
@@ -136,8 +172,12 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.access_alarm, size: badgeWidgetSize)),
-                titleStyle: TextStyle(fontSize: fontSize, color: Colors.black),
+                    icon: Icon(UniconsLine.chart_growth,
+                        size: badgeWidgetSize, color: fontColor)),
+                titleStyle: TextStyle(
+                    fontSize: fontSize,
+                    color: fontColor,
+                    fontWeight: fontWeight),
                 value: 25,
                 color: Colors.purple);
           case 3:
@@ -148,8 +188,15 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.access_alarm, size: badgeWidgetSize)),
-                titleStyle: TextStyle(fontSize: fontSize, color: Colors.black),
+                    icon: Icon(
+                      UniconsLine.bitcoin_circle,
+                      size: badgeWidgetSize,
+                      color: fontColor,
+                    )),
+                titleStyle: TextStyle(
+                    fontSize: fontSize,
+                    color: fontColor,
+                    fontWeight: fontWeight),
                 value: 5);
           case 4:
             return PieChartSectionData(
@@ -159,8 +206,12 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.access_alarm, size: badgeWidgetSize)),
-                titleStyle: TextStyle(fontSize: fontSize, color: Colors.black),
+                    icon: Icon(UniconsLine.dollar_alt,
+                        size: badgeWidgetSize, color: fontColor)),
+                titleStyle: TextStyle(
+                    fontSize: fontSize,
+                    color: fontColor,
+                    fontWeight: fontWeight),
                 value: 10,
                 color: Colors.lightBlue);
           default:
@@ -203,9 +254,15 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            spacing: MediaQuery.of(context).size.height * 0.0125,
-            children: assetsWidgets(),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: const Color.fromARGB(55, 146, 146, 146),
+            ),
+            child: Column(
+              spacing: MediaQuery.of(context).size.height * 0.015,
+              children: assetsWidgets(),
+            ),
           ),
         )
       ],

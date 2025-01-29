@@ -8,6 +8,7 @@ import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
+import 'package:portfolio/features/pages/widgets/operatons_history_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 
 class CryptoPage extends StatefulWidget {
@@ -75,24 +76,18 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                             title: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Column(
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  "Cryptocurrency \n2137\$",
+                                  style:
+                                      Theme.of(context).textTheme.headlineLarge,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      textAlign: TextAlign.center,
-                                      "Cryptocurrency \n2137\$",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text("-0,45\$"),
-                                        Icon(Icons.arrow_drop_down),
-                                        Text("-0,45%"),
-                                      ],
-                                    )
+                                    Text("-0,45\$"),
+                                    Icon(Icons.arrow_drop_down),
+                                    Text("-0,45%"),
                                   ],
                                 ),
                                 LineChartWidget()
@@ -102,9 +97,140 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                         ),
                         ActionButtonsWidget(
                             slidingUpPanelController: slidingUpPanelController),
-                        Column(
-                          spacing: MediaQuery.of(context).size.height * 0.075,
-                          children: [PieChartWidget(), AssetsListWidget()],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromARGB(55, 146, 146, 146),
+                            ),
+                            child: Column(
+                              spacing:
+                                  MediaQuery.of(context).size.height * 0.0125,
+                              children: [
+                                ListTile(
+                                  leading: Image(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.06,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.15,
+                                      image: AssetImage(
+                                          "assets/images/bitcoin_icon.png")),
+                                  title: Text("Bitcoin"),
+                                  trailing: Text("123"),
+                                ),
+                                ListTile(
+                                  leading: Image(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.15,
+                                      image: AssetImage(
+                                          "assets/images/eth_logo.png")),
+                                  title: Text("Etherium"),
+                                  trailing: Text("123"),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        OperatonsHistoryWidget(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:
+                                      const Color.fromARGB(55, 146, 146, 146),
+                                ),
+                                width: (MediaQuery.of(context).size.width / 2) -
+                                    22,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.18,
+                                child: ListTile(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("BTC"),
+                                      Image(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.06,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.15,
+                                          image: AssetImage(
+                                              "assets/images/bitcoin_icon.png")),
+                                    ],
+                                  ),
+                                  subtitle: Column(
+                                    children: [
+                                      Text("100 000 \$"),
+                                      Transform.scale(
+                                        scale: 0.5,
+                                        child: LineChartWidget(),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color:
+                                      const Color.fromARGB(55, 146, 146, 146),
+                                ),
+                                width: (MediaQuery.of(context).size.width / 2) -
+                                    22,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.18,
+                                child: ListTile(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("ETH"),
+                                      Image(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.06,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.1,
+                                          image: AssetImage(
+                                              "assets/images/eth_logo.png")),
+                                    ],
+                                  ),
+                                  subtitle: Column(
+                                    children: [
+                                      Text("3 000 \$"),
+                                      Transform.scale(
+                                        scale: 0.5,
+                                        child: LineChartWidget(),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
