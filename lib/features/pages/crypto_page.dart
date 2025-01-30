@@ -5,6 +5,7 @@ import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
+import 'package:portfolio/features/pages/widgets/crypto_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
@@ -96,7 +97,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        ActionButtonsWidget(
+                        CryptoActionButtons(
                             slidingUpPanelController: slidingUpPanelController),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -138,7 +139,15 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        OperatonsHistoryWidget(),
+                        OperatonsHistoryWidget(
+                          assetImage:
+                              AssetImage("assets/images/bitcoin_icon.png"),
+                          exampleOne: [
+                            "assets/images/bitcoin_icon.png",
+                            "USD",
+                            "BTC"
+                          ],
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 16.0,
@@ -242,6 +251,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                           ),
                         ),
                         HighestChangesWidget(),
+                        AllCryptosWidget()
                       ],
                     ),
                     PageEndTextWidget()
@@ -255,6 +265,71 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                 slidingUpPanelController: slidingUpPanelController),
           )
         ],
+      ),
+    );
+  }
+}
+
+class AllCryptosWidget extends StatelessWidget {
+  const AllCryptosWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    List<ListTile> exampleList = List.generate(9, (i) {
+      return ListTile(
+        leading: Image(
+            height: MediaQuery.of(context).size.height * 0.06,
+            width: MediaQuery.of(context).size.width * 0.2,
+            image: AssetImage("assets/images/bitcoin_icon.png")),
+        title: Text("Bitcoin"),
+        subtitle: Text("BTC"),
+        trailing: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.25,
+          child: Column(
+            children: [
+              Text("100 000\$"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    i % 2 == 0 ? Icons.arrow_upward : Icons.arrow_downward,
+                    color: i % 2 == 0 ? Colors.green : Colors.red,
+                  ),
+                  Text(
+                    "2.3%",
+                    style: TextStyle(
+                        color: i % 2 == 0 ? Colors.green : Colors.red),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      );
+    });
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(55, 146, 146, 146),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text("All cryptocurrencies"),
+              ]),
+            ),
+            Wrap(
+              children: exampleList,
+            )
+          ],
+        ),
       ),
     );
   }

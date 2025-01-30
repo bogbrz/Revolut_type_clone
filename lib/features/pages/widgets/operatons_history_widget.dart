@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class OperatonsHistoryWidget extends StatelessWidget {
-  const OperatonsHistoryWidget({
-    super.key,
-  });
+  const OperatonsHistoryWidget(
+      {super.key, required this.exampleOne, required this.assetImage});
+  final List<String> exampleOne;
+  final AssetImage assetImage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +37,12 @@ class OperatonsHistoryWidget extends StatelessWidget {
                     leading: Image(
                         height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.15,
-                        image: AssetImage("assets/images/bitcoin_icon.png")),
+                        image:assetImage),
                     title: Row(
                       children: [
-                        Text("USD"),
+                        Text(exampleOne[1]),
                         Icon(Icons.arrow_right_alt),
-                        Text("BTC")
+                        Text(exampleOne[2])
                       ],
                     ),
                     trailing: Text("+0.0000060 \$"),
