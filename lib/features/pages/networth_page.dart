@@ -1,10 +1,9 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
-import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
-import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
+import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 
 class NetWorthPage extends StatefulWidget {

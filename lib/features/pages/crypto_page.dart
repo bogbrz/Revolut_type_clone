@@ -1,17 +1,16 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
-import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
+import 'package:portfolio/features/pages/widgets/all_assets_widget.dart';
 import 'package:portfolio/features/pages/widgets/crypto_action_buttons.dart';
-import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
-import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
+import 'package:portfolio/features/pages/widgets/highest_changes_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
 import 'package:portfolio/features/pages/widgets/operatons_history_widget.dart';
+import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
-import 'package:segmented_button_slide/segmented_button_slide.dart';
 
 class CryptoPage extends StatefulWidget {
   const CryptoPage({
@@ -140,6 +139,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                           ),
                         ),
                         OperatonsHistoryWidget(
+                          widthMultiplayer: 0.15,
                           assetImage:
                               AssetImage("assets/images/bitcoin_icon.png"),
                           exampleOne: [
@@ -250,8 +250,18 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                             ],
                           ),
                         ),
-                        HighestChangesWidget(),
-                        AllCryptosWidget()
+                        HighestChangesWidget(
+                          images: [
+                            AssetImage("assets/images/bitcoin_icon.png"),
+                            AssetImage("assets/images/eth_logo.png")
+                          ],
+                        ),
+                        AllAssetsWidget(
+                          images: [
+                            AssetImage("assets/images/bitcoin_icon.png"),
+                            AssetImage("assets/images/eth_logo.png")
+                          ],
+                        )
                       ],
                     ),
                     PageEndTextWidget()
@@ -270,164 +280,3 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
   }
 }
 
-class AllCryptosWidget extends StatelessWidget {
-  const AllCryptosWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    List<ListTile> exampleList = List.generate(9, (i) {
-      return ListTile(
-        leading: Image(
-            height: MediaQuery.of(context).size.height * 0.06,
-            width: MediaQuery.of(context).size.width * 0.2,
-            image: AssetImage("assets/images/bitcoin_icon.png")),
-        title: Text("Bitcoin"),
-        subtitle: Text("BTC"),
-        trailing: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.25,
-          child: Column(
-            children: [
-              Text("100 000\$"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    i % 2 == 0 ? Icons.arrow_upward : Icons.arrow_downward,
-                    color: i % 2 == 0 ? Colors.green : Colors.red,
-                  ),
-                  Text(
-                    "2.3%",
-                    style: TextStyle(
-                        color: i % 2 == 0 ? Colors.green : Colors.red),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      );
-    });
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(55, 146, 146, 146),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                Text("All cryptocurrencies"),
-              ]),
-            ),
-            Wrap(
-              children: exampleList,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HighestChangesWidget extends StatefulWidget {
-  const HighestChangesWidget({
-    super.key,
-  });
-
-  @override
-  State<HighestChangesWidget> createState() => _HighestChangesWidgetState();
-}
-
-class _HighestChangesWidgetState extends State<HighestChangesWidget> {
-  int selectedSegment = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    List<SizedBox> exampleList = List.generate(9, (i) {
-      return SizedBox(
-        width: (MediaQuery.of(context).size.width * 0.3),
-        child: ListTile(
-          title: Column(
-            children: [
-              Image(
-                  height: MediaQuery.of(context).size.height * 0.06,
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  image: AssetImage("assets/images/bitcoin_icon.png")),
-              Text("PC")
-            ],
-          ),
-          subtitle: Row(
-            children: [
-              Icon(
-                selectedSegment == 0
-                    ? Icons.arrow_upward
-                    : Icons.arrow_downward,
-                color: selectedSegment == 0 ? Colors.green : Colors.red,
-              ),
-              Text(
-                "21.37%",
-                style: TextStyle(
-                    fontSize: 15,
-                    color: selectedSegment == 0 ? Colors.green : Colors.red),
-              )
-            ],
-          ),
-        ),
-      );
-    });
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(55, 146, 146, 146),
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(children: [
-                Text("Highest fluctuations"),
-              ]),
-            ),
-            SegmentedButtonSlide(
-              padding: EdgeInsets.all(16),
-              colors: SegmentedButtonSlideColors(
-                  barColor: Colors.transparent,
-                  backgroundSelectedColor: Colors.transparent),
-              onChange: (p0) {
-                setState(() {
-                  selectedSegment = p0;
-                });
-              },
-              selectedEntry: selectedSegment,
-              slideShadow: [
-                BoxShadow(
-                  color: const Color.fromARGB(125, 235, 231, 231),
-                  blurRadius: 5,
-                  spreadRadius: 1,
-                )
-              ],
-              entries: [
-                SegmentedButtonSlideEntry(
-                    icon: Icons.high_quality, label: "Highest"),
-                SegmentedButtonSlideEntry(
-                    icon: Icons.low_priority, label: "Lowest")
-              ],
-            ),
-            Wrap(
-              children: exampleList,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}

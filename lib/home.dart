@@ -3,7 +3,7 @@ import 'package:portfolio/features/pages/account_page.dart';
 import 'package:portfolio/features/pages/crypto_page.dart';
 import 'package:portfolio/features/pages/investments_page.dart';
 import 'package:portfolio/features/pages/networth_page.dart';
-import 'package:portfolio/features/pages/news_page.dart';
+import 'package:portfolio/features/pages/news_page/news_page.dart';
 import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 
@@ -32,11 +32,11 @@ class _HomePageState extends State<HomePage> {
                 controller: controller,
                 scrollDirection: Axis.horizontal,
                 children: [
+                  InvestmentsPage(),
                   CryptoPage(),
                   NetWorthPage(),
                   AccountPage(),
                   SavingsPage(),
-                  InvestmentsPage(),
                 ],
               );
             }
