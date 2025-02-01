@@ -14,25 +14,22 @@ class NewsPageBloc extends Bloc<NewsPageEvent, NewsPageState> {
           model: null,
           error: false,
         )) {
-    Future<void> getNews() async {
-      on<NewsPageEvent>((event, emit) async {
-        emit(NewsPageLoadInProgress(
-            status: Status.loading, model: null, error: false));
-
-        try {
-          final newsModel = await newsRepository.getNewsData();
-          if (newsModel == null) {
-            emit(NewsPageLoadFaliure(
-                status: Status.failure, model: null, error: true));
-          } else {
-            emit(NewsPageLoadSucces(
-                status: Status.success, model: newsModel, error: false));
-          }
-        } catch (e) {
+    on<NewsPageEvent>((event, emit) async {
+      emit(NewsPageLoadInProgress(
+          status: Status.loading, model: null, error: false));
+      try {
+        final newsModel = await newsRepository.getNewsData();
+        if (newsModel == null) {
           emit(NewsPageLoadFaliure(
               status: Status.failure, model: null, error: true));
+        } else {
+          emit(NewsPageLoadSucces(
+              status: Status.success, model: newsModel, error: false));
         }
-      });
-    }
+      } catch (e) {
+        emit(NewsPageLoadFaliure(
+            status: Status.failure, model: null, error: true));
+      }
+    });
   }
 }
