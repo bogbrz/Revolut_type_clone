@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/pages/account_page.dart';
-import 'package:portfolio/features/pages/crypto_page.dart';
+
+import 'package:portfolio/features/pages/crypto_page/crypto_page.dart';
 import 'package:portfolio/features/pages/investments_page.dart';
 import 'package:portfolio/features/pages/networth_page.dart';
 import 'package:portfolio/features/pages/news_page/news_page.dart';
@@ -32,8 +33,8 @@ class _HomePageState extends State<HomePage> {
                 controller: controller,
                 scrollDirection: Axis.horizontal,
                 children: [
-                  InvestmentsPage(),
                   CryptoPage(),
+                  InvestmentsPage(),
                   NetWorthPage(),
                   AccountPage(),
                   SavingsPage(),

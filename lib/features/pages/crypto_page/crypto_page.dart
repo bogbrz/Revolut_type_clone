@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
-import 'package:portfolio/features/pages/widgets/all_assets_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
 import 'package:portfolio/features/pages/widgets/crypto_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/highest_changes_widget.dart';
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
