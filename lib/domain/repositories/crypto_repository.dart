@@ -12,6 +12,10 @@ class CryptoRepository {
       return null;
     }
 
-    return cryptoData;
+    final cryptoList = CryptoModel.fromJson(cryptoData);
+    // final cryptoList =
+    //     cryptoData.map((coinData) => coinData as CryptoModel).toList();
+
+    return cryptoList;
   }
 }

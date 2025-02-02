@@ -1,20 +1,16 @@
-import 'dart:convert';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-List<CryptoModel> CryptoModelFromJson(String str) => List<CryptoModel>.from(
-    json.decode(str).map((x) => CryptoModel.fromJson(x)));
+part 'crypto_model.freezed.dart';
+part 'crypto_model.g.dart';
 
-class CryptoModel {
-  String id;
-  String symbol;
-  String name;
-  Platforms platforms;
-
-  CryptoModel({
-    required this.id,
-    required this.symbol,
-    required this.name,
-    required this.platforms,
-  });
+@freezed
+class CryptoModel with _$CryptoModel {
+  const factory CryptoModel({
+    required String id,
+    required String symbol,
+    required String name,
+    required Platforms platforms,
+  }) = _CryptoModel;
 
   factory CryptoModel.fromJson(Map<String, dynamic> json) => CryptoModel(
         id: json["id"],
@@ -24,14 +20,12 @@ class CryptoModel {
       );
 }
 
-class Platforms {
-  String? ethereum;
-  String? polygonPos;
-
-  Platforms({
-    this.ethereum,
-    this.polygonPos,
-  });
+@freezed
+class Platforms with _$Platforms {
+  const factory Platforms({
+    required String? ethereum,
+    required String? polygonPos,
+  }) = _Platforms;
 
   factory Platforms.fromJson(Map<String, dynamic> json) => Platforms(
         ethereum: json["ethereum"],

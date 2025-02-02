@@ -12,13 +12,12 @@ class CryptoPageBloc extends Bloc<CryptoPageEvent, CryptoPageState> {
       : super(CryptoPageInitial(
             status: Status.initial, model: null, error: false)) {
     on<CryptoPageEvent>((event, emit) async {
-      emit(
-          CryptoPageInitial(status: Status.loading, model: null, error: false));
+      emit(CryptoPageInitial(status: Status.loading, model: null, error: false));
       try {
         final cryptoModel = await cryptoRepository.getCrypto();
         print("DUPAA ${cryptoModel}");
         if (cryptoModel == null) {
-          print("DUPAA ${cryptoModel}");
+          print("ERROR 2");
           emit(CryptoPageLoadFaliure(
               status: Status.failure, model: null, error: true));
         } else {
@@ -27,6 +26,7 @@ class CryptoPageBloc extends Bloc<CryptoPageEvent, CryptoPageState> {
               status: Status.success, model: cryptoModel, error: false));
         }
       } catch (e) {
+        print("${e.toString()}");
         emit(CryptoPageLoadFaliure(
             status: Status.failure, model: null, error: true));
       }

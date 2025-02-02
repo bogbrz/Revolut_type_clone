@@ -7,22 +7,25 @@ class CryptoDataSource {
   final String baseUrl = "https://api.coingecko.com/api/v3/";
   final String keyRequest = "x_cg_demo_api_key=$cryptoKey";
 
-  Future<CryptoModel?> getCryptoData() async {
-    final pingRequest =
-        await Dio().get<Map<String, dynamic>>("$baseUrl/ping/?$keyRequest");
-    if (pingRequest.statusCode != 200) {
-      throw Exception("Something went wrong");
-    }
+  Future<Map<String, dynamic>?> getCryptoData() async {
+    // final pingRequest = await Dio().get<Map<String, dynamic>>(
+    //     "https://api.coingecko.com/api/v3/ping?/?x_cg_demo_api_key=$cryptoKey");
+    // if (pingRequest.statusCode != 200) {
+    //   print("ERROR 0");
+    //   throw Exception("Something went wrong");
+    // }
 
-    final response = await Dio()
-        .get<Map<String, dynamic>>("$baseUrl/coins/list/?$keyRequest");
+    final response = await Dio().get<Map<String, dynamic>>(
+      "https://api.coingecko.com/api/v3/coins/list?include_platform=false/?x_cg_demo_api_key=$cryptoKey",
+    );
 
     if (response.data == null) {
+      print("ERROR 1");
       throw Exception("Something went wrong");
     } else {
-      final cryptoData = CryptoModel.fromJson(response.data!);
-   
-      return cryptoData;
+      final data = response.data;
+
+      return data;
     }
   }
 }
