@@ -1,13 +1,12 @@
 part of 'crypto_page_bloc.dart';
 
-
 enum Status { initial, loading, success, failure }
 
 @immutable
 sealed class CryptoPageState {
   CryptoPageState(
       {required this.model, required this.status, required this.error});
-  final CryptoModel? model;
+  final List<TestModel?> model;
   final Status status;
   final bool error;
 }

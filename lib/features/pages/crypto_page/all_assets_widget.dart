@@ -86,20 +86,53 @@ class AllAssetsWidget extends StatelessWidget {
                       return Center(child: CircularProgressIndicator());
 
                     case Status.success:
-                      return Wrap(children: [
-                        SizedBox(
+                      return SizedBox(
                           height: 200,
-                          child: Expanded(
-                            child: ListView.builder(
-                              itemCount: 10,
+                          width: MediaQuery.of(context).size.width,
+                          child: GridView.builder(
+                              itemCount: state.model.length,
+                              gridDelegate:
+                                  SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent:
+                                          MediaQuery.of(context).size.width *
+                                              0.25),
                               itemBuilder: (context, index) {
-                                print(state.model);
-                                return Text(state.model?.name ?? "Dupa");
-                              },
-                            ),
-                          ),
-                        )
-                      ]);
+                                return Column(
+                                  children: [
+                                    Image.network(
+                                        state.model[index]!.image!.small!),
+                                    Text(state.model[index]?.symbol ?? "Dupa"),
+                                  ],
+                                );
+                              })
+
+                          //  Expanded(
+                          //   child:
+
+                          //  ListView.builder(
+                          //   itemCount: state.model.length,
+                          //   itemBuilder: (context, index) {
+                          //     print(state.model);
+                          //     return Wrap(
+                          //       spacing: 8,
+                          //       direction: Axis.horizontal,
+                          //       children: [
+                          //         Column(
+                          //           children: [
+                          //             CircleAvatar(
+                          //               child: Image.network(
+                          //                   state.model[index]!.image!.small!),
+                          //             ),
+                          //             Text(
+                          //                 state.model[index]?.symbol ?? "Dupa"),
+                          //           ],
+                          //         ),
+                          //       ],
+                          //     );
+                          //   },
+                          // ),
+                          // ),
+                          );
 
                     case Status.failure:
                       return Center(

@@ -23,7 +23,6 @@ mixin _$CryptoModel {
   String get id => throw _privateConstructorUsedError;
   String get symbol => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Platforms get platforms => throw _privateConstructorUsedError;
 
   /// Serializes this CryptoModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,9 +40,7 @@ abstract class $CryptoModelCopyWith<$Res> {
           CryptoModel value, $Res Function(CryptoModel) then) =
       _$CryptoModelCopyWithImpl<$Res, CryptoModel>;
   @useResult
-  $Res call({String id, String symbol, String name, Platforms platforms});
-
-  $PlatformsCopyWith<$Res> get platforms;
+  $Res call({String id, String symbol, String name});
 }
 
 /// @nodoc
@@ -64,7 +61,6 @@ class _$CryptoModelCopyWithImpl<$Res, $Val extends CryptoModel>
     Object? id = null,
     Object? symbol = null,
     Object? name = null,
-    Object? platforms = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -79,21 +75,7 @@ class _$CryptoModelCopyWithImpl<$Res, $Val extends CryptoModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      platforms: null == platforms
-          ? _value.platforms
-          : platforms // ignore: cast_nullable_to_non_nullable
-              as Platforms,
     ) as $Val);
-  }
-
-  /// Create a copy of CryptoModel
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $PlatformsCopyWith<$Res> get platforms {
-    return $PlatformsCopyWith<$Res>(_value.platforms, (value) {
-      return _then(_value.copyWith(platforms: value) as $Val);
-    });
   }
 }
 
@@ -105,10 +87,7 @@ abstract class _$$CryptoModelImplCopyWith<$Res>
       __$$CryptoModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String symbol, String name, Platforms platforms});
-
-  @override
-  $PlatformsCopyWith<$Res> get platforms;
+  $Res call({String id, String symbol, String name});
 }
 
 /// @nodoc
@@ -127,7 +106,6 @@ class __$$CryptoModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? symbol = null,
     Object? name = null,
-    Object? platforms = null,
   }) {
     return _then(_$CryptoModelImpl(
       id: null == id
@@ -142,10 +120,6 @@ class __$$CryptoModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      platforms: null == platforms
-          ? _value.platforms
-          : platforms // ignore: cast_nullable_to_non_nullable
-              as Platforms,
     ));
   }
 }
@@ -154,10 +128,7 @@ class __$$CryptoModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CryptoModelImpl implements _CryptoModel {
   const _$CryptoModelImpl(
-      {required this.id,
-      required this.symbol,
-      required this.name,
-      required this.platforms});
+      {required this.id, required this.symbol, required this.name});
 
   factory _$CryptoModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CryptoModelImplFromJson(json);
@@ -168,12 +139,10 @@ class _$CryptoModelImpl implements _CryptoModel {
   final String symbol;
   @override
   final String name;
-  @override
-  final Platforms platforms;
 
   @override
   String toString() {
-    return 'CryptoModel(id: $id, symbol: $symbol, name: $name, platforms: $platforms)';
+    return 'CryptoModel(id: $id, symbol: $symbol, name: $name)';
   }
 
   @override
@@ -183,14 +152,12 @@ class _$CryptoModelImpl implements _CryptoModel {
             other is _$CryptoModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.symbol, symbol) || other.symbol == symbol) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.platforms, platforms) ||
-                other.platforms == platforms));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, symbol, name, platforms);
+  int get hashCode => Object.hash(runtimeType, id, symbol, name);
 
   /// Create a copy of CryptoModel
   /// with the given fields replaced by the non-null parameter values.
@@ -212,8 +179,7 @@ abstract class _CryptoModel implements CryptoModel {
   const factory _CryptoModel(
       {required final String id,
       required final String symbol,
-      required final String name,
-      required final Platforms platforms}) = _$CryptoModelImpl;
+      required final String name}) = _$CryptoModelImpl;
 
   factory _CryptoModel.fromJson(Map<String, dynamic> json) =
       _$CryptoModelImpl.fromJson;
@@ -224,181 +190,11 @@ abstract class _CryptoModel implements CryptoModel {
   String get symbol;
   @override
   String get name;
-  @override
-  Platforms get platforms;
 
   /// Create a copy of CryptoModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CryptoModelImplCopyWith<_$CryptoModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Platforms _$PlatformsFromJson(Map<String, dynamic> json) {
-  return _Platforms.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Platforms {
-  String? get ethereum => throw _privateConstructorUsedError;
-  String? get polygonPos => throw _privateConstructorUsedError;
-
-  /// Serializes this Platforms to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Platforms
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $PlatformsCopyWith<Platforms> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PlatformsCopyWith<$Res> {
-  factory $PlatformsCopyWith(Platforms value, $Res Function(Platforms) then) =
-      _$PlatformsCopyWithImpl<$Res, Platforms>;
-  @useResult
-  $Res call({String? ethereum, String? polygonPos});
-}
-
-/// @nodoc
-class _$PlatformsCopyWithImpl<$Res, $Val extends Platforms>
-    implements $PlatformsCopyWith<$Res> {
-  _$PlatformsCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Platforms
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? ethereum = freezed,
-    Object? polygonPos = freezed,
-  }) {
-    return _then(_value.copyWith(
-      ethereum: freezed == ethereum
-          ? _value.ethereum
-          : ethereum // ignore: cast_nullable_to_non_nullable
-              as String?,
-      polygonPos: freezed == polygonPos
-          ? _value.polygonPos
-          : polygonPos // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$PlatformsImplCopyWith<$Res>
-    implements $PlatformsCopyWith<$Res> {
-  factory _$$PlatformsImplCopyWith(
-          _$PlatformsImpl value, $Res Function(_$PlatformsImpl) then) =
-      __$$PlatformsImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? ethereum, String? polygonPos});
-}
-
-/// @nodoc
-class __$$PlatformsImplCopyWithImpl<$Res>
-    extends _$PlatformsCopyWithImpl<$Res, _$PlatformsImpl>
-    implements _$$PlatformsImplCopyWith<$Res> {
-  __$$PlatformsImplCopyWithImpl(
-      _$PlatformsImpl _value, $Res Function(_$PlatformsImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Platforms
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? ethereum = freezed,
-    Object? polygonPos = freezed,
-  }) {
-    return _then(_$PlatformsImpl(
-      ethereum: freezed == ethereum
-          ? _value.ethereum
-          : ethereum // ignore: cast_nullable_to_non_nullable
-              as String?,
-      polygonPos: freezed == polygonPos
-          ? _value.polygonPos
-          : polygonPos // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PlatformsImpl implements _Platforms {
-  const _$PlatformsImpl({required this.ethereum, required this.polygonPos});
-
-  factory _$PlatformsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PlatformsImplFromJson(json);
-
-  @override
-  final String? ethereum;
-  @override
-  final String? polygonPos;
-
-  @override
-  String toString() {
-    return 'Platforms(ethereum: $ethereum, polygonPos: $polygonPos)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PlatformsImpl &&
-            (identical(other.ethereum, ethereum) ||
-                other.ethereum == ethereum) &&
-            (identical(other.polygonPos, polygonPos) ||
-                other.polygonPos == polygonPos));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, ethereum, polygonPos);
-
-  /// Create a copy of Platforms
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PlatformsImplCopyWith<_$PlatformsImpl> get copyWith =>
-      __$$PlatformsImplCopyWithImpl<_$PlatformsImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PlatformsImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Platforms implements Platforms {
-  const factory _Platforms(
-      {required final String? ethereum,
-      required final String? polygonPos}) = _$PlatformsImpl;
-
-  factory _Platforms.fromJson(Map<String, dynamic> json) =
-      _$PlatformsImpl.fromJson;
-
-  @override
-  String? get ethereum;
-  @override
-  String? get polygonPos;
-
-  /// Create a copy of Platforms
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$PlatformsImplCopyWith<_$PlatformsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

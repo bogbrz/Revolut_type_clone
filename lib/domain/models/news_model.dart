@@ -1,4 +1,4 @@
-import 'package:freezed/builder.dart';
+
 
 class NewsModel {
   String status;
