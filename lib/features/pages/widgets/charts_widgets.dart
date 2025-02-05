@@ -272,28 +272,22 @@ class _PieChartWidgetState extends State<PieChartWidget> {
 }
 
 // color: const Color.fromARGB(55, 146, 146, 146),
-class LineChartWidget extends StatefulWidget {
+class LineChartWidget extends StatelessWidget {
   const LineChartWidget({
     required this.cryptoData,
     required this.days,
+    this.prices,
+    this.unixTime,
     super.key,
   });
   final CryptoHistoryModel? cryptoData;
   final int? days;
-
-  @override
-  State<LineChartWidget> createState() => _LineChartWidgetState();
-}
+  final List<double>? prices;
+  final List<double>? unixTime;
 
 // The first number (e.g. 1711843200000) represents the timestamp in UNIX time
 // The second number (e.g. 69702.3087473573) represents the price value
 
-// List<FlSpot> dataList({required List<double> prices, required int days}) {
-
-//   return;
-// }
-
-class _LineChartWidgetState extends State<LineChartWidget> {
   @override
   Widget build(BuildContext context) {
     List<FlSpot> mockList = [
@@ -311,26 +305,29 @@ class _LineChartWidgetState extends State<LineChartWidget> {
       FlSpot(21, 15),
       FlSpot(22, 14.9)
     ];
-    return Center(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: Transform.scale(
-          scale: 1.11,
-          child: LineChart(LineChartData(
-            borderData: FlBorderData(
-              show: false,
-            ),
-            gridData: FlGridData(show: false),
-            titlesData: FlTitlesData(show: false),
-            lineBarsData: [
-              LineChartBarData(
-                  color: Colors.white,
-                  dotData: FlDotData(show: false),
-                  isCurved: true,
-                  spots: mockList),
-            ],
-          )),
-        ),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.1,
+      child: Transform.scale(
+        scale: 1.11,
+        child: LineChart(LineChartData(
+          borderData: FlBorderData(
+            show: false,
+          ),
+          gridData: FlGridData(show: false),
+          titlesData: FlTitlesData(show: false),
+          lineBarsData: [
+            LineChartBarData(
+              color: Colors.white,
+              dotData: FlDotData(show: false),
+              isCurved: true,
+              spots: cryptoData == null
+                  ? mockList
+                  : List.generate(prices!.length, (index) {
+                      return FlSpot(unixTime![index], prices![index]);
+                    }),
+            )
+          ],
+        )),
       ),
     );
   }

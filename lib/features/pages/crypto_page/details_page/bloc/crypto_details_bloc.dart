@@ -15,12 +15,16 @@ class CryptoDetailsBloc
             status: Status.initial,
             historyModel: null,
             detailsModel: null,
-            error: false)) {
+            error: false,
+            prices: [],
+            unixTime: [])) {
     on<CryptoDetailsPageEvent>((
       event,
       emit,
     ) async {
       emit(CryptoPageInitial(
+          prices: [],
+          unixTime: [],
           status: Status.loading,
           detailsModel: null,
           historyModel: null,
@@ -30,8 +34,19 @@ class CryptoDetailsBloc
             id: event.id, days: event.days);
         final detailsModel =
             await cryptoRepository.getCryptoDetails(id: event.id);
+        List<double> timeStamp = [];
+        List<double> price = [];
+        List<List<double?>?>? pricesData = historyModel.prices ?? [];
+        
+
+        for (final data in pricesData) {
+          timeStamp.add(data![0]!);
+          price.add(data[1]!);
+        }
 
         emit(CryptoPageLoadSucces(
+            prices: price,
+            unixTime: timeStamp,
             status: Status.success,
             historyModel: historyModel,
             detailsModel: detailsModel,
@@ -39,6 +54,8 @@ class CryptoDetailsBloc
       } catch (e) {
         print("${e.toString()}");
         emit(CryptoPageLoadFaliure(
+            prices: [],
+            unixTime: [],
             status: Status.failure,
             historyModel: null,
             detailsModel: null,

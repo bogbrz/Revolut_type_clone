@@ -5,7 +5,7 @@ import 'package:portfolio/domain/models/crypto_info_model.dart';
 
 
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
-import 'package:portfolio/testingmodels/modeltwo.dart';
+
 
 part 'crypto_page_event.dart';
 part 'crypto_page_state.dart';
