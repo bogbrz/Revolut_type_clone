@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:unicons/unicons.dart';
 
 class PieChartWidget extends StatefulWidget {
@@ -271,13 +272,45 @@ class _PieChartWidgetState extends State<PieChartWidget> {
 }
 
 // color: const Color.fromARGB(55, 146, 146, 146),
-class LineChartWidget extends StatelessWidget {
+class LineChartWidget extends StatefulWidget {
   const LineChartWidget({
+    required this.cryptoData,
+    required this.days,
     super.key,
   });
+  final CryptoHistoryModel? cryptoData;
+  final int? days;
 
   @override
+  State<LineChartWidget> createState() => _LineChartWidgetState();
+}
+
+// The first number (e.g. 1711843200000) represents the timestamp in UNIX time
+// The second number (e.g. 69702.3087473573) represents the price value
+
+// List<FlSpot> dataList({required List<double> prices, required int days}) {
+
+//   return;
+// }
+
+class _LineChartWidgetState extends State<LineChartWidget> {
+  @override
   Widget build(BuildContext context) {
+    List<FlSpot> mockList = [
+      FlSpot(10.5, 14),
+      FlSpot(11, 14.3),
+      FlSpot(12, 14.5),
+      FlSpot(13, 14.2),
+      FlSpot(14, 14.8),
+      FlSpot(15, 14.9),
+      FlSpot(16, 14.7),
+      FlSpot(17, 14.3),
+      FlSpot(18, 14.8),
+      FlSpot(19, 14.1),
+      FlSpot(20, 14.2),
+      FlSpot(21, 15),
+      FlSpot(22, 14.9)
+    ];
     return Center(
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.1,
@@ -294,21 +327,7 @@ class LineChartWidget extends StatelessWidget {
                   color: Colors.white,
                   dotData: FlDotData(show: false),
                   isCurved: true,
-                  spots: [
-                    FlSpot(10.5, 14),
-                    FlSpot(11, 14.3),
-                    FlSpot(12, 14.5),
-                    FlSpot(13, 14.2),
-                    FlSpot(14, 14.8),
-                    FlSpot(15, 14.9),
-                    FlSpot(16, 14.7),
-                    FlSpot(17, 14.3),
-                    FlSpot(18, 14.8),
-                    FlSpot(19, 14.1),
-                    FlSpot(20, 14.2),
-                    FlSpot(21, 15),
-                    FlSpot(22, 14.9)
-                  ]),
+                  spots: mockList),
             ],
           )),
         ),

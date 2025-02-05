@@ -6,7 +6,7 @@ enum Status { initial, loading, success, failure }
 sealed class CryptoPageState {
   CryptoPageState(
       {required this.model, required this.status, required this.error});
-  final List<TestModel?> model;
+  final List<CryptoInfoModel?> model;
   final Status status;
   final bool error;
 }

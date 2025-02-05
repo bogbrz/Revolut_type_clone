@@ -90,7 +90,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                     Text("-0,45%"),
                                   ],
                                 ),
-                                LineChartWidget()
+                                LineChartWidget(cryptoData: null,days:  null,)
                               ],
                             ),
                           ),
@@ -194,7 +194,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                       ),
                                       Transform.scale(
                                         scale: 0.5,
-                                        child: LineChartWidget(),
+                                        child: LineChartWidget(cryptoData: null,days:  null,),
                                       )
                                     ],
                                   ),
@@ -240,7 +240,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                       ),
                                       Transform.scale(
                                         scale: 0.5,
-                                        child: LineChartWidget(),
+                                        child: LineChartWidget(cryptoData: null, days: null,),
                                       )
                                     ],
                                   ),

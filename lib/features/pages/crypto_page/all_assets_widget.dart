@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 
 class AllAssetsWidget extends StatelessWidget {
   const AllAssetsWidget({
@@ -12,48 +13,6 @@ class AllAssetsWidget extends StatelessWidget {
   final List<AssetImage> images;
   @override
   Widget build(BuildContext context) {
-    List<ListTile> exampleList = List.generate(9, (i) {
-      return ListTile(
-        leading: Image(
-            height: MediaQuery.of(context).size.height * 0.06,
-            width: images.length == 2
-                ? MediaQuery.of(context).size.width * 0.2
-                : MediaQuery.of(context).size.width * 0.075,
-            image: images.length == 2
-                ? i % 2 == 0
-                    ? images[0]
-                    : images[1]
-                : i % 2 == 0
-                    ? images[0]
-                    : i % 3 == 0
-                        ? images[1]
-                        : images[2]),
-        title: Text("Bitcoin"),
-        subtitle: Text("BTC"),
-        trailing: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.25,
-          child: Column(
-            children: [
-              Text("100 000\$"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    i % 2 == 0 ? Icons.arrow_upward : Icons.arrow_downward,
-                    color: i % 2 == 0 ? Colors.green : Colors.red,
-                  ),
-                  Text(
-                    "2.3%",
-                    style: TextStyle(
-                        color: i % 2 == 0 ? Colors.green : Colors.red),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      );
-    });
     return BlocProvider(
       create: (context) => CryptoPageBloc(
           cryptoRepository:
@@ -97,42 +56,30 @@ class AllAssetsWidget extends StatelessWidget {
                                           MediaQuery.of(context).size.width *
                                               0.25),
                               itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    Image.network(
-                                        state.model[index]!.image!.small!),
-                                    Text(state.model[index]?.symbol ?? "Dupa"),
-                                  ],
+                                return DecoratedBox(
+                                  decoration:
+                                      BoxDecoration(shape: BoxShape.circle),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CryptoDetailsPage(
+                                                      id: state
+                                                          .model[index]!.id!)));
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Image.network(
+                                            scale: 3.5,
+                                            state.model[index]?.image ?? ""),
+                                        Text(state.model[index]?.symbol ??
+                                            "Dupa"),
+                                      ],
+                                    ),
+                                  ),
                                 );
-                              })
-
-                          //  Expanded(
-                          //   child:
-
-                          //  ListView.builder(
-                          //   itemCount: state.model.length,
-                          //   itemBuilder: (context, index) {
-                          //     print(state.model);
-                          //     return Wrap(
-                          //       spacing: 8,
-                          //       direction: Axis.horizontal,
-                          //       children: [
-                          //         Column(
-                          //           children: [
-                          //             CircleAvatar(
-                          //               child: Image.network(
-                          //                   state.model[index]!.image!.small!),
-                          //             ),
-                          //             Text(
-                          //                 state.model[index]?.symbol ?? "Dupa"),
-                          //           ],
-                          //         ),
-                          //       ],
-                          //     );
-                          //   },
-                          // ),
-                          // ),
-                          );
+                              }));
 
                     case Status.failure:
                       return Center(
@@ -140,7 +87,8 @@ class AllAssetsWidget extends StatelessWidget {
                       );
                   }
                 },
-              )
+              ),
+              ElevatedButton(onPressed: () {}, child: Text("View all"))
             ],
           ),
         ),

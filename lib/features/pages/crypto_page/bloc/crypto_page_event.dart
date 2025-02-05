@@ -1,7 +1,11 @@
 part of 'crypto_page_bloc.dart';
 
 @immutable
-sealed class CryptoPageEvent {}
+sealed class CryptoPageEvent {
+
+
+ 
+}
 
 final class CryptoInitial extends CryptoPageEvent {}
 

@@ -90,7 +90,7 @@ class _NetWorthPageState extends State<NetWorthPage>
                                     )
                                   ],
                                 ),
-                                LineChartWidget(),
+                                LineChartWidget(cryptoData: null,days:  null,),
                               ],
                             ),
                           ),

@@ -1,22 +1,27 @@
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
-import 'package:portfolio/domain/models/crypto_data_model.dart';
-import 'package:portfolio/domain/models/crypto_model.dart';
-import 'package:portfolio/domain/models/test_crypto_data_model.dart';
+import 'package:portfolio/domain/models/crypto_details_model.dart';
+import 'package:portfolio/domain/models/crypto_history_model.dart';
+
+import 'package:portfolio/domain/models/crypto_info_model.dart';
+
+import 'package:portfolio/testingmodels/modeltwo.dart';
 
 class CryptoRepository {
   CryptoRepository({required this.cryptoDataSource});
   final CryptoDataSource cryptoDataSource;
 
-  Future<List<TestModel?>> getCrypto() async {
-    final cryptoData = await cryptoDataSource.getCryptoData();
-  
-    // if (cryptoData == null) {
-    //   return null;
-    // }
+  Future<List<CryptoInfoModel?>> getCrypto() async {
+    final cryptoData = await cryptoDataSource.getCryptoWithData();
+    return cryptoData;
+  }
 
-    // final cryptoList =
-    //     cryptoData.map((coinData) => coinData as CryptoModel).toList();
-
+   Future<CryptoDetailsModel> getCryptoDetails({required String id}) async {
+    final cryptoData = await cryptoDataSource.getCryptoDetails(id: id);
+    return cryptoData;
+  }
+   Future<CryptoHistoryModel> getHistoricalData({required String id, required int days}) async {
+    final cryptoData = await cryptoDataSource.getHistoricalData(id: id, days: days );
     return cryptoData;
   }
 }
+

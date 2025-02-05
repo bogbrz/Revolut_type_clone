@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:portfolio/domain/models/crypto_data_model.dart';
-import 'package:portfolio/domain/models/crypto_model.dart';
-import 'package:portfolio/domain/models/test_crypto_data_model.dart';
+
+import 'package:portfolio/domain/models/crypto_info_model.dart';
+
+
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
+import 'package:portfolio/testingmodels/modeltwo.dart';
 
 part 'crypto_page_event.dart';
 part 'crypto_page_state.dart';

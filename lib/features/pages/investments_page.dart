@@ -95,7 +95,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                     )
                                   ],
                                 ),
-                                LineChartWidget()
+                                LineChartWidget(cryptoData: null,days:  null,)
                               ],
                             ),
                           ),
