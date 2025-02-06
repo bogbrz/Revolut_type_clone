@@ -69,7 +69,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     ],
                                   ),
                                   trailing: Image.network(
-                                      state.detailsModel?.image?.large ?? ""),
+                                      state.detailsModel?.image.small ?? ""),
                                 ),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
@@ -155,7 +155,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "${state.detailsModel?.marketData?.marketCap ?? " D"}",
+                                "${state.detailsModel?.marketData.marketCap ?? " D"}",
                                 style:
                                     Theme.of(context).textTheme.headlineLarge,
                               )

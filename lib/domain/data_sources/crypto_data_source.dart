@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:portfolio/domain/models/crypto_details_model.dart';
+
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
+import 'package:portfolio/domain/models/model.dart';
 
 import 'package:portfolio/env.dart';
 
@@ -16,7 +17,6 @@ class CryptoDataSource {
     List<CryptoInfoModel> cryptoDataList = [];
     final data = response.data;
 
-    print(data);
     if (data == null) {
       throw Exception("Something went wrong");
     } else {
@@ -29,15 +29,26 @@ class CryptoDataSource {
     }
   }
 
-  Future<CryptoDetailsModel> getCryptoDetails({required String id}) async {
+  Future<NewModel> getCryptoDetails({required String id}) async {
+    // "https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
     final response = await Dio().get<Map<String, dynamic>>(
-      "https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false/?x_cg_demo_api_key=$cryptoKey",
+      "https://api.coingecko.com/api/v3/coins/${id}/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
+
+     
+
+      // "https://api.coingecko.com/api/v3/coins/${id}?/market_data=true/?x_cg_demo_api_key=$cryptoKey"
+      ,
     );
+
     final data = response.data;
+    print(data);
     if (data == null) {
       throw Exception("Something went wrong");
     } else {
-      return CryptoDetailsModel.fromJson(data);
+      final model = NewModel.fromJson(data);
+
+      print("Data: ${model.id}");
+      return model;
     }
   }
 
@@ -47,6 +58,7 @@ class CryptoDataSource {
       "https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}/?x_cg_demo_api_key=$cryptoKey",
     );
     final data = response.data;
+    print("OK");
     if (data == null) {
       throw Exception("Something went wrong");
     } else {
@@ -55,7 +67,7 @@ class CryptoDataSource {
   }
 }
 
-//   Future<List<Welcome?>> getCryptoData() async {
+//   Future<List<CryptoDetailsModel?>> getCryptoData() async {
 //     final response = await Dio().get<List<dynamic>>(
 //       "https://api.coingecko.com/api/v3/coins/list?include_platform=false/?x_cg_demo_api_key=$cryptoKey",
 //     );
@@ -71,7 +83,7 @@ class CryptoDataSource {
 //       for (final model in convertedList) {
 //         cryptoList.add(CryptoModel.fromJson(model));
 //       }
-//       List<Welcome> cryptoDataList = [];
+//       List<CryptoDetailsModel> cryptoDataList = [];
 //       int i = 0;
 //       for (final crypto in cryptoList) {
 //         i++;
@@ -80,7 +92,7 @@ class CryptoDataSource {
 //           final cryptoData = await Dio().get<Map<String, dynamic>>(
 //               "https://api.coingecko.com/api/v3/coins/${crypto.id}?localization=true&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=false?x_cg_demo_api_key=$cryptoKey");
 
-//           cryptoDataList.add(Welcome.fromJson(cryptoData.data!));
+//           cryptoDataList.add(CryptoDetailsModel.fromJson(cryptoData.data!));
 //         } catch (e) {
 //           i--;
 //         }

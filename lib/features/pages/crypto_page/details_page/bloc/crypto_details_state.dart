@@ -4,13 +4,16 @@ enum Status { initial, loading, success, failure }
 
 @immutable
 sealed class CryptoDetailsPageState {
-  CryptoDetailsPageState(
-      {required this.historyModel,
-      required this.detailsModel,
-      required this.status,
-      required this.error, required this.prices,required this.unixTime, });
+  CryptoDetailsPageState({
+    required this.historyModel,
+    required this.detailsModel,
+    required this.status,
+    required this.error,
+    required this.prices,
+    required this.unixTime,
+  });
   final CryptoHistoryModel? historyModel;
-  final CryptoDetailsModel? detailsModel;
+  final NewModel? detailsModel;
   final Status status;
   final bool error;
   final List<double> prices;
@@ -22,7 +25,9 @@ final class CryptoPageInitial extends CryptoDetailsPageState {
     required super.status,
     required super.historyModel,
     required super.detailsModel,
-    required super.error, required super.prices, required super.unixTime,
+    required super.error,
+    required super.prices,
+    required super.unixTime,
   });
 }
 
@@ -31,7 +36,9 @@ final class CryptoPageLoadInProgress extends CryptoDetailsPageState {
     required super.status,
     required super.historyModel,
     required super.detailsModel,
-    required super.error, required super.prices, required super.unixTime,
+    required super.error,
+    required super.prices,
+    required super.unixTime,
   });
 }
 
@@ -40,7 +47,9 @@ final class CryptoPageLoadSucces extends CryptoDetailsPageState {
     required super.status,
     required super.historyModel,
     required super.detailsModel,
-    required super.error, required super.prices, required super.unixTime,
+    required super.error,
+    required super.prices,
+    required super.unixTime,
   });
 }
 
@@ -49,6 +58,8 @@ final class CryptoPageLoadFaliure extends CryptoDetailsPageState {
     required super.status,
     required super.historyModel,
     required super.detailsModel,
-    required super.error, required super.prices, required super.unixTime,
+    required super.error,
+    required super.prices,
+    required super.unixTime,
   });
 }

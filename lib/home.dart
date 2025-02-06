@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                     setState(() {
                       pageIndex = value;
 
-                      print(pageIndex);
+                  
                     });
                   },
                   currentIndex: pageIndex,

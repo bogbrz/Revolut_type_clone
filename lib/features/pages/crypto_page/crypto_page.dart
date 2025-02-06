@@ -33,7 +33,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-    print("DUPA22");
+
   }
 
   @override
