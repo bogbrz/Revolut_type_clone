@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:unicons/unicons.dart';
 
@@ -306,19 +307,37 @@ class LineChartWidget extends StatelessWidget {
       FlSpot(22, 14.9)
     ];
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.1,
+      height: MediaQuery.of(context).size.height * 0.25,
       child: Transform.scale(
-        scale: 1.11,
+        scale: 1.1,
         child: LineChart(LineChartData(
           borderData: FlBorderData(
             show: false,
           ),
           gridData: FlGridData(show: false),
           titlesData: FlTitlesData(show: false),
+          lineTouchData: LineTouchData(touchTooltipData:
+              LineTouchTooltipData(getTooltipItems: (touchedSpots) {
+            return touchedSpots.map((LineBarSpot touchedSpot) {
+              DateTime date =
+                  DateTime.fromMillisecondsSinceEpoch(touchedSpot.x.toInt());
+              String formmattedDate = DateFormat.yMMMEd().format(date);
+              return LineTooltipItem(
+                children: [TextSpan(text: formmattedDate)],
+                touchedSpot.y.toStringAsFixed(2) + " USD" "\n",
+                TextStyle(color: Colors.white),
+              );
+            }).toList();
+          })),
           lineBarsData: [
             LineChartBarData(
-              color: Colors.white,
-              dotData: FlDotData(show: false),
+              belowBarData: BarAreaData(
+                show: true,
+              ),
+              color: const Color.fromARGB(204, 255, 255, 255),
+              dotData: FlDotData(
+                show: false,
+              ),
               isCurved: true,
               spots: cryptoData == null
                   ? mockList

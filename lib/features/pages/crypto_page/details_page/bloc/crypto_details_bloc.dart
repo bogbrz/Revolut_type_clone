@@ -30,14 +30,14 @@ class CryptoDetailsBloc
           historyModel: null,
           error: false));
       try {
-        final historyModel = await cryptoRepository.getHistoricalData(
-            id: event.id, days: event.days);
         final detailsModel =
             await cryptoRepository.getCryptoDetails(id: event.id);
+        final historyModel = await cryptoRepository.getHistoricalData(
+            id: event.id, days: event.days);
+
         List<double> timeStamp = [];
         List<double> price = [];
         List<List<double?>?>? pricesData = historyModel.prices ?? [];
-        
 
         for (final data in pricesData) {
           timeStamp.add(data![0]!);

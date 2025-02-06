@@ -33,7 +33,7 @@ class CryptoDetailsPage extends StatelessWidget {
               child: ListView(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.25,
+                    height: MediaQuery.of(context).size.height * 0.40,
                     child:
                         BlocBuilder<CryptoDetailsBloc, CryptoDetailsPageState>(
                       builder: (context, state) {
@@ -61,7 +61,9 @@ class CryptoDetailsPage extends StatelessWidget {
                                         children: [
                                           Text(
                                               "${state.detailsModel?.name ?? ""} - ${state.detailsModel?.symbol ?? ""}"),
-                                          Text(state.prices.last.toString())
+                                          Text(state.prices.last
+                                                  .toStringAsFixed(2) +
+                                              " USD"),
                                         ],
                                       ),
                                     ],
@@ -71,7 +73,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                 ),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 32, vertical: 32),
+                                      horizontal: 25, vertical: 32),
                                   child: LineChartWidget(
                                     prices: state.prices,
                                     unixTime: state.unixTime,
@@ -124,6 +126,72 @@ class CryptoDetailsPage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color.fromARGB(55, 146, 146, 146),
+                      ),
+                      padding: EdgeInsets.all(8),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        spacing: MediaQuery.of(context).size.height * 0.02,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Stats",
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Capitalization",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              Text(
+                                "${state.detailsModel?.marketData?.marketCap ?? " D"}",
+                                style:
+                                    Theme.of(context).textTheme.headlineLarge,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "In circulation",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "maximum supply",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "Trading volume",
+                                style:
+                                    Theme.of(context).textTheme.headlineSmall,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             );

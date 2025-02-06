@@ -27,8 +27,8 @@ class CryptoDetailsModel with _$CryptoDetailsModel {
     double? sentimentVotesUpPercentage,
     double? sentimentVotesDownPercentage,
     int? watchlistPortfolioUsers,
-    int? marketCapRank,
-    MarketData? marketData,
+    required int? marketCapRank,
+    required MarketData? marketData,
     List<dynamic>? statusUpdates,
     DateTime? lastUpdated,
   }) = _CryptoDetailsModel;
@@ -114,7 +114,7 @@ class ReposUrl with _$ReposUrl {
 @freezed
 class MarketData with _$MarketData {
   factory MarketData({
-    Map<String, double?>? currentPrice,
+    required Map<String, double> currentPrice,
     dynamic totalValueLocked,
     dynamic mcapToTvlRatio,
     dynamic fdvToTvlRatio,
@@ -125,11 +125,11 @@ class MarketData with _$MarketData {
     Map<String, double?>? atl,
     Map<String, double?>? atlChangePercentage,
     Map<String, DateTime?>? atlDate,
-    Map<String, double?>? marketCap,
-    int? marketCapRank,
+    required Map<String, double?>? marketCap,
+    required int marketCapRank,
     Map<String, double?>? fullyDilutedValuation,
     int? marketCapFdvRatio,
-    Map<String, double?>? totalVolume,
+    required Map<String, double> totalVolume,
     Map<String, double?>? high24H,
     Map<String, double?>? low24H,
     double? priceChange24H,
@@ -153,7 +153,7 @@ class MarketData with _$MarketData {
     Map<String, double?>? priceChangePercentage1YInCurrency,
     Map<String, double?>? marketCapChange24HInCurrency,
     Map<String, double?>? marketCapChangePercentage24HInCurrency,
-    int? totalSupply,
+    required int totalSupply,
     int? maxSupply,
     bool? maxSupplyInfinite,
     int? circulatingSupply,

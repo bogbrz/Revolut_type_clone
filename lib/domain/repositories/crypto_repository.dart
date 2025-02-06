@@ -4,8 +4,6 @@ import 'package:portfolio/domain/models/crypto_history_model.dart';
 
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 
-
-
 class CryptoRepository {
   CryptoRepository({required this.cryptoDataSource});
   final CryptoDataSource cryptoDataSource;
@@ -15,13 +13,17 @@ class CryptoRepository {
     return cryptoData;
   }
 
-   Future<CryptoDetailsModel> getCryptoDetails({required String id}) async {
+  Future<CryptoDetailsModel> getCryptoDetails({required String id}) async {
     final cryptoData = await cryptoDataSource.getCryptoDetails(id: id);
+    print("REPOSIOTRY $cryptoData");
     return cryptoData;
   }
-   Future<CryptoHistoryModel> getHistoricalData({required String id, required int days}) async {
-    final cryptoData = await cryptoDataSource.getHistoricalData(id: id, days: days );
+
+  Future<CryptoHistoryModel> getHistoricalData(
+      {required String id, required int days}) async {
+    final cryptoData =
+        await cryptoDataSource.getHistoricalData(id: id, days: days);
+    print("REPOSIOTRY history $cryptoData");
     return cryptoData;
   }
 }
-

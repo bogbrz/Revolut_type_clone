@@ -194,8 +194,8 @@ Map<String, dynamic> _$$ReposUrlImplToJson(_$ReposUrlImpl instance) =>
 
 _$MarketDataImpl _$$MarketDataImplFromJson(Map<String, dynamic> json) =>
     _$MarketDataImpl(
-      currentPrice: (json['currentPrice'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num?)?.toDouble()),
+      currentPrice: (json['currentPrice'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
       ),
       totalValueLocked: json['totalValueLocked'],
       mcapToTvlRatio: json['mcapToTvlRatio'],
@@ -224,14 +224,14 @@ _$MarketDataImpl _$$MarketDataImplFromJson(Map<String, dynamic> json) =>
       marketCap: (json['marketCap'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num?)?.toDouble()),
       ),
-      marketCapRank: (json['marketCapRank'] as num?)?.toInt(),
+      marketCapRank: (json['marketCapRank'] as num).toInt(),
       fullyDilutedValuation:
           (json['fullyDilutedValuation'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num?)?.toDouble()),
       ),
       marketCapFdvRatio: (json['marketCapFdvRatio'] as num?)?.toInt(),
-      totalVolume: (json['totalVolume'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, (e as num?)?.toDouble()),
+      totalVolume: (json['totalVolume'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(k, (e as num).toDouble()),
       ),
       high24H: (json['high24H'] as Map<String, dynamic>?)?.map(
         (k, e) => MapEntry(k, (e as num?)?.toDouble()),
@@ -311,7 +311,7 @@ _$MarketDataImpl _$$MarketDataImplFromJson(Map<String, dynamic> json) =>
               ?.map(
         (k, e) => MapEntry(k, (e as num?)?.toDouble()),
       ),
-      totalSupply: (json['totalSupply'] as num?)?.toInt(),
+      totalSupply: (json['totalSupply'] as num).toInt(),
       maxSupply: (json['maxSupply'] as num?)?.toInt(),
       maxSupplyInfinite: json['maxSupplyInfinite'] as bool?,
       circulatingSupply: (json['circulatingSupply'] as num?)?.toInt(),

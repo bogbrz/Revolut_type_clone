@@ -546,8 +546,8 @@ class _$CryptoDetailsModelImpl implements _CryptoDetailsModel {
       this.sentimentVotesUpPercentage,
       this.sentimentVotesDownPercentage,
       this.watchlistPortfolioUsers,
-      this.marketCapRank,
-      this.marketData,
+      required this.marketCapRank,
+      required this.marketData,
       final List<dynamic>? statusUpdates,
       this.lastUpdated})
       : _categories = categories,
@@ -765,8 +765,8 @@ abstract class _CryptoDetailsModel implements CryptoDetailsModel {
       final double? sentimentVotesUpPercentage,
       final double? sentimentVotesDownPercentage,
       final int? watchlistPortfolioUsers,
-      final int? marketCapRank,
-      final MarketData? marketData,
+      required final int? marketCapRank,
+      required final MarketData? marketData,
       final List<dynamic>? statusUpdates,
       final DateTime? lastUpdated}) = _$CryptoDetailsModelImpl;
 
@@ -2190,7 +2190,7 @@ MarketData _$MarketDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MarketData {
-  Map<String, double?>? get currentPrice => throw _privateConstructorUsedError;
+  Map<String, double> get currentPrice => throw _privateConstructorUsedError;
   dynamic get totalValueLocked => throw _privateConstructorUsedError;
   dynamic get mcapToTvlRatio => throw _privateConstructorUsedError;
   dynamic get fdvToTvlRatio => throw _privateConstructorUsedError;
@@ -2204,11 +2204,11 @@ mixin _$MarketData {
       throw _privateConstructorUsedError;
   Map<String, DateTime?>? get atlDate => throw _privateConstructorUsedError;
   Map<String, double?>? get marketCap => throw _privateConstructorUsedError;
-  int? get marketCapRank => throw _privateConstructorUsedError;
+  int get marketCapRank => throw _privateConstructorUsedError;
   Map<String, double?>? get fullyDilutedValuation =>
       throw _privateConstructorUsedError;
   int? get marketCapFdvRatio => throw _privateConstructorUsedError;
-  Map<String, double?>? get totalVolume => throw _privateConstructorUsedError;
+  Map<String, double> get totalVolume => throw _privateConstructorUsedError;
   Map<String, double?>? get high24H => throw _privateConstructorUsedError;
   Map<String, double?>? get low24H => throw _privateConstructorUsedError;
   double? get priceChange24H => throw _privateConstructorUsedError;
@@ -2244,7 +2244,7 @@ mixin _$MarketData {
       throw _privateConstructorUsedError;
   Map<String, double?>? get marketCapChangePercentage24HInCurrency =>
       throw _privateConstructorUsedError;
-  int? get totalSupply => throw _privateConstructorUsedError;
+  int get totalSupply => throw _privateConstructorUsedError;
   int? get maxSupply => throw _privateConstructorUsedError;
   bool? get maxSupplyInfinite => throw _privateConstructorUsedError;
   int? get circulatingSupply => throw _privateConstructorUsedError;
@@ -2267,7 +2267,7 @@ abstract class $MarketDataCopyWith<$Res> {
       _$MarketDataCopyWithImpl<$Res, MarketData>;
   @useResult
   $Res call(
-      {Map<String, double?>? currentPrice,
+      {Map<String, double> currentPrice,
       dynamic totalValueLocked,
       dynamic mcapToTvlRatio,
       dynamic fdvToTvlRatio,
@@ -2279,10 +2279,10 @@ abstract class $MarketDataCopyWith<$Res> {
       Map<String, double?>? atlChangePercentage,
       Map<String, DateTime?>? atlDate,
       Map<String, double?>? marketCap,
-      int? marketCapRank,
+      int marketCapRank,
       Map<String, double?>? fullyDilutedValuation,
       int? marketCapFdvRatio,
-      Map<String, double?>? totalVolume,
+      Map<String, double> totalVolume,
       Map<String, double?>? high24H,
       Map<String, double?>? low24H,
       double? priceChange24H,
@@ -2306,7 +2306,7 @@ abstract class $MarketDataCopyWith<$Res> {
       Map<String, double?>? priceChangePercentage1YInCurrency,
       Map<String, double?>? marketCapChange24HInCurrency,
       Map<String, double?>? marketCapChangePercentage24HInCurrency,
-      int? totalSupply,
+      int totalSupply,
       int? maxSupply,
       bool? maxSupplyInfinite,
       int? circulatingSupply,
@@ -2328,7 +2328,7 @@ class _$MarketDataCopyWithImpl<$Res, $Val extends MarketData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPrice = freezed,
+    Object? currentPrice = null,
     Object? totalValueLocked = freezed,
     Object? mcapToTvlRatio = freezed,
     Object? fdvToTvlRatio = freezed,
@@ -2340,10 +2340,10 @@ class _$MarketDataCopyWithImpl<$Res, $Val extends MarketData>
     Object? atlChangePercentage = freezed,
     Object? atlDate = freezed,
     Object? marketCap = freezed,
-    Object? marketCapRank = freezed,
+    Object? marketCapRank = null,
     Object? fullyDilutedValuation = freezed,
     Object? marketCapFdvRatio = freezed,
-    Object? totalVolume = freezed,
+    Object? totalVolume = null,
     Object? high24H = freezed,
     Object? low24H = freezed,
     Object? priceChange24H = freezed,
@@ -2367,17 +2367,17 @@ class _$MarketDataCopyWithImpl<$Res, $Val extends MarketData>
     Object? priceChangePercentage1YInCurrency = freezed,
     Object? marketCapChange24HInCurrency = freezed,
     Object? marketCapChangePercentage24HInCurrency = freezed,
-    Object? totalSupply = freezed,
+    Object? totalSupply = null,
     Object? maxSupply = freezed,
     Object? maxSupplyInfinite = freezed,
     Object? circulatingSupply = freezed,
     Object? lastUpdated = freezed,
   }) {
     return _then(_value.copyWith(
-      currentPrice: freezed == currentPrice
+      currentPrice: null == currentPrice
           ? _value.currentPrice
           : currentPrice // ignore: cast_nullable_to_non_nullable
-              as Map<String, double?>?,
+              as Map<String, double>,
       totalValueLocked: freezed == totalValueLocked
           ? _value.totalValueLocked
           : totalValueLocked // ignore: cast_nullable_to_non_nullable
@@ -2422,10 +2422,10 @@ class _$MarketDataCopyWithImpl<$Res, $Val extends MarketData>
           ? _value.marketCap
           : marketCap // ignore: cast_nullable_to_non_nullable
               as Map<String, double?>?,
-      marketCapRank: freezed == marketCapRank
+      marketCapRank: null == marketCapRank
           ? _value.marketCapRank
           : marketCapRank // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       fullyDilutedValuation: freezed == fullyDilutedValuation
           ? _value.fullyDilutedValuation
           : fullyDilutedValuation // ignore: cast_nullable_to_non_nullable
@@ -2434,10 +2434,10 @@ class _$MarketDataCopyWithImpl<$Res, $Val extends MarketData>
           ? _value.marketCapFdvRatio
           : marketCapFdvRatio // ignore: cast_nullable_to_non_nullable
               as int?,
-      totalVolume: freezed == totalVolume
+      totalVolume: null == totalVolume
           ? _value.totalVolume
           : totalVolume // ignore: cast_nullable_to_non_nullable
-              as Map<String, double?>?,
+              as Map<String, double>,
       high24H: freezed == high24H
           ? _value.high24H
           : high24H // ignore: cast_nullable_to_non_nullable
@@ -2539,10 +2539,10 @@ class _$MarketDataCopyWithImpl<$Res, $Val extends MarketData>
           ? _value.marketCapChangePercentage24HInCurrency
           : marketCapChangePercentage24HInCurrency // ignore: cast_nullable_to_non_nullable
               as Map<String, double?>?,
-      totalSupply: freezed == totalSupply
+      totalSupply: null == totalSupply
           ? _value.totalSupply
           : totalSupply // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       maxSupply: freezed == maxSupply
           ? _value.maxSupply
           : maxSupply // ignore: cast_nullable_to_non_nullable
@@ -2572,7 +2572,7 @@ abstract class _$$MarketDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Map<String, double?>? currentPrice,
+      {Map<String, double> currentPrice,
       dynamic totalValueLocked,
       dynamic mcapToTvlRatio,
       dynamic fdvToTvlRatio,
@@ -2584,10 +2584,10 @@ abstract class _$$MarketDataImplCopyWith<$Res>
       Map<String, double?>? atlChangePercentage,
       Map<String, DateTime?>? atlDate,
       Map<String, double?>? marketCap,
-      int? marketCapRank,
+      int marketCapRank,
       Map<String, double?>? fullyDilutedValuation,
       int? marketCapFdvRatio,
-      Map<String, double?>? totalVolume,
+      Map<String, double> totalVolume,
       Map<String, double?>? high24H,
       Map<String, double?>? low24H,
       double? priceChange24H,
@@ -2611,7 +2611,7 @@ abstract class _$$MarketDataImplCopyWith<$Res>
       Map<String, double?>? priceChangePercentage1YInCurrency,
       Map<String, double?>? marketCapChange24HInCurrency,
       Map<String, double?>? marketCapChangePercentage24HInCurrency,
-      int? totalSupply,
+      int totalSupply,
       int? maxSupply,
       bool? maxSupplyInfinite,
       int? circulatingSupply,
@@ -2631,7 +2631,7 @@ class __$$MarketDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPrice = freezed,
+    Object? currentPrice = null,
     Object? totalValueLocked = freezed,
     Object? mcapToTvlRatio = freezed,
     Object? fdvToTvlRatio = freezed,
@@ -2643,10 +2643,10 @@ class __$$MarketDataImplCopyWithImpl<$Res>
     Object? atlChangePercentage = freezed,
     Object? atlDate = freezed,
     Object? marketCap = freezed,
-    Object? marketCapRank = freezed,
+    Object? marketCapRank = null,
     Object? fullyDilutedValuation = freezed,
     Object? marketCapFdvRatio = freezed,
-    Object? totalVolume = freezed,
+    Object? totalVolume = null,
     Object? high24H = freezed,
     Object? low24H = freezed,
     Object? priceChange24H = freezed,
@@ -2670,17 +2670,17 @@ class __$$MarketDataImplCopyWithImpl<$Res>
     Object? priceChangePercentage1YInCurrency = freezed,
     Object? marketCapChange24HInCurrency = freezed,
     Object? marketCapChangePercentage24HInCurrency = freezed,
-    Object? totalSupply = freezed,
+    Object? totalSupply = null,
     Object? maxSupply = freezed,
     Object? maxSupplyInfinite = freezed,
     Object? circulatingSupply = freezed,
     Object? lastUpdated = freezed,
   }) {
     return _then(_$MarketDataImpl(
-      currentPrice: freezed == currentPrice
+      currentPrice: null == currentPrice
           ? _value._currentPrice
           : currentPrice // ignore: cast_nullable_to_non_nullable
-              as Map<String, double?>?,
+              as Map<String, double>,
       totalValueLocked: freezed == totalValueLocked
           ? _value.totalValueLocked
           : totalValueLocked // ignore: cast_nullable_to_non_nullable
@@ -2725,10 +2725,10 @@ class __$$MarketDataImplCopyWithImpl<$Res>
           ? _value._marketCap
           : marketCap // ignore: cast_nullable_to_non_nullable
               as Map<String, double?>?,
-      marketCapRank: freezed == marketCapRank
+      marketCapRank: null == marketCapRank
           ? _value.marketCapRank
           : marketCapRank // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       fullyDilutedValuation: freezed == fullyDilutedValuation
           ? _value._fullyDilutedValuation
           : fullyDilutedValuation // ignore: cast_nullable_to_non_nullable
@@ -2737,10 +2737,10 @@ class __$$MarketDataImplCopyWithImpl<$Res>
           ? _value.marketCapFdvRatio
           : marketCapFdvRatio // ignore: cast_nullable_to_non_nullable
               as int?,
-      totalVolume: freezed == totalVolume
+      totalVolume: null == totalVolume
           ? _value._totalVolume
           : totalVolume // ignore: cast_nullable_to_non_nullable
-              as Map<String, double?>?,
+              as Map<String, double>,
       high24H: freezed == high24H
           ? _value._high24H
           : high24H // ignore: cast_nullable_to_non_nullable
@@ -2842,10 +2842,10 @@ class __$$MarketDataImplCopyWithImpl<$Res>
           ? _value._marketCapChangePercentage24HInCurrency
           : marketCapChangePercentage24HInCurrency // ignore: cast_nullable_to_non_nullable
               as Map<String, double?>?,
-      totalSupply: freezed == totalSupply
+      totalSupply: null == totalSupply
           ? _value.totalSupply
           : totalSupply // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       maxSupply: freezed == maxSupply
           ? _value.maxSupply
           : maxSupply // ignore: cast_nullable_to_non_nullable
@@ -2870,7 +2870,7 @@ class __$$MarketDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MarketDataImpl implements _MarketData {
   _$MarketDataImpl(
-      {final Map<String, double?>? currentPrice,
+      {required final Map<String, double> currentPrice,
       this.totalValueLocked,
       this.mcapToTvlRatio,
       this.fdvToTvlRatio,
@@ -2881,11 +2881,11 @@ class _$MarketDataImpl implements _MarketData {
       final Map<String, double?>? atl,
       final Map<String, double?>? atlChangePercentage,
       final Map<String, DateTime?>? atlDate,
-      final Map<String, double?>? marketCap,
-      this.marketCapRank,
+      required final Map<String, double?>? marketCap,
+      required this.marketCapRank,
       final Map<String, double?>? fullyDilutedValuation,
       this.marketCapFdvRatio,
-      final Map<String, double?>? totalVolume,
+      required final Map<String, double> totalVolume,
       final Map<String, double?>? high24H,
       final Map<String, double?>? low24H,
       this.priceChange24H,
@@ -2909,7 +2909,7 @@ class _$MarketDataImpl implements _MarketData {
       final Map<String, double?>? priceChangePercentage1YInCurrency,
       final Map<String, double?>? marketCapChange24HInCurrency,
       final Map<String, double?>? marketCapChangePercentage24HInCurrency,
-      this.totalSupply,
+      required this.totalSupply,
       this.maxSupply,
       this.maxSupplyInfinite,
       this.circulatingSupply,
@@ -2947,14 +2947,12 @@ class _$MarketDataImpl implements _MarketData {
   factory _$MarketDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$MarketDataImplFromJson(json);
 
-  final Map<String, double?>? _currentPrice;
+  final Map<String, double> _currentPrice;
   @override
-  Map<String, double?>? get currentPrice {
-    final value = _currentPrice;
-    if (value == null) return null;
+  Map<String, double> get currentPrice {
     if (_currentPrice is EqualUnmodifiableMapView) return _currentPrice;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableMapView(_currentPrice);
   }
 
   @override
@@ -3038,7 +3036,7 @@ class _$MarketDataImpl implements _MarketData {
   }
 
   @override
-  final int? marketCapRank;
+  final int marketCapRank;
   final Map<String, double?>? _fullyDilutedValuation;
   @override
   Map<String, double?>? get fullyDilutedValuation {
@@ -3052,14 +3050,12 @@ class _$MarketDataImpl implements _MarketData {
 
   @override
   final int? marketCapFdvRatio;
-  final Map<String, double?>? _totalVolume;
+  final Map<String, double> _totalVolume;
   @override
-  Map<String, double?>? get totalVolume {
-    final value = _totalVolume;
-    if (value == null) return null;
+  Map<String, double> get totalVolume {
     if (_totalVolume is EqualUnmodifiableMapView) return _totalVolume;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
+    return EqualUnmodifiableMapView(_totalVolume);
   }
 
   final Map<String, double?>? _high24H;
@@ -3224,7 +3220,7 @@ class _$MarketDataImpl implements _MarketData {
   }
 
   @override
-  final int? totalSupply;
+  final int totalSupply;
   @override
   final int? maxSupply;
   @override
@@ -3391,7 +3387,7 @@ class _$MarketDataImpl implements _MarketData {
 
 abstract class _MarketData implements MarketData {
   factory _MarketData(
-      {final Map<String, double?>? currentPrice,
+      {required final Map<String, double> currentPrice,
       final dynamic totalValueLocked,
       final dynamic mcapToTvlRatio,
       final dynamic fdvToTvlRatio,
@@ -3402,11 +3398,11 @@ abstract class _MarketData implements MarketData {
       final Map<String, double?>? atl,
       final Map<String, double?>? atlChangePercentage,
       final Map<String, DateTime?>? atlDate,
-      final Map<String, double?>? marketCap,
-      final int? marketCapRank,
+      required final Map<String, double?>? marketCap,
+      required final int marketCapRank,
       final Map<String, double?>? fullyDilutedValuation,
       final int? marketCapFdvRatio,
-      final Map<String, double?>? totalVolume,
+      required final Map<String, double> totalVolume,
       final Map<String, double?>? high24H,
       final Map<String, double?>? low24H,
       final double? priceChange24H,
@@ -3430,7 +3426,7 @@ abstract class _MarketData implements MarketData {
       final Map<String, double?>? priceChangePercentage1YInCurrency,
       final Map<String, double?>? marketCapChange24HInCurrency,
       final Map<String, double?>? marketCapChangePercentage24HInCurrency,
-      final int? totalSupply,
+      required final int totalSupply,
       final int? maxSupply,
       final bool? maxSupplyInfinite,
       final int? circulatingSupply,
@@ -3440,7 +3436,7 @@ abstract class _MarketData implements MarketData {
       _$MarketDataImpl.fromJson;
 
   @override
-  Map<String, double?>? get currentPrice;
+  Map<String, double> get currentPrice;
   @override
   dynamic get totalValueLocked;
   @override
@@ -3464,13 +3460,13 @@ abstract class _MarketData implements MarketData {
   @override
   Map<String, double?>? get marketCap;
   @override
-  int? get marketCapRank;
+  int get marketCapRank;
   @override
   Map<String, double?>? get fullyDilutedValuation;
   @override
   int? get marketCapFdvRatio;
   @override
-  Map<String, double?>? get totalVolume;
+  Map<String, double> get totalVolume;
   @override
   Map<String, double?>? get high24H;
   @override
@@ -3518,7 +3514,7 @@ abstract class _MarketData implements MarketData {
   @override
   Map<String, double?>? get marketCapChangePercentage24HInCurrency;
   @override
-  int? get totalSupply;
+  int get totalSupply;
   @override
   int? get maxSupply;
   @override
