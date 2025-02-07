@@ -5,8 +5,8 @@ class NewsRepository {
   NewsRepository({required this.newsDataSource});
   final NewsDataSource newsDataSource;
 
-  Future<NewsModel?> getNewsData() async {
-    final data = await newsDataSource.getNews();
+  Future<NewsModel?> getNewsData({required String topic}) async {
+    final data = await newsDataSource.getNews(topic: topic);
     if (data == null) {
       return null;
     }

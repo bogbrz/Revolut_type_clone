@@ -14,7 +14,7 @@ class NewsPage extends StatelessWidget {
     return BlocProvider(
       create: (_) => NewsPageBloc(
           newsRepository: NewsRepository(newsDataSource: NewsDataSource()))
-        ..add(NewsInitial()),
+        ..add(NewsInitial(topic: "Business")),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
@@ -129,7 +129,7 @@ class NewsTile extends StatelessWidget {
               spacing: 4,
               children: [
                 Text(
-                  "Published at: ${articles.publishedAt.day}.${articles.publishedAt.month}.${articles.publishedAt.year}",
+                  "Published at: ${articles.publishedAt?.day}.${articles.publishedAt?.month}.${articles.publishedAt?.year}",
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
                 Text(

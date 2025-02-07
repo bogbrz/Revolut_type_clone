@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:portfolio/domain/models/crypto_details_model.dart';
 
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
@@ -34,8 +35,6 @@ class CryptoDataSource {
     final response = await Dio().get<Map<String, dynamic>>(
       "https://api.coingecko.com/api/v3/coins/${id}/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
 
-     
-
       // "https://api.coingecko.com/api/v3/coins/${id}?/market_data=true/?x_cg_demo_api_key=$cryptoKey"
       ,
     );
@@ -49,6 +48,27 @@ class CryptoDataSource {
 
       print("Data: ${model.id}");
       return model;
+    }
+  }
+
+  Future<Welcome> getExtraCryptoDetails({required String id}) async {
+    final response = await Dio().get<Map<String, dynamic>>(
+      "https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false?x_cg_demo_api_key=$cryptoKey",
+    );
+
+    final data = response.data;
+
+    if (data == null) {
+      throw Exception("Something went wrong");
+    } else {
+      print("Data: ok");
+      try {
+        final model = Welcome.fromJson(data);
+        print("Data: model ok");
+        return model;
+      } catch (e) {
+        throw Exception(e.toString());
+      }
     }
   }
 
@@ -67,7 +87,7 @@ class CryptoDataSource {
   }
 }
 
-//   Future<List<CryptoDetailsModel?>> getCryptoData() async {
+//   Future<List<Welcome?>> getCryptoData() async {
 //     final response = await Dio().get<List<dynamic>>(
 //       "https://api.coingecko.com/api/v3/coins/list?include_platform=false/?x_cg_demo_api_key=$cryptoKey",
 //     );
@@ -83,7 +103,7 @@ class CryptoDataSource {
 //       for (final model in convertedList) {
 //         cryptoList.add(CryptoModel.fromJson(model));
 //       }
-//       List<CryptoDetailsModel> cryptoDataList = [];
+//       List<Welcome> cryptoDataList = [];
 //       int i = 0;
 //       for (final crypto in cryptoList) {
 //         i++;
@@ -92,7 +112,7 @@ class CryptoDataSource {
 //           final cryptoData = await Dio().get<Map<String, dynamic>>(
 //               "https://api.coingecko.com/api/v3/coins/${crypto.id}?localization=true&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=false?x_cg_demo_api_key=$cryptoKey");
 
-//           cryptoDataList.add(CryptoDetailsModel.fromJson(cryptoData.data!));
+//           cryptoDataList.add(Welcome.fromJson(cryptoData.data!));
 //         } catch (e) {
 //           i--;
 //         }

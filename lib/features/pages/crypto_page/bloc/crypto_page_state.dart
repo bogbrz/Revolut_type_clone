@@ -7,6 +7,7 @@ sealed class CryptoPageState {
   CryptoPageState(
       {required this.model, required this.status, required this.error});
   final List<CryptoInfoModel?> model;
+  
   final Status status;
   final bool error;
 }

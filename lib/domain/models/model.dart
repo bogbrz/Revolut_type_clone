@@ -128,9 +128,9 @@ class Image {
 }
 
 class MarketData {
-  Map<String, double>? currentPrice;
-  Map<String, double>? marketCap;
-  Map<String, double>? totalVolume;
+  CurrentPrice? currentPrice;
+  CurrentPrice? marketCap;
+  CurrentPrice? totalVolume;
 
   MarketData({
     required this.currentPrice,
@@ -139,21 +139,204 @@ class MarketData {
   });
 
   factory MarketData.fromJson(Map<String, dynamic> json) => MarketData(
-        currentPrice: json["current_price"] != null
-            ? Map.from(json["current_price"]).map((k, v) =>
-                MapEntry<String, double>(
-                    k, v is int ? v.toDouble() : v)) // Check and convert if int
-            : null,
-        marketCap: json["market_cap"] != null
-            ? Map.from(json["market_cap"]).map((k, v) =>
-                MapEntry<String, double>(
-                    k, v is int ? v.toDouble() : v)) // Check and convert if int
-            : null,
-        totalVolume: json["total_volume"] != null
-            ? Map.from(json["total_volume"]).map((k, v) =>
-                MapEntry<String, double>(
-                    k, v is int ? v.toDouble() : v)) // Check and convert if int
-            : null,
+        currentPrice: CurrentPrice.fromJson(json["current_price"]),
+        marketCap: CurrentPrice.fromJson(json["market_cap"]),
+        totalVolume: CurrentPrice.fromJson(json["total_volume"]),
+      );
+}
+
+class CurrentPrice {
+  final double? aed;
+  final double? ars;
+  final double? aud;
+  final double? bch;
+  final double? bdt;
+  final double? bhd;
+  final double? bmd;
+  final double? bnb;
+  final double? brl;
+  final double? btc;
+  final double? cad;
+  final double? chf;
+  final double? clp;
+  final double? cny;
+  final double? czk;
+  final double? dkk;
+  final double? dot;
+  final double? eos;
+  final double? eth;
+  final double? eur;
+  final double? gbp;
+  final double? gel;
+  final double? hkd;
+  final double? huf;
+  final double? idr;
+  final double? ils;
+  final double? inr;
+  final double? jpy;
+  final double? krw;
+  final double? kwd;
+  final double? lkr;
+  final double? ltc;
+  final double? mmk;
+  final double? mxn;
+  final double? myr;
+  final double? ngn;
+  final double? nok;
+  final double? nzd;
+  final double? php;
+  final double? pkr;
+  final double? pln;
+  final double? rub;
+  final double? sar;
+  final double? sek;
+  final double? sgd;
+  final double? thb;
+  final double? trys;
+  final double? twd;
+  final double? uah;
+  final double? usd;
+  final double? vef;
+  final double? vnd;
+  final double? xag;
+  final double? xau;
+  final double? xdr;
+  final double? xlm;
+  final double? xrp;
+  final double? yfi;
+  final double? zar;
+  final double? bits;
+  final double? link;
+  final double? sats;
+
+  CurrentPrice({
+    required this.aed,
+    required this.ars,
+    required this.aud,
+    required this.bch,
+    required this.bdt,
+    required this.bhd,
+    required this.bmd,
+    required this.bnb,
+    required this.brl,
+    required this.btc,
+    required this.cad,
+    required this.chf,
+    required this.clp,
+    required this.cny,
+    required this.czk,
+    required this.dkk,
+    required this.dot,
+    required this.eos,
+    required this.eth,
+    required this.eur,
+    required this.gbp,
+    required this.gel,
+    required this.hkd,
+    required this.huf,
+    required this.idr,
+    required this.ils,
+    required this.inr,
+    required this.jpy,
+    required this.krw,
+    required this.kwd,
+    required this.lkr,
+    required this.ltc,
+    required this.mmk,
+    required this.mxn,
+    required this.myr,
+    required this.ngn,
+    required this.nok,
+    required this.nzd,
+    required this.php,
+    required this.pkr,
+    required this.pln,
+    required this.rub,
+    required this.sar,
+    required this.sek,
+    required this.sgd,
+    required this.thb,
+    required this.trys, // Corrected typo: try -> trys
+    required this.twd,
+    required this.uah,
+    required this.usd,
+    required this.vef,
+    required this.vnd,
+    required this.xag,
+    required this.xau,
+    required this.xdr,
+    required this.xlm,
+    required this.xrp,
+    required this.yfi,
+    required this.zar,
+    required this.bits,
+    required this.link,
+    required this.sats,
+  });
+
+  factory CurrentPrice.fromJson(Map<String, dynamic> json) => CurrentPrice(
+        aed: json['aed'] + 0.0 as double,
+        ars: json['ars'] + 0.0 as double,
+        aud: json['aud'] + 0.0 as double,
+        bch: json['bch'] + 0.0 as double,
+        bdt: json['bdt'] + 0.0 as double,
+        bhd: json['bhd'] + 0.0 as double,
+        bmd: json['bmd'] + 0.0 as double,
+        bnb: json['bnb'] + 0.0 as double,
+        brl: json['brl'] + 0.0 as double,
+        btc: json['btc'] + 0.0 as double,
+        cad: json['cad'] + 0.0 as double,
+        chf: json['chf'] + 0.0 as double,
+        clp: json['clp'] + 0.0 as double,
+        cny: json['cny'] + 0.0 as double,
+        czk: json['czk'] + 0.0 as double,
+        dkk: json['dkk'] + 0.0 as double,
+        dot: json['dot'] + 0.0 as double,
+        eos: json['eos'] + 0.0 as double,
+        eth: json['eth'] + 0.0 as double,
+        eur: json['eur'] + 0.0 as double,
+        gbp: json['gbp'] + 0.0 as double,
+        gel: json['gel'] + 0.0 as double,
+        hkd: json['hkd'] + 0.0 as double,
+        huf: json['huf'] + 0.0 as double,
+        idr: json['idr'] + 0.0 as double,
+        ils: json['ils'] + 0.0 as double,
+        inr: json['inr'] + 0.0 as double,
+        jpy: json['jpy'] + 0.0 as double,
+        krw: json['krw'] + 0.0 as double,
+        kwd: json['kwd'] + 0.0 as double,
+        lkr: json['lkr'] + 0.0 as double,
+        ltc: json['ltc'] + 0.0 as double,
+        mmk: json['mmk'] + 0.0 as double,
+        mxn: json['mxn'] + 0.0 as double,
+        myr: json['myr'] + 0.0 as double,
+        ngn: json['ngn'] + 0.0 as double,
+        nok: json['nok'] + 0.0 as double,
+        nzd: json['nzd'] + 0.0 as double,
+        php: json['php'] + 0.0 as double,
+        pkr: json['pkr'] + 0.0 as double,
+        pln: json['pln'] + 0.0 as double,
+        rub: json['rub'] + 0.0 as double,
+        sar: json['sar'] + 0.0 as double,
+        sek: json['sek'] + 0.0 as double,
+        sgd: json['sgd'] + 0.0 as double,
+        thb: json['thb'] + 0.0 as double,
+        trys: json['try'] + 0.0 as double, // Corrected typo: try -> trys
+        twd: json['twd'] + 0.0 as double,
+        uah: json['uah'] + 0.0 as double,
+        usd: json['usd'] + 0.0 as double,
+        vef: json['vef'] + 0.0 as double,
+        vnd: json['vnd'] + 0.0 as double,
+        xag: json['xag'] + 0.0 as double,
+        xau: json['xau'] + 0.0 as double,
+        xdr: json['xdr'] + 0.0 as double,
+        xlm: json['xlm'] + 0.0 as double,
+        xrp: json['xrp'] + 0.0 as double,
+        yfi: json['yfi'] + 0.0 as double,
+        zar: json['zar'] + 0.0 as double,
+        bits: json['bits'] + 0.0 as double,
+        link: json['link'] + 0.0 as double,
+        sats: json['sats'] + 0.0 as double,
       );
 }
 

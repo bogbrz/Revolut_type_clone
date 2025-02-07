@@ -277,6 +277,7 @@ class LineChartWidget extends StatelessWidget {
   const LineChartWidget({
     required this.cryptoData,
     required this.days,
+    this.scale,
     this.prices,
     this.unixTime,
     super.key,
@@ -285,6 +286,7 @@ class LineChartWidget extends StatelessWidget {
   final int? days;
   final List<double>? prices;
   final List<double>? unixTime;
+  final double? scale;
 
 // The first number (e.g. 1711843200000) represents the timestamp in UNIX time
 // The second number (e.g. 69702.3087473573) represents the price value
@@ -307,9 +309,11 @@ class LineChartWidget extends StatelessWidget {
       FlSpot(22, 14.9)
     ];
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: scale != null
+          ? MediaQuery.of(context).size.height * 0.25
+          : MediaQuery.of(context).size.height * 0.1,
       child: Transform.scale(
-        scale: 1.1,
+        scale: scale == null ? 1.1 : scale!,
         child: LineChart(LineChartData(
           borderData: FlBorderData(
             show: false,

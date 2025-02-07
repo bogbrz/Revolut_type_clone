@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
+
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
+
 import 'package:portfolio/features/pages/crypto_page/details_page/bloc/crypto_details_bloc.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/news_widget.dart';
+
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
+import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 import 'package:unicons/unicons.dart';
 
@@ -61,9 +66,10 @@ class CryptoDetailsPage extends StatelessWidget {
                                         children: [
                                           Text(
                                               "${state.detailsModel?.name ?? ""} - ${state.detailsModel?.symbol ?? ""}"),
-                                          Text(state.prices.last
-                                                  .toStringAsFixed(2) +
-                                              " USD"),
+                                          Text(state.extraDetailsModel
+                                                  ?.marketData.currentPrice?.usd
+                                                  ?.toStringAsFixed(2) ??
+                                              "" + " USD"),
                                         ],
                                       ),
                                     ],
@@ -79,6 +85,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     unixTime: state.unixTime,
                                     cryptoData: state.historyModel,
                                     days: 5,
+                                    scale: 1.0,
                                   ),
                                 ),
                               ],
@@ -127,7 +134,8 @@ class CryptoDetailsPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -148,50 +156,70 @@ class CryptoDetailsPage extends StatelessWidget {
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Capitalization",
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
+                                style: Theme.of(context).textTheme.titleLarge,
                               ),
                               Text(
-                                "${state.detailsModel?.marketData.marketCap ?? " D"}",
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
+                                "${state.extraDetailsModel?.marketData.marketCap?.usd?.round() ?? " D"}",
+                                style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "In circulation",
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              Text(
+                                "${state.extraDetailsModel?.marketData.circulatingSupply?.round() ?? " D"}",
+                                style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "maximum supply",
                                 style:
                                     Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              Text(
+                                "${state.extraDetailsModel?.marketData.maxSupply?.round() ?? " D"}",
+                                style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 "Trading volume",
                                 style:
                                     Theme.of(context).textTheme.headlineSmall,
+                              ),
+                              Text(
+                                "${state.extraDetailsModel?.marketData.totalVolume?.usd?.round() ?? " D"}",
+                                style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
                           ),
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.35,
+                      child: NewsInfoWidget(
+                        coinId: id,
+                      )),
+                  PageEndTextWidget()
                 ],
               ),
             );

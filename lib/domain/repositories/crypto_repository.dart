@@ -20,6 +20,12 @@ class CryptoRepository {
 
     return cryptoData;
   }
+  Future<Welcome> getExtraCryptoDetails({required String id}) async {
+    final cryptoData = await cryptoDataSource.getExtraCryptoDetails(id: id);
+    print("Repo det ${cryptoData.marketData}");
+
+    return cryptoData;
+  }
 
   Future<CryptoHistoryModel> getHistoricalData(
       {required String id, required int days}) async {

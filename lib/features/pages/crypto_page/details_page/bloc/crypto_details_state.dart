@@ -4,8 +4,9 @@ enum Status { initial, loading, success, failure }
 
 @immutable
 sealed class CryptoDetailsPageState {
-  CryptoDetailsPageState({
+  const CryptoDetailsPageState({
     required this.historyModel,
+    required this.extraDetailsModel,
     required this.detailsModel,
     required this.status,
     required this.error,
@@ -14,6 +15,8 @@ sealed class CryptoDetailsPageState {
   });
   final CryptoHistoryModel? historyModel;
   final NewModel? detailsModel;
+  final Welcome? extraDetailsModel;
+
   final Status status;
   final bool error;
   final List<double> prices;
@@ -22,6 +25,7 @@ sealed class CryptoDetailsPageState {
 
 final class CryptoPageInitial extends CryptoDetailsPageState {
   CryptoPageInitial({
+    required super.extraDetailsModel,
     required super.status,
     required super.historyModel,
     required super.detailsModel,
@@ -32,7 +36,8 @@ final class CryptoPageInitial extends CryptoDetailsPageState {
 }
 
 final class CryptoPageLoadInProgress extends CryptoDetailsPageState {
-  CryptoPageLoadInProgress({
+  const CryptoPageLoadInProgress({
+    required super.extraDetailsModel,
     required super.status,
     required super.historyModel,
     required super.detailsModel,
@@ -43,7 +48,8 @@ final class CryptoPageLoadInProgress extends CryptoDetailsPageState {
 }
 
 final class CryptoPageLoadSucces extends CryptoDetailsPageState {
-  CryptoPageLoadSucces({
+  const CryptoPageLoadSucces({
+    required super.extraDetailsModel,
     required super.status,
     required super.historyModel,
     required super.detailsModel,
@@ -54,7 +60,8 @@ final class CryptoPageLoadSucces extends CryptoDetailsPageState {
 }
 
 final class CryptoPageLoadFaliure extends CryptoDetailsPageState {
-  CryptoPageLoadFaliure({
+  const CryptoPageLoadFaliure({
+    required super.extraDetailsModel,
     required super.status,
     required super.historyModel,
     required super.detailsModel,

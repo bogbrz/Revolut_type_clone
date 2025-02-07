@@ -19,7 +19,7 @@ class NewsDetailsPage extends StatelessWidget {
             spacing: 4,
             children: [
               Text(
-                "Published at: ${articles.publishedAt.day}.${articles.publishedAt.month}.${articles.publishedAt.year}",
+                "Published at: ${articles.publishedAt?.day}.${articles.publishedAt?.month}.${articles.publishedAt?.year}",
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               Text(

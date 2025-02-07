@@ -33,7 +33,6 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     super.dispose();
-
   }
 
   @override
@@ -90,7 +89,10 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                     Text("-0,45%"),
                                   ],
                                 ),
-                                LineChartWidget(cryptoData: null,days:  null,)
+                                LineChartWidget(
+                                  cryptoData: null,
+                                  days: null,
+                                )
                               ],
                             ),
                           ),
@@ -194,7 +196,10 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                       ),
                                       Transform.scale(
                                         scale: 0.5,
-                                        child: LineChartWidget(cryptoData: null,days:  null,),
+                                        child: LineChartWidget(
+                                          cryptoData: null,
+                                          days: null,
+                                        ),
                                       )
                                     ],
                                   ),
@@ -240,7 +245,10 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                       ),
                                       Transform.scale(
                                         scale: 0.5,
-                                        child: LineChartWidget(cryptoData: null, days: null,),
+                                        child: LineChartWidget(
+                                          cryptoData: null,
+                                          days: null,
+                                        ),
                                       )
                                     ],
                                   ),
@@ -278,4 +286,3 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
     );
   }
 }
-

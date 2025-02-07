@@ -18,7 +18,7 @@ class NewsPageBloc extends Bloc<NewsPageEvent, NewsPageState> {
       emit(NewsPageLoadInProgress(
           status: Status.loading, model: null, error: false));
       try {
-        final newsModel = await newsRepository.getNewsData();
+        final newsModel = await newsRepository.getNewsData(topic: event.topic);
         if (newsModel == null) {
           emit(NewsPageLoadFaliure(
               status: Status.failure, model: null, error: true));
