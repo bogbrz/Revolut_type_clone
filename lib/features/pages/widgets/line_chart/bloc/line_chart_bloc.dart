@@ -6,45 +6,34 @@ import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
-part 'crypto_details_event.dart';
-part 'crypto_details_state.dart';
+part 'line_chart_event.dart';
+part 'line_chart_state.dart';
 
-class CryptoDetailsBloc
-    extends Bloc<CryptoDetailsPageEvent, CryptoDetailsPageState> {
+class LineChartBloc extends Bloc<LineChartEvent, LineChartState> {
   final CryptoRepository cryptoRepository;
-  CryptoDetailsBloc({required this.cryptoRepository})
-      : super(CryptoPageInitial(
-        
+  LineChartBloc({required this.cryptoRepository})
+      : super(LineChartInitial(
             status: Status.initial,
             historyModel: null,
-            detailsModel: null,
             error: false,
             prices: [],
             unixTime: [])) {
-    on<CryptoDetailsPageEvent>((
+    on<LineChartEvent>((
       event,
       emit,
     ) async {
-      emit(CryptoPageInitial(
-        
+      emit(LineChartInitial(
           prices: [],
           unixTime: [],
           status: Status.loading,
-          detailsModel: null,
           historyModel: null,
           error: false));
 
       try {
-        final detailsModel =
-            await cryptoRepository.getCryptoDetails(id: event.id);
-        print("EXTRA: ${detailsModel.marketData}");
-        // final detailsModel =
-        //     await cryptoRepository.getCryptoDetails(id: event.id);
-
-        final historyModel = await cryptoRepository.getHistoricalData(
-            id: event.id, days: event.days);
-
-        List<double> timeStamp = [];
+        if (event.id != null) {
+          final historyModel = await cryptoRepository.getHistoricalData(
+              id: event.id!, days: event.days);
+               List<double> timeStamp = [];
         List<double> price = [];
         List<List<double?>?>? pricesData = historyModel.prices ?? [];
 
@@ -53,23 +42,22 @@ class CryptoDetailsBloc
           price.add(data[1]!);
         }
 
-        emit(CryptoPageLoadSucces(
-  
+        emit(LineChartLoadSucces(
             prices: price,
             unixTime: timeStamp,
             status: Status.success,
             historyModel: historyModel,
-            detailsModel: detailsModel,
             error: false));
+        }
+
+       
       } catch (e) {
         print("${e.toString()}");
-        emit(CryptoPageLoadFaliure(
-          
+        emit(LineChartLoadFaliure(
             prices: [],
             unixTime: [],
             status: Status.failure,
             historyModel: null,
-            detailsModel: null,
             error: true));
       }
     });

@@ -2,8 +2,9 @@ import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
-import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
+
 import 'package:portfolio/features/pages/widgets/highest_changes_widget.dart';
+import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/operatons_history_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
@@ -95,7 +96,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                     )
                                   ],
                                 ),
-                                LineChartWidget(cryptoData: null,days:  null,)
+                                LineChartWidget(days:  1,)
                               ],
                             ),
                           ),

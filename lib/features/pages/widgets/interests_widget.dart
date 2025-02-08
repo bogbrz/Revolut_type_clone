@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
+
+import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 
 class InterestWidgets extends StatelessWidget {
   const InterestWidgets({
@@ -45,7 +46,7 @@ class InterestWidgets extends StatelessWidget {
                     Text("9999 \$"),
                     Transform.scale(
                       scale: 0.5,
-                      child: LineChartWidget(cryptoData: null,days:  null,),
+                      child: LineChartWidget(days:  11,),
                     )
                   ],
                 )),

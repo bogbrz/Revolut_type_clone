@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 
-
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
 import 'package:portfolio/features/pages/crypto_page/details_page/bloc/crypto_details_bloc.dart';
@@ -11,7 +10,7 @@ import 'package:portfolio/features/pages/crypto_page/details_page/crypto_stats_w
 import 'package:portfolio/features/pages/crypto_page/details_page/news_widget.dart';
 import 'package:portfolio/features/pages/news_page/news_page.dart';
 
-import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
+import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 import 'package:unicons/unicons.dart';
@@ -121,9 +120,10 @@ class CryptoDetailsPage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 32),
                                     child: LineChartWidget(
+                                      coinId: id,
                                       prices: state.prices,
                                       unixTime: state.unixTime,
-                                      cryptoData: state.historyModel,
+                                  
                                       days: 5,
                                       scale: 1.0,
                                     ),
@@ -271,4 +271,3 @@ class InvestmentWidget extends StatelessWidget {
     );
   }
 }
-
