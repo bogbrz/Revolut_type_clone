@@ -41,7 +41,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               );
             }
-            return NewsPage();
+            return NewsPage(
+              topic: null,
+            );
           }),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,8 +53,6 @@ class _HomePageState extends State<HomePage> {
                   onTap: (value) {
                     setState(() {
                       pageIndex = value;
-
-                  
                     });
                   },
                   currentIndex: pageIndex,

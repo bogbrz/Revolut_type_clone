@@ -3,7 +3,6 @@ import 'package:portfolio/domain/models/crypto_details_model.dart';
 
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
-import 'package:portfolio/domain/models/model.dart';
 
 import 'package:portfolio/env.dart';
 
@@ -23,8 +22,9 @@ class CryptoDataSource {
     } else {
       List<Map<String, dynamic>> convertedList =
           List<Map<String, dynamic>>.from(data);
-      for (int i = 0; i < 13; i++)
+      for (int i = 0; i < 9; i++) {
         cryptoDataList.add(CryptoInfoModel.fromJson(convertedList[i]));
+      }
 
       return cryptoDataList;
     }
@@ -94,41 +94,3 @@ class CryptoDataSource {
     }
   }
 }
-
-//   Future<List<Welcome?>> getCryptoData() async {
-//     final response = await Dio().get<List<dynamic>>(
-//       "https://api.coingecko.com/api/v3/coins/list?include_platform=false/?x_cg_demo_api_key=$cryptoKey",
-//     );
-
-//     final data = response.data;
-//     if (data == null) {
-//       throw Exception("Something went wrong");
-//     } else {
-//       List<Map<String, dynamic>> convertedList =
-//           List<Map<String, dynamic>>.from(data);
-
-//       final List<CryptoModel> cryptoList = [];
-//       for (final model in convertedList) {
-//         cryptoList.add(CryptoModel.fromJson(model));
-//       }
-//       List<Welcome> cryptoDataList = [];
-//       int i = 0;
-//       for (final crypto in cryptoList) {
-//         i++;
-//         try {
-//           if (i == 9) break;
-//           final cryptoData = await Dio().get<Map<String, dynamic>>(
-//               "https://api.coingecko.com/api/v3/coins/${crypto.id}?localization=true&tickers=true&market_data=true&community_data=true&developer_data=true&sparkline=false?x_cg_demo_api_key=$cryptoKey");
-
-//           cryptoDataList.add(Welcome.fromJson(cryptoData.data!));
-//         } catch (e) {
-//           i--;
-//         }
-
-//         if (i == 9) break;
-//       }
-//       print(cryptoDataList[0]);
-//       return cryptoDataList;
-//     }
-//   }
-// }

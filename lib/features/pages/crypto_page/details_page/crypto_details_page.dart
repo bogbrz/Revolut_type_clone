@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 
+
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
 import 'package:portfolio/features/pages/crypto_page/details_page/bloc/crypto_details_bloc.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/coin_info_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/crypto_stats_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/news_widget.dart';
+import 'package:portfolio/features/pages/news_page/news_page.dart';
 
 import 'package:portfolio/features/pages/widgets/charts_widgets.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
@@ -37,61 +41,98 @@ class CryptoDetailsPage extends StatelessWidget {
             return Expanded(
               child: ListView(
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.40,
-                    child:
-                        BlocBuilder<CryptoDetailsBloc, CryptoDetailsPageState>(
-                      builder: (context, state) {
-                        switch (state.status) {
-                          case Status.loading:
-                            return Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          case Status.failure:
-                            return Center(
-                              child: Text("Error"),
-                            );
+                  Expanded(
+                    child: SizedBox(
+                      child: BlocBuilder<CryptoDetailsBloc,
+                          CryptoDetailsPageState>(
+                        builder: (context, state) {
+                          switch (state.status) {
+                            case Status.loading:
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            case Status.failure:
+                              return Center(
+                                child: Text("Error"),
+                              );
 
-                          case Status.initial:
-                            return Center(
-                              child: Text("Waiting for data"),
-                            );
-                          case Status.success:
-                            return Column(
-                              children: [
-                                ListTile(
-                                  title: Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Text(
-                                              "${state.detailsModel?.name ?? ""} - ${state.detailsModel?.symbol ?? ""}"),
-                                          Text(state.detailsModel?.marketData
-                                                  ?.currentPrice?.usd
-                                                  ?.toStringAsFixed(2) ??
-                                              "" + " USD"),
-                                        ],
-                                      ),
-                                    ],
+                            case Status.initial:
+                              return Center(
+                                child: Text("Waiting for data"),
+                              );
+                            case Status.success:
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    title: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Text(
+                                                "${state.detailsModel?.name ?? ""} - ${state.detailsModel?.symbol ?? ""}"),
+                                            Text(
+                                                "${state.detailsModel?.marketData?.currentPrice?.usd?.toStringAsFixed(2) ?? ""} USD"),
+                                            Text(
+                                              "${segment == 0 ? state.detailsModel?.marketData?.priceChangePercentage24H!.toStringAsFixed(2) ?? "" : segment == 1 ? state.detailsModel?.marketData?.priceChangePercentage7D!.toStringAsFixed(2) ?? "" : segment == 2 ? state.detailsModel?.marketData?.priceChangePercentage30D!.toStringAsFixed(2) ?? "" : segment == 3 ? state.detailsModel?.marketData?.priceChangePercentage200D!.toStringAsFixed(2) ?? "" : state.detailsModel?.marketData?.priceChangePercentage1Y!.toStringAsFixed(2) ?? ""}",
+                                              style: TextStyle(
+                                                  color: segment == 0 &&
+                                                              state
+                                                                      .detailsModel!
+                                                                      .marketData!
+                                                                      .priceChangePercentage24H! >
+                                                                  0 ||
+                                                          segment == 1 &&
+                                                              state
+                                                                      .detailsModel!
+                                                                      .marketData!
+                                                                      .priceChangePercentage7D! >
+                                                                  0 ||
+                                                          segment == 2 &&
+                                                              state
+                                                                      .detailsModel!
+                                                                      .marketData!
+                                                                      .priceChangePercentage30D! >
+                                                                  0 ||
+                                                          segment == 3 &&
+                                                              state
+                                                                      .detailsModel!
+                                                                      .marketData!
+                                                                      .priceChangePercentage200D! >
+                                                                  0 ||
+                                                          segment == 4 &&
+                                                              state
+                                                                      .detailsModel!
+                                                                      .marketData!
+                                                                      .priceChangePercentage1Y! >
+                                                                  0
+                                                      ? Colors.green
+                                                      : Colors.red),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    trailing: Image.network(
+                                        state.detailsModel?.image?.small ?? ""),
                                   ),
-                                  trailing: Image.network(
-                                      state.detailsModel?.image?.small ?? ""),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25, vertical: 32),
-                                  child: LineChartWidget(
-                                    prices: state.prices,
-                                    unixTime: state.unixTime,
-                                    cryptoData: state.historyModel,
-                                    days: 5,
-                                    scale: 1.0,
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 32),
+                                    child: LineChartWidget(
+                                      prices: state.prices,
+                                      unixTime: state.unixTime,
+                                      cryptoData: state.historyModel,
+                                      days: 5,
+                                      scale: 1.0,
+                                    ),
                                   ),
-                                ),
-                              ],
-                            );
-                        }
-                      },
+                                ],
+                              );
+                          }
+                        },
+                      ),
                     ),
                   ),
                   Padding(
@@ -133,92 +174,12 @@ class CryptoDetailsPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: const Color.fromARGB(55, 146, 146, 146),
-                      ),
-                      padding: EdgeInsets.all(8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        spacing: MediaQuery.of(context).size.height * 0.02,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Stats",
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Capitalization",
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
-                              Text(
-                                "${state.detailsModel?.marketData?.marketCap?.usd?.round() ?? " D"}",
-                                style: Theme.of(context).textTheme.titleLarge,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "In circulation",
-                                style: Theme.of(context).textTheme.titleLarge,
-                              ),
-                              Text(
-                                "${state.detailsModel?.marketData?.circulatingSupply?.round() ?? " D"}",
-                                style: Theme.of(context).textTheme.titleLarge,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "maximum supply",
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ),
-                              Text(
-                                "${state.detailsModel?.marketData?.maxSupply?.round() ?? " D"}",
-                                style: Theme.of(context).textTheme.titleLarge,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Trading volume",
-                                style:
-                                    Theme.of(context).textTheme.headlineSmall,
-                              ),
-                              Text(
-                                "${state.detailsModel?.marketData?.totalVolume?.usd?.round() ?? " D"}",
-                                style: Theme.of(context).textTheme.titleLarge,
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                  InvestmentWidget(),
+                  CryptoStatsWidget(
+                    model: state.detailsModel,
                   ),
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      child: NewsInfoWidget(
-                        coinId: id,
-                      )),
+                  NewsletterWidget(id: id),
+                  CoinInfoWidget(model: state.detailsModel),
                   PageEndTextWidget()
                 ],
               ),
@@ -229,3 +190,85 @@ class CryptoDetailsPage extends StatelessWidget {
     );
   }
 }
+
+class NewsletterWidget extends StatelessWidget {
+  const NewsletterWidget({
+    super.key,
+    required this.id,
+  });
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Newsletter",
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => NewsPage(
+                            topic: id,
+                          )));
+                },
+                child: Text(
+                  "Show all",
+                  style: TextStyle(color: Colors.blue),
+                ),
+              )
+            ],
+          ),
+        ),
+        Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.35,
+            child: NewsInfoWidget(
+              coinId: id,
+            )),
+      ],
+    );
+  }
+}
+
+class InvestmentWidget extends StatelessWidget {
+  const InvestmentWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Investment",
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+            ],
+          ),
+          Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(55, 146, 146, 146),
+              ),
+              padding: EdgeInsets.all(8),
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.15,
+              child: Text("INVESTMENT DATA")),
+        ],
+      ),
+    );
+  }
+}
+

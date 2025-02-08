@@ -11,6 +11,7 @@ class CryptoRepository {
 
   Future<List<CryptoInfoModel?>> getCrypto() async {
     final cryptoData = await cryptoDataSource.getCryptoWithData();
+    print(cryptoData[0]);
     return cryptoData;
   }
 

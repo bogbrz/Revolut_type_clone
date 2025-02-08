@@ -46,7 +46,7 @@ class AllAssetsWidget extends StatelessWidget {
 
                     case Status.success:
                       return SizedBox(
-                          height: 200,
+                          height: 250,
                           width: MediaQuery.of(context).size.width,
                           child: GridView.builder(
                               itemCount: state.model.length,
@@ -54,29 +54,39 @@ class AllAssetsWidget extends StatelessWidget {
                                   SliverGridDelegateWithMaxCrossAxisExtent(
                                       maxCrossAxisExtent:
                                           MediaQuery.of(context).size.width *
-                                              0.25),
+                                              0.4),
                               itemBuilder: (context, index) {
-                                return DecoratedBox(
-                                  decoration:
-                                      BoxDecoration(shape: BoxShape.circle),
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CryptoDetailsPage(
-                                                      id: state
-                                                          .model[index]!.id!)));
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Image.network(
-                                            scale: 3.5,
-                                            state.model[index]?.image ?? ""),
-                                        Text(state.model[index]?.symbol ??
-                                            "Dupa"),
-                                      ],
-                                    ),
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CryptoDetailsPage(
+                                                    id: state
+                                                        .model[index]!.id!)));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Image.network(
+                                          scale: 4,
+                                          state.model[index]?.image ?? ""),
+                                      Text(state.model[index]?.name ?? "Dupa"),
+                                      Text(state.model[index]?.currentPrice
+                                              .toString() ??
+                                          "Dupa"),
+                                      Text(
+                                        state.model[index]
+                                                ?.priceChangePercentage24H!
+                                                .toStringAsFixed(2) ??
+                                            "Dupa",
+                                        style: TextStyle(
+                                            color: state.model[index]!
+                                                        .priceChangePercentage24H! >
+                                                    0
+                                                ? Colors.green
+                                                : Colors.red),
+                                      ),
+                                    ],
                                   ),
                                 );
                               }));

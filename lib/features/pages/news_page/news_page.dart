@@ -7,14 +7,14 @@ import 'package:portfolio/features/pages/news_page/bloc/news_page_bloc.dart';
 import 'package:portfolio/features/pages/news_page/news_details_page.dart';
 
 class NewsPage extends StatelessWidget {
-  const NewsPage({super.key});
-
+  const NewsPage({super.key, required this.topic});
+  final String? topic;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => NewsPageBloc(
           newsRepository: NewsRepository(newsDataSource: NewsDataSource()))
-        ..add(NewsInitial(topic: "Business")),
+        ..add(NewsInitial(topic: topic == null ? "Business" : topic!)),
       child: Scaffold(
         appBar: AppBar(
           title: Text(
