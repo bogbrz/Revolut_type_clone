@@ -6,7 +6,7 @@ enum Status { initial, loading, success, failure }
 sealed class CryptoDetailsPageState {
   const CryptoDetailsPageState({
     required this.historyModel,
-    required this.extraDetailsModel,
+  
     required this.detailsModel,
     required this.status,
     required this.error,
@@ -14,8 +14,8 @@ sealed class CryptoDetailsPageState {
     required this.unixTime,
   });
   final CryptoHistoryModel? historyModel;
-  final NewModel? detailsModel;
-  final Welcome? extraDetailsModel;
+  final Welcome? detailsModel;
+
 
   final Status status;
   final bool error;
@@ -25,7 +25,7 @@ sealed class CryptoDetailsPageState {
 
 final class CryptoPageInitial extends CryptoDetailsPageState {
   CryptoPageInitial({
-    required super.extraDetailsModel,
+   
     required super.status,
     required super.historyModel,
     required super.detailsModel,
@@ -37,7 +37,7 @@ final class CryptoPageInitial extends CryptoDetailsPageState {
 
 final class CryptoPageLoadInProgress extends CryptoDetailsPageState {
   const CryptoPageLoadInProgress({
-    required super.extraDetailsModel,
+  
     required super.status,
     required super.historyModel,
     required super.detailsModel,
@@ -49,7 +49,7 @@ final class CryptoPageLoadInProgress extends CryptoDetailsPageState {
 
 final class CryptoPageLoadSucces extends CryptoDetailsPageState {
   const CryptoPageLoadSucces({
-    required super.extraDetailsModel,
+
     required super.status,
     required super.historyModel,
     required super.detailsModel,
@@ -61,7 +61,7 @@ final class CryptoPageLoadSucces extends CryptoDetailsPageState {
 
 final class CryptoPageLoadFaliure extends CryptoDetailsPageState {
   const CryptoPageLoadFaliure({
-    required super.extraDetailsModel,
+  
     required super.status,
     required super.historyModel,
     required super.detailsModel,

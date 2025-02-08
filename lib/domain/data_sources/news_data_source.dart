@@ -13,11 +13,13 @@ class NewsDataSource {
     final respons = await Dio().get<Map<String, dynamic>>(url);
 
     final data = respons.data;
-    if (data == null) {
-      return null;
+   
+    final news = NewsModel.fromJson(data!);
+    if (news.articles.isEmpty || news.totalResults == 0) {
+      final backUpNews = await Dio().get<Map<String, dynamic>>(
+          "https://newsapi.org/v2/everything?q=crypto&sortBy=popularity&apiKey=$newsKey");
+      return NewsModel.fromJson(backUpNews.data!);
     } else {
-      final news = NewsModel.fromJson(data);
-      print("News");
       return news;
     }
   }

@@ -32,29 +32,47 @@ class NewsInfoWidget extends StatelessWidget {
               padding: EdgeInsets.all(8),
               child: BlocBuilder<NewsPageBloc, NewsPageState>(
                 builder: (context, state) {
-                  return Expanded(
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.model?.articles.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => NewsDetailsPage(
-                                        articles: state.model!.articles[index],
-                                      )));
-                            },
-                            child: SmallTile(
-                              isSmall: true,
-                              articles: state.model!.articles[index],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
+                  switch (state.status) {
+                    case Status.loading:
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+
+                    case Status.initial:
+                      return const Center(
+                        child: Text("Waiting for data"),
+                      );
+                    case Status.success:
+                      return Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount:
+                              state.model?.articles.length == null ? 0 : 5,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => NewsDetailsPage(
+                                            articles:
+                                                state.model!.articles[index],
+                                          )));
+                                },
+                                child: SmallTile(
+                                  isSmall: true,
+                                  articles: state.model!.articles[index],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    case Status.failure:
+                      return const Center(
+                        child: Text("Error"),
+                      );
+                  }
                 },
               ))),
     );
@@ -89,35 +107,37 @@ class SmallTile extends StatelessWidget {
                       'https://media.istockphoto.com/id/1369150014/pl/wektor/naj%C5%9Bwie%C5%BCsze-wiadomo%C5%9Bci-z-t%C5%82a-mapy-%C5%9Bwiata-wektor.jpg?s=2048x2048&w=is&k=20&c=jJljlIW4KdORcTez68MuBZxOgRrcDuXzV6MUIIvOgII=',
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "${article.title}",
-                  style: Theme.of(context).textTheme.titleSmall,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "${article.title}",
+                    style: Theme.of(context).textTheme.titleSmall,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "${articles.publishedAt?.hour}:${articles.publishedAt?.minute}",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    Text(
-                      "${articles.publishedAt?.day}.${articles.publishedAt?.month}.${articles.publishedAt?.year}",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    )
-                  ],
-                ),
-              )
-            ],
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "${articles.publishedAt?.hour}:${articles.publishedAt?.minute}",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      Text(
+                        "${articles.publishedAt?.day}.${articles.publishedAt?.month}.${articles.publishedAt?.year}",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),

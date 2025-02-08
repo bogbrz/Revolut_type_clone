@@ -14,7 +14,7 @@ class CryptoDetailsBloc
   final CryptoRepository cryptoRepository;
   CryptoDetailsBloc({required this.cryptoRepository})
       : super(CryptoPageInitial(
-            extraDetailsModel: null,
+        
             status: Status.initial,
             historyModel: null,
             detailsModel: null,
@@ -26,7 +26,7 @@ class CryptoDetailsBloc
       emit,
     ) async {
       emit(CryptoPageInitial(
-          extraDetailsModel: null,
+        
           prices: [],
           unixTime: [],
           status: Status.loading,
@@ -35,11 +35,11 @@ class CryptoDetailsBloc
           error: false));
 
       try {
-        final extraDetails =
-            await cryptoRepository.getExtraCryptoDetails(id: event.id);
-        print("EXTRA: ${extraDetails.marketData}");
         final detailsModel =
-            await cryptoRepository.getCryptoDetails(id: event.id);
+            await cryptoRepository.getExtraCryptoDetails(id: event.id);
+        print("EXTRA: ${detailsModel.marketData}");
+        // final detailsModel =
+        //     await cryptoRepository.getCryptoDetails(id: event.id);
 
         final historyModel = await cryptoRepository.getHistoricalData(
             id: event.id, days: event.days);
@@ -54,7 +54,7 @@ class CryptoDetailsBloc
         }
 
         emit(CryptoPageLoadSucces(
-            extraDetailsModel: extraDetails,
+  
             prices: price,
             unixTime: timeStamp,
             status: Status.success,
@@ -64,7 +64,7 @@ class CryptoDetailsBloc
       } catch (e) {
         print("${e.toString()}");
         emit(CryptoPageLoadFaliure(
-            extraDetailsModel: null,
+          
             prices: [],
             unixTime: [],
             status: Status.failure,

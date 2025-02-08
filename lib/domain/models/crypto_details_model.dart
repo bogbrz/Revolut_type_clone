@@ -3,54 +3,56 @@ class Welcome {
   String? symbol;
   String? name;
   String? webSlug;
-  dynamic assetPlatformId;
-  Platforms platforms;
-  DetailPlatforms detailPlatforms;
-  int blockTimeInMinutes;
-  String? hashingAlgorithm;
-  List<String?> categories;
-  bool previewListing;
-  dynamic publicNotice;
-  List<dynamic> additionalNotices;
-  Description description;
-  Links links;
-  Image image;
-  String countryOrigin;
-  DateTime genesisDate;
-  double sentimentVotesUpPercentage;
-  double sentimentVotesDownPercentage;
-  double watchlistPortfolioUsers;
-  double marketCapRank;
-  MarketData marketData;
-  List<dynamic> statusUpdates;
-  DateTime lastUpdated;
+  String? assetPlatformId;
+  Platforms? platforms;
+  Map<String, DetailPlatform>? detailPlatforms;
+  double? blockTimeInMinutes;
+  dynamic hashingAlgorithm;
+  List<String>? categories;
+  bool? previewListing;
+  String? publicNotice;
+  List<dynamic>? additionalNotices;
+  Description? description;
+  Links? links;
+  Image? image;
+  String? countryOrigin;
+  dynamic genesisDate;
+  String? contractAddress;
+  double? sentimentVotesUpPercentage;
+  double? sentimentVotesDownPercentage;
+  double? watchlistPortfolioUsers;
+  double? marketCapRank;
+  MarketData? marketData;
+  List<dynamic>? statusUpdates;
+  DateTime? lastUpdated;
 
   Welcome({
-    required this.id,
-    required this.symbol,
-    required this.name,
-    required this.webSlug,
-    required this.assetPlatformId,
-    required this.platforms,
-    required this.detailPlatforms,
-    required this.blockTimeInMinutes,
-    required this.hashingAlgorithm,
-    required this.categories,
-    required this.previewListing,
-    required this.publicNotice,
-    required this.additionalNotices,
-    required this.description,
-    required this.links,
-    required this.image,
-    required this.countryOrigin,
-    required this.genesisDate,
-    required this.sentimentVotesUpPercentage,
-    required this.sentimentVotesDownPercentage,
-    required this.watchlistPortfolioUsers,
-    required this.marketCapRank,
-    required this.marketData,
-    required this.statusUpdates,
-    required this.lastUpdated,
+    this.id,
+    this.symbol,
+    this.name,
+    this.webSlug,
+    this.assetPlatformId,
+    this.platforms,
+    this.detailPlatforms,
+    this.blockTimeInMinutes,
+    this.hashingAlgorithm,
+    this.categories,
+    this.previewListing,
+    this.publicNotice,
+    this.additionalNotices,
+    this.description,
+    this.links,
+    this.image,
+    this.countryOrigin,
+    this.genesisDate,
+    this.contractAddress,
+    this.sentimentVotesUpPercentage,
+    this.sentimentVotesDownPercentage,
+    this.watchlistPortfolioUsers,
+    this.marketCapRank,
+    this.marketData,
+    this.statusUpdates,
+    this.lastUpdated,
   });
 
   factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
@@ -59,29 +61,52 @@ class Welcome {
         name: json["name"],
         webSlug: json["web_slug"],
         assetPlatformId: json["asset_platform_id"],
-        platforms: Platforms.fromJson(json["platforms"]),
-        detailPlatforms: DetailPlatforms.fromJson(json["detail_platforms"]),
-        blockTimeInMinutes: json["block_time_in_minutes"],
+        platforms: json["platforms"] == null
+            ? null
+            : Platforms.fromJson(json["platforms"]),
+        detailPlatforms: Map.from(json["detail_platforms"]!).map((k, v) =>
+            MapEntry<String, DetailPlatform>(k, DetailPlatform.fromJson(v))),
+        blockTimeInMinutes: json["block_time_in_minutes"] != null
+            ? json["block_time_in_minutes"] + 0.0 as double
+            : null,
         hashingAlgorithm: json["hashing_algorithm"],
-        categories: List<String>.from(json["categories"].map((x) => x)),
+        categories: json["categories"] == null
+            ? []
+            : List<String>.from(json["categories"]!.map((x) => x)),
         previewListing: json["preview_listing"],
         publicNotice: json["public_notice"],
-        additionalNotices:
-            List<dynamic>.from(json["additional_notices"].map((x) => x)),
-        description: Description.fromJson(json["description"]),
-        links: Links.fromJson(json["links"]),
-        image: Image.fromJson(json["image"]),
+        additionalNotices: json["additional_notices"] == null
+            ? []
+            : List<dynamic>.from(json["additional_notices"]!.map((x) => x)),
+        description: json["description"] == null
+            ? null
+            : Description.fromJson(json["description"]),
+        links: json["links"] == null ? null : Links.fromJson(json["links"]),
+        image: json["image"] == null ? null : Image.fromJson(json["image"]),
         countryOrigin: json["country_origin"],
-        genesisDate: DateTime.parse(json["genesis_date"]),
+        genesisDate: json["genesis_date"],
+        contractAddress: json["contract_address"],
         sentimentVotesUpPercentage:
-            json["sentiment_votes_up_percentage"]?.toDouble(),
+            json["sentiment_votes_up_percentage"] != null
+                ? json["sentiment_votes_up_percentage"] + 0.0 as double
+                : null,
         sentimentVotesDownPercentage:
-            json["sentiment_votes_down_percentage"]?.toDouble(),
-        watchlistPortfolioUsers: json["watchlist_portfolio_users"] + 0.0,
-        marketCapRank: json["market_cap_rank"] + 0.0,
-        marketData: MarketData.fromJson(json["market_data"]),
-        statusUpdates: List<dynamic>.from(json["status_updates"].map((x) => x)),
-        lastUpdated: DateTime.parse(json["last_updated"]),
+            json["sentiment_votes_down_percentage"] + 0.0 + 0.0 as double?,
+        watchlistPortfolioUsers: json["watchlist_portfolio_users"] != null
+            ? json["watchlist_portfolio_users"] + 0.0 as double
+            : null,
+        marketCapRank: json["market_cap_rank"] != null
+            ? json["market_cap_rank"] + 0.0 as double
+            : null,
+        marketData: json["market_data"] == null
+            ? null
+            : MarketData.fromJson(json["market_data"]),
+        statusUpdates: json["status_updates"] == null
+            ? []
+            : List<dynamic>.from(json["status_updates"]!.map((x) => x)),
+        lastUpdated: json["last_updated"] == null
+            ? null
+            : DateTime.parse(json["last_updated"]),
       );
 }
 
@@ -89,7 +114,7 @@ class Description {
   String? en;
 
   Description({
-    required this.en,
+    this.en,
   });
 
   factory Description.fromJson(Map<String, dynamic> json) => Description(
@@ -97,32 +122,21 @@ class Description {
       );
 }
 
-class DetailPlatforms {
-  Empty empty;
-
-  DetailPlatforms({
-    required this.empty,
-  });
-
-  factory DetailPlatforms.fromJson(Map<String, dynamic> json) =>
-      DetailPlatforms(
-        empty: Empty.fromJson(json[""]),
-      );
-}
-
-class Empty {
-  dynamic decimalPlace;
-  String contractAddress;
+class DetailPlatform {
+  double? decimalPlace;
+  String? contractAddress;
   dynamic logo;
 
-  Empty({
-    required this.decimalPlace,
-    required this.contractAddress,
-    required this.logo,
+  DetailPlatform({
+    this.decimalPlace,
+    this.contractAddress,
+    this.logo,
   });
 
-  factory Empty.fromJson(Map<String, dynamic> json) => Empty(
-        decimalPlace: json["decimal_place"],
+  factory DetailPlatform.fromJson(Map<String, dynamic> json) => DetailPlatform(
+        decimalPlace: json["decimal_place"] != null
+            ? json["decimal_place"] + 0.0 as double
+            : null,
         contractAddress: json["contract_address"],
         logo: json["logo"],
       );
@@ -134,9 +148,9 @@ class Image {
   String? large;
 
   Image({
-    required this.thumb,
-    required this.small,
-    required this.large,
+    this.thumb,
+    this.small,
+    this.large,
   });
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
@@ -147,90 +161,104 @@ class Image {
 }
 
 class Links {
-  List<String> homepage;
-  String whitepaper;
-  List<String> blockchainSite;
-  List<String> officialForumUrl;
-  List<dynamic> chatUrl;
-  List<dynamic> announcementUrl;
+  List<String>? homepage;
+  String? whitepaper;
+  List<String>? blockchainSite;
+  List<dynamic>? officialForumUrl;
+  List<String>? chatUrl;
+  List<String>? announcementUrl;
   dynamic snapshotUrl;
-  String twitterScreenName;
-  String facebookUsername;
-  dynamic bitcointalkThreadIdentifier;
-  String telegramChannelIdentifier;
-  String subredditUrl;
-  ReposUrl reposUrl;
+  String? twitterScreenName;
+  String? facebookUsername;
+  dynamic bitcodoublealkThreadIdentifier;
+  String? telegramChannelIdentifier;
+  String? subredditUrl;
+  ReposUrl? reposUrl;
 
   Links({
-    required this.homepage,
-    required this.whitepaper,
-    required this.blockchainSite,
-    required this.officialForumUrl,
-    required this.chatUrl,
-    required this.announcementUrl,
-    required this.snapshotUrl,
-    required this.twitterScreenName,
-    required this.facebookUsername,
-    required this.bitcointalkThreadIdentifier,
-    required this.telegramChannelIdentifier,
-    required this.subredditUrl,
-    required this.reposUrl,
+    this.homepage,
+    this.whitepaper,
+    this.blockchainSite,
+    this.officialForumUrl,
+    this.chatUrl,
+    this.announcementUrl,
+    this.snapshotUrl,
+    this.twitterScreenName,
+    this.facebookUsername,
+    this.bitcodoublealkThreadIdentifier,
+    this.telegramChannelIdentifier,
+    this.subredditUrl,
+    this.reposUrl,
   });
 
   factory Links.fromJson(Map<String, dynamic> json) => Links(
-        homepage: List<String>.from(json["homepage"].map((x) => x)),
+        homepage: json["homepage"] == null
+            ? []
+            : List<String>.from(json["homepage"]!.map((x) => x)),
         whitepaper: json["whitepaper"],
-        blockchainSite:
-            List<String>.from(json["blockchain_site"].map((x) => x)),
-        officialForumUrl:
-            List<String>.from(json["official_forum_url"].map((x) => x)),
-        chatUrl: List<dynamic>.from(json["chat_url"].map((x) => x)),
-        announcementUrl:
-            List<dynamic>.from(json["announcement_url"].map((x) => x)),
+        blockchainSite: json["blockchain_site"] == null
+            ? []
+            : List<String>.from(json["blockchain_site"]!.map((x) => x)),
+        officialForumUrl: json["official_forum_url"] == null
+            ? []
+            : List<dynamic>.from(json["official_forum_url"]!.map((x) => x)),
+        chatUrl: json["chat_url"] == null
+            ? []
+            : List<String>.from(json["chat_url"]!.map((x) => x)),
+        announcementUrl: json["announcement_url"] == null
+            ? []
+            : List<String>.from(json["announcement_url"]!.map((x) => x)),
         snapshotUrl: json["snapshot_url"],
         twitterScreenName: json["twitter_screen_name"],
         facebookUsername: json["facebook_username"],
-        bitcointalkThreadIdentifier: json["bitcointalk_thread_identifier"],
+        bitcodoublealkThreadIdentifier:
+            json["bitcodoublealk_thread_identifier"],
         telegramChannelIdentifier: json["telegram_channel_identifier"],
         subredditUrl: json["subreddit_url"],
-        reposUrl: ReposUrl.fromJson(json["repos_url"]),
+        reposUrl: json["repos_url"] == null
+            ? null
+            : ReposUrl.fromJson(json["repos_url"]),
       );
 }
 
 class ReposUrl {
-  List<String> github;
-  List<dynamic> bitbucket;
+  List<String>? github;
+  List<dynamic>? bitbucket;
 
   ReposUrl({
-    required this.github,
-    required this.bitbucket,
+    this.github,
+    this.bitbucket,
   });
 
   factory ReposUrl.fromJson(Map<String, dynamic> json) => ReposUrl(
-        github: List<String>.from(json["github"].map((x) => x)),
-        bitbucket: List<dynamic>.from(json["bitbucket"].map((x) => x)),
+        github: json["github"] == null
+            ? []
+            : List<String>.from(json["github"]!.map((x) => x)),
+        bitbucket: json["bitbucket"] == null
+            ? []
+            : List<dynamic>.from(json["bitbucket"]!.map((x) => x)),
       );
 }
 
 class MarketData {
-  MapStringDouble? currentPrice;
+  CurrentPrice? currentPrice;
   dynamic totalValueLocked;
   dynamic mcapToTvlRatio;
   dynamic fdvToTvlRatio;
   dynamic roi;
-  MapStringDouble? ath;
-  MapStringDouble? athChangePercentage;
-  Map<String, DateTime> athDate;
-  MapStringDouble? atl;
-  MapStringDouble? atlChangePercentage;
+  CurrentPrice? ath;
+  CurrentPrice? athChangePercentage;
+  Map<String, DateTime>? athDate;
+  CurrentPrice? atl;
+  CurrentPrice? atlChangePercentage;
   Map<String, DateTime>? atlDate;
-  MapStringDouble? marketCap;
+  CurrentPrice? marketCap;
   double? marketCapRank;
-  MapStringDouble? fullyDilutedValuation;
+  CurrentPrice? fullyDilutedValuation;
   double? marketCapFdvRatio;
-  MapStringDouble? totalVolume;
-  MapStringDouble? high24H;
-  MapStringDouble? low24H;
+  CurrentPrice? totalVolume;
+  CurrentPrice? high24H;
+  CurrentPrice? low24H;
   double? priceChange24H;
   double? priceChangePercentage24H;
   double? priceChangePercentage7D;
@@ -241,141 +269,166 @@ class MarketData {
   double? priceChangePercentage1Y;
   double? marketCapChange24H;
   double? marketCapChangePercentage24H;
-  MapStringDouble? priceChange24HInCurrency;
-  MapStringDouble? priceChangePercentage1HInCurrency;
-  MapStringDouble? priceChangePercentage24HInCurrency;
-  MapStringDouble? priceChangePercentage7DInCurrency;
-  MapStringDouble? priceChangePercentage14DInCurrency;
-  MapStringDouble? priceChangePercentage30DInCurrency;
-  MapStringDouble? priceChangePercentage60DInCurrency;
-  MapStringDouble? priceChangePercentage200DInCurrency;
-  MapStringDouble? priceChangePercentage1YInCurrency;
-  MapStringDouble? marketCapChange24HInCurrency;
-  MapStringDouble? marketCapChangePercentage24HInCurrency;
+  CurrentPrice? priceChange24HInCurrency;
+  CurrentPrice? priceChangePercentage1HInCurrency;
+  CurrentPrice? priceChangePercentage24HInCurrency;
+  CurrentPrice? priceChangePercentage7DInCurrency;
+  CurrentPrice? priceChangePercentage14DInCurrency;
+  CurrentPrice? priceChangePercentage30DInCurrency;
+  CurrentPrice? priceChangePercentage60DInCurrency;
+  CurrentPrice? priceChangePercentage200DInCurrency;
+  CurrentPrice? priceChangePercentage1YInCurrency;
+  CurrentPrice? marketCapChange24HInCurrency;
+  CurrentPrice? marketCapChangePercentage24HInCurrency;
   double? totalSupply;
-  double? maxSupply;
+  dynamic maxSupply;
   bool? maxSupplyInfinite;
   double? circulatingSupply;
   DateTime? lastUpdated;
 
   MarketData({
-    required this.currentPrice,
-    required this.totalValueLocked,
-    required this.mcapToTvlRatio,
-    required this.fdvToTvlRatio,
-    required this.roi,
-    required this.ath,
-    required this.athChangePercentage,
-    required this.athDate,
-    required this.atl,
-    required this.atlChangePercentage,
-    required this.atlDate,
-    required this.marketCap,
-    required this.marketCapRank,
-    required this.fullyDilutedValuation,
-    required this.marketCapFdvRatio,
-    required this.totalVolume,
-    required this.high24H,
-    required this.low24H,
-    required this.priceChange24H,
-    required this.priceChangePercentage24H,
-    required this.priceChangePercentage7D,
-    required this.priceChangePercentage14D,
-    required this.priceChangePercentage30D,
-    required this.priceChangePercentage60D,
-    required this.priceChangePercentage200D,
-    required this.priceChangePercentage1Y,
-    required this.marketCapChange24H,
-    required this.marketCapChangePercentage24H,
-    required this.priceChange24HInCurrency,
-    required this.priceChangePercentage1HInCurrency,
-    required this.priceChangePercentage24HInCurrency,
-    required this.priceChangePercentage7DInCurrency,
-    required this.priceChangePercentage14DInCurrency,
-    required this.priceChangePercentage30DInCurrency,
-    required this.priceChangePercentage60DInCurrency,
-    required this.priceChangePercentage200DInCurrency,
-    required this.priceChangePercentage1YInCurrency,
-    required this.marketCapChange24HInCurrency,
-    required this.marketCapChangePercentage24HInCurrency,
-    required this.totalSupply,
-    required this.maxSupply,
-    required this.maxSupplyInfinite,
-    required this.circulatingSupply,
-    required this.lastUpdated,
+    this.currentPrice,
+    this.totalValueLocked,
+    this.mcapToTvlRatio,
+    this.fdvToTvlRatio,
+    this.roi,
+    this.ath,
+    this.athChangePercentage,
+    this.athDate,
+    this.atl,
+    this.atlChangePercentage,
+    this.atlDate,
+    this.marketCap,
+    this.marketCapRank,
+    this.fullyDilutedValuation,
+    this.marketCapFdvRatio,
+    this.totalVolume,
+    this.high24H,
+    this.low24H,
+    this.priceChange24H,
+    this.priceChangePercentage24H,
+    this.priceChangePercentage7D,
+    this.priceChangePercentage14D,
+    this.priceChangePercentage30D,
+    this.priceChangePercentage60D,
+    this.priceChangePercentage200D,
+    this.priceChangePercentage1Y,
+    this.marketCapChange24H,
+    this.marketCapChangePercentage24H,
+    this.priceChange24HInCurrency,
+    this.priceChangePercentage1HInCurrency,
+    this.priceChangePercentage24HInCurrency,
+    this.priceChangePercentage7DInCurrency,
+    this.priceChangePercentage14DInCurrency,
+    this.priceChangePercentage30DInCurrency,
+    this.priceChangePercentage60DInCurrency,
+    this.priceChangePercentage200DInCurrency,
+    this.priceChangePercentage1YInCurrency,
+    this.marketCapChange24HInCurrency,
+    this.marketCapChangePercentage24HInCurrency,
+    this.totalSupply,
+    this.maxSupply,
+    this.maxSupplyInfinite,
+    this.circulatingSupply,
+    this.lastUpdated,
   });
 
   factory MarketData.fromJson(Map<String, dynamic> json) => MarketData(
-        currentPrice: MapStringDouble.fromJson(json["current_price"]),
+        currentPrice: CurrentPrice.fromJson(json["current_price"]),
         totalValueLocked: json["total_value_locked"],
         mcapToTvlRatio: json["mcap_to_tvl_ratio"],
         fdvToTvlRatio: json["fdv_to_tvl_ratio"],
         roi: json["roi"],
-        ath: MapStringDouble.fromJson(json["ath"]),
+        ath: CurrentPrice.fromJson(json["ath"]),
         athChangePercentage:
-            MapStringDouble.fromJson(json["ath_change_percentage"]),
-        athDate: Map.from(json["ath_date"])
+            CurrentPrice.fromJson(json["ath_change_percentage"]),
+        athDate: Map.from(json["ath_date"]!)
             .map((k, v) => MapEntry<String, DateTime>(k, DateTime.parse(v))),
-        atl: MapStringDouble.fromJson(json["atl"]),
+        atl: CurrentPrice.fromJson(json["atl"]),
         atlChangePercentage:
-            MapStringDouble.fromJson(json["atl_change_percentage"]),
-        atlDate: Map.from(json["atl_date"])
+            CurrentPrice.fromJson(json["atl_change_percentage"]),
+        atlDate: Map.from(json["atl_date"]!)
             .map((k, v) => MapEntry<String, DateTime>(k, DateTime.parse(v))),
-        marketCap: MapStringDouble.fromJson(json["market_cap"]),
-        marketCapRank: json["market_cap_rank"] + 0.0,
+        marketCap: CurrentPrice.fromJson(json["market_cap"]),
+        marketCapRank: json["market_cap_rank"] != null
+            ? json["market_cap_rank"] + 0.0 as double
+            : null,
         fullyDilutedValuation:
-            MapStringDouble.fromJson(json["fully_diluted_valuation"]),
-        marketCapFdvRatio: json["market_cap_fdv_ratio"] + 0.0,
-        totalVolume: MapStringDouble.fromJson(json["total_volume"]),
-        high24H: MapStringDouble.fromJson(json["high_24h"]),
-        low24H: MapStringDouble.fromJson(json["low_24h"]),
-        priceChange24H: json["price_change_24h"]?.toDouble(),
-        priceChangePercentage24H:
-            json["price_change_percentage_24h"]?.toDouble(),
-        priceChangePercentage7D: json["price_change_percentage_7d"]?.toDouble(),
-        priceChangePercentage14D:
-            json["price_change_percentage_14d"]?.toDouble(),
-        priceChangePercentage30D:
-            json["price_change_percentage_30d"]?.toDouble(),
-        priceChangePercentage60D:
-            json["price_change_percentage_60d"]?.toDouble(),
-        priceChangePercentage200D:
-            json["price_change_percentage_200d"]?.toDouble(),
-        priceChangePercentage1Y: json["price_change_percentage_1y"]?.toDouble(),
-        marketCapChange24H: json["market_cap_change_24h"]?.toDouble(),
+            CurrentPrice.fromJson(json["fully_diluted_valuation"]),
+        marketCapFdvRatio: json["market_cap_fdv_ratio"] != null
+            ? json["market_cap_fdv_ratio"] + 0.0 as double
+            : null,
+        totalVolume: CurrentPrice.fromJson(json["total_volume"]),
+        high24H: CurrentPrice.fromJson(json["high_24h"]),
+        low24H: CurrentPrice.fromJson(json["low_24h"]),
+        priceChange24H: json["price_change_24h"] != null
+            ? json["price_change_24h"] + 0.0 as double
+            : null,
+        priceChangePercentage24H: json["price_change_percentage_24h"] != null
+            ? json["price_change_percentage_24h"] + 0.0 as double
+            : null,
+        priceChangePercentage7D: json["price_change_percentage_7d"] != null
+            ? json["price_change_percentage_7d"] + 0.0 as double
+            : null,
+        priceChangePercentage14D: json["price_change_percentage_14d"] != null
+            ? json["price_change_percentage_14d"] + 0.0 as double
+            : null,
+        priceChangePercentage30D: json["price_change_percentage_30d"] != null
+            ? json["price_change_percentage_30d"] + 0.0 as double
+            : null,
+        priceChangePercentage60D: json["price_change_percentage_60d"] != null
+            ? json["price_change_percentage_60d"] + 0.0 as double
+            : null,
+        priceChangePercentage200D: json["price_change_percentage_200d"] != null
+            ? json["price_change_percentage_200d"] + 0.0 as double
+            : null,
+        priceChangePercentage1Y: json["price_change_percentage_1y"] != null
+            ? json["price_change_percentage_1y"] + 0.0 as double
+            : null,
+        marketCapChange24H: json["market_cap_change_24h"] != null
+            ? json["market_cap_change_24h"] + 0.0 as double
+            : null,
         marketCapChangePercentage24H:
-            json["market_cap_change_percentage_24h"]?.toDouble(),
+            json["market_cap_change_percentage_24h"] != null
+                ? json["market_cap_change_percentage_24h"] + 0.0 as double
+                : null,
         priceChange24HInCurrency:
-            MapStringDouble.fromJson(json["price_change_24h_in_currency"]),
-        priceChangePercentage1HInCurrency: MapStringDouble.fromJson(
+            CurrentPrice.fromJson(json["price_change_24h_in_currency"]),
+        priceChangePercentage1HInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_1h_in_currency"]),
-        priceChangePercentage24HInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage24HInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_24h_in_currency"]),
-        priceChangePercentage7DInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage7DInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_7d_in_currency"]),
-        priceChangePercentage14DInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage14DInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_14d_in_currency"]),
-        priceChangePercentage30DInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage30DInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_30d_in_currency"]),
-        priceChangePercentage60DInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage60DInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_60d_in_currency"]),
-        priceChangePercentage200DInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage200DInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_200d_in_currency"]),
-        priceChangePercentage1YInCurrency: MapStringDouble.fromJson(
+        priceChangePercentage1YInCurrency: CurrentPrice.fromJson(
             json["price_change_percentage_1y_in_currency"]),
         marketCapChange24HInCurrency:
-            MapStringDouble.fromJson(json["market_cap_change_24h_in_currency"]),
-        marketCapChangePercentage24HInCurrency: MapStringDouble.fromJson(
+            CurrentPrice.fromJson(json["market_cap_change_24h_in_currency"]),
+        marketCapChangePercentage24HInCurrency: CurrentPrice.fromJson(
             json["market_cap_change_percentage_24h_in_currency"]),
-        totalSupply: json["total_supply"] + 0.0,
-        maxSupply: json["max_supply"] + .0,
+        totalSupply: json["total_supply"] != null
+            ? json["total_supply"] + 0.0 as double
+            : null,
+        maxSupply: json["max_supply"],
         maxSupplyInfinite: json["max_supply_infinite"],
-        circulatingSupply: json["circulating_supply"] + 0.0,
-        lastUpdated: DateTime.parse(json["last_updated"]),
+        circulatingSupply: json["circulating_supply"] != null
+            ? json["circulating_supply"] + 0.0 as double
+            : null,
+        lastUpdated: json["last_updated"] == null
+            ? null
+            : DateTime.parse(json["last_updated"]),
       );
 }
 
-class MapStringDouble {
+class CurrentPrice {
   final double? aed;
   final double? ars;
   final double? aud;
@@ -439,7 +492,7 @@ class MapStringDouble {
   final double? link;
   final double? sats;
 
-  MapStringDouble({
+  CurrentPrice({
     required this.aed,
     required this.ars,
     required this.aud,
@@ -504,8 +557,7 @@ class MapStringDouble {
     required this.sats,
   });
 
-  factory MapStringDouble.fromJson(Map<String, dynamic> json) =>
-      MapStringDouble(
+  factory CurrentPrice.fromJson(Map<String, dynamic> json) => CurrentPrice(
         aed: json['aed'] + 0.0 as double,
         ars: json['ars'] + 0.0 as double,
         aud: json['aud'] + 0.0 as double,
@@ -572,13 +624,61 @@ class MapStringDouble {
 }
 
 class Platforms {
-  String? empty;
+  String? ethereum;
+  String? zksync;
+  String? optimisticEthereum;
+  String? polkadot;
+  String? tron;
+  String? nearProtocol;
+  String? hederaHashgraph;
+  String? aptos;
+  String? algorand;
+  String? stellar;
+  String? celo;
+  String? sui;
+  String? avalanche;
+  String? arbitrumOne;
+  String? polygonPos;
+  String? base;
+  String? solana;
 
   Platforms({
-    required this.empty,
+    this.ethereum,
+    this.zksync,
+    this.optimisticEthereum,
+    this.polkadot,
+    this.tron,
+    this.nearProtocol,
+    this.hederaHashgraph,
+    this.aptos,
+    this.algorand,
+    this.stellar,
+    this.celo,
+    this.sui,
+    this.avalanche,
+    this.arbitrumOne,
+    this.polygonPos,
+    this.base,
+    this.solana,
   });
 
   factory Platforms.fromJson(Map<String, dynamic> json) => Platforms(
-        empty: json[""],
+        ethereum: json["ethereum"],
+        zksync: json["zksync"],
+        optimisticEthereum: json["optimistic-ethereum"],
+        polkadot: json["polkadot"],
+        tron: json["tron"],
+        nearProtocol: json["near-protocol"],
+        hederaHashgraph: json["hedera-hashgraph"],
+        aptos: json["aptos"],
+        algorand: json["algorand"],
+        stellar: json["stellar"],
+        celo: json["celo"],
+        sui: json["sui"],
+        avalanche: json["avalanche"],
+        arbitrumOne: json["arbitrum-one"],
+        polygonPos: json["polygon-pos"],
+        base: json["base"],
+        solana: json["solana"],
       );
 }

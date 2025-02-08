@@ -30,26 +30,34 @@ class CryptoDataSource {
     }
   }
 
-  Future<NewModel> getCryptoDetails({required String id}) async {
-    // "https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
-    final response = await Dio().get<Map<String, dynamic>>(
-      "https://api.coingecko.com/api/v3/coins/${id}/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
+  // Future<NewModel> getCryptoDetails({required String id}) async {
+  //   // "https://api.coingecko.com/api/v3/coins/bitcoin/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
+  //   final response = await Dio().get<Map<String, dynamic>>(
+  //     "https://api.coingecko.com/api/v3/coins/${id}/history?date=30-12-2024&localization=false?x_cg_demo_api_key=$cryptoKey"
 
-      // "https://api.coingecko.com/api/v3/coins/${id}?/market_data=true/?x_cg_demo_api_key=$cryptoKey"
-      ,
-    );
+  //     // "https://api.coingecko.com/api/v3/coins/${id}?/market_data=true/?x_cg_demo_api_key=$cryptoKey"
+  //     ,
+  //   );
 
-    final data = response.data;
-    print(data);
-    if (data == null) {
-      throw Exception("Something went wrong");
-    } else {
-      final model = NewModel.fromJson(data);
+  //   final data = response.data;
+  //   print(data);
+  //   if (data == null) {
+  //     throw Exception("Something went wrong");
+  //   } else {
+  //     final model = NewModel.fromJson(data);
 
-      print("Data: ${model.id}");
-      return model;
-    }
-  }
+  //     print("Data: ${model.id}");
+  //     return model;
+  //   }
+  // }
+
+  //BITCOIN 1576 ZNAKOW
+  //ETHEREUM 1622 ZNAKOW
+  //THETER 1628 ZNAKOW
+  //RIPPLE 1574 ZNAKOW
+  //SOLANA 1612 ZNAKOW
+  //BINANCECOIN 1625 ZNAKOW
+  //USD- COIN 1690 ZNAKOW
 
   Future<Welcome> getExtraCryptoDetails({required String id}) async {
     final response = await Dio().get<Map<String, dynamic>>(
@@ -57,7 +65,7 @@ class CryptoDataSource {
     );
 
     final data = response.data;
-
+    print("Source: $data");
     if (data == null) {
       throw Exception("Something went wrong");
     } else {

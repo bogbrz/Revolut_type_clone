@@ -66,8 +66,8 @@ class CryptoDetailsPage extends StatelessWidget {
                                         children: [
                                           Text(
                                               "${state.detailsModel?.name ?? ""} - ${state.detailsModel?.symbol ?? ""}"),
-                                          Text(state.extraDetailsModel
-                                                  ?.marketData.currentPrice?.usd
+                                          Text(state.detailsModel?.marketData
+                                                  ?.currentPrice?.usd
                                                   ?.toStringAsFixed(2) ??
                                               "" + " USD"),
                                         ],
@@ -75,7 +75,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     ],
                                   ),
                                   trailing: Image.network(
-                                      state.detailsModel?.image.small ?? ""),
+                                      state.detailsModel?.image?.small ?? ""),
                                 ),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
@@ -163,7 +163,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                               Text(
-                                "${state.extraDetailsModel?.marketData.marketCap?.usd?.round() ?? " D"}",
+                                "${state.detailsModel?.marketData?.marketCap?.usd?.round() ?? " D"}",
                                 style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
@@ -176,7 +176,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                               Text(
-                                "${state.extraDetailsModel?.marketData.circulatingSupply?.round() ?? " D"}",
+                                "${state.detailsModel?.marketData?.circulatingSupply?.round() ?? " D"}",
                                 style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
@@ -190,7 +190,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "${state.extraDetailsModel?.marketData.maxSupply?.round() ?? " D"}",
+                                "${state.detailsModel?.marketData?.maxSupply?.round() ?? " D"}",
                                 style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],
@@ -204,7 +204,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     Theme.of(context).textTheme.headlineSmall,
                               ),
                               Text(
-                                "${state.extraDetailsModel?.marketData.totalVolume?.usd?.round() ?? " D"}",
+                                "${state.detailsModel?.marketData?.totalVolume?.usd?.round() ?? " D"}",
                                 style: Theme.of(context).textTheme.titleLarge,
                               )
                             ],

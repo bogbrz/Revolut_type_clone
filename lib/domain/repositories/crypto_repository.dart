@@ -14,12 +14,12 @@ class CryptoRepository {
     return cryptoData;
   }
 
-  Future<NewModel> getCryptoDetails({required String id}) async {
-    final cryptoData = await cryptoDataSource.getCryptoDetails(id: id);
-    print("Repo det ${cryptoData.marketData}");
+  // Future<NewModel> getCryptoDetails({required String id}) async {
+  //   final cryptoData = await cryptoDataSource.getCryptoDetails(id: id);
+  //   print("Repo det ${cryptoData.marketData}");
 
-    return cryptoData;
-  }
+  //   return cryptoData;
+  // }
   Future<Welcome> getExtraCryptoDetails({required String id}) async {
     final cryptoData = await cryptoDataSource.getExtraCryptoDetails(id: id);
     print("Repo det ${cryptoData.marketData}");
