@@ -47,7 +47,7 @@ class NewsInfoWidget extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount:
-                              state.model?.articles.length == null ? 0 : 5,
+                              state.model?.articles.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -61,7 +61,7 @@ class NewsInfoWidget extends StatelessWidget {
                                 },
                                 child: SmallTile(
                                   isSmall: true,
-                                  articles: state.model!.articles[index],
+                                  articles: state.model?.articles[index],
                                 ),
                               ),
                             );
@@ -80,7 +80,7 @@ class NewsInfoWidget extends StatelessWidget {
 }
 
 class SmallTile extends StatelessWidget {
-  final Article articles;
+  final Article? articles;
 
   SmallTile({super.key, required this.articles, required this.isSmall});
 
@@ -101,9 +101,9 @@ class SmallTile extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.175,
             child: Image.network(
               fit: BoxFit.cover,
-              article.urlToImage == ""
+              article?.urlToImage == ""
                   ? 'https://media.istockphoto.com/id/1369150014/pl/wektor/naj%C5%9Bwie%C5%BCsze-wiadomo%C5%9Bci-z-t%C5%82a-mapy-%C5%9Bwiata-wektor.jpg?s=2048x2048&w=is&k=20&c=jJljlIW4KdORcTez68MuBZxOgRrcDuXzV6MUIIvOgII='
-                  : article.urlToImage ??
+                  : article?.urlToImage ??
                       'https://media.istockphoto.com/id/1369150014/pl/wektor/naj%C5%9Bwie%C5%BCsze-wiadomo%C5%9Bci-z-t%C5%82a-mapy-%C5%9Bwiata-wektor.jpg?s=2048x2048&w=is&k=20&c=jJljlIW4KdORcTez68MuBZxOgRrcDuXzV6MUIIvOgII=',
             ),
           ),
@@ -114,7 +114,7 @@ class SmallTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "${article.title}",
+                    "${article?.title}",
                     style: Theme.of(context).textTheme.titleSmall,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -126,11 +126,11 @@ class SmallTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "${articles.publishedAt?.hour}:${articles.publishedAt?.minute}",
+                        "${articles?.publishedAt?.hour}:${articles?.publishedAt?.minute}",
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                       Text(
-                        "${articles.publishedAt?.day}.${articles.publishedAt?.month}.${articles.publishedAt?.year}",
+                        "${articles?.publishedAt?.day}.${articles?.publishedAt?.month}.${articles?.publishedAt?.year}",
                         style: Theme.of(context).textTheme.bodySmall,
                       )
                     ],
