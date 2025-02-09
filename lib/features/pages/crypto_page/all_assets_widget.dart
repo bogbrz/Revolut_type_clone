@@ -49,7 +49,7 @@ class AllAssetsWidget extends StatelessWidget {
                           height: 250,
                           width: MediaQuery.of(context).size.width,
                           child: GridView.builder(
-                              itemCount: state.model.length,
+                              itemCount: 6,
                               gridDelegate:
                                   SliverGridDelegateWithMaxCrossAxisExtent(
                                       maxCrossAxisExtent:

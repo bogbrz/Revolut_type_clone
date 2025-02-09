@@ -22,15 +22,13 @@ class CryptoDataSource {
     } else {
       List<Map<String, dynamic>> convertedList =
           List<Map<String, dynamic>>.from(data);
-      for (int i = 0; i < 9; i++) {
+      for (int i = 0; i < convertedList.length; i++) {
         cryptoDataList.add(CryptoInfoModel.fromJson(convertedList[i]));
       }
 
       return cryptoDataList;
     }
   }
-
- 
 
   Future<Welcome> getCryptoDetails({required String id}) async {
     final response = await Dio().get<Map<String, dynamic>>(

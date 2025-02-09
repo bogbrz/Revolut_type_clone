@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
 
-import 'package:portfolio/features/pages/widgets/highest_changes_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
 import 'package:portfolio/features/pages/widgets/operatons_history_widget.dart';
@@ -96,7 +95,9 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                     )
                                   ],
                                 ),
-                                LineChartWidget(days:  1,)
+                                LineChartWidget(
+                                  days: 1,
+                                )
                               ],
                             ),
                           ),
@@ -156,13 +157,13 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                             "1 stock"
                           ],
                         ),
-                        HighestChangesWidget(
-                          images: [
-                            AssetImage("assets/images/apple.png"),
-                            AssetImage("assets/images/amazon.png"),
-                            AssetImage("assets/images/nvidia.png")
-                          ],
-                        ),
+                        // HighestChangesWidget(
+                        //   images: [
+                        //     AssetImage("assets/images/apple.png"),
+                        //     AssetImage("assets/images/amazon.png"),
+                        //     AssetImage("assets/images/nvidia.png")
+                        //   ],
+                        // ),
                         AllAssetsWidget(
                           images: [
                             AssetImage("assets/images/apple.png"),

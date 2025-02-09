@@ -164,6 +164,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                               width: double.infinity,
                               child: MainCryptoWidget()),
                           HighestChangesWidget(
+                            
                             images: [
                               AssetImage("assets/images/bitcoin_icon.png"),
                               AssetImage("assets/images/eth_logo.png")

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 
@@ -63,41 +64,50 @@ class TileWidget extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-          left: model?.name == "Bitcoin" ? 16 : 8,
-          right: model?.name == "Bitcoin" ? 8 : 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: const Color.fromARGB(55, 146, 146, 146),
-      ),
-      width: (MediaQuery.of(context).size.width * 0.5) - 24,
-      height: MediaQuery.of(context).size.height * 0.18,
-      child: ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(model?.name ?? ""),
-            Image.network(scale: 5, model?.image ?? "")
-          ],
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => CryptoDetailsPage(id: model!.id!),
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+            left: model?.name == "Bitcoin" ? 16 : 4,
+            right: model?.name == "Bitcoin" ? 4 : 16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(55, 146, 146, 146),
         ),
-        subtitle: Column(
-          children: [
-            Row(
-              children: [
-                Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ?? ""),
-              ],
-            ),
-            Transform.scale(
-              scale: 0.7,
-              child: LineChartWidget(
-                coinId: model!.id,
-                
-                days: 5,
+        width: (MediaQuery.of(context).size.width * 0.5) - 20,
+        height: MediaQuery.of(context).size.height * 0.18,
+        child: ListTile(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(model?.name ?? ""),
+              Image.network(scale: 5, model?.image ?? "")
+            ],
+          ),
+          subtitle: Column(
+            children: [
+              Row(
+                children: [
+                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ?? ""),
+                ],
               ),
-            )
-          ],
+              Transform.scale(
+                scale: 0.7,
+                child: LineChartWidget(
+                  coinId: model!.id,
+                  days: 5,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
