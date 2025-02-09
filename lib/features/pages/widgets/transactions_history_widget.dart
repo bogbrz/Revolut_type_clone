@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 
-class OperatonsHistoryWidget extends StatelessWidget {
-  const OperatonsHistoryWidget(
-      {super.key,
-      required this.exampleOne,
-      required this.assetImage,
-      required this.widthMultiplayer});
-  final List<String> exampleOne;
-  final AssetImage assetImage;
-  final double widthMultiplayer;
+class TransactionsHistoryWidget extends StatelessWidget {
+  const TransactionsHistoryWidget({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,11 +19,6 @@ class OperatonsHistoryWidget extends StatelessWidget {
         child: Column(
           spacing: MediaQuery.of(context).size.height * 0.0125,
           children: [
-            Row(
-              children: [
-                Text("Transactions >"),
-              ],
-            ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,
               child: ListView.builder(
@@ -37,19 +28,9 @@ class OperatonsHistoryWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return ListTile(
                     onTap: () {},
-                    leading: Image(
-                        height: MediaQuery.of(context).size.height * 0.06,
-                        width: MediaQuery.of(context).size.width *
-                            widthMultiplayer,
-                        image: assetImage),
-                    title: Row(
-                      children: [
-                        Text(exampleOne[1]),
-                        Icon(Icons.arrow_right_alt),
-                        Text(exampleOne[2])
-                      ],
-                    ),
-                    trailing: Text("+0.0000060 \$"),
+                    leading: Icon(Icons.calendar_today),
+                    title: Text("Interest"),
+                    trailing: Text("1.23 \$"),
                     subtitle: Text("Today, 00:00"),
                   );
                 },
@@ -62,3 +43,5 @@ class OperatonsHistoryWidget extends StatelessWidget {
     );
   }
 }
+
+

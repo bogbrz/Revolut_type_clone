@@ -1,5 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:unicons/unicons.dart';
 
 class PieChartWidget extends StatefulWidget {
@@ -270,49 +272,3 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   }
 }
 
-// color: const Color.fromARGB(55, 146, 146, 146),
-class LineChartWidget extends StatelessWidget {
-  const LineChartWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.1,
-        child: Transform.scale(
-          scale: 1.11,
-          child: LineChart(LineChartData(
-            borderData: FlBorderData(
-              show: false,
-            ),
-            gridData: FlGridData(show: false),
-            titlesData: FlTitlesData(show: false),
-            lineBarsData: [
-              LineChartBarData(
-                  color: Colors.white,
-                  dotData: FlDotData(show: false),
-                  isCurved: true,
-                  spots: [
-                    FlSpot(10.5, 14),
-                    FlSpot(11, 14.3),
-                    FlSpot(12, 14.5),
-                    FlSpot(13, 14.2),
-                    FlSpot(14, 14.8),
-                    FlSpot(15, 14.9),
-                    FlSpot(16, 14.7),
-                    FlSpot(17, 14.3),
-                    FlSpot(18, 14.8),
-                    FlSpot(19, 14.1),
-                    FlSpot(20, 14.2),
-                    FlSpot(21, 15),
-                    FlSpot(22, 14.9)
-                  ]),
-            ],
-          )),
-        ),
-      ),
-    );
-  }
-}

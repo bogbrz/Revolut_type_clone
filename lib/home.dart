@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/pages/account_page.dart';
-import 'package:portfolio/features/pages/crypto_page.dart';
+
+import 'package:portfolio/features/pages/crypto_page/crypto_page.dart';
 import 'package:portfolio/features/pages/investments_page.dart';
 import 'package:portfolio/features/pages/networth_page.dart';
-import 'package:portfolio/features/pages/news_page.dart';
+import 'package:portfolio/features/pages/news_page/news_page.dart';
 import 'package:portfolio/features/pages/savings_page.dart';
 import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 
@@ -33,14 +34,16 @@ class _HomePageState extends State<HomePage> {
                 scrollDirection: Axis.horizontal,
                 children: [
                   CryptoPage(),
+                  InvestmentsPage(),
                   NetWorthPage(),
                   AccountPage(),
                   SavingsPage(),
-                  InvestmentsPage(),
                 ],
               );
             }
-            return NewsPage();
+            return NewsPage(
+              topic: null,
+            );
           }),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,8 +53,6 @@ class _HomePageState extends State<HomePage> {
                   onTap: (value) {
                     setState(() {
                       pageIndex = value;
-
-                      print(pageIndex);
                     });
                   },
                   currentIndex: pageIndex,
