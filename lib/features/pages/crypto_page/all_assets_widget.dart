@@ -8,10 +8,10 @@ import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details
 
 class AllAssetsWidget extends StatelessWidget {
   const AllAssetsWidget({
-    required this.images,
+   
     super.key,
   });
-  final List<AssetImage> images;
+ 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

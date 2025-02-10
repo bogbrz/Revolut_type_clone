@@ -3,7 +3,6 @@ import 'package:portfolio/domain/models/crypto_details_model.dart';
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 
 import 'package:portfolio/domain/models/crypto_info_model.dart';
-import 'package:portfolio/domain/models/model.dart';
 
 class CryptoRepository {
   CryptoRepository({required this.cryptoDataSource});

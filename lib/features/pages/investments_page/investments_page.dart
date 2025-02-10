@@ -1,7 +1,12 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
+import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
+import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
+import 'package:portfolio/features/pages/investments_page/all_stocks_widget.dart';
+import 'package:portfolio/features/pages/investments_page/bloc/investments_bloc.dart';
 
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
@@ -103,7 +108,8 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                           ),
                         ),
                         ActionButtonsWidget(
-                            slidingUpPanelController: slidingUpPanelController),
+                            slidingUpPanelController:
+                                slidingUpPanelController),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Container(
@@ -121,8 +127,9 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.06,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.1,
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                              0.1,
                                       image: AssetImage(
                                           "assets/images/amazon.png")),
                                   title: Text("Amazon"),
@@ -134,8 +141,9 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.05,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.1,
+                                      width:
+                                          MediaQuery.of(context).size.width *
+                                              0.1,
                                       image: AssetImage(
                                           "assets/images/nvidia.png")),
                                   title: Text("Nvidia"),
@@ -157,19 +165,8 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                             "1 stock"
                           ],
                         ),
-                        // HighestChangesWidget(
-                        //   images: [
-                        //     AssetImage("assets/images/apple.png"),
-                        //     AssetImage("assets/images/amazon.png"),
-                        //     AssetImage("assets/images/nvidia.png")
-                        //   ],
-                        // ),
-                        AllAssetsWidget(
-                          images: [
-                            AssetImage("assets/images/apple.png"),
-                            AssetImage("assets/images/amazon.png"),
-                            AssetImage("assets/images/nvidia.png")
-                          ],
+                        AllStocksWidget(
+                          
                         )
                       ],
                     ),
