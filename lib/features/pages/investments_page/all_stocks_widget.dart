@@ -4,6 +4,7 @@ import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
 import 'package:portfolio/features/pages/investments_page/bloc/investments_bloc.dart';
+import 'package:portfolio/features/pages/investments_page/single_stock_widget/single_stock_widget.dart';
 
 class AllStocksWidget extends StatelessWidget {
   const AllStocksWidget({
@@ -34,23 +35,36 @@ class AllStocksWidget extends StatelessWidget {
             );
 
           case Status.success:
-            return Column(
-              children: [
-                SizedBox(
-                  height: 250,
-                  width: MediaQuery.of(context).size.width,
-                  child: GridView.builder(
-                    itemCount: 6,
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent:
-                            MediaQuery.of(context).size.width * 0.4),
-                    itemBuilder: (context, index) {
-                      return null;
-                    },
+            return Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 8,
+              ),
+              margin: EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: const Color.fromARGB(55, 146, 146, 146),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 250,
+                    width: MediaQuery.of(context).size.width,
+                    child: GridView.builder(
+                      itemCount: state.model?.data?.length,
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent:
+                              MediaQuery.of(context).size.width * 0.4),
+                      itemBuilder: (context, index) {
+                        return SingleStockWidget(
+                          name: state.model?.data?[index].name ?? "",
+                          symbol: state.model?.data?[index].symbol ?? "",
+                        );
+                      },
+                    ),
                   ),
-                ),
-                ElevatedButton(onPressed: () {}, child: Text("View all"))
-              ],
+                  ElevatedButton(onPressed: () {}, child: Text("View all"))
+                ],
+              ),
             );
         }
       }),

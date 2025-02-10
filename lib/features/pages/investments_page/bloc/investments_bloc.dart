@@ -15,7 +15,8 @@ class InvestmentsBloc extends Bloc<InvestmentsEvent, InvestmentsState> {
       emit(InvesmentsLoadInProgress(
           status: Status.loading, model: null, error: false));
       final stockList = await stockMarketRepository.getStockList();
-      
+   
+
       try {
         emit(InvesmentsLoadSucces(
             status: Status.success, model: stockList, error: false));
