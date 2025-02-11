@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
+import 'package:portfolio/domain/models/stock_price_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
 part 'single_stock_event.dart';
@@ -11,19 +12,30 @@ class SingleStockBloc extends Bloc<SingleStockEvent, SingleStockState> {
   final StockMarketRepository stockMarketRepository;
   SingleStockBloc({required this.stockMarketRepository})
       : super(SingleStockInitialState(
-            status: Status.initial, model: null, error: false)) {
+            status: Status.initial,
+            model: null,
+            error: false,
+            priceModel: null)) {
     on<SingleStockEvent>((event, emit) async {
       emit(SingleStockLoadInProgress(
-          status: Status.loading, model: null, error: false));
+          status: Status.loading, model: null, error: false, priceModel: null));
       final stockLogo =
           await stockMarketRepository.getStockLogo(symbol: event.symbol);
-
+      // final stockPrice =
+      //     await stockMarketRepository.getStockPrice(symbol: event.symbol);
+      // print(stockPrice.price);
       try {
         emit(SingleStockLoadSucces(
-            status: Status.success, model: stockLogo, error: false));
+            status: Status.success,
+            model: stockLogo,
+            error: false,
+            priceModel: null));
       } catch (e) {
         emit(SingleStockLoadFaliure(
-            status: Status.failure, model: null, error: true));
+            status: Status.failure,
+            model: null,
+            error: true,
+            priceModel: null));
       }
     });
   }

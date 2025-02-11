@@ -8,10 +8,9 @@ import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details
 
 class AllAssetsWidget extends StatelessWidget {
   const AllAssetsWidget({
-   
     super.key,
   });
- 
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

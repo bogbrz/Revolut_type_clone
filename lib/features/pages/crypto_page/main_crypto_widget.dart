@@ -96,7 +96,7 @@ class TileWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ?? ""),
+                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ),
                 ],
               ),
               Transform.scale(

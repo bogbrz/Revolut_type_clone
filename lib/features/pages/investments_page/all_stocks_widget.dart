@@ -5,6 +5,7 @@ import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
 import 'package:portfolio/features/pages/investments_page/bloc/investments_bloc.dart';
 import 'package:portfolio/features/pages/investments_page/single_stock_widget/single_stock_widget.dart';
+import 'package:portfolio/features/pages/investments_page/stock_details_page/stock_details_page.dart';
 
 class AllStocksWidget extends StatelessWidget {
   const AllStocksWidget({
@@ -55,9 +56,17 @@ class AllStocksWidget extends StatelessWidget {
                           maxCrossAxisExtent:
                               MediaQuery.of(context).size.width * 0.4),
                       itemBuilder: (context, index) {
-                        return SingleStockWidget(
-                          name: state.model?.data?[index].name ?? "",
-                          symbol: state.model?.data?[index].symbol ?? "",
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => StockDetailsPage(
+                                      model: state.model!.data![index],
+                                    )));
+                          },
+                          child: SingleStockWidget(
+                            name: state.model?.data?[index].name ?? "",
+                            symbol: state.model?.data?[index].symbol ?? "",
+                          ),
                         );
                       },
                     ),
