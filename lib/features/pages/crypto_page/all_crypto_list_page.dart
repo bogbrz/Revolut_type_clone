@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
@@ -43,7 +43,7 @@ class AllCryptoListPage extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => CryptoDetailsPage(id: model!.id!)));
                 },
-                leading: CachedNetworkImage(imageUrl: model?.image ?? ""),
+                leading: Image.network( model?.image ?? ""),
               
                 title: Text(
                   model?.name ?? "",
