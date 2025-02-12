@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 import 'package:portfolio/features/pages/investments_page/stock_details_page/bloc/stock_details_bloc.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
+import 'package:unicons/unicons.dart';
 
 class StockDetailsPage extends StatelessWidget {
   const StockDetailsPage({
@@ -22,9 +24,23 @@ class StockDetailsPage extends StatelessWidget {
             repository:
                 StockMarketRepository(dataSource: StockMarketDataSource()))
           ..add(StockDetailsInitial(
-              symbol: model.symbol ?? "", interval: "1day")),
+              symbol: model.symbol ?? "",
+              interval: segment == 0
+                  ? "1min"
+                  : segment == 1
+                      ? "1h"
+                      : segment == 2
+                          ? "1day"
+                          : segment == 3
+                              ? "1week"
+                              : "1month")),
         child: Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              actions: [
+                IconButton(onPressed: () {}, icon: Icon(UniconsLine.bell)),
+                IconButton(onPressed: () {}, icon: Icon(Icons.star))
+              ],
+            ),
             body: Expanded(
                 child: BlocBuilder<StockDetailsBloc, StockDetailsState>(
               builder: (context, state) {
@@ -84,11 +100,13 @@ class StockDetailsPage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 32),
                               child: LineChartWidget(
-                                coinId: null,
-                                prices: null,
-                                unixTime: null,
+                                mock: false,
+                                timeSeries: state.timeSeries,
+                              
+                              
                                 days: 5,
                                 scale: 1.0,
+                              
                               ),
                             ),
                             Padding(
@@ -134,6 +152,7 @@ class StockDetailsPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        NewsletterWidget(id: model.name ?? ""),
                       ],
                     );
                 }

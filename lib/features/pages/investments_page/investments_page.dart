@@ -101,6 +101,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                   ],
                                 ),
                                 LineChartWidget(
+                                  mock: true,
                                   days: 1,
                                 )
                               ],

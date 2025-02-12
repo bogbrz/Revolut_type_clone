@@ -47,7 +47,7 @@ class NewsInfoWidget extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount:
-                              state.model?.articles.length,
+                              state.model?.articles.length != null ? 6 : null,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),

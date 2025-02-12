@@ -44,7 +44,7 @@ class StockMarketDataSource {
   Future<StockTimeSeriesModel?> getTimeSeries(
       {required String symbol, required String interval}) async {
     final response = await Dio().get<Map<String, dynamic>>(
-        "https://api.twelvedata.com/time_series?symbol=$symbol&interval=$interval&apikey=$stockKey");
+        "https://api.twelvedata.com/time_series?symbol=$symbol&interval=$interval&outputsize=500&apikey=$stockKey");
     final data = response.data;
     try {
       if (data == null) {

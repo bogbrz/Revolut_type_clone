@@ -51,18 +51,20 @@ class AllStocksWidget extends StatelessWidget {
                     height: 250,
                     width: MediaQuery.of(context).size.width,
                     child: GridView.builder(
-                      itemCount: state.model?.data?.length,
+                      itemCount: state.model?.data?.length ?? 6,
                       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent:
                               MediaQuery.of(context).size.width * 0.4),
                       itemBuilder: (context, index) {
                         return InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => StockDetailsPage(
-                                      model: state.model!.data![index],
-                                    )));
-                          },
+                          onTap: state.model?.data == null
+                              ? null
+                              : () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => StockDetailsPage(
+                                            model: state.model!.data![index],
+                                          )));
+                                },
                           child: SingleStockWidget(
                             name: state.model?.data?[index].name ?? "",
                             symbol: state.model?.data?[index].symbol ?? "",

@@ -120,6 +120,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 32),
                                     child: LineChartWidget(
+                                      mock: false,
                                       coinId: id,
                                       prices: state.prices,
                                       unixTime: state.unixTime,

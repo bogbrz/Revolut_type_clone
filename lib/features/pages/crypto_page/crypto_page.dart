@@ -97,6 +97,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                     ],
                                   ),
                                   LineChartWidget(
+                                    mock: true,
                                     coinId: null,
                                     days: 5,
                                   )
