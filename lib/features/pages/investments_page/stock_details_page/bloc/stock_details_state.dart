@@ -10,11 +10,12 @@ sealed class StockDetailsState {
     required this.error,
     required this.logo,
     required this.timeSeries,
-
+    required this.price,
   });
   final Status status;
   final StockTimeSeriesModel? model;
   final StockLogoModel? logo;
+  final StockPriceModel? price;
   final bool error;
   // final List<DateTime> time;
   // final List<double> prices;
@@ -27,7 +28,8 @@ final class StockDetailsInitialState extends StockDetailsState {
     required super.model,
     required super.error,
     required super.logo,
-   required super.timeSeries,
+    required super.timeSeries,
+    required super.price,
   });
 }
 
@@ -37,8 +39,7 @@ final class StockDetailsLoadInProgress extends StockDetailsState {
     required super.model,
     required super.error,
     required super.logo,
-
-    required super.timeSeries,
+    required super.timeSeries,required super.price,
   });
 }
 
@@ -48,8 +49,7 @@ final class StockDetailsLoadSucces extends StockDetailsState {
     required super.model,
     required super.error,
     required super.logo,
-
-    required super.timeSeries,
+    required super.timeSeries,required super.price,
   });
 }
 
@@ -58,8 +58,7 @@ final class StockDetailsLoadFaliure extends StockDetailsState {
     required super.status,
     required super.model,
     required super.logo,
-
     required super.timeSeries,
-    required super.error,
+    required super.error,required super.price,
   });
 }

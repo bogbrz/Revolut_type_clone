@@ -21,9 +21,7 @@ class SingleStockBloc extends Bloc<SingleStockEvent, SingleStockState> {
           status: Status.loading, model: null, error: false, priceModel: null));
       final stockLogo =
           await stockMarketRepository.getStockLogo(symbol: event.symbol);
-      // final stockPrice =
-      //     await stockMarketRepository.getStockPrice(symbol: event.symbol);
-      // print(stockPrice.price);
+     
       try {
         emit(SingleStockLoadSucces(
             status: Status.success,

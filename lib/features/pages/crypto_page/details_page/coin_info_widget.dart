@@ -9,6 +9,7 @@ class CoinInfoWidget extends StatefulWidget {
   });
 
   final Welcome? model;
+  
 
   @override
   State<CoinInfoWidget> createState() => _CoinInfoWidgetState();

@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/coin_info_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 import 'package:portfolio/features/pages/investments_page/stock_details_page/bloc/stock_details_bloc.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
+import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 import 'package:unicons/unicons.dart';
 
@@ -18,22 +20,13 @@ class StockDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int segment = 0;
+    int segment = 2;
     return BlocProvider(
         create: (context) => StockDetailsBloc(
             repository:
                 StockMarketRepository(dataSource: StockMarketDataSource()))
           ..add(StockDetailsInitial(
-              symbol: model.symbol ?? "",
-              interval: segment == 0
-                  ? "1min"
-                  : segment == 1
-                      ? "1h"
-                      : segment == 2
-                          ? "1day"
-                          : segment == 3
-                              ? "1week"
-                              : "1month")),
+              symbol: model.symbol ?? "", interval: "1day")),
         child: Scaffold(
             appBar: AppBar(
               actions: [
@@ -74,7 +67,8 @@ class StockDetailsPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              subtitle: Text(model.symbol ?? ""),
+                              subtitle: Text(
+                                  "${model.symbol ?? ""} - ${state.price?.price ?? 'null'}"),
                               trailing: state.logo?.url != null &&
                                       state.logo!.url!.isNotEmpty
                                   ? SizedBox(
@@ -102,11 +96,8 @@ class StockDetailsPage extends StatelessWidget {
                               child: LineChartWidget(
                                 mock: false,
                                 timeSeries: state.timeSeries,
-                              
-                              
                                 days: 5,
                                 scale: 1.0,
-                              
                               ),
                             ),
                             Padding(
@@ -153,6 +144,8 @@ class StockDetailsPage extends StatelessWidget {
                           ],
                         ),
                         NewsletterWidget(id: model.name ?? ""),
+                        CoinInfoWidget(model: null),
+                        PageEndTextWidget(),
                       ],
                     );
                 }
