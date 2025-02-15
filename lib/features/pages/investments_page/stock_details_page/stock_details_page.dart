@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
-import 'package:portfolio/features/pages/crypto_page/details_page/coin_info_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/asset_info_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 import 'package:portfolio/features/pages/investments_page/stock_details_page/bloc/stock_details_bloc.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
@@ -68,7 +68,7 @@ class StockDetailsPage extends StatelessWidget {
                                 ],
                               ),
                               subtitle: Text(
-                                  "${model.symbol ?? ""} - ${state.price?.price ?? 'null'}"),
+                                  "${model.symbol ?? ""} - ${state.price?.price}"),
                               trailing: state.logo?.url != null &&
                                       state.logo!.url!.isNotEmpty
                                   ? SizedBox(
@@ -144,7 +144,10 @@ class StockDetailsPage extends StatelessWidget {
                           ],
                         ),
                         NewsletterWidget(id: model.name ?? ""),
-                        CoinInfoWidget(model: null),
+                        AssetInfoWidget(
+                          model: null,
+                       
+                        ),
                         PageEndTextWidget(),
                       ],
                     );

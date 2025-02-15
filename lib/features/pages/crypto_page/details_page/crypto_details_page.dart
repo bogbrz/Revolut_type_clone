@@ -5,7 +5,7 @@ import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
 import 'package:portfolio/features/pages/crypto_page/details_page/bloc/crypto_details_bloc.dart';
-import 'package:portfolio/features/pages/crypto_page/details_page/coin_info_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/details_page/asset_info_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_stats_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/news_widget.dart';
 import 'package:portfolio/features/pages/news_page/news_page.dart';
@@ -124,7 +124,6 @@ class CryptoDetailsPage extends StatelessWidget {
                                       coinId: id,
                                       prices: state.prices,
                                       unixTime: state.unixTime,
-                                  
                                       days: 5,
                                       scale: 1.0,
                                     ),
@@ -180,7 +179,9 @@ class CryptoDetailsPage extends StatelessWidget {
                     model: state.detailsModel,
                   ),
                   NewsletterWidget(id: id),
-                  CoinInfoWidget(model: state.detailsModel),
+                  AssetInfoWidget(
+                    model: state.detailsModel,
+                  ),
                   PageEndTextWidget()
                 ],
               ),

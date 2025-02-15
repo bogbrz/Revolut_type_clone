@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
 import 'package:portfolio/domain/models/stock_price_model.dart';
+import 'package:portfolio/domain/models/stock_profile_model.dart';
 import 'package:portfolio/domain/models/stock_time_series_model.dart';
 import 'package:portfolio/env.dart';
 
@@ -18,7 +19,7 @@ class StockMarketDataSource {
         return null;
       }
       final model = StockListModel.fromJson(data);
-      print(model);
+
       return model;
     } catch (e) {
       throw Exception("$e");
@@ -34,7 +35,7 @@ class StockMarketDataSource {
         return null;
       }
       final model = StockPriceModel.fromJson(data);
-      print(model);
+
       return model;
     } catch (e) {
       throw Exception("$e");
@@ -51,7 +52,7 @@ class StockMarketDataSource {
         return null;
       }
       final model = StockTimeSeriesModel.fromJson(data);
-      print(model);
+
       return model;
     } catch (e) {
       throw Exception("$e");
@@ -67,12 +68,12 @@ class StockMarketDataSource {
         return null;
       }
       final model = StockLogoModel.fromJson(data);
-      print(model);
+
       return model;
     } catch (e) {
       throw Exception("$e");
     }
   }
 
-  //
+
 }

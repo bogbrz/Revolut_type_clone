@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
 import 'package:portfolio/domain/models/stock_price_model.dart';
+import 'package:portfolio/domain/models/stock_profile_model.dart';
 import 'package:portfolio/domain/models/stock_time_series_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
@@ -13,6 +14,7 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
   final StockMarketRepository repository;
   StockDetailsBloc({required this.repository})
       : super(StockDetailsInitialState(
+           
             status: Status.initial,
             model: null,
             error: false,
@@ -22,6 +24,7 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
     on<StockDetailsEvent>((event, emit) async {
       emit(StockDetailsLoadInProgress(
           status: Status.loading,
+        
           model: null,
           error: false,
           logo: null,
@@ -51,12 +54,14 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
       print("logo $stockLogo");
       final stockPrice = await repository.getStockPrice(symbol: event.symbol);
       print("Stockprice ${stockPrice.price}");
+      
 
       try {
         emit(StockDetailsLoadSucces(
             status: Status.success,
             model: stockTimeSeries,
             error: false,
+           
             logo: stockLogo,
             timeSeries: models,
             price: stockPrice));
@@ -65,6 +70,7 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
           status: Status.failure,
           model: null,
           error: true,
+         
           logo: null,
           timeSeries: [],
           price: null,
