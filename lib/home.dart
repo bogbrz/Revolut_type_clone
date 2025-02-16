@@ -5,7 +5,7 @@ import 'package:portfolio/features/pages/crypto_page/crypto_page.dart';
 import 'package:portfolio/features/pages/investments_page/investments_page.dart';
 import 'package:portfolio/features/pages/networth_page.dart';
 import 'package:portfolio/features/pages/news_page/news_page.dart';
-import 'package:portfolio/features/pages/savings_page.dart';
+import 'package:portfolio/features/pages/savings_page/savings_page.dart';
 import 'package:portfolio/features/pages/widgets/appbar_widget.dart';
 import 'package:portfolio/features/pages/widgets/drawer/drawer_widget.dart';
 

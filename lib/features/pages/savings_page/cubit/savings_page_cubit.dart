@@ -1,0 +1,31 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:portfolio/domain/models/savings_saldo_model.dart';
+import 'package:portfolio/domain/models/savings_transactions_model.dart';
+import 'package:portfolio/domain/repositories/firebase_repository.dart';
+import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
+part 'savings_page_state.dart';
+part 'savings_page_cubit.freezed.dart';
+
+class SavingsPageCubit extends Cubit<SavingsPageState> {
+  SavingsPageCubit({required this.repository})
+      : super(SavingsPageState(saldo: null, status: Status.initial));
+
+  StreamSubscription? streamSubscription;
+  final FirebaseRepository repository;
+
+  Future<void> getSaldoData() async {
+    emit(SavingsPageState(saldo: null, status: Status.loading));
+    streamSubscription = repository.getSavingsSaldo().listen((results) {
+      emit(SavingsPageState(saldo: results, status: Status.success));
+    })
+      ..onError((error) {
+        emit(SavingsPageState(saldo: null, status: Status.failure));
+      });
+  }
+
+  Future<void> getTransactions() async {}
+}

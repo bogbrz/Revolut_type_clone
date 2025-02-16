@@ -1,4 +1,4 @@
 class AccountSaldoModel {
-  final String worth;
+  final int worth;
   AccountSaldoModel({required this.worth});
 }
