@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({
     super.key,
@@ -16,7 +15,9 @@ class AppBarWidget extends StatelessWidget {
           CircleAvatar(
             backgroundColor: Colors.transparent,
             child: IconButton.filledTonal(
-              onPressed: () {},
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
               icon: Icon(
                 Icons.person,
                 color: Colors.white,
@@ -60,4 +61,3 @@ class AppBarWidget extends StatelessWidget {
     );
   }
 }
-
