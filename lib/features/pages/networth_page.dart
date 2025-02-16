@@ -93,6 +93,7 @@ class _NetWorthPageState extends State<NetWorthPage>
                                   ],
                                 ),
                                 LineChartWidget(
+                                  mock: true,
                                   days: 1,
                                 ),
                               ],

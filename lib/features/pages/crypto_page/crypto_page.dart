@@ -9,8 +9,8 @@ import 'package:portfolio/domain/repositories/crypto_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
 import 'package:portfolio/features/pages/crypto_page/main_crypto_widget.dart';
-import 'package:portfolio/features/pages/widgets/crypto_action_buttons.dart';
-import 'package:portfolio/features/pages/widgets/highest_changes_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/crypto_action_buttons.dart';
+import 'package:portfolio/features/pages/crypto_page/highest_changes_widget.dart';
 import 'package:portfolio/features/pages/widgets/pie_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/operatons_history_widget.dart';
@@ -97,6 +97,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                     ],
                                   ),
                                   LineChartWidget(
+                                    mock: true,
                                     coinId: null,
                                     days: 5,
                                   )
@@ -164,18 +165,12 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                               width: double.infinity,
                               child: MainCryptoWidget()),
                           HighestChangesWidget(
-                            
                             images: [
                               AssetImage("assets/images/bitcoin_icon.png"),
                               AssetImage("assets/images/eth_logo.png")
                             ],
                           ),
-                          AllAssetsWidget(
-                            images: [
-                              AssetImage("assets/images/bitcoin_icon.png"),
-                              AssetImage("assets/images/eth_logo.png")
-                            ],
-                          )
+                          AllAssetsWidget()
                         ],
                       ),
                       PageEndTextWidget()

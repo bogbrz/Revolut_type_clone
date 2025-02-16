@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/domain/models/crypto_details_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class CoinInfoWidget extends StatefulWidget {
-  const CoinInfoWidget({
+class AssetInfoWidget extends StatefulWidget {
+  const AssetInfoWidget({
     super.key,
     required this.model,
   });
@@ -11,10 +11,10 @@ class CoinInfoWidget extends StatefulWidget {
   final Welcome? model;
 
   @override
-  State<CoinInfoWidget> createState() => _CoinInfoWidgetState();
+  State<AssetInfoWidget> createState() => _AssetInfoWidgetState();
 }
 
-class _CoinInfoWidgetState extends State<CoinInfoWidget> {
+class _AssetInfoWidgetState extends State<AssetInfoWidget> {
   var showMore = false;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _CoinInfoWidgetState extends State<CoinInfoWidget> {
           Row(
             children: [
               Text(
-                "${widget.model?.name ?? ""} info",
+                "${widget.model?.name ?? ""} Info",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
             ],
@@ -44,7 +44,8 @@ class _CoinInfoWidgetState extends State<CoinInfoWidget> {
                 child: Column(
                   children: [
                     Text(
-                      widget.model?.description?.en ?? "",
+                      widget.model?.description?.en ??
+                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                       maxLines: showMore ? null : 8,
                     ),
                     Column(

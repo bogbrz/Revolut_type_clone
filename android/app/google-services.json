@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "417209356312",
+    "project_id": "revoult-clone-app",
+    "storage_bucket": "revoult-clone-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417209356312:android:6161f47ef0c0410461336d",
+        "android_client_info": {
+          "package_name": "com.example.portfolio.portfolio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2U0Oh6RlOgtIN_SC9TJzMsWM2hDjwYUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

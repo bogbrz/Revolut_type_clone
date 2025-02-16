@@ -96,12 +96,13 @@ class TileWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ?? ""),
+                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ),
                 ],
               ),
               Transform.scale(
                 scale: 0.7,
                 child: LineChartWidget(
+                  mock: false,
                   coinId: model!.id,
                   days: 5,
                 ),

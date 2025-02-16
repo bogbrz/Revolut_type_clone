@@ -46,7 +46,7 @@ class InterestWidgets extends StatelessWidget {
                     Text("9999 \$"),
                     Transform.scale(
                       scale: 0.5,
-                      child: LineChartWidget(days:  11,),
+                      child: LineChartWidget(days:  11, mock: true,),
                     )
                   ],
                 )),

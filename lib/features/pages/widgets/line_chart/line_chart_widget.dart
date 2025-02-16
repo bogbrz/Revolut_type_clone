@@ -5,17 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/models/crypto_history_model.dart';
+import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
+
 import 'package:portfolio/features/pages/widgets/line_chart/bloc/line_chart_bloc.dart';
 import 'package:unicons/unicons.dart';
 
 class LineChartWidget extends StatelessWidget {
   const LineChartWidget({
     required this.days,
+    this.dateTime,
     this.coinId,
     this.scale,
     this.prices,
     this.unixTime,
+    required this.mock,
+    this.timeSeries,
     super.key,
   });
   final String? coinId;
@@ -23,7 +28,11 @@ class LineChartWidget extends StatelessWidget {
   final int days;
   final List<double>? prices;
   final List<double>? unixTime;
+  final List<DateTime>? dateTime;
   final double? scale;
+  final List<DataModel?>? timeSeries;
+
+  final bool mock;
 
 // The first number (e.g. 1711843200000) represents the timestamp in UNIX time
 // The second number (e.g. 69702.3087473573) represents the price value
@@ -77,8 +86,10 @@ class LineChartWidget extends StatelessWidget {
                       return touchedSpots.map((LineBarSpot touchedSpot) {
                         DateTime date = DateTime.fromMillisecondsSinceEpoch(
                             touchedSpot.x.toInt());
-                        String formmattedDate =
-                            DateFormat.yMMMEd().format(date);
+                        String formmattedDate = mock == false && coinId == null
+                            ? (DateFormat.yMMMEd().format(date) +
+                                " ${date.hour}:${date.minute}:${date.second}")
+                            : DateFormat.yMMMEd().format(date);
                         return LineTooltipItem(
                           children: [TextSpan(text: formmattedDate)],
                           touchedSpot.y.toStringAsFixed(2) + " USD" "\n",
@@ -88,21 +99,29 @@ class LineChartWidget extends StatelessWidget {
                     })),
                     lineBarsData: [
                       LineChartBarData(
-                        belowBarData: BarAreaData(
-                          show: false,
-                        ),
-                        color: const Color.fromARGB(204, 255, 255, 255),
-                        dotData: FlDotData(
-                          show: false,
-                        ),
-                        isCurved: true,
-                        spots: coinId == null
-                            ? mockList
-                            : List.generate(state.prices.length, (index) {
-                                return FlSpot(
-                                    state.unixTime[index], state.prices[index]);
-                              }),
-                      )
+                          belowBarData: BarAreaData(
+                            show: false,
+                          ),
+                          color: const Color.fromARGB(204, 255, 255, 255),
+                          dotData: FlDotData(
+                            show: false,
+                          ),
+                          isCurved: true,
+                          spots: mock == true && coinId == null
+                              ? mockList
+                              : mock == false && coinId == null
+                                  ? List.generate(timeSeries!.length, (index) {
+                                      return FlSpot(
+                                          timeSeries![index]!
+                                              .date
+                                              .millisecondsSinceEpoch
+                                              .toDouble(),
+                                          timeSeries![index]!.price);
+                                    })
+                                  : List.generate(state.prices.length, (index) {
+                                      return FlSpot(state.unixTime[index],
+                                          state.prices[index]);
+                                    }))
                     ],
                   )),
                 ),
