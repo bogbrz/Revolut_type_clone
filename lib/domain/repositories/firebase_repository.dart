@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/models/account_saldo_model.dart';
 import 'package:portfolio/domain/models/account_transaction_history_model.dart';
@@ -11,7 +12,8 @@ class FirebaseRepository {
   Stream<List<PersonalInfoModel>> getPersonalInfo() {
     return dataSource.getPersonalInfo();
   }
- // PERSONAL ACCOUNT
+
+  // PERSONAL ACCOUNT
   Stream<List<AccountSaldoModel>> getAccountSaldo() {
     print("REPO ${dataSource.getAccountSaldoData()}");
     return dataSource.getAccountSaldoData();
@@ -20,8 +22,9 @@ class FirebaseRepository {
   Stream<List<AccountTransactionHistoryModel>> getAccountTransactions() {
     return dataSource.getAccountTransactionHistory();
   }
-  // SAVINGS 
-Stream<List<SavingsSaldoModel>> getSavingsSaldo() {
+
+  // SAVINGS
+  Stream<List<SavingsSaldoModel>> getSavingsSaldo() {
     print("REPO ${dataSource.getAccountSaldoData()}");
     return dataSource.getSavingsData();
   }
@@ -30,5 +33,8 @@ Stream<List<SavingsSaldoModel>> getSavingsSaldo() {
     return dataSource.getSavingsTransactions();
   }
 
-
+  Future<void> updateSavingGoal(
+      {required Timestamp? date, required int? goal}) {
+    return dataSource.updateSavingGoal(date: date, goal: goal);
+  }
 }

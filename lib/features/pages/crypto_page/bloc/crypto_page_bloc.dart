@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:portfolio/app/core/enums.dart';
 
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 

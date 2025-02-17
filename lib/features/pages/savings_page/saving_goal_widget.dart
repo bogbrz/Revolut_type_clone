@@ -13,10 +13,10 @@ class SavingGoalWidget extends StatelessWidget {
     return BlocBuilder<SavingsPageCubit, SavingsPageState>(
       builder: (context, state) {
         double progress = 0;
-        if (state.saldo == null) {
+        if (state.saldo == null || state.saldo?[0].savingsGoal ==null) {
           progress = 0;
         } else {
-          progress = state.saldo![0].worth / state.saldo![0].savingsGoal;
+          progress = state.saldo![0].worth / state.saldo![0].savingsGoal!;
         }
 
         return Padding(
@@ -25,7 +25,7 @@ class SavingGoalWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             onTap: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SetGoalPage()));
+                  .push(MaterialPageRoute(builder: (context) => SetGoalPage(currentDate: state.saldo?[0].goalDate, currentGoal:state.saldo?[0].savingsGoal , )));
             },
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -39,7 +39,7 @@ class SavingGoalWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Goal > ${state.saldo?[0].goalDate.toDate().toString()}",
+                        "Goal > ${state.saldo?[0].goalDate?.toDate().toString()}",
                         textAlign: TextAlign.left,
                       ),
                     ],
@@ -47,7 +47,7 @@ class SavingGoalWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "2137.00zł out of ${state.saldo?[0].savingsGoal}",
+                        "${state.saldo?[0].worth} out of ${state.saldo?[0].savingsGoal}",
                         textAlign: TextAlign.left,
                       ),
                     ],

@@ -1,9 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
+import 'package:portfolio/domain/repositories/firebase_repository.dart';
+import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
 
 class SetGoalPage extends StatefulWidget {
-  SetGoalPage({super.key});
-
+  const SetGoalPage(
+      {super.key, required this.currentDate, required this.currentGoal});
+  final int? currentGoal;
+  final Timestamp? currentDate;
   @override
   State<SetGoalPage> createState() => _SetGoalPageState();
 }
@@ -32,58 +39,80 @@ class _SetGoalPageState extends State<SetGoalPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          spacing: 16,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+    return BlocProvider(
+      create: (context) => SavingsPageCubit(
+          repository: FirebaseRepository(dataSource: FirebaseDataSource())),
+      child: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Goal",
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            actions: [TextButton(onPressed: () {}, child: Text("Delete"))],
+          ),
+          body: BlocBuilder<SavingsPageCubit, SavingsPageState>(
+            builder: (context, state) {
+              return Column(
+                spacing: 16,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Goal",
-                    style: Theme.of(context).textTheme.headlineLarge,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [],
                   ),
-                  TextButton(onPressed: () {}, child: Text("Delete"))
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineLarge,
-                    controller: controller,
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.7,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              label: Text("Set saving goal"),
+                              hintText: widget.currentGoal.toString()),
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headlineLarge,
+                          controller: controller,
+                        ),
+                      ),
+                      Text(
+                          "${_newDate == null && widget.currentDate != null ? widget.currentDate!.toDate() : formatDate(date: _newDate)}"),
+                    ],
                   ),
-                ),
-                Text(formatDate(date: _newDate)),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton.filled(
-                    onPressed: () async {
-                      _releaseDate = await setDate();
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton.filled(
+                          onPressed: () async {
+                            _releaseDate = await setDate();
 
-                      setState(() {
-                        _newDate = _releaseDate;
-                      });
-                    },
-                    icon: Icon(Icons.date_range)),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Confirm"))
-              ],
-            )
-          ],
+                            setState(() {
+                              _newDate = _releaseDate;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.date_range,
+                            size: MediaQuery.of(context).size.width * 0.1,
+                          )),
+                      ElevatedButton(
+                          onPressed: () {
+                            context.read<SavingsPageCubit>().updateSavingsGoal(
+                                date: _newDate == null
+                                    ? null
+                                    : Timestamp.fromDate(_newDate!),
+                                goal: int.parse(controller.text));
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "Confirm",
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ))
+                    ],
+                  )
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

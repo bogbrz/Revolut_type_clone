@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
@@ -17,7 +18,7 @@ class TransactionsHistoryWidget extends StatelessWidget {
     return BlocProvider(
       create: (context) => TransactionHistoryCubit(
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getTransactions(),
+        ..getTransactions(pageType: PageType.account),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

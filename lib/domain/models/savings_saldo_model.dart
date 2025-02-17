@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SavingsSaldoModel {
   final double interestRate;
-  final int savingsGoal;
+  final int? savingsGoal;
   final int worth;
-  final Timestamp goalDate;
+  final Timestamp? goalDate;
 
   SavingsSaldoModel(
       {required this.interestRate,

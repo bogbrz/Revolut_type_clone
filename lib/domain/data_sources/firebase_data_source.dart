@@ -83,6 +83,16 @@ class FirebaseDataSource {
             .toList());
   }
 
+  Future<void> updateSavingGoal(
+      {required Timestamp? date, required int? goal}) {
+    return dataBase
+        .collection("Users")
+        .doc("JeK52txUc6cwKGEF9Yjk")
+        .collection("saving account")
+        .doc("saldo")
+        .update({"savings goal": goal, "goal_date" : date});
+  }
+
   Stream<List<SavingsTransactionsModel>> getSavingsTransactions() {
     return dataBase
         .collection("Users")

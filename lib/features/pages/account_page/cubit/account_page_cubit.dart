@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/account_saldo_model.dart';
 import 'package:portfolio/domain/models/account_transaction_history_model.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';

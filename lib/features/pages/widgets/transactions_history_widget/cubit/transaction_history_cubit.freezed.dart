@@ -19,6 +19,8 @@ mixin _$TransactionHistoryState {
   List<AccountTransactionHistoryModel>? get models =>
       throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  List<SavingsTransactionsModel>? get savingModels =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of TransactionHistoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +35,10 @@ abstract class $TransactionHistoryStateCopyWith<$Res> {
           $Res Function(TransactionHistoryState) then) =
       _$TransactionHistoryStateCopyWithImpl<$Res, TransactionHistoryState>;
   @useResult
-  $Res call({List<AccountTransactionHistoryModel>? models, Status status});
+  $Res call(
+      {List<AccountTransactionHistoryModel>? models,
+      Status status,
+      List<SavingsTransactionsModel>? savingModels});
 }
 
 /// @nodoc
@@ -54,6 +59,7 @@ class _$TransactionHistoryStateCopyWithImpl<$Res,
   $Res call({
     Object? models = freezed,
     Object? status = null,
+    Object? savingModels = freezed,
   }) {
     return _then(_value.copyWith(
       models: freezed == models
@@ -64,6 +70,10 @@ class _$TransactionHistoryStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      savingModels: freezed == savingModels
+          ? _value.savingModels
+          : savingModels // ignore: cast_nullable_to_non_nullable
+              as List<SavingsTransactionsModel>?,
     ) as $Val);
   }
 }
@@ -76,7 +86,10 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<AccountTransactionHistoryModel>? models, Status status});
+  $Res call(
+      {List<AccountTransactionHistoryModel>? models,
+      Status status,
+      List<SavingsTransactionsModel>? savingModels});
 }
 
 /// @nodoc
@@ -94,6 +107,7 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? models = freezed,
     Object? status = null,
+    Object? savingModels = freezed,
   }) {
     return _then(_$InitialImpl(
       models: freezed == models
@@ -104,6 +118,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      savingModels: freezed == savingModels
+          ? _value._savingModels
+          : savingModels // ignore: cast_nullable_to_non_nullable
+              as List<SavingsTransactionsModel>?,
     ));
   }
 }
@@ -113,8 +131,10 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required final List<AccountTransactionHistoryModel>? models,
-      required this.status})
-      : _models = models;
+      required this.status,
+      required final List<SavingsTransactionsModel>? savingModels})
+      : _models = models,
+        _savingModels = savingModels;
 
   final List<AccountTransactionHistoryModel>? _models;
   @override
@@ -128,10 +148,19 @@ class _$InitialImpl implements _Initial {
 
   @override
   final Status status;
+  final List<SavingsTransactionsModel>? _savingModels;
+  @override
+  List<SavingsTransactionsModel>? get savingModels {
+    final value = _savingModels;
+    if (value == null) return null;
+    if (_savingModels is EqualUnmodifiableListView) return _savingModels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'TransactionHistoryState(models: $models, status: $status)';
+    return 'TransactionHistoryState(models: $models, status: $status, savingModels: $savingModels)';
   }
 
   @override
@@ -140,12 +169,17 @@ class _$InitialImpl implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
             const DeepCollectionEquality().equals(other._models, _models) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other._savingModels, _savingModels));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_models), status);
+      runtimeType,
+      const DeepCollectionEquality().hash(_models),
+      status,
+      const DeepCollectionEquality().hash(_savingModels));
 
   /// Create a copy of TransactionHistoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -158,13 +192,17 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements TransactionHistoryState {
   const factory _Initial(
-      {required final List<AccountTransactionHistoryModel>? models,
-      required final Status status}) = _$InitialImpl;
+          {required final List<AccountTransactionHistoryModel>? models,
+          required final Status status,
+          required final List<SavingsTransactionsModel>? savingModels}) =
+      _$InitialImpl;
 
   @override
   List<AccountTransactionHistoryModel>? get models;
   @override
   Status get status;
+  @override
+  List<SavingsTransactionsModel>? get savingModels;
 
   /// Create a copy of TransactionHistoryState
   /// with the given fields replaced by the non-null parameter values.
