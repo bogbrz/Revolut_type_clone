@@ -17,6 +17,7 @@ class CryptoPageBloc extends Bloc<CryptoPageEvent, CryptoPageState> {
             model: [],
             error: false,
             sortedList: [],
+            errorMessage: null,
             reversed: [])) {
     on<CryptoPageEvent>((event, emit) async {
       emit(CryptoPageInitial(
@@ -24,37 +25,46 @@ class CryptoPageBloc extends Bloc<CryptoPageEvent, CryptoPageState> {
           model: [],
           sortedList: [],
           error: false,
+          errorMessage: null,
           reversed: []));
       try {
         final cryptoModel = await cryptoRepository.getCrypto();
+        print("CRYPTO PAGE BLOC $cryptoModel");
         List<CryptoInfoModel> sortedModels = List.from(cryptoModel)
-          ..sort((a, b) => a.priceChangePercentage24H!
-              .compareTo(b.priceChangePercentage24H!));
+          ..sort((a, b) {
+            return a.priceChangePercentage24H!
+                .compareTo(b.priceChangePercentage24H!);
+          });
         List<CryptoInfoModel> reversed = sortedModels.reversed.toList();
 
         if (cryptoModel == []) {
           emit(CryptoPageLoadFaliure(
-              status: Status.failure,
-              model: [],
-              error: true,
-              sortedList: [],
-              reversed: []));
-        } else {
-          emit(CryptoPageLoadSucces(
-              status: Status.success,
-              model: cryptoModel,
-              error: false,
-              sortedList: sortedModels,
-              reversed: reversed));
-        }
-      } catch (e) {
-        print("${e.toString()}");
-        emit(CryptoPageLoadFaliure(
             status: Status.failure,
             model: [],
             error: true,
             sortedList: [],
-            reversed: []));
+            reversed: [],
+            errorMessage: null,
+          ));
+        } else {
+          emit(CryptoPageLoadSucces(
+            status: Status.success,
+            model: cryptoModel,
+            error: false,
+            sortedList: sortedModels,
+            reversed: reversed,
+            errorMessage: null,
+          ));
+        }
+      } catch (e) {
+        emit(CryptoPageLoadFaliure(
+          status: Status.failure,
+          model: [],
+          error: true,
+          sortedList: [],
+          reversed: [],
+          errorMessage: e.toString(),
+        ));
       }
     });
   }

@@ -16,6 +16,7 @@ class LineChartBloc extends Bloc<LineChartEvent, LineChartState> {
             status: Status.initial,
             historyModel: null,
             error: false,
+            errorMessage: null,
             prices: [],
             unixTime: [])) {
     on<LineChartEvent>((
@@ -26,6 +27,7 @@ class LineChartBloc extends Bloc<LineChartEvent, LineChartState> {
           prices: [],
           unixTime: [],
           status: Status.loading,
+          errorMessage: null,
           historyModel: null,
           error: false));
 
@@ -33,30 +35,32 @@ class LineChartBloc extends Bloc<LineChartEvent, LineChartState> {
         if (event.id != null) {
           final historyModel = await cryptoRepository.getHistoricalData(
               id: event.id!, days: event.days);
-               List<double> timeStamp = [];
-        List<double> price = [];
-        List<List<double?>?>? pricesData = historyModel.prices ?? [];
+          List<double> timeStamp = [];
+          List<double> price = [];
+          List<List<double?>?>? pricesData = historyModel.prices ?? [];
+          print("BLOC : $historyModel");
 
-        for (final data in pricesData) {
-          timeStamp.add(data![0]!);
-          price.add(data[1]!);
+          for (final data in pricesData) {
+            timeStamp.add(data![0]!);
+            if (data[1] == null) {}
+            price.add(data[1]!);
+          }
+
+          emit(LineChartLoadSucces(
+              prices: price,
+              unixTime: timeStamp,
+              status: Status.success,
+              historyModel: historyModel,
+              errorMessage: null,
+              error: false));
         }
-
-        emit(LineChartLoadSucces(
-            prices: price,
-            unixTime: timeStamp,
-            status: Status.success,
-            historyModel: historyModel,
-            error: false));
-        }
-
-       
       } catch (e) {
-        print("${e.toString()}");
+        print(e);
         emit(LineChartLoadFaliure(
             prices: [],
             unixTime: [],
             status: Status.failure,
+            errorMessage: e.toString(),
             historyModel: null,
             error: true));
       }

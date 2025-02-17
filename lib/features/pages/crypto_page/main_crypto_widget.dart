@@ -47,7 +47,7 @@ class MainCryptoWidget extends StatelessWidget {
             );
           case Status.failure:
             return Center(
-              child: Text("error"),
+              child: Text(state.errorMessage.toString()),
             );
         }
       },

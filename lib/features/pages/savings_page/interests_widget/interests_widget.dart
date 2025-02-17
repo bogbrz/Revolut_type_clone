@@ -5,6 +5,7 @@ import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.da
 class InterestWidgets extends StatelessWidget {
   const InterestWidgets({
     super.key,
+    
   });
 
   @override

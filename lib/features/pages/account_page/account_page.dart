@@ -118,7 +118,9 @@ class _AccountPageState extends State<AccountPage>
                           AccountActionButtons(
                               slidingUpPanelController:
                                   slidingUpPanelController),
-                          TransactionsHistoryWidget(),
+                          TransactionsHistoryWidget(
+                            pageType: PageType.account,
+                          ),
                           AutomationWidget(),
                           AssetsListWidget()
                         ],

@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
+import 'package:portfolio/domain/models/account_transaction_history_model.dart';
+import 'package:portfolio/domain/models/savings_transactions_model.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
 import 'package:portfolio/features/pages/widgets/transactions_history_widget/cubit/transaction_history_cubit.dart';
 import 'package:unicons/unicons.dart';
 
 class TransactionsHistoryWidget extends StatelessWidget {
-  const TransactionsHistoryWidget({
-    super.key,
-  });
+  const TransactionsHistoryWidget({super.key, required this.pageType});
+
+  final PageType pageType;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => TransactionHistoryCubit(
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getTransactions(pageType: PageType.account),
+        ..getTransactions(pageType: pageType),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -54,24 +56,46 @@ class TransactionsHistoryWidget extends StatelessWidget {
                         child: ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
-                          itemCount: state.models?.length != null &&
-                                  state.models!.length > 3
-                              ? 3
+                          itemCount: state.models?.length == null
+                              ? state.savingModels?.length
                               : state.models?.length,
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              onTap: () {},
-                              leading: Icon(
-                                  state.models?[index].operation == "transfer"
-                                      ? UniconsLine.arrow_down
-                                      : UniconsLine.arrow_up),
-                              title: Text(state.models?[index].operation ?? ""),
-                              trailing:
-                                  Text("${state.models?[index].amount} USD"),
-                              subtitle: Text(state.models![index].date
-                                  .toDate()
-                                  .toString()),
-                            );
+                            return state.models == null
+                                ? ListTile(
+                                    onTap: () {},
+                                    leading: Icon(
+                                        state.savingModels![index].interests
+                                            ? Icons.balance
+                                            : state.savingModels?[index]
+                                                        .operation ==
+                                                    "income"
+                                                ? UniconsLine.arrow_up
+                                                : UniconsLine.arrow_down),
+                                    title: Text(
+                                        state.savingModels?[index].operation ??
+                                            ""),
+                                    trailing: Text(
+                                        "${state.savingModels?[index].amount} USD"),
+                                    subtitle: Text(state
+                                        .savingModels![index].date
+                                        .toDate()
+                                        .toString()),
+                                  )
+                                : ListTile(
+                                    onTap: () {},
+                                    leading: Icon(
+                                        state.models?[index].operation ==
+                                                "transfer"
+                                            ? UniconsLine.arrow_down
+                                            : UniconsLine.arrow_up),
+                                    title: Text(
+                                        state.models?[index].operation ?? ""),
+                                    trailing: Text(
+                                        "${state.models?[index].amount} USD"),
+                                    subtitle: Text(state.models![index].date
+                                        .toDate()
+                                        .toString()),
+                                  );
                           },
                         ),
                       );

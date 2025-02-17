@@ -5,12 +5,12 @@ import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/automation_widget.dart';
 
-import 'package:portfolio/features/pages/widgets/interests_widget.dart';
+import 'package:portfolio/features/pages/savings_page/interests_widget/interests_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/saving_action_buttons.dart';
 import 'package:portfolio/features/pages/savings_page/saving_goal_widget.dart';
@@ -126,7 +126,7 @@ class _SavingsPageState extends State<SavingsPage>
                           SavingActionButtons(
                               slidingUpPanelController:
                                   slidingUpPanelController),
-                          TransactionsHistoryWidget(),
+                          TransactionsHistoryWidget(pageType: PageType.savings,),
                           InterestWidgets(),
                           SavingGoalWidget(),
                           AutomationWidget(),

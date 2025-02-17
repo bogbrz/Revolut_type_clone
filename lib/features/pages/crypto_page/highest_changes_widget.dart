@@ -29,7 +29,7 @@ class _HighestChangesWidgetState extends State<HighestChangesWidget> {
             return Center(child: CircularProgressIndicator());
           case Status.failure:
             return Center(
-              child: Text("Error"),
+              child: Text(state.errorMessage.toString()),
             );
           case Status.success:
             return Padding(

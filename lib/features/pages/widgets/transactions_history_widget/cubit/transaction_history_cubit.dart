@@ -13,19 +13,41 @@ part 'transaction_history_cubit.freezed.dart';
 
 class TransactionHistoryCubit extends Cubit<TransactionHistoryState> {
   TransactionHistoryCubit({required this.repository})
-      : super(TransactionHistoryState(models: null, status: Status.initial, savingModels: null));
+      : super(TransactionHistoryState(
+            models: null, status: Status.initial, savingModels: null));
 
   StreamSubscription? streamSubscription;
   final FirebaseRepository repository;
+  final pageType = PageType;
 
   Future<void> getTransactions({required PageType pageType}) async {
-    emit(TransactionHistoryState(models: null, status: Status.loading, savingModels: null));
-    
-    streamSubscription = repository.getAccountTransactions().listen((results) {
-      emit(TransactionHistoryState(models: results, status: Status.success, savingModels: null));
-    })
-      ..onError((error) {
-        emit(TransactionHistoryState(models: null, status: Status.failure, savingModels: null));
-      });
+    emit(TransactionHistoryState(
+        models: null, status: Status.loading, savingModels: null));
+
+    switch (pageType) {
+      case PageType.savings:
+        streamSubscription =
+            repository.getSavingsTransactions().listen((results) {
+          emit(TransactionHistoryState(
+              models: null, status: Status.success, savingModels: results));
+        })
+              ..onError((error) {
+                emit(TransactionHistoryState(
+                    models: null, status: Status.failure, savingModels: null));
+              });
+      case PageType.account:
+        streamSubscription =
+            repository.getAccountTransactions().listen((results) {
+          emit(TransactionHistoryState(
+              models: results, status: Status.success, savingModels: null));
+        })
+              ..onError((error) {
+                emit(TransactionHistoryState(
+                    models: null, status: Status.failure, savingModels: null));
+              });
+
+      case PageType.crypto:
+      case PageType.invest:
+    }
   }
 }

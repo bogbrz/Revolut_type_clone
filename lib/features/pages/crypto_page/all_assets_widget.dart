@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
@@ -108,7 +109,7 @@ class AllAssetsWidget extends StatelessWidget {
 
                     case Status.failure:
                       return Center(
-                        child: Text("Something went wrong"),
+                        child: Text(state.errorMessage ?? "error"),
                       );
                   }
                 },
