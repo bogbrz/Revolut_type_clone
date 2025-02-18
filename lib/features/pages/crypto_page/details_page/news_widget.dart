@@ -16,7 +16,7 @@ class NewsInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(coinId);
+ 
     return BlocProvider(
       create: (context) => NewsPageBloc(
           newsRepository: NewsRepository(newsDataSource: NewsDataSource()))

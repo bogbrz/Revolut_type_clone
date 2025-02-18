@@ -42,7 +42,7 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
           if (models.contains(DataModel(
               price: double.parse(stockTime.open!),
               date: stockTime.datetime!))) {
-            print("Duplicate");
+     
           } else {
             models.add(DataModel(
                 price: double.parse(stockTime.open!),
@@ -52,9 +52,9 @@ class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
       }
 
       final stockLogo = await repository.getStockLogo(symbol: event.symbol);
-      print("logo $stockLogo");
+    
       final stockPrice = await repository.getStockPrice(symbol: event.symbol);
-      print("Stockprice ${stockPrice.price}");
+    
       
 
       try {

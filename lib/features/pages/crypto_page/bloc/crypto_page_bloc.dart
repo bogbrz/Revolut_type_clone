@@ -29,7 +29,7 @@ class CryptoPageBloc extends Bloc<CryptoPageEvent, CryptoPageState> {
           reversed: []));
       try {
         final cryptoModel = await cryptoRepository.getCrypto();
-        print("CRYPTO PAGE BLOC $cryptoModel");
+       
         List<CryptoInfoModel> sortedModels = List.from(cryptoModel)
           ..sort((a, b) {
             return a.priceChangePercentage24H!

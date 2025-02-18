@@ -15,9 +15,10 @@ import 'package:portfolio/features/pages/crypto_page/cubit/crypto_firebase_cubit
 import 'package:portfolio/features/pages/crypto_page/main_crypto_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/crypto_action_buttons.dart';
 import 'package:portfolio/features/pages/crypto_page/highest_changes_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/owned_assets_widget.dart';
 import 'package:portfolio/features/pages/widgets/pie_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
-import 'package:portfolio/features/pages/widgets/operatons_history_widget.dart';
+import 'package:portfolio/features/pages/crypto_page/operatons_history_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 
@@ -108,8 +109,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                         child: CircularProgressIndicator(),
                                       );
                                     case Status.success:
-                                      print(
-                                          "PAGE: ${state.coinSpend}, ${state.dates}");
+                               
                                       return Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -149,48 +149,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                           CryptoActionButtons(
                               slidingUpPanelController:
                                   slidingUpPanelController),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: const Color.fromARGB(55, 146, 146, 146),
-                              ),
-                              child: Column(
-                                spacing:
-                                    MediaQuery.of(context).size.height * 0.0125,
-                                children: [
-                                  ListTile(
-                                    leading: Image(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.06,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
-                                        image: AssetImage(
-                                            "assets/images/bitcoin_icon.png")),
-                                    title: Text("Bitcoin"),
-                                    trailing: Text("123"),
-                                  ),
-                                  ListTile(
-                                    leading: Image(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.05,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.15,
-                                        image: AssetImage(
-                                            "assets/images/eth_logo.png")),
-                                    title: Text("Etherium"),
-                                    trailing: Text("123"),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          OwnedAssetsWidget(),
                           OperatonsHistoryWidget(
                             widthMultiplayer: 0.15,
                             assetImage:

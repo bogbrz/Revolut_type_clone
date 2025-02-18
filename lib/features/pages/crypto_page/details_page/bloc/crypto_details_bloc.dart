@@ -38,7 +38,7 @@ class CryptoDetailsBloc
       try {
         final detailsModel =
             await cryptoRepository.getCryptoDetails(id: event.id);
-        print("EXTRA: ${detailsModel.marketData}");
+   
         // final detailsModel =
         //     await cryptoRepository.getCryptoDetails(id: event.id);
 
@@ -63,7 +63,7 @@ class CryptoDetailsBloc
             detailsModel: detailsModel,
             error: false));
       } catch (e) {
-        print("${e.toString()}");
+       
         emit(CryptoPageLoadFaliure(
           
             prices: [],

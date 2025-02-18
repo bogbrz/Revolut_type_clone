@@ -36,13 +36,39 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
         coinSpendings.add(totalBalance);
         dates.add(result.date.millisecondsSinceEpoch + 0.0);
       }
-      print("$coinSpendings, $dates");
+
       emit(CryptoFirebaseState(
           coinSpend: coinSpendings,
           dates: dates,
           saldoModel: results,
           status: Status.success,
           totalBalance: totalBalance));
+    });
+  }
+
+  Future<void> getCoinBalance() async {
+    emit(CryptoFirebaseState(
+        saldoModel: null,
+        status: Status.loading,
+        totalBalance: null,
+        coinSpend: null,
+        dates: null));
+    streamSubscription = repository.getCryptoTransactions().listen((results) {
+      Map<String, double> coinCount = {};
+      for (final result in results) {
+        if (coinCount.containsKey(result.coinId)) {
+          coinCount.update(result.coinId, (value) => value + result.coinAmount);
+        } else {
+          coinCount[result.coinId] = result.coinAmount;
+        }
+      }
+      print(coinCount);
+      emit(CryptoFirebaseState(
+          saldoModel: null,
+          status: Status.success,
+          totalBalance: null,
+          coinSpend: null,
+          dates: null));
     });
   }
 }

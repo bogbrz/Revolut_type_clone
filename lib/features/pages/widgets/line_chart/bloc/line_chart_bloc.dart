@@ -39,7 +39,6 @@ class LineChartBloc extends Bloc<LineChartEvent, LineChartState> {
           List<double> timeStamp = [];
           List<double> price = [];
           List<List<double?>?>? pricesData = historyModel.prices ?? [];
-          print("BLOC : $historyModel");
 
           for (final data in pricesData) {
             timeStamp.add(data![0]!);
@@ -56,7 +55,6 @@ class LineChartBloc extends Bloc<LineChartEvent, LineChartState> {
               error: false));
         }
       } catch (e) {
-        print(e);
         emit(LineChartLoadFaliure(
             prices: [],
             unixTime: [],

@@ -26,7 +26,7 @@ class FirebaseRepository {
 
   // SAVINGS
   Stream<List<SavingsSaldoModel>> getSavingsSaldo() {
-    print("REPO ${dataSource.getSavingsData()}");
+    
     return dataSource.getSavingsData();
   }
 

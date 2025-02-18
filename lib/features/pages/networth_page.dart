@@ -33,11 +33,11 @@ class _NetWorthPageState extends State<NetWorthPage>
   void dispose() {
     if (mounted) {
       slidingUpPanelController.dispose();
-      print("DUPA2");
+     
     }
 
     super.dispose();
-    print("DUPA22");
+
   }
 
   @override

@@ -24,7 +24,7 @@ class DrawerCubit extends Cubit<DrawerState> {
       emit(DrawerState(model: results[0], status: Status.success));
     })
       ..onError((error) {
-        print("ERROR $error");
+     
         emit(DrawerState(model: null, status: Status.failure));
       });
   }

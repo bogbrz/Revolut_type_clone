@@ -23,7 +23,7 @@ class AccountPageCubit extends Cubit<AccountPageState> {
     emit(AccountPageState(
         saldo: null, status: Status.loading, totalBalance: null));
     streamSubscription = repository.getAccountTransactions().listen((results) {
-      print("BLOC ${results}");
+  
       double totalBalance = 0;
       for (final result in results) {
         totalBalance += result.amount;

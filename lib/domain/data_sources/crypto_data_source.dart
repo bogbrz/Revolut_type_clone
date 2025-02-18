@@ -36,14 +36,14 @@ class CryptoDataSource {
     );
 
     final data = response.data;
-    print("Source: $data");
+   
     if (data == null) {
       throw Exception("Something went wrong");
     } else {
-      print("Data: ok");
+      
       try {
         final model = Welcome.fromJson(data);
-        print("Data: model ok");
+     
         return model;
       } catch (e) {
         throw Exception(e.toString());
@@ -57,7 +57,7 @@ class CryptoDataSource {
       "https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}/?x_cg_demo_api_key=$cryptoKey",
     );
     final data = response.data;
-    print("OK $data");
+ 
     if (data == null) {
       throw Exception("Something went wrong");
     } else {
