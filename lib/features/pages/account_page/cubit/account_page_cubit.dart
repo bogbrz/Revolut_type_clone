@@ -14,22 +14,26 @@ part 'account_page_cubit.freezed.dart';
 class AccountPageCubit extends Cubit<AccountPageState> {
   AccountPageCubit({required this.repository})
       : super(AccountPageState(
-            saldo: null, status: Status.initial));
+            saldo: null, status: Status.initial, totalBalance: null));
 
   StreamSubscription? streamSubscription;
   final FirebaseRepository repository;
 
   Future<void> getAccountData() async {
     emit(AccountPageState(
-        saldo: null, status: Status.loading));
-    streamSubscription = repository.getAccountSaldo().listen((results) {
+        saldo: null, status: Status.loading, totalBalance: null));
+    streamSubscription = repository.getAccountTransactions().listen((results) {
       print("BLOC ${results}");
+      double totalBalance = 0;
+      for (final result in results) {
+        totalBalance += result.amount;
+      }
       emit(AccountPageState(
-          saldo: results, status: Status.success));
+          saldo: results, status: Status.success, totalBalance: totalBalance));
     })
       ..onError((error) {
         emit(AccountPageState(
-            saldo: null, status: Status.failure));
+            saldo: null, status: Status.failure, totalBalance: null));
       });
   }
 }

@@ -7,6 +7,7 @@ import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
+import 'package:portfolio/features/pages/savings_page/interests_widget/cubit/interests_cubit.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/automation_widget.dart';
 
@@ -43,10 +44,19 @@ class _SavingsPageState extends State<SavingsPage>
   @override
   Widget build(BuildContext context) {
     double progress = currentValue / goalValue;
-    return BlocProvider(
-      create: (context) => SavingsPageCubit(
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getSaldoData(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SavingsPageCubit(
+              repository: FirebaseRepository(dataSource: FirebaseDataSource()))
+            ..getSaldoData(),
+        ),
+        BlocProvider(
+          create: (context) => InterestsCubit(
+              repository: FirebaseRepository(dataSource: FirebaseDataSource()))
+            ..getInterestsData(),
+        ),
+      ],
       child: AnimateGradient(
         reverse: true,
         controller: animationController,
@@ -77,58 +87,52 @@ class _SavingsPageState extends State<SavingsPage>
                       Column(
                         spacing: MediaQuery.of(context).size.height * 0.01,
                         children: [
-                          BlocBuilder<SavingsPageCubit, SavingsPageState>(
-                            builder: (context, state) {
-                              switch (state.status) {
-                                case Status.initial:
-                                  return Center(
-                                    child: Text("Waiting for data"),
-                                  );
-
-                                case Status.loading:
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-
-                                case Status.failure:
-                                  return Center(
-                                    child: Text("Error"),
-                                  );
-                                case Status.success:
-                                  return SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.25,
-                                    child: ListTile(
-                                      tileColor: Colors.transparent,
-                                      title: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              textAlign: TextAlign.center,
-                                              "Savings\n${state.saldo?[0].worth} \$",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineLarge,
-                                            ),
-                                            Text(
-                                                "${state.saldo?[0].interestRate}%/annum")
-                                          ],
-                                        ),
-                                      ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.25,
+                            child: ListTile(
+                              tileColor: Colors.transparent,
+                              title: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    BlocBuilder<InterestsCubit, InterestsState>(
+                                      builder: (context, state) {
+                                        return Text(
+                                          textAlign: TextAlign.center,
+                                          "Savings\n${state.totalBalance} \$",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineLarge,
+                                        );
+                                      },
                                     ),
-                                  );
-                              }
-                            },
+                                    BlocBuilder<SavingsPageCubit,
+                                        SavingsPageState>(
+                                      builder: (context, state) {
+                                        return Text(
+                                            "${state.saldo?[0].interestRate}%/annum");
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                           SavingActionButtons(
                               slidingUpPanelController:
                                   slidingUpPanelController),
-                          TransactionsHistoryWidget(pageType: PageType.savings,),
+                          TransactionsHistoryWidget(
+                            pageType: PageType.savings,
+                          ),
                           InterestWidgets(),
-                          SavingGoalWidget(),
+                          BlocBuilder<InterestsCubit, InterestsState>(
+                            builder: (context, state) {
+                              return SavingGoalWidget(
+                                totalBalance: state.totalBalance,
+                              );
+                            },
+                          ),
                           AutomationWidget(),
                           AssetsListWidget()
                         ],

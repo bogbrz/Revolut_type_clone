@@ -1,6 +1,6 @@
 part of 'line_chart_bloc.dart';
 
-enum Status { initial, loading, success, failure }
+
 
 @immutable
 sealed class LineChartState {

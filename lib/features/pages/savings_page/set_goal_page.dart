@@ -100,7 +100,9 @@ class _SetGoalPageState extends State<SetGoalPage> {
                                 date: _newDate == null
                                     ? null
                                     : Timestamp.fromDate(_newDate!),
-                                goal: int.parse(controller.text));
+                                goal: controller.text.isEmpty
+                                    ? widget.currentGoal!
+                                    : int.parse(controller.text));
                             Navigator.of(context).pop();
                           },
                           child: Text(

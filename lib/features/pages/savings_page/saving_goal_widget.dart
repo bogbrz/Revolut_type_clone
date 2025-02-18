@@ -6,17 +6,18 @@ import 'package:portfolio/features/pages/savings_page/set_goal_page.dart';
 class SavingGoalWidget extends StatelessWidget {
   const SavingGoalWidget({
     super.key,
+    required this.totalBalance,
   });
-
+  final double? totalBalance;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SavingsPageCubit, SavingsPageState>(
       builder: (context, state) {
         double progress = 0;
-        if (state.saldo == null || state.saldo?[0].savingsGoal ==null) {
+        if (state.saldo == null || state.saldo?[0].savingsGoal == null) {
           progress = 0;
         } else {
-          progress = state.saldo![0].worth / state.saldo![0].savingsGoal!;
+          progress = totalBalance! / state.saldo![0].savingsGoal!;
         }
 
         return Padding(
@@ -24,8 +25,11 @@ class SavingGoalWidget extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => SetGoalPage(currentDate: state.saldo?[0].goalDate, currentGoal:state.saldo?[0].savingsGoal , )));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => SetGoalPage(
+                        currentDate: state.saldo?[0].goalDate,
+                        currentGoal: state.saldo?[0].savingsGoal,
+                      )));
             },
             child: Container(
               padding: const EdgeInsets.all(16),
@@ -47,7 +51,7 @@ class SavingGoalWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${state.saldo?[0].worth} out of ${state.saldo?[0].savingsGoal}",
+                        "${totalBalance} out of ${state.saldo?[0].savingsGoal}",
                         textAlign: TextAlign.left,
                       ),
                     ],

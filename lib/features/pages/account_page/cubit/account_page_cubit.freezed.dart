@@ -16,7 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AccountPageState {
-  List<AccountSaldoModel>? get saldo => throw _privateConstructorUsedError;
+  List<AccountTransactionHistoryModel>? get saldo =>
+      throw _privateConstructorUsedError;
+  double? get totalBalance => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
   /// Create a copy of AccountPageState
@@ -32,7 +34,10 @@ abstract class $AccountPageStateCopyWith<$Res> {
           AccountPageState value, $Res Function(AccountPageState) then) =
       _$AccountPageStateCopyWithImpl<$Res, AccountPageState>;
   @useResult
-  $Res call({List<AccountSaldoModel>? saldo, Status status});
+  $Res call(
+      {List<AccountTransactionHistoryModel>? saldo,
+      double? totalBalance,
+      Status status});
 }
 
 /// @nodoc
@@ -51,13 +56,18 @@ class _$AccountPageStateCopyWithImpl<$Res, $Val extends AccountPageState>
   @override
   $Res call({
     Object? saldo = freezed,
+    Object? totalBalance = freezed,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
       saldo: freezed == saldo
           ? _value.saldo
           : saldo // ignore: cast_nullable_to_non_nullable
-              as List<AccountSaldoModel>?,
+              as List<AccountTransactionHistoryModel>?,
+      totalBalance: freezed == totalBalance
+          ? _value.totalBalance
+          : totalBalance // ignore: cast_nullable_to_non_nullable
+              as double?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -74,7 +84,10 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<AccountSaldoModel>? saldo, Status status});
+  $Res call(
+      {List<AccountTransactionHistoryModel>? saldo,
+      double? totalBalance,
+      Status status});
 }
 
 /// @nodoc
@@ -91,13 +104,18 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? saldo = freezed,
+    Object? totalBalance = freezed,
     Object? status = null,
   }) {
     return _then(_$InitialImpl(
       saldo: freezed == saldo
           ? _value._saldo
           : saldo // ignore: cast_nullable_to_non_nullable
-              as List<AccountSaldoModel>?,
+              as List<AccountTransactionHistoryModel>?,
+      totalBalance: freezed == totalBalance
+          ? _value.totalBalance
+          : totalBalance // ignore: cast_nullable_to_non_nullable
+              as double?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -110,12 +128,14 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required final List<AccountSaldoModel>? saldo, required this.status})
+      {required final List<AccountTransactionHistoryModel>? saldo,
+      required this.totalBalance,
+      required this.status})
       : _saldo = saldo;
 
-  final List<AccountSaldoModel>? _saldo;
+  final List<AccountTransactionHistoryModel>? _saldo;
   @override
-  List<AccountSaldoModel>? get saldo {
+  List<AccountTransactionHistoryModel>? get saldo {
     final value = _saldo;
     if (value == null) return null;
     if (_saldo is EqualUnmodifiableListView) return _saldo;
@@ -124,11 +144,13 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
+  final double? totalBalance;
+  @override
   final Status status;
 
   @override
   String toString() {
-    return 'AccountPageState(saldo: $saldo, status: $status)';
+    return 'AccountPageState(saldo: $saldo, totalBalance: $totalBalance, status: $status)';
   }
 
   @override
@@ -137,12 +159,14 @@ class _$InitialImpl implements _Initial {
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
             const DeepCollectionEquality().equals(other._saldo, _saldo) &&
+            (identical(other.totalBalance, totalBalance) ||
+                other.totalBalance == totalBalance) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_saldo), status);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_saldo), totalBalance, status);
 
   /// Create a copy of AccountPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -155,11 +179,14 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements AccountPageState {
   const factory _Initial(
-      {required final List<AccountSaldoModel>? saldo,
+      {required final List<AccountTransactionHistoryModel>? saldo,
+      required final double? totalBalance,
       required final Status status}) = _$InitialImpl;
 
   @override
-  List<AccountSaldoModel>? get saldo;
+  List<AccountTransactionHistoryModel>? get saldo;
+  @override
+  double? get totalBalance;
   @override
   Status get status;
 

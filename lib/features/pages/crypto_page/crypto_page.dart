@@ -4,10 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
+import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
+import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+import 'package:portfolio/features/pages/crypto_page/cubit/crypto_firebase_cubit.dart';
 import 'package:portfolio/features/pages/crypto_page/main_crypto_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/crypto_action_buttons.dart';
 import 'package:portfolio/features/pages/crypto_page/highest_changes_widget.dart';
@@ -38,11 +42,20 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CryptoPageBloc(
-          cryptoRepository:
-              CryptoRepository(cryptoDataSource: CryptoDataSource()))
-        ..add(CryptoInitial()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CryptoPageBloc(
+              cryptoRepository:
+                  CryptoRepository(cryptoDataSource: CryptoDataSource()))
+            ..add(CryptoInitial()),
+        ),
+        BlocProvider(
+            create: (context) => CryptoFirebaseCubit(
+                repository:
+                    FirebaseRepository(dataSource: FirebaseDataSource()))
+              ..getCryptoTransactions())
+      ],
       child: AnimateGradient(
         reverse: true,
         controller: animationController,
@@ -78,30 +91,58 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                             height: MediaQuery.of(context).size.height * 0.25,
                             child: ListTile(
                               tileColor: Colors.transparent,
-                              title: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    "Cryptocurrency \n2137\$",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineLarge,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text("-0,45\$"),
-                                      Icon(Icons.arrow_drop_down),
-                                      Text("-0,45%"),
-                                    ],
-                                  ),
-                                  LineChartWidget(
-                                    mock: true,
-                                    coinId: null,
-                                    days: 5,
-                                  )
-                                ],
+                              title: BlocBuilder<CryptoFirebaseCubit,
+                                  CryptoFirebaseState>(
+                                builder: (context, state) {
+                                  switch (state.status) {
+                                    case Status.initial:
+                                      return Center(
+                                        child: Text("waiting for data"),
+                                      );
+                                    case Status.failure:
+                                      return Center(
+                                        child: Text("error"),
+                                      );
+                                    case Status.loading:
+                                      return Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    case Status.success:
+                                      print(
+                                          "PAGE: ${state.coinSpend}, ${state.dates}");
+                                      return Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            "Cryptocurrency \n ${state.totalBalance} \$",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text("-0,45\$"),
+                                              Icon(Icons.arrow_drop_down),
+                                              Text("-0,45%"),
+                                            ],
+                                          ),
+                                          LineChartWidget(
+                                            lineChartMode:
+                                                LineChartMode.savings,
+                                            mock: false,
+                                            coinId: null,
+                                            prices: state.coinSpend,
+                                            unixTime: state.dates,
+                                            days: 5,
+                                          )
+                                        ],
+                                      );
+                                  }
+                                },
                               ),
                             ),
                           ),

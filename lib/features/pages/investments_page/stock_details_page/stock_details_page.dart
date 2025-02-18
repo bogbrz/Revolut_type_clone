@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
@@ -94,6 +95,7 @@ class StockDetailsPage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 32),
                               child: LineChartWidget(
+                                lineChartMode: LineChartMode.stock,
                                 mock: false,
                                 timeSeries: state.timeSeries,
                                 days: 5,

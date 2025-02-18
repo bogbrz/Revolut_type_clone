@@ -2,6 +2,7 @@ import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
@@ -101,6 +102,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                   ],
                                 ),
                                 LineChartWidget(
+                                  lineChartMode: LineChartMode.mock,
                                   mock: true,
                                   days: 1,
                                 )

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:portfolio/domain/models/account_saldo_model.dart';
 import 'package:portfolio/domain/models/account_transaction_history_model.dart';
+import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';
 import 'package:portfolio/domain/models/savings_saldo_model.dart';
 import 'package:portfolio/domain/models/savings_transactions_model.dart';
@@ -30,20 +31,20 @@ class FirebaseDataSource {
 
   // Personal account
 
-  Stream<List<AccountSaldoModel>> getAccountSaldoData() {
-    return dataBase
-        .collection("Users")
-        .doc("JeK52txUc6cwKGEF9Yjk")
-        .collection("personal account")
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map(
-              (doc) => AccountSaldoModel(
-                worth: doc["worth"],
-              ),
-            )
-            .toList());
-  }
+  // Stream<List<AccountSaldoModel>> getAccountSaldoData() {
+  //   return dataBase
+  //       .collection("Users")
+  //       .doc("JeK52txUc6cwKGEF9Yjk")
+  //       .collection("personal account")
+  //       .snapshots()
+  //       .map((snapshot) => snapshot.docs
+  //           .map(
+  //             (doc) => AccountSaldoModel(
+  //               worth: doc["worth"],
+  //             ),
+  //           )
+  //           .toList());
+  // }
 
   Stream<List<AccountTransactionHistoryModel>> getAccountTransactionHistory() {
     return dataBase
@@ -75,7 +76,6 @@ class FirebaseDataSource {
         .map((snapshot) => snapshot.docs
             .map(
               (doc) => SavingsSaldoModel(
-                  worth: doc["worth"],
                   interestRate: doc["interests_percentage"],
                   savingsGoal: doc["savings goal"],
                   goalDate: doc["goal_date"]),
@@ -90,7 +90,7 @@ class FirebaseDataSource {
         .doc("JeK52txUc6cwKGEF9Yjk")
         .collection("saving account")
         .doc("saldo")
-        .update({"savings goal": goal, "goal_date" : date});
+        .update({"savings goal": goal, "goal_date": date});
   }
 
   Stream<List<SavingsTransactionsModel>> getSavingsTransactions() {
@@ -109,6 +109,30 @@ class FirebaseDataSource {
                   amount: doc["amount"],
                   operation: doc["operation"],
                   interests: doc["interests"]),
+            )
+            .toList());
+  }
+
+  // CRYPTO
+
+  Stream<List<CryptoTransactionHistoryModel>> getCryptoTransactions() {
+    return dataBase
+        .collection("Users")
+        .doc("JeK52txUc6cwKGEF9Yjk")
+        .collection("crypto_account")
+        .doc("saldo")
+        .collection("transaction_history")
+        .orderBy("date")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map(
+              (doc) => CryptoTransactionHistoryModel(
+                  date: doc["date"],
+                  coinAmount: doc["coin amount"] + 0.0,
+                  operation: doc["operation"],
+                  coinId: doc["coinId"],
+                  coinImageUrl: doc["coin_image_url"],
+                  coinPrice: doc["coin_price"] + 0.0),
             )
             .toList());
   }

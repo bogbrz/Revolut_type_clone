@@ -103,6 +103,7 @@ class TileWidget extends StatelessWidget {
               Transform.scale(
                 scale: 0.7,
                 child: LineChartWidget(
+                  lineChartMode: LineChartMode.basic,
                   mock: false,
                   coinId: model!.id,
                   days: 5,

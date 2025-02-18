@@ -35,7 +35,42 @@ class InterestsCubit extends Cubit<InterestsState> {
         status: Status.loading,
       ),
     );
-    streamSubscription =
-        repository.getAccountTransactions().listen((results) {});
+    streamSubscription = repository.getSavingsTransactions().listen((results) {
+      double totalBalance = 0;
+      double totalInterests = 0;
+      double interestsThisMonth = 0;
+      List<double> balanceHistory = [];
+      List<double> balanceDates = [];
+
+      for (final result in results) {
+        if (result.interests) {
+          totalInterests += result.amount;
+        }
+        if (result.interests &&
+            result.date.toDate().month == DateTime.timestamp().month) {
+          interestsThisMonth += result.amount;
+        }
+        totalBalance += result.amount;
+        balanceHistory.add(totalBalance);
+        balanceDates.add(result.date.millisecondsSinceEpoch + 0.0);
+      }
+
+      emit(InterestsState(
+          totalBalance: totalBalance,
+          totalInterests: totalInterests,
+          interestsThisMonth: interestsThisMonth,
+          balanceHistory: balanceHistory,
+          balanceDates: balanceDates,
+          status: Status.success));
+    })
+      ..onError((error) {
+        emit(InterestsState(
+            totalBalance: null,
+            totalInterests: null,
+            interestsThisMonth: null,
+            balanceHistory: null,
+            balanceDates: null,
+            status: Status.failure));
+      });
   }
 }

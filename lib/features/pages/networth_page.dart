@@ -1,6 +1,7 @@
 import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/features/pages/widgets/pie_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
@@ -93,6 +94,7 @@ class _NetWorthPageState extends State<NetWorthPage>
                                   ],
                                 ),
                                 LineChartWidget(
+                                  lineChartMode: LineChartMode.mock,
                                   mock: true,
                                   days: 1,
                                 ),

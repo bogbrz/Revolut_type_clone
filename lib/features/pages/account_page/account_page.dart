@@ -100,7 +100,7 @@ class _AccountPageState extends State<AccountPage>
                                         children: [
                                           Text(
                                             textAlign: TextAlign.center,
-                                            "Personal account - all\n${state.saldo?[0].worth} \$",
+                                            "Personal account - all\n${state.totalBalance} \$",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineLarge,
