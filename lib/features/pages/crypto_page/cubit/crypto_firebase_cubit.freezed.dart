@@ -29,6 +29,10 @@ mixin _$CryptoFirebaseState {
       throw _privateConstructorUsedError;
   List<double>? get coinSpend => throw _privateConstructorUsedError;
   List<double>? get dates => throw _privateConstructorUsedError;
+  List<CryptoInfoModel?>? get cryptoInfomodel =>
+      throw _privateConstructorUsedError;
+  List<CryptoInfoModel?>? get sortedList => throw _privateConstructorUsedError;
+  List<CryptoInfoModel?>? get reversed => throw _privateConstructorUsedError;
 
   /// Create a copy of CryptoFirebaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -53,7 +57,10 @@ abstract class $CryptoFirebaseStateCopyWith<$Res> {
       List<CoinBalanceModel>? coinBalanceModel,
       List<CoinWorthModel>? coinWorthModel,
       List<double>? coinSpend,
-      List<double>? dates});
+      List<double>? dates,
+      List<CryptoInfoModel?>? cryptoInfomodel,
+      List<CryptoInfoModel?>? sortedList,
+      List<CryptoInfoModel?>? reversed});
 }
 
 /// @nodoc
@@ -81,6 +88,9 @@ class _$CryptoFirebaseStateCopyWithImpl<$Res, $Val extends CryptoFirebaseState>
     Object? coinWorthModel = freezed,
     Object? coinSpend = freezed,
     Object? dates = freezed,
+    Object? cryptoInfomodel = freezed,
+    Object? sortedList = freezed,
+    Object? reversed = freezed,
   }) {
     return _then(_value.copyWith(
       saldoModel: freezed == saldoModel
@@ -123,6 +133,18 @@ class _$CryptoFirebaseStateCopyWithImpl<$Res, $Val extends CryptoFirebaseState>
           ? _value.dates
           : dates // ignore: cast_nullable_to_non_nullable
               as List<double>?,
+      cryptoInfomodel: freezed == cryptoInfomodel
+          ? _value.cryptoInfomodel
+          : cryptoInfomodel // ignore: cast_nullable_to_non_nullable
+              as List<CryptoInfoModel?>?,
+      sortedList: freezed == sortedList
+          ? _value.sortedList
+          : sortedList // ignore: cast_nullable_to_non_nullable
+              as List<CryptoInfoModel?>?,
+      reversed: freezed == reversed
+          ? _value.reversed
+          : reversed // ignore: cast_nullable_to_non_nullable
+              as List<CryptoInfoModel?>?,
     ) as $Val);
   }
 }
@@ -145,7 +167,10 @@ abstract class _$$InitialImplCopyWith<$Res>
       List<CoinBalanceModel>? coinBalanceModel,
       List<CoinWorthModel>? coinWorthModel,
       List<double>? coinSpend,
-      List<double>? dates});
+      List<double>? dates,
+      List<CryptoInfoModel?>? cryptoInfomodel,
+      List<CryptoInfoModel?>? sortedList,
+      List<CryptoInfoModel?>? reversed});
 }
 
 /// @nodoc
@@ -171,6 +196,9 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? coinWorthModel = freezed,
     Object? coinSpend = freezed,
     Object? dates = freezed,
+    Object? cryptoInfomodel = freezed,
+    Object? sortedList = freezed,
+    Object? reversed = freezed,
   }) {
     return _then(_$InitialImpl(
       saldoModel: freezed == saldoModel
@@ -213,6 +241,18 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value._dates
           : dates // ignore: cast_nullable_to_non_nullable
               as List<double>?,
+      cryptoInfomodel: freezed == cryptoInfomodel
+          ? _value._cryptoInfomodel
+          : cryptoInfomodel // ignore: cast_nullable_to_non_nullable
+              as List<CryptoInfoModel?>?,
+      sortedList: freezed == sortedList
+          ? _value._sortedList
+          : sortedList // ignore: cast_nullable_to_non_nullable
+              as List<CryptoInfoModel?>?,
+      reversed: freezed == reversed
+          ? _value._reversed
+          : reversed // ignore: cast_nullable_to_non_nullable
+              as List<CryptoInfoModel?>?,
     ));
   }
 }
@@ -230,12 +270,18 @@ class _$InitialImpl implements _Initial {
       required final List<CoinBalanceModel>? coinBalanceModel,
       required final List<CoinWorthModel>? coinWorthModel,
       required final List<double>? coinSpend,
-      required final List<double>? dates})
+      required final List<double>? dates,
+      final List<CryptoInfoModel?>? cryptoInfomodel,
+      final List<CryptoInfoModel?>? sortedList,
+      final List<CryptoInfoModel?>? reversed})
       : _saldoModel = saldoModel,
         _coinBalanceModel = coinBalanceModel,
         _coinWorthModel = coinWorthModel,
         _coinSpend = coinSpend,
-        _dates = dates;
+        _dates = dates,
+        _cryptoInfomodel = cryptoInfomodel,
+        _sortedList = sortedList,
+        _reversed = reversed;
 
   final List<CryptoTransactionHistoryModel>? _saldoModel;
   @override
@@ -298,9 +344,39 @@ class _$InitialImpl implements _Initial {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<CryptoInfoModel?>? _cryptoInfomodel;
+  @override
+  List<CryptoInfoModel?>? get cryptoInfomodel {
+    final value = _cryptoInfomodel;
+    if (value == null) return null;
+    if (_cryptoInfomodel is EqualUnmodifiableListView) return _cryptoInfomodel;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<CryptoInfoModel?>? _sortedList;
+  @override
+  List<CryptoInfoModel?>? get sortedList {
+    final value = _sortedList;
+    if (value == null) return null;
+    if (_sortedList is EqualUnmodifiableListView) return _sortedList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<CryptoInfoModel?>? _reversed;
+  @override
+  List<CryptoInfoModel?>? get reversed {
+    final value = _reversed;
+    if (value == null) return null;
+    if (_reversed is EqualUnmodifiableListView) return _reversed;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'CryptoFirebaseState(saldoModel: $saldoModel, status: $status, accountIncome: $accountIncome, accountWorth: $accountWorth, coinPricePaid: $coinPricePaid, totalBalance: $totalBalance, coinBalanceModel: $coinBalanceModel, coinWorthModel: $coinWorthModel, coinSpend: $coinSpend, dates: $dates)';
+    return 'CryptoFirebaseState(saldoModel: $saldoModel, status: $status, accountIncome: $accountIncome, accountWorth: $accountWorth, coinPricePaid: $coinPricePaid, totalBalance: $totalBalance, coinBalanceModel: $coinBalanceModel, coinWorthModel: $coinWorthModel, coinSpend: $coinSpend, dates: $dates, cryptoInfomodel: $cryptoInfomodel, sortedList: $sortedList, reversed: $reversed)';
   }
 
   @override
@@ -325,7 +401,12 @@ class _$InitialImpl implements _Initial {
                 .equals(other._coinWorthModel, _coinWorthModel) &&
             const DeepCollectionEquality()
                 .equals(other._coinSpend, _coinSpend) &&
-            const DeepCollectionEquality().equals(other._dates, _dates));
+            const DeepCollectionEquality().equals(other._dates, _dates) &&
+            const DeepCollectionEquality()
+                .equals(other._cryptoInfomodel, _cryptoInfomodel) &&
+            const DeepCollectionEquality()
+                .equals(other._sortedList, _sortedList) &&
+            const DeepCollectionEquality().equals(other._reversed, _reversed));
   }
 
   @override
@@ -340,7 +421,10 @@ class _$InitialImpl implements _Initial {
       const DeepCollectionEquality().hash(_coinBalanceModel),
       const DeepCollectionEquality().hash(_coinWorthModel),
       const DeepCollectionEquality().hash(_coinSpend),
-      const DeepCollectionEquality().hash(_dates));
+      const DeepCollectionEquality().hash(_dates),
+      const DeepCollectionEquality().hash(_cryptoInfomodel),
+      const DeepCollectionEquality().hash(_sortedList),
+      const DeepCollectionEquality().hash(_reversed));
 
   /// Create a copy of CryptoFirebaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -362,7 +446,10 @@ abstract class _Initial implements CryptoFirebaseState {
       required final List<CoinBalanceModel>? coinBalanceModel,
       required final List<CoinWorthModel>? coinWorthModel,
       required final List<double>? coinSpend,
-      required final List<double>? dates}) = _$InitialImpl;
+      required final List<double>? dates,
+      final List<CryptoInfoModel?>? cryptoInfomodel,
+      final List<CryptoInfoModel?>? sortedList,
+      final List<CryptoInfoModel?>? reversed}) = _$InitialImpl;
 
   @override
   List<CryptoTransactionHistoryModel>? get saldoModel;
@@ -384,6 +471,12 @@ abstract class _Initial implements CryptoFirebaseState {
   List<double>? get coinSpend;
   @override
   List<double>? get dates;
+  @override
+  List<CryptoInfoModel?>? get cryptoInfomodel;
+  @override
+  List<CryptoInfoModel?>? get sortedList;
+  @override
+  List<CryptoInfoModel?>? get reversed;
 
   /// Create a copy of CryptoFirebaseState
   /// with the given fields replaced by the non-null parameter values.

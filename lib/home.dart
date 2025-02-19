@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/features/pages/account_page/account_page.dart';
-
 import 'package:portfolio/features/pages/crypto_page/crypto_page.dart';
 import 'package:portfolio/features/pages/investments_page/investments_page.dart';
 import 'package:portfolio/features/pages/networth_page.dart';

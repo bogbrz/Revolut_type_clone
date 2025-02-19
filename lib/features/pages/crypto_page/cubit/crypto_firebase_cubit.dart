@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
 import 'package:portfolio/domain/models/coin_worth_model.dart';
+import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
@@ -28,7 +29,7 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
             status: Status.initial,
             totalBalance: null,
             coinSpend: null,
-            dates: null));
+            dates: null, cryptoInfomodel: null, reversed: null, sortedList: null));
 
   // Future<void> getCryptoTransactions() async {
   //   emit(CryptoFirebaseState(
@@ -70,7 +71,7 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
         saldoModel: null,
         status: Status.loading,
         totalBalance: null,
-        coinSpend: null,
+        coinSpend: null, cryptoInfomodel: null, reversed: null, sortedList: null,
         dates: null));
     streamSubscription =
         repository.getCryptoTransactions().listen((results) async {
@@ -115,6 +116,15 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
       }
       double accountIncome = accountWorth - coinPricePaid;
 
+       final cryptoModel = await cryptoRepository.getCrypto();
+       
+        List<CryptoInfoModel> sortedModels = List.from(cryptoModel)
+          ..sort((a, b) {
+            return a.priceChangePercentage24H!
+                .compareTo(b.priceChangePercentage24H!);
+          });
+        List<CryptoInfoModel> reversed = sortedModels.reversed.toList();
+
       emit(CryptoFirebaseState(
           coinPricePaid: coinPricePaid,
           accountIncome: accountIncome,
@@ -125,7 +135,7 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
           status: Status.success,
           totalBalance: totalBalance,
           coinSpend: coinSpendings,
-          dates: dates));
+          dates: dates, cryptoInfomodel: cryptoModel, reversed: reversed, sortedList: sortedModels));
     });
   }
 }

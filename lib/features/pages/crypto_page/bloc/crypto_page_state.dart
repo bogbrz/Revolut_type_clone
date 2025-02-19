@@ -12,12 +12,12 @@ sealed class CryptoPageState {
       required this.error,
       required this.sortedList});
   final List<CryptoInfoModel?> model;
-
+ final List<CryptoInfoModel?> sortedList;
+  final List<CryptoInfoModel?> reversed;
   final Status status;
   final String? errorMessage;
   final bool error;
-  final List<CryptoInfoModel?> sortedList;
-  final List<CryptoInfoModel?> reversed;
+ 
 }
 
 final class CryptoPageInitial extends CryptoPageState {

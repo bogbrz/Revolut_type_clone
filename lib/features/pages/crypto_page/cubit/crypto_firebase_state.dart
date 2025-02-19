@@ -13,6 +13,9 @@ class CryptoFirebaseState with _$CryptoFirebaseState {
     required List<CoinWorthModel>? coinWorthModel,
     required List<double>? coinSpend,
     required List<double>? dates,
+    final List<CryptoInfoModel?>? cryptoInfomodel,
+ final List<CryptoInfoModel?>? sortedList,
+  final List<CryptoInfoModel?>? reversed,
 
   }) = _Initial;
 }

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/features/pages/crypto_page/cubit/crypto_firebase_cubit.dart';
 
 class OperatonsHistoryWidget extends StatelessWidget {
-  const OperatonsHistoryWidget(
-      {super.key,
-    
-      required this.widthMultiplayer});
+  const OperatonsHistoryWidget({super.key, required this.widthMultiplayer});
 
   final double widthMultiplayer;
+  final List<CryptoTransactionHistoryModel>? saldoModel;
   @override
   Widget build(BuildContext context) {
     return Container(
