@@ -5,6 +5,9 @@ class CryptoFirebaseState with _$CryptoFirebaseState {
   const factory CryptoFirebaseState({
     required List<CryptoTransactionHistoryModel>? saldoModel,
     required Status status,
+    required double? accountIncome,
+    required double? accountWorth,
+    required double? coinPricePaid,
     required double? totalBalance,
     required List<CoinBalanceModel>? coinBalanceModel,
     required List<CoinWorthModel>? coinWorthModel,

@@ -6,11 +6,9 @@ import 'package:portfolio/features/pages/crypto_page/cubit/crypto_firebase_cubit
 class OperatonsHistoryWidget extends StatelessWidget {
   const OperatonsHistoryWidget(
       {super.key,
-      required this.exampleOne,
-      required this.assetImage,
+    
       required this.widthMultiplayer});
-  final List<String> exampleOne;
-  final AssetImage assetImage;
+
   final double widthMultiplayer;
   @override
   Widget build(BuildContext context) {

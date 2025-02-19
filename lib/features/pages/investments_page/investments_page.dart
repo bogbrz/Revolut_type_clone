@@ -38,7 +38,6 @@ class _InvestmentsPageState extends State<InvestmentsPage>
   @override
   void dispose() {
     super.dispose();
-  
   }
 
   @override
@@ -111,8 +110,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                           ),
                         ),
                         ActionButtonsWidget(
-                            slidingUpPanelController:
-                                slidingUpPanelController),
+                            slidingUpPanelController: slidingUpPanelController),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Container(
@@ -130,9 +128,8 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.06,
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                              0.1,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.1,
                                       image: AssetImage(
                                           "assets/images/amazon.png")),
                                   title: Text("Amazon"),
@@ -144,9 +141,8 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.05,
-                                      width:
-                                          MediaQuery.of(context).size.width *
-                                              0.1,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.1,
                                       image: AssetImage(
                                           "assets/images/nvidia.png")),
                                   title: Text("Nvidia"),
@@ -159,18 +155,8 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                         ),
                         OperatonsHistoryWidget(
                           widthMultiplayer: 0.1,
-                          assetImage: AssetImage(
-                            "assets/images/amazon.png",
-                          ),
-                          exampleOne: [
-                            "assets/images/AMZN.png",
-                            "Amazon",
-                            "1 stock"
-                          ],
                         ),
-                        AllStocksWidget(
-                          
-                        )
+                        AllStocksWidget()
                       ],
                     ),
                     PageEndTextWidget()

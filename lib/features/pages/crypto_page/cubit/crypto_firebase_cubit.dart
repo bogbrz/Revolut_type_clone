@@ -19,43 +19,52 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
   CryptoFirebaseCubit(
       {required this.repository, required this.cryptoRepository})
       : super(CryptoFirebaseState(
-            coinBalanceModel: null,    coinWorthModel: null,
+            coinPricePaid: null,
+            accountIncome: null,
+            accountWorth: null,
+            coinBalanceModel: null,
+            coinWorthModel: null,
             saldoModel: null,
             status: Status.initial,
             totalBalance: null,
             coinSpend: null,
             dates: null));
 
+  // Future<void> getCryptoTransactions() async {
+  //   emit(CryptoFirebaseState(
+  //       coinBalanceModel: null,coinPricePaid: null, accountIncome: null, accountWorth: null,
+  //       coinWorthModel: null,
+  //       coinSpend: null,
+  //       dates: null,
+  //       saldoModel: null,
+  //       status: Status.loading,
+  //       totalBalance: null));
+  //   streamSubscription = repository.getCryptoTransactions().listen((results) {
+  //     double totalBalance = 0;
+  //     List<double> coinSpendings = [];
+  //     List<double> dates = [];
+  //     for (final result in results) {
+  //       totalBalance += (result.coinAmount * result.coinPrice);
+  //       coinSpendings.add(totalBalance);
+  //       dates.add(result.date.millisecondsSinceEpoch + 0.0);
+  //     }
+
+  //     emit(CryptoFirebaseState(coinPricePaid: null, accountIncome: null, accountWorth: null,
+  //         coinBalanceModel: null,
+  //         coinWorthModel: null,
+  //         coinSpend: coinSpendings,
+  //         dates: dates,
+  //         saldoModel: results,
+  //         status: Status.success,
+  //         totalBalance: totalBalance));
+  //   });
+  // }
+
   Future<void> getCryptoTransactions() async {
     emit(CryptoFirebaseState(
-        coinBalanceModel: null,    coinWorthModel: null,
-        coinSpend: null,
-        dates: null,
-        saldoModel: null,
-        status: Status.loading,
-        totalBalance: null));
-    streamSubscription = repository.getCryptoTransactions().listen((results) {
-      double totalBalance = 0;
-      List<double> coinSpendings = [];
-      List<double> dates = [];
-      for (final result in results) {
-        totalBalance += (result.coinAmount * result.coinPrice);
-        coinSpendings.add(totalBalance);
-        dates.add(result.date.millisecondsSinceEpoch + 0.0);
-      }
-
-      emit(CryptoFirebaseState(
-          coinBalanceModel: null,    coinWorthModel: null,
-          coinSpend: coinSpendings,
-          dates: dates,
-          saldoModel: results,
-          status: Status.success,
-          totalBalance: totalBalance));
-    });
-  }
-
-  Future<void> getCoinBalance() async {
-    emit(CryptoFirebaseState(
+        coinPricePaid: null,
+        accountIncome: null,
+        accountWorth: null,
         coinBalanceModel: null,
         coinWorthModel: null,
         saldoModel: null,
@@ -65,10 +74,18 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
         dates: null));
     streamSubscription =
         repository.getCryptoTransactions().listen((results) async {
+      double totalBalance = 0;
+      List<double> coinSpendings = [];
+      List<double> dates = [];
+
       Map<String, double> coinCount = {};
       List<CoinBalanceModel> coinBalance = [];
-
+      double coinPricePaid = 0;
       for (final result in results) {
+        totalBalance += (result.coinAmount * result.coinPrice);
+        coinSpendings.add(totalBalance);
+        dates.add(result.date.millisecondsSinceEpoch + 0.0);
+        coinPricePaid += (result.coinAmount * result.coinPrice);
         if (coinCount.containsKey(result.coinId)) {
           coinCount.update(result.coinId, (value) => value + result.coinAmount);
         } else {
@@ -86,20 +103,29 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
             coinId: coinBalances.coinId);
 
         coinWorth.add(CoinWorthModel(
-          coinUrl: cryptoData.image!,
+            coinUrl: cryptoData.image!,
             coinAmount: coinBalances.coinAmount,
             marketPrice: cryptoData.currentPrice! + 0.0,
             coinId: coinBalances.coinId));
       }
+      double accountWorth = 0;
+
+      for (final coinWorths in coinWorth) {
+        accountWorth += (coinWorths.coinAmount * coinWorths.marketPrice);
+      }
+      double accountIncome = accountWorth - coinPricePaid;
 
       emit(CryptoFirebaseState(
+          coinPricePaid: coinPricePaid,
+          accountIncome: accountIncome,
+          accountWorth: accountWorth,
           coinBalanceModel: coinBalance,
           coinWorthModel: coinWorth,
-          saldoModel: null,
+          saldoModel: results,
           status: Status.success,
-          totalBalance: null,
-          coinSpend: null,
-          dates: null));
+          totalBalance: totalBalance,
+          coinSpend: coinSpendings,
+          dates: dates));
     });
   }
 }

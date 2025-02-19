@@ -53,7 +53,8 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
         ),
         BlocProvider(
             create: (context) => CryptoFirebaseCubit(
-              cryptoRepository: CryptoRepository(cryptoDataSource: CryptoDataSource()),
+                cryptoRepository:
+                    CryptoRepository(cryptoDataSource: CryptoDataSource()),
                 repository:
                     FirebaseRepository(dataSource: FirebaseDataSource()))
               ..getCryptoTransactions())
@@ -110,14 +111,13 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                         child: CircularProgressIndicator(),
                                       );
                                     case Status.success:
-                               
                                       return Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             textAlign: TextAlign.center,
-                                            "Cryptocurrency \n ${state.totalBalance} \$",
+                                            "Cryptocurrency \n ${state.accountWorth!.toStringAsFixed(2)} \$",
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineLarge,
@@ -126,9 +126,17 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text("-0,45\$"),
-                                              Icon(Icons.arrow_drop_down),
-                                              Text("-0,45%"),
+                                              Text(
+                                                  "${state.accountIncome!.toStringAsFixed(2)}\$"),
+                                              Icon(((state.accountIncome! *
+                                                              100) /
+                                                          state
+                                                              .coinPricePaid!) <
+                                                      0
+                                                  ? Icons.arrow_drop_down
+                                                  : Icons.arrow_upward),
+                                              Text(
+                                                  "${((state.accountIncome! * 100) / state.coinPricePaid!).toStringAsFixed(2)}%"),
                                             ],
                                           ),
                                           LineChartWidget(
@@ -153,13 +161,6 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                           OwnedAssetsWidget(),
                           OperatonsHistoryWidget(
                             widthMultiplayer: 0.15,
-                            assetImage:
-                                AssetImage("assets/images/bitcoin_icon.png"),
-                            exampleOne: [
-                              "assets/images/bitcoin_icon.png",
-                              "USD",
-                              "BTC"
-                            ],
                           ),
                           SizedBox(
                               height: MediaQuery.of(context).size.height * 0.18,

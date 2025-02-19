@@ -21,7 +21,7 @@ class OwnedAssetsWidget extends StatelessWidget {
           cryptoRepository:
               CryptoRepository(cryptoDataSource: CryptoDataSource()),
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getCoinBalance(),
+        ..getCryptoTransactions(),
       child: BlocBuilder<CryptoFirebaseCubit, CryptoFirebaseState>(
         builder: (context, state) {
           switch (state.status) {
@@ -64,13 +64,14 @@ class OwnedAssetsWidget extends StatelessWidget {
                                 ),
                                 title: Text(
                                     "${state.coinWorthModel?[index].coinId}"),
+                                subtitle: Text(state
+                                    .coinWorthModel![index].coinAmount
+                                    .toString()),
                                 trailing: Text(
                                     "${(state.coinWorthModel![index].coinAmount * state.coinWorthModel![index].marketPrice)}"),
                               );
                             }),
                       ),
-
-                  
                     ],
                   ),
                 ),
