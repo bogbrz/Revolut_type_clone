@@ -53,6 +53,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
         ),
         BlocProvider(
             create: (context) => CryptoFirebaseCubit(
+              cryptoRepository: CryptoRepository(cryptoDataSource: CryptoDataSource()),
                 repository:
                     FirebaseRepository(dataSource: FirebaseDataSource()))
               ..getCryptoTransactions())

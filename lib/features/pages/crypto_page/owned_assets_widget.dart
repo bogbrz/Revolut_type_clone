@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
+import 'package:portfolio/domain/repositories/crypto_repository.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 
 import 'package:portfolio/features/pages/crypto_page/cubit/crypto_firebase_cubit.dart';
@@ -16,6 +18,8 @@ class OwnedAssetsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CryptoFirebaseCubit(
+          cryptoRepository:
+              CryptoRepository(cryptoDataSource: CryptoDataSource()),
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
         ..getCoinBalance(),
       child: BlocBuilder<CryptoFirebaseCubit, CryptoFirebaseState>(
@@ -37,6 +41,7 @@ class OwnedAssetsWidget extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
+                  height: MediaQuery.of(context).size.height * 0.16,
                   padding: EdgeInsets.symmetric(vertical: 8),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -45,23 +50,27 @@ class OwnedAssetsWidget extends StatelessWidget {
                   child: Column(
                     spacing: MediaQuery.of(context).size.height * 0.0125,
                     children: [
-                      ListTile(
-                        leading: Image(
-                            height: MediaQuery.of(context).size.height * 0.06,
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            image:
-                                AssetImage("assets/images/bitcoin_icon.png")),
-                        title: Text("Bitcoin"),
-                        trailing: Text("123"),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: state.coinBalanceModel?.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading: Image.network(
+                                  state.coinWorthModel![index].coinUrl,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.06,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                ),
+                                title: Text(
+                                    "${state.coinWorthModel?[index].coinId}"),
+                                trailing: Text(
+                                    "${(state.coinWorthModel![index].coinAmount * state.coinWorthModel![index].marketPrice)}"),
+                              );
+                            }),
                       ),
-                      ListTile(
-                        leading: Image(
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            image: AssetImage("assets/images/eth_logo.png")),
-                        title: Text("Etherium"),
-                        trailing: Text("123"),
-                      ),
+
+                  
                     ],
                   ),
                 ),

@@ -6,6 +6,8 @@ class CryptoFirebaseState with _$CryptoFirebaseState {
     required List<CryptoTransactionHistoryModel>? saldoModel,
     required Status status,
     required double? totalBalance,
+    required List<CoinBalanceModel>? coinBalanceModel,
+    required List<CoinWorthModel>? coinWorthModel,
     required List<double>? coinSpend,
     required List<double>? dates,
 

@@ -3,6 +3,7 @@ import 'package:portfolio/domain/models/crypto_details_model.dart';
 
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
+import 'package:portfolio/domain/models/single_crypto_model.dart';
 
 import 'package:portfolio/env.dart';
 
@@ -30,20 +31,36 @@ class CryptoDataSource {
     }
   }
 
+  Future<SingleCryptoModel> getSingleCryptoData({required String coinId}) async {
+    final response = await Dio().get<List<dynamic>>(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=$coinId&order=volume_desc?x_cg_demo_api_key=$cryptoKey");
+    SingleCryptoModel? singleCryptoModel;
+    final data = response.data;
+
+    if (data == null) {
+      throw Exception("Something went wrong");
+    } else {
+      List<Map<String, dynamic>> convertedList =
+          List<Map<String, dynamic>>.from(data);
+      singleCryptoModel = SingleCryptoModel.fromJson(convertedList[0]);
+
+      return singleCryptoModel;
+    }
+  }
+
   Future<Welcome> getCryptoDetails({required String id}) async {
     final response = await Dio().get<Map<String, dynamic>>(
       "https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false?x_cg_demo_api_key=$cryptoKey",
     );
 
     final data = response.data;
-   
+
     if (data == null) {
       throw Exception("Something went wrong");
     } else {
-      
       try {
         final model = Welcome.fromJson(data);
-     
+
         return model;
       } catch (e) {
         throw Exception(e.toString());
@@ -57,7 +74,7 @@ class CryptoDataSource {
       "https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}/?x_cg_demo_api_key=$cryptoKey",
     );
     final data = response.data;
- 
+
     if (data == null) {
       throw Exception("Something went wrong");
     } else {

@@ -3,6 +3,7 @@ import 'package:portfolio/domain/models/crypto_details_model.dart';
 import 'package:portfolio/domain/models/crypto_history_model.dart';
 
 import 'package:portfolio/domain/models/crypto_info_model.dart';
+import 'package:portfolio/domain/models/single_crypto_model.dart';
 
 class CryptoRepository {
   CryptoRepository({required this.cryptoDataSource});
@@ -10,6 +11,11 @@ class CryptoRepository {
 
   Future<List<CryptoInfoModel?>> getCrypto() async {
     final cryptoData = await cryptoDataSource.getCryptoWithData();
+   
+    return cryptoData;
+  }
+  Future<SingleCryptoModel> getSingleCryptoModel({required String coinId}) async {
+    final cryptoData = await cryptoDataSource.getSingleCryptoData(coinId: coinId);
    
     return cryptoData;
   }
