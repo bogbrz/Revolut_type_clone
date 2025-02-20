@@ -43,7 +43,7 @@ class _SavingsPageState extends State<SavingsPage>
 
   @override
   Widget build(BuildContext context) {
-    double progress = currentValue / goalValue;
+   
     return MultiBlocProvider(
       providers: [
         BlocProvider(

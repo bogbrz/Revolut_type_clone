@@ -5,7 +5,6 @@ import 'package:portfolio/domain/models/news_model.dart';
 import 'package:portfolio/domain/repositories/news_repository.dart';
 import 'package:portfolio/features/pages/news_page/bloc/news_page_bloc.dart';
 import 'package:portfolio/features/pages/news_page/news_details_page.dart';
-import 'package:portfolio/features/pages/news_page/news_page.dart';
 
 class NewsInfoWidget extends StatelessWidget {
   const NewsInfoWidget({

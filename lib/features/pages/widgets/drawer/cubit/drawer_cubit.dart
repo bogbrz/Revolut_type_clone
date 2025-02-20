@@ -6,7 +6,7 @@ import 'package:portfolio/app/core/enums.dart';
 
 import 'package:portfolio/domain/models/personal_info_model.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
 
 part 'drawer_state.dart';
 part 'drawer_cubit.freezed.dart';

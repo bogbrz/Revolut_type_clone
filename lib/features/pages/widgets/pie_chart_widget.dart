@@ -1,7 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:unicons/unicons.dart';
 
 class PieChartWidget extends StatefulWidget {

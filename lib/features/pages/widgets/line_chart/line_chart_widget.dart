@@ -5,12 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
-import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
 import 'package:portfolio/features/pages/widgets/line_chart/bloc/line_chart_bloc.dart';
-import 'package:unicons/unicons.dart';
 
 class LineChartWidget extends StatelessWidget {
   const LineChartWidget({

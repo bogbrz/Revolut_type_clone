@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:portfolio/domain/models/account_saldo_model.dart';
 import 'package:portfolio/domain/models/account_transaction_history_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';

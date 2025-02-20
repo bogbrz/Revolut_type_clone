@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 

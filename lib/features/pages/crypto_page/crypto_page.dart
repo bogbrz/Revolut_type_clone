@@ -149,19 +149,21 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                     coinWorthModel: state.coinWorthModel,
                                   ),
                                   OperatonsHistoryWidget(
+                                    state.saldoModel,
                                     widthMultiplayer: 0.15,
+                                    
                                   ),
                                   SizedBox(
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.18,
                                       width: double.infinity,
-                                      child: MainCryptoWidget()),
+                                      child: MainCryptoWidget(cryptoInfoModel: state.cryptoInfomodel!,)),
                                   HighestChangesWidget(
                                     sortedList: state.sortedList!,
                                     reversed: state.reversed!,
                                   ),
-                                  AllAssetsWidget()
+                                  AllAssetsWidget(state.cryptoInfomodel)
                                 ],
                               ),
                               PageEndTextWidget()

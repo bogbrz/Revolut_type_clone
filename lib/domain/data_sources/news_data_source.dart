@@ -8,7 +8,7 @@ class NewsDataSource {
 
   Future<NewsModel?> getNews({required String topic}) async {
     final String url =
-        "https://newsapi.org/v2/everything?q=${topic}&sortBy=popularity&apiKey=$newsKey";
+        "https://newsapi.org/v2/everything?q=$topic&sortBy=popularity&apiKey=$newsKey";
 
     final respons = await Dio().get<Map<String, dynamic>>(url);
 

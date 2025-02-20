@@ -50,7 +50,7 @@ class CryptoDataSource {
 
   Future<Welcome> getCryptoDetails({required String id}) async {
     final response = await Dio().get<Map<String, dynamic>>(
-      "https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false?x_cg_demo_api_key=$cryptoKey",
+      "https://api.coingecko.com/api/v3/coins/$id?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false?x_cg_demo_api_key=$cryptoKey",
     );
 
     final data = response.data;
@@ -71,7 +71,7 @@ class CryptoDataSource {
   Future<CryptoHistoryModel> getHistoricalData(
       {required String id, required int days}) async {
     final response = await Dio().get<Map<String, dynamic>>(
-      "https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}/?x_cg_demo_api_key=$cryptoKey",
+      "https://api.coingecko.com/api/v3/coins/$id/market_chart?vs_currency=usd&days=$days/?x_cg_demo_api_key=$cryptoKey",
     );
     final data = response.data;
 

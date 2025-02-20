@@ -61,7 +61,7 @@ class _AssetInfoWidgetState extends State<AssetInfoWidget> {
                                       : setState(() {
                                           showMore = true;
                                         });
-                                  ;
+                                  
                                 },
                                 child: Text(
                                   showMore ? "Homepage" : "Show more",
@@ -84,9 +84,7 @@ class _AssetInfoWidgetState extends State<AssetInfoWidget> {
                         showMore
                             ? TextButton(
                                 onPressed: () {
-                                  whitePaperUri == null
-                                      ? null
-                                      : launchUrl(whitePaperUri,
+                                launchUrl(whitePaperUri,
                                           mode: LaunchMode.inAppBrowserView);
                                 },
                                 child: Text("Whitepaper",

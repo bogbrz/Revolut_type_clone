@@ -4,7 +4,6 @@ import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
 import 'package:portfolio/domain/models/stock_price_model.dart';
-import 'package:portfolio/domain/models/stock_profile_model.dart';
 import 'package:portfolio/domain/models/stock_time_series_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 

@@ -147,9 +147,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                             ),
                           ),
                         ),
-                        OperatonsHistoryWidget(
-                          widthMultiplayer: 0.1,
-                        ),
+                        OperatonsHistoryWidget(widthMultiplayer: 0.1, null),
                         AllStocksWidget()
                       ],
                     ),

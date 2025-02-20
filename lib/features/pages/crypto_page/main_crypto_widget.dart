@@ -1,56 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 
 class MainCryptoWidget extends StatelessWidget {
   const MainCryptoWidget({
+    required this.cryptoInfoModel,
     super.key,
   });
 
+  final List<CryptoInfoModel?> cryptoInfoModel;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CryptoPageBloc, CryptoPageState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case Status.initial:
-            return Center(
-              child: Text("Waiting for data"),
-            );
-          case Status.loading:
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-
-          case Status.success:
-            return Expanded(
-              child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: 2,
-                itemBuilder: (context, index) {
-                  return TileWidget(
-                      index: index,
-                      model: index == 0
-                          ? state.model.where((model) {
-                              return model?.id == "bitcoin";
-                            }).toList()[0]
-                          : state.model.where((model) {
-                              return model?.id == "ethereum";
-                            }).toList()[0]);
-                },
-              ),
-            );
-          case Status.failure:
-            return Center(
-              child: Text(state.errorMessage.toString()),
-            );
-        }
-      },
+    return Expanded(
+      child: ListView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          return TileWidget(
+              index: index,
+              model: index == 0
+                  ? cryptoInfoModel.where((model) {
+                      return model?.id == "bitcoin";
+                    }).toList()[0]
+                  : cryptoInfoModel.where((model) {
+                      return model?.id == "ethereum";
+                    }).toList()[0]);
+        },
+      ),
     );
   }
 }
@@ -97,7 +78,7 @@ class TileWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD" ),
+                  Text("${model?.currentPrice?.toStringAsFixed(2)} USD"),
                 ],
               ),
               Transform.scale(

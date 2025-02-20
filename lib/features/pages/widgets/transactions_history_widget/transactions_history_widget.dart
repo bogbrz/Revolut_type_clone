@@ -1,12 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
-import 'package:portfolio/domain/models/account_transaction_history_model.dart';
-import 'package:portfolio/domain/models/savings_transactions_model.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
 import 'package:portfolio/features/pages/widgets/transactions_history_widget/cubit/transaction_history_cubit.dart';
 import 'package:unicons/unicons.dart';
 

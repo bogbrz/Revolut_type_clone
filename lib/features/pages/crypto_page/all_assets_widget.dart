@@ -1,121 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio/app/core/enums.dart';
-
-import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
-import 'package:portfolio/domain/repositories/crypto_repository.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 
 class AllAssetsWidget extends StatelessWidget {
-  const AllAssetsWidget({
+  const AllAssetsWidget(
+    this.cryptoInfoModel, {
     super.key,
   });
-
+  final List<CryptoInfoModel?>? cryptoInfoModel;
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CryptoPageBloc(
-          cryptoRepository:
-              CryptoRepository(cryptoDataSource: CryptoDataSource()))
-        ..add(CryptoInitial()),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: const Color.fromARGB(55, 146, 146, 146),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(children: [
-                  Text("All cryptocurrencies"),
-                ]),
-              ),
-              BlocBuilder<CryptoPageBloc, CryptoPageState>(
-                builder: (context, state) {
-                  switch (state.status) {
-                    case Status.initial:
-                      return Center(
-                        child: Text("Waiting for data"),
-                      );
-                    case Status.loading:
-                      return Center(child: CircularProgressIndicator());
-
-                    case Status.success:
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 250,
-                            width: MediaQuery.of(context).size.width,
-                            child: GridView.builder(
-                              itemCount: 6,
-                              gridDelegate:
-                                  SliverGridDelegateWithMaxCrossAxisExtent(
-                                      maxCrossAxisExtent:
-                                          MediaQuery.of(context).size.width *
-                                              0.4),
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CryptoDetailsPage(
-                                                    id: state
-                                                        .model[index]!.id!)));
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Image.network(
-                                          scale: 4,
-                                          state.model[index]?.image ?? ""),
-                                      Text(state.model[index]?.name ?? "Dupa"),
-                                      Text(state.model[index]?.currentPrice
-                                              .toString() ??
-                                          "Dupa"),
-                                      Text(
-                                        state.model[index]
-                                                ?.priceChangePercentage24H!
-                                                .toStringAsFixed(2) ??
-                                            "Dupa",
-                                        style: TextStyle(
-                                            color: state.model[index]!
-                                                        .priceChangePercentage24H! >
-                                                    0
-                                                ? Colors.green
-                                                : Colors.red),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color.fromARGB(55, 146, 146, 146),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(children: [
+                Text("All cryptocurrencies"),
+              ]),
+            ),
+            Column(
+              children: [
+                SizedBox(
+                  height: 250,
+                  width: MediaQuery.of(context).size.width,
+                  child: GridView.builder(
+                    itemCount: 6,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent:
+                            MediaQuery.of(context).size.width * 0.4),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => CryptoDetailsPage(
+                                  id: cryptoInfoModel![index]!.id!)));
+                        },
+                        child: Column(
+                          children: [
+                            Image.network(
+                                scale: 4, cryptoInfoModel?[index]?.image ?? ""),
+                            Text(cryptoInfoModel?[index]?.name ?? "Dupa"),
+                            Text(cryptoInfoModel?[index]
+                                    ?.currentPrice
+                                    .toString() ??
+                                "Dupa"),
+                            Text(
+                              cryptoInfoModel?[index]
+                                      ?.priceChangePercentage24H!
+                                      .toStringAsFixed(2) ??
+                                  "Dupa",
+                              style: TextStyle(
+                                  color: cryptoInfoModel![index]!
+                                              .priceChangePercentage24H! >
+                                          0
+                                      ? Colors.green
+                                      : Colors.red),
                             ),
-                          ),
-                          ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => AllCryptoListPage(
-                                          models: state.model,
-                                        )));
-                              },
-                              child: Text("View all"))
-                        ],
+                          ],
+                        ),
                       );
-
-                    case Status.failure:
-                      return Center(
-                        child: Text(state.errorMessage ?? "error"),
-                      );
-                  }
-                },
-              ),
-            ],
-          ),
+                    },
+                  ),
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AllCryptoListPage(
+                                models: cryptoInfoModel!,
+                              )));
+                    },
+                    child: Text("View all"))
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -75,7 +75,44 @@ class CryptoDetailsPage extends StatelessWidget {
                                             Text(
                                                 "${state.detailsModel?.marketData?.currentPrice?.usd?.toStringAsFixed(2) ?? ""} USD"),
                                             Text(
-                                              "${segment == 0 ? state.detailsModel?.marketData?.priceChangePercentage24H!.toStringAsFixed(2) ?? "" : segment == 1 ? state.detailsModel?.marketData?.priceChangePercentage7D!.toStringAsFixed(2) ?? "" : segment == 2 ? state.detailsModel?.marketData?.priceChangePercentage30D!.toStringAsFixed(2) ?? "" : segment == 3 ? state.detailsModel?.marketData?.priceChangePercentage200D!.toStringAsFixed(2) ?? "" : state.detailsModel?.marketData?.priceChangePercentage1Y!.toStringAsFixed(2) ?? ""}",
+                                              segment == 0
+                                                  ? state
+                                                          .detailsModel
+                                                          ?.marketData
+                                                          ?.priceChangePercentage24H!
+                                                          .toStringAsFixed(2) ??
+                                                      ""
+                                                  : segment == 1
+                                                      ? state
+                                                              .detailsModel
+                                                              ?.marketData
+                                                              ?.priceChangePercentage7D!
+                                                              .toStringAsFixed(
+                                                                  2) ??
+                                                          ""
+                                                      : segment == 2
+                                                          ? state
+                                                                  .detailsModel
+                                                                  ?.marketData
+                                                                  ?.priceChangePercentage30D!
+                                                                  .toStringAsFixed(
+                                                                      2) ??
+                                                              ""
+                                                          : segment == 3
+                                                              ? state
+                                                                      .detailsModel
+                                                                      ?.marketData
+                                                                      ?.priceChangePercentage200D!
+                                                                      .toStringAsFixed(
+                                                                          2) ??
+                                                                  ""
+                                                              : state
+                                                                      .detailsModel
+                                                                      ?.marketData
+                                                                      ?.priceChangePercentage1Y!
+                                                                      .toStringAsFixed(
+                                                                          2) ??
+                                                                  "",
                                               style: TextStyle(
                                                   color: segment == 0 &&
                                                               state
