@@ -43,4 +43,10 @@ class FirebaseRepository {
   Stream<List<CryptoTransactionHistoryModel>> getCryptoTransactions() {
     return dataSource.getCryptoTransactions();
   }
+
+  //INVEST
+
+   Stream<List<CryptoTransactionHistoryModel>> getInvestTransaction() {
+    return dataSource.getInvestTransactions();
+  }
 }

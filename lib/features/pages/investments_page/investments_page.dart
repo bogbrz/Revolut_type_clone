@@ -2,10 +2,10 @@ import 'package:animate_gradient/animate_gradient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/features/pages/crypto_page/stock_trans_history_widget.dart';
 import 'package:portfolio/features/pages/investments_page/all_stocks_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
-import 'package:portfolio/features/pages/crypto_page/operatons_history_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 
@@ -147,7 +147,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                             ),
                           ),
                         ),
-                        OperatonsHistoryWidget(widthMultiplayer: 0.1, null),
+                        StockTransHistoryWidget(),
                         AllStocksWidget()
                       ],
                     ),

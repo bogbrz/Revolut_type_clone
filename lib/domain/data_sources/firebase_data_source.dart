@@ -135,4 +135,28 @@ class FirebaseDataSource {
             )
             .toList());
   }
+
+  //Investment
+ Stream<List<CryptoTransactionHistoryModel>> getInvestTransactions() {
+    return dataBase
+        .collection("Users")
+        .doc("JeK52txUc6cwKGEF9Yjk")
+        .collection("invest_account")
+        .doc("saldo")
+        .collection("transaction_history")
+        .orderBy("date")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map(
+              (doc) => CryptoTransactionHistoryModel(
+                  date: doc["date"],
+                  coinAmount: doc["coin amount"] + 0.0,
+                  operation: doc["operation"],
+                  coinId: doc["coinId"],
+                  coinImageUrl: doc["coin_image_url"],
+                  coinPrice: doc["coin_price"] + 0.0),
+            )
+            .toList());
+  }
+
 }
