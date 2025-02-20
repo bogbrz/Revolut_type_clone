@@ -19,6 +19,11 @@ mixin _$InvestmentsFirebaseState {
   List<CryptoTransactionHistoryModel>? get transcationsModel =>
       throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  List<double>? get stockSpend => throw _privateConstructorUsedError;
+  List<double>? get dates => throw _privateConstructorUsedError;
+  double? get totalBalance => throw _privateConstructorUsedError;
+  List<CoinBalanceModel>? get stockBalanceModel =>
+      throw _privateConstructorUsedError;
 
   /// Create a copy of InvestmentsFirebaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -34,7 +39,12 @@ abstract class $InvestmentsFirebaseStateCopyWith<$Res> {
       _$InvestmentsFirebaseStateCopyWithImpl<$Res, InvestmentsFirebaseState>;
   @useResult
   $Res call(
-      {List<CryptoTransactionHistoryModel>? transcationsModel, Status status});
+      {List<CryptoTransactionHistoryModel>? transcationsModel,
+      Status status,
+      List<double>? stockSpend,
+      List<double>? dates,
+      double? totalBalance,
+      List<CoinBalanceModel>? stockBalanceModel});
 }
 
 /// @nodoc
@@ -55,6 +65,10 @@ class _$InvestmentsFirebaseStateCopyWithImpl<$Res,
   $Res call({
     Object? transcationsModel = freezed,
     Object? status = null,
+    Object? stockSpend = freezed,
+    Object? dates = freezed,
+    Object? totalBalance = freezed,
+    Object? stockBalanceModel = freezed,
   }) {
     return _then(_value.copyWith(
       transcationsModel: freezed == transcationsModel
@@ -65,6 +79,22 @@ class _$InvestmentsFirebaseStateCopyWithImpl<$Res,
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      stockSpend: freezed == stockSpend
+          ? _value.stockSpend
+          : stockSpend // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      dates: freezed == dates
+          ? _value.dates
+          : dates // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      totalBalance: freezed == totalBalance
+          ? _value.totalBalance
+          : totalBalance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      stockBalanceModel: freezed == stockBalanceModel
+          ? _value.stockBalanceModel
+          : stockBalanceModel // ignore: cast_nullable_to_non_nullable
+              as List<CoinBalanceModel>?,
     ) as $Val);
   }
 }
@@ -78,7 +108,12 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CryptoTransactionHistoryModel>? transcationsModel, Status status});
+      {List<CryptoTransactionHistoryModel>? transcationsModel,
+      Status status,
+      List<double>? stockSpend,
+      List<double>? dates,
+      double? totalBalance,
+      List<CoinBalanceModel>? stockBalanceModel});
 }
 
 /// @nodoc
@@ -96,6 +131,10 @@ class __$$InitialImplCopyWithImpl<$Res>
   $Res call({
     Object? transcationsModel = freezed,
     Object? status = null,
+    Object? stockSpend = freezed,
+    Object? dates = freezed,
+    Object? totalBalance = freezed,
+    Object? stockBalanceModel = freezed,
   }) {
     return _then(_$InitialImpl(
       transcationsModel: freezed == transcationsModel
@@ -106,6 +145,22 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      stockSpend: freezed == stockSpend
+          ? _value._stockSpend
+          : stockSpend // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      dates: freezed == dates
+          ? _value._dates
+          : dates // ignore: cast_nullable_to_non_nullable
+              as List<double>?,
+      totalBalance: freezed == totalBalance
+          ? _value.totalBalance
+          : totalBalance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      stockBalanceModel: freezed == stockBalanceModel
+          ? _value._stockBalanceModel
+          : stockBalanceModel // ignore: cast_nullable_to_non_nullable
+              as List<CoinBalanceModel>?,
     ));
   }
 }
@@ -115,8 +170,15 @@ class __$$InitialImplCopyWithImpl<$Res>
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
       {required final List<CryptoTransactionHistoryModel>? transcationsModel,
-      required this.status})
-      : _transcationsModel = transcationsModel;
+      required this.status,
+      required final List<double>? stockSpend,
+      required final List<double>? dates,
+      required this.totalBalance,
+      required final List<CoinBalanceModel>? stockBalanceModel})
+      : _transcationsModel = transcationsModel,
+        _stockSpend = stockSpend,
+        _dates = dates,
+        _stockBalanceModel = stockBalanceModel;
 
   final List<CryptoTransactionHistoryModel>? _transcationsModel;
   @override
@@ -131,10 +193,42 @@ class _$InitialImpl implements _Initial {
 
   @override
   final Status status;
+  final List<double>? _stockSpend;
+  @override
+  List<double>? get stockSpend {
+    final value = _stockSpend;
+    if (value == null) return null;
+    if (_stockSpend is EqualUnmodifiableListView) return _stockSpend;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<double>? _dates;
+  @override
+  List<double>? get dates {
+    final value = _dates;
+    if (value == null) return null;
+    if (_dates is EqualUnmodifiableListView) return _dates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final double? totalBalance;
+  final List<CoinBalanceModel>? _stockBalanceModel;
+  @override
+  List<CoinBalanceModel>? get stockBalanceModel {
+    final value = _stockBalanceModel;
+    if (value == null) return null;
+    if (_stockBalanceModel is EqualUnmodifiableListView)
+      return _stockBalanceModel;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'InvestmentsFirebaseState(transcationsModel: $transcationsModel, status: $status)';
+    return 'InvestmentsFirebaseState(transcationsModel: $transcationsModel, status: $status, stockSpend: $stockSpend, dates: $dates, totalBalance: $totalBalance, stockBalanceModel: $stockBalanceModel)';
   }
 
   @override
@@ -144,12 +238,25 @@ class _$InitialImpl implements _Initial {
             other is _$InitialImpl &&
             const DeepCollectionEquality()
                 .equals(other._transcationsModel, _transcationsModel) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality()
+                .equals(other._stockSpend, _stockSpend) &&
+            const DeepCollectionEquality().equals(other._dates, _dates) &&
+            (identical(other.totalBalance, totalBalance) ||
+                other.totalBalance == totalBalance) &&
+            const DeepCollectionEquality()
+                .equals(other._stockBalanceModel, _stockBalanceModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_transcationsModel), status);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_transcationsModel),
+      status,
+      const DeepCollectionEquality().hash(_stockSpend),
+      const DeepCollectionEquality().hash(_dates),
+      totalBalance,
+      const DeepCollectionEquality().hash(_stockBalanceModel));
 
   /// Create a copy of InvestmentsFirebaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -163,12 +270,25 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements InvestmentsFirebaseState {
   const factory _Initial(
       {required final List<CryptoTransactionHistoryModel>? transcationsModel,
-      required final Status status}) = _$InitialImpl;
+      required final Status status,
+      required final List<double>? stockSpend,
+      required final List<double>? dates,
+      required final double? totalBalance,
+      required final List<CoinBalanceModel>?
+          stockBalanceModel}) = _$InitialImpl;
 
   @override
   List<CryptoTransactionHistoryModel>? get transcationsModel;
   @override
   Status get status;
+  @override
+  List<double>? get stockSpend;
+  @override
+  List<double>? get dates;
+  @override
+  double? get totalBalance;
+  @override
+  List<CoinBalanceModel>? get stockBalanceModel;
 
   /// Create a copy of InvestmentsFirebaseState
   /// with the given fields replaced by the non-null parameter values.

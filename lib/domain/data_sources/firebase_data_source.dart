@@ -137,7 +137,7 @@ class FirebaseDataSource {
   }
 
   //Investment
- Stream<List<CryptoTransactionHistoryModel>> getInvestTransactions() {
+  Stream<List<CryptoTransactionHistoryModel>> getInvestTransactions() {
     return dataBase
         .collection("Users")
         .doc("JeK52txUc6cwKGEF9Yjk")
@@ -150,13 +150,12 @@ class FirebaseDataSource {
             .map(
               (doc) => CryptoTransactionHistoryModel(
                   date: doc["date"],
-                  coinAmount: doc["coin amount"] + 0.0,
+                  coinAmount: doc["stock_amount"] + 0.0,
                   operation: doc["operation"],
-                  coinId: doc["coinId"],
-                  coinImageUrl: doc["coin_image_url"],
-                  coinPrice: doc["coin_price"] + 0.0),
+                  coinId: doc["stock_symbol"],
+                  coinImageUrl: doc["stock_logo_url"],
+                  coinPrice: doc["stock_price"] + 0.0),
             )
             .toList());
   }
-
 }
