@@ -7,6 +7,7 @@ import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
+import 'package:portfolio/features/pages/crypto_page/owned_assets_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/stock_trans_history_widget.dart';
 import 'package:portfolio/features/pages/investments_page/all_stocks_widget.dart';
 import 'package:portfolio/features/pages/investments_page/cubit/investments_firebase_cubit.dart';
@@ -112,7 +113,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                               children: [
                                                 Text(
                                                   textAlign: TextAlign.center,
-                                                  "Investments\n${state.totalBalance}\$",
+                                                  "Investments\n${state.accountWorth}\$",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headlineLarge,
@@ -121,16 +122,21 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
-                                                    Text("-0,45\$"),
+                                                    Text(
+                                                        "${state.accountIncome}\$"),
                                                     Icon(Icons.arrow_drop_down),
-                                                    Text("-0,45%"),
+                                                    Text(
+                                                        "${((state.accountIncome! * 100) / state.stockPricePaid!).toStringAsFixed(2)}%"),
                                                   ],
                                                 )
                                               ],
                                             ),
                                             LineChartWidget(
-                                              lineChartMode: LineChartMode.mock,
-                                              mock: true,
+                                              lineChartMode:
+                                                  LineChartMode.savings,
+                                              mock: false,
+                                              unixTime: state.dates,
+                                              prices: state.stockSpend,
                                               days: 1,
                                             )
                                           ],
@@ -140,60 +146,12 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                     ActionButtonsWidget(
                                         slidingUpPanelController:
                                             slidingUpPanelController),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      child: Container(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 8),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: const Color.fromARGB(
-                                              55, 146, 146, 146),
-                                        ),
-                                        child: Column(
-                                          spacing: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.0125,
-                                          children: [
-                                            ListTile(
-                                              leading: Image(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.06,
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.1,
-                                                  image: AssetImage(
-                                                      "assets/images/amazon.png")),
-                                              title: Text("Amazon"),
-                                              subtitle: Text("1,23 shares"),
-                                              trailing: Text("123"),
-                                            ),
-                                            ListTile(
-                                              leading: Image(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.05,
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.1,
-                                                  image: AssetImage(
-                                                      "assets/images/nvidia.png")),
-                                              title: Text("Nvidia"),
-                                              subtitle: Text("1,23 shares"),
-                                              trailing: Text("123"),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
+                                    OwnedAssetsWidget(
+                                        stockWorthModel: state.stockWorth,
+                                        stockExtraData: state.transcationsModel,
+                                        coinBalanceModel:
+                                            state.stockBalanceModel,
+                                        coinWorthModel: null),
                                     StockTransHistoryWidget(
                                       stockModels: state.transcationsModel,
                                     ),

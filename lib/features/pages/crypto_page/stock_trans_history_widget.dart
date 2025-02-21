@@ -28,7 +28,8 @@ class StockTransHistoryWidget extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.15,
               child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
+                // physics: NeverScrollableScrollPhysics(),
+                itemCount: stockModels?.length,
                 itemBuilder: (context, index) {
                   final model = stockModels![index];
                   return ListTile(
