@@ -46,7 +46,7 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
           cryptoRepository:
               CryptoRepository(cryptoDataSource: CryptoDataSource()),
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getCryptoTransactions(),
+        ..getTransactionsByType(type: "crypto"),
       child: AnimateGradient(
           reverse: true,
           controller: animationController,

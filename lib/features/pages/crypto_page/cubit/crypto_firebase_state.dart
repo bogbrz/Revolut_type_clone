@@ -3,10 +3,11 @@ part of 'crypto_firebase_cubit.dart';
 @freezed
 class CryptoFirebaseState with _$CryptoFirebaseState {
   const factory CryptoFirebaseState({
-    required List<CryptoTransactionHistoryModel>? saldoModel,
+    required List<AllTransactionsModel>? saldoModel,
     required Status status,
     required double? accountIncome,
     required double? accountWorth,
+    required List<AllTransactionsModel>? transactionsModel,
     required double? coinPricePaid,
     required double? totalBalance,
     required List<CoinBalanceModel>? coinBalanceModel,

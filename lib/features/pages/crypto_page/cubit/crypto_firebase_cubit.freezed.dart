@@ -16,11 +16,13 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CryptoFirebaseState {
-  List<CryptoTransactionHistoryModel>? get saldoModel =>
+  List<AllTransactionsModel>? get saldoModel =>
       throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
   double? get accountIncome => throw _privateConstructorUsedError;
   double? get accountWorth => throw _privateConstructorUsedError;
+  List<AllTransactionsModel>? get transactionsModel =>
+      throw _privateConstructorUsedError;
   double? get coinPricePaid => throw _privateConstructorUsedError;
   double? get totalBalance => throw _privateConstructorUsedError;
   List<CoinBalanceModel>? get coinBalanceModel =>
@@ -48,10 +50,11 @@ abstract class $CryptoFirebaseStateCopyWith<$Res> {
       _$CryptoFirebaseStateCopyWithImpl<$Res, CryptoFirebaseState>;
   @useResult
   $Res call(
-      {List<CryptoTransactionHistoryModel>? saldoModel,
+      {List<AllTransactionsModel>? saldoModel,
       Status status,
       double? accountIncome,
       double? accountWorth,
+      List<AllTransactionsModel>? transactionsModel,
       double? coinPricePaid,
       double? totalBalance,
       List<CoinBalanceModel>? coinBalanceModel,
@@ -82,6 +85,7 @@ class _$CryptoFirebaseStateCopyWithImpl<$Res, $Val extends CryptoFirebaseState>
     Object? status = null,
     Object? accountIncome = freezed,
     Object? accountWorth = freezed,
+    Object? transactionsModel = freezed,
     Object? coinPricePaid = freezed,
     Object? totalBalance = freezed,
     Object? coinBalanceModel = freezed,
@@ -96,7 +100,7 @@ class _$CryptoFirebaseStateCopyWithImpl<$Res, $Val extends CryptoFirebaseState>
       saldoModel: freezed == saldoModel
           ? _value.saldoModel
           : saldoModel // ignore: cast_nullable_to_non_nullable
-              as List<CryptoTransactionHistoryModel>?,
+              as List<AllTransactionsModel>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -109,6 +113,10 @@ class _$CryptoFirebaseStateCopyWithImpl<$Res, $Val extends CryptoFirebaseState>
           ? _value.accountWorth
           : accountWorth // ignore: cast_nullable_to_non_nullable
               as double?,
+      transactionsModel: freezed == transactionsModel
+          ? _value.transactionsModel
+          : transactionsModel // ignore: cast_nullable_to_non_nullable
+              as List<AllTransactionsModel>?,
       coinPricePaid: freezed == coinPricePaid
           ? _value.coinPricePaid
           : coinPricePaid // ignore: cast_nullable_to_non_nullable
@@ -158,10 +166,11 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CryptoTransactionHistoryModel>? saldoModel,
+      {List<AllTransactionsModel>? saldoModel,
       Status status,
       double? accountIncome,
       double? accountWorth,
+      List<AllTransactionsModel>? transactionsModel,
       double? coinPricePaid,
       double? totalBalance,
       List<CoinBalanceModel>? coinBalanceModel,
@@ -190,6 +199,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? status = null,
     Object? accountIncome = freezed,
     Object? accountWorth = freezed,
+    Object? transactionsModel = freezed,
     Object? coinPricePaid = freezed,
     Object? totalBalance = freezed,
     Object? coinBalanceModel = freezed,
@@ -204,7 +214,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       saldoModel: freezed == saldoModel
           ? _value._saldoModel
           : saldoModel // ignore: cast_nullable_to_non_nullable
-              as List<CryptoTransactionHistoryModel>?,
+              as List<AllTransactionsModel>?,
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -217,6 +227,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.accountWorth
           : accountWorth // ignore: cast_nullable_to_non_nullable
               as double?,
+      transactionsModel: freezed == transactionsModel
+          ? _value._transactionsModel
+          : transactionsModel // ignore: cast_nullable_to_non_nullable
+              as List<AllTransactionsModel>?,
       coinPricePaid: freezed == coinPricePaid
           ? _value.coinPricePaid
           : coinPricePaid // ignore: cast_nullable_to_non_nullable
@@ -261,10 +275,11 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required final List<CryptoTransactionHistoryModel>? saldoModel,
+      {required final List<AllTransactionsModel>? saldoModel,
       required this.status,
       required this.accountIncome,
       required this.accountWorth,
+      required final List<AllTransactionsModel>? transactionsModel,
       required this.coinPricePaid,
       required this.totalBalance,
       required final List<CoinBalanceModel>? coinBalanceModel,
@@ -275,6 +290,7 @@ class _$InitialImpl implements _Initial {
       final List<CryptoInfoModel?>? sortedList,
       final List<CryptoInfoModel?>? reversed})
       : _saldoModel = saldoModel,
+        _transactionsModel = transactionsModel,
         _coinBalanceModel = coinBalanceModel,
         _coinWorthModel = coinWorthModel,
         _coinSpend = coinSpend,
@@ -283,9 +299,9 @@ class _$InitialImpl implements _Initial {
         _sortedList = sortedList,
         _reversed = reversed;
 
-  final List<CryptoTransactionHistoryModel>? _saldoModel;
+  final List<AllTransactionsModel>? _saldoModel;
   @override
-  List<CryptoTransactionHistoryModel>? get saldoModel {
+  List<AllTransactionsModel>? get saldoModel {
     final value = _saldoModel;
     if (value == null) return null;
     if (_saldoModel is EqualUnmodifiableListView) return _saldoModel;
@@ -299,6 +315,17 @@ class _$InitialImpl implements _Initial {
   final double? accountIncome;
   @override
   final double? accountWorth;
+  final List<AllTransactionsModel>? _transactionsModel;
+  @override
+  List<AllTransactionsModel>? get transactionsModel {
+    final value = _transactionsModel;
+    if (value == null) return null;
+    if (_transactionsModel is EqualUnmodifiableListView)
+      return _transactionsModel;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   final double? coinPricePaid;
   @override
@@ -376,7 +403,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'CryptoFirebaseState(saldoModel: $saldoModel, status: $status, accountIncome: $accountIncome, accountWorth: $accountWorth, coinPricePaid: $coinPricePaid, totalBalance: $totalBalance, coinBalanceModel: $coinBalanceModel, coinWorthModel: $coinWorthModel, coinSpend: $coinSpend, dates: $dates, cryptoInfomodel: $cryptoInfomodel, sortedList: $sortedList, reversed: $reversed)';
+    return 'CryptoFirebaseState(saldoModel: $saldoModel, status: $status, accountIncome: $accountIncome, accountWorth: $accountWorth, transactionsModel: $transactionsModel, coinPricePaid: $coinPricePaid, totalBalance: $totalBalance, coinBalanceModel: $coinBalanceModel, coinWorthModel: $coinWorthModel, coinSpend: $coinSpend, dates: $dates, cryptoInfomodel: $cryptoInfomodel, sortedList: $sortedList, reversed: $reversed)';
   }
 
   @override
@@ -391,6 +418,8 @@ class _$InitialImpl implements _Initial {
                 other.accountIncome == accountIncome) &&
             (identical(other.accountWorth, accountWorth) ||
                 other.accountWorth == accountWorth) &&
+            const DeepCollectionEquality()
+                .equals(other._transactionsModel, _transactionsModel) &&
             (identical(other.coinPricePaid, coinPricePaid) ||
                 other.coinPricePaid == coinPricePaid) &&
             (identical(other.totalBalance, totalBalance) ||
@@ -416,6 +445,7 @@ class _$InitialImpl implements _Initial {
       status,
       accountIncome,
       accountWorth,
+      const DeepCollectionEquality().hash(_transactionsModel),
       coinPricePaid,
       totalBalance,
       const DeepCollectionEquality().hash(_coinBalanceModel),
@@ -437,10 +467,11 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements CryptoFirebaseState {
   const factory _Initial(
-      {required final List<CryptoTransactionHistoryModel>? saldoModel,
+      {required final List<AllTransactionsModel>? saldoModel,
       required final Status status,
       required final double? accountIncome,
       required final double? accountWorth,
+      required final List<AllTransactionsModel>? transactionsModel,
       required final double? coinPricePaid,
       required final double? totalBalance,
       required final List<CoinBalanceModel>? coinBalanceModel,
@@ -452,13 +483,15 @@ abstract class _Initial implements CryptoFirebaseState {
       final List<CryptoInfoModel?>? reversed}) = _$InitialImpl;
 
   @override
-  List<CryptoTransactionHistoryModel>? get saldoModel;
+  List<AllTransactionsModel>? get saldoModel;
   @override
   Status get status;
   @override
   double? get accountIncome;
   @override
   double? get accountWorth;
+  @override
+  List<AllTransactionsModel>? get transactionsModel;
   @override
   double? get coinPricePaid;
   @override

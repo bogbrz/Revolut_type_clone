@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:portfolio/domain/models/account_transaction_history_model.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';
 import 'package:portfolio/domain/models/savings_saldo_model.dart';
@@ -155,6 +156,28 @@ class FirebaseDataSource {
                   coinId: doc["stock_symbol"],
                   coinImageUrl: doc["stock_logo_url"],
                   coinPrice: doc["stock_price"] + 0.0),
+            )
+            .toList());
+  }
+
+  // ALL TRANSACTIONS
+  Stream<List<AllTransactionsModel>> getAllTransactions() {
+    return dataBase
+        .collection("Users")
+        .doc("JeK52txUc6cwKGEF9Yjk")
+        .collection("transactions")
+        .orderBy("date")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map(
+              (doc) => AllTransactionsModel(
+                  type: doc["type"],
+                  date: doc["date"].toDate(),
+                  amount: doc["amount"] + 0.0,
+                  operation: doc["operation"],
+                  assetId: doc["asset_id"],
+                  imageUrl: doc["image_url"],
+                  price: doc["price"] + 0.0),
             )
             .toList());
   }

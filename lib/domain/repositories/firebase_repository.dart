@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/models/account_transaction_history_model.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';
 import 'package:portfolio/domain/models/savings_saldo_model.dart';
@@ -25,7 +26,6 @@ class FirebaseRepository {
 
   // SAVINGS
   Stream<List<SavingsSaldoModel>> getSavingsSaldo() {
-    
     return dataSource.getSavingsData();
   }
 
@@ -46,7 +46,14 @@ class FirebaseRepository {
 
   //INVEST
 
-   Stream<List<CryptoTransactionHistoryModel>> getInvestTransaction() {
+  Stream<List<CryptoTransactionHistoryModel>> getInvestTransaction() {
     return dataSource.getInvestTransactions();
+  }
+
+  //ALL
+  Stream<List<AllTransactionsModel>> getAllTransactionByType() {
+
+    
+    return dataSource.getAllTransactions();
   }
 }

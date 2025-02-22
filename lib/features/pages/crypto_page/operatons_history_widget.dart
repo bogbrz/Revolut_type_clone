@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 
 class OperatonsHistoryWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class OperatonsHistoryWidget extends StatelessWidget {
   });
 
   final double widthMultiplayer;
-  final List<CryptoTransactionHistoryModel>? saldoModel;
+  final List<AllTransactionsModel>? saldoModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,7 +44,7 @@ class OperatonsHistoryWidget extends StatelessWidget {
                   return ListTile(
                     onTap: () {},
                     leading: Image.network(
-                      model?.coinImageUrl.toString() ?? "",
+                      model?.imageUrl.toString() ?? "",
                       height: MediaQuery.of(context).size.height * 0.06,
                       width:
                           MediaQuery.of(context).size.width * widthMultiplayer,
@@ -52,11 +53,11 @@ class OperatonsHistoryWidget extends StatelessWidget {
                       children: [
                         Text("USD"),
                         Icon(Icons.arrow_right_alt),
-                        Text(model?.coinId ?? "")
+                        Text(model?.assetId ?? "")
                       ],
                     ),
-                    trailing: Text("${model!.coinPrice * model.coinAmount}\$"),
-                    subtitle: Text("${model.date.toDate()}"),
+                    trailing: Text("${model!.price * model.amount}\$"),
+                    subtitle: Text("${model.date}"),
                   );
                 },
               ),

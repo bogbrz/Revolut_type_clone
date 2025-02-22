@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
 import 'package:portfolio/domain/models/coin_worth_model.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
@@ -20,6 +21,7 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
   CryptoFirebaseCubit(
       {required this.repository, required this.cryptoRepository})
       : super(CryptoFirebaseState(
+            transactionsModel: null,
             coinPricePaid: null,
             accountIncome: null,
             accountWorth: null,
@@ -29,12 +31,14 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
             status: Status.initial,
             totalBalance: null,
             coinSpend: null,
-            dates: null, cryptoInfomodel: null, reversed: null, sortedList: null));
-
-
+            dates: null,
+            cryptoInfomodel: null,
+            reversed: null,
+            sortedList: null));
 
   Future<void> getCryptoTransactions() async {
     emit(CryptoFirebaseState(
+        transactionsModel: null,
         coinPricePaid: null,
         accountIncome: null,
         accountWorth: null,
@@ -43,7 +47,10 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
         saldoModel: null,
         status: Status.loading,
         totalBalance: null,
-        coinSpend: null, cryptoInfomodel: null, reversed: null, sortedList: null,
+        coinSpend: null,
+        cryptoInfomodel: null,
+        reversed: null,
+        sortedList: null,
         dates: null));
     streamSubscription =
         repository.getCryptoTransactions().listen((results) async {
@@ -88,26 +95,119 @@ class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
       }
       double accountIncome = accountWorth - coinPricePaid;
 
-       final cryptoModel = await cryptoRepository.getCrypto();
-       
-        List<CryptoInfoModel> sortedModels = List.from(cryptoModel)
-          ..sort((a, b) {
-            return a.priceChangePercentage24H!
-                .compareTo(b.priceChangePercentage24H!);
-          });
-        List<CryptoInfoModel> reversed = sortedModels.reversed.toList();
+      final cryptoModel = await cryptoRepository.getCrypto();
 
+      List<CryptoInfoModel> sortedModels = List.from(cryptoModel)
+        ..sort((a, b) {
+          return a.priceChangePercentage24H!
+              .compareTo(b.priceChangePercentage24H!);
+        });
+      List<CryptoInfoModel> reversed = sortedModels.reversed.toList();
+
+      // emit(CryptoFirebaseState(transactionsModel: null,
+      //     coinPricePaid: coinPricePaid,
+      //     accountIncome: accountIncome,
+      //     accountWorth: accountWorth,
+      //     coinBalanceModel: coinBalance,
+      //     coinWorthModel: coinWorth,
+      //     saldoModel: results,
+      //     status: Status.success,
+      //     totalBalance: totalBalance,
+      //     coinSpend: coinSpendings,
+      //     dates: dates,
+      //     cryptoInfomodel: cryptoModel,
+      //     reversed: reversed,
+      //     sortedList: sortedModels));
+    });
+  }
+
+  //ALL
+
+  Future<void> getTransactionsByType({required String type}) async {
+    emit(CryptoFirebaseState(
+        transactionsModel: null,
+        saldoModel: null,
+        status: Status.loading,
+        accountIncome: null,
+        accountWorth: null,
+        coinPricePaid: null,
+        totalBalance: null,
+        coinBalanceModel: null,
+        coinWorthModel: null,
+        coinSpend: null,
+        dates: null));
+    List<AllTransactionsModel> filteredModels = [];
+    streamSubscription =
+        repository.getAllTransactionByType().listen((results) async {
+      filteredModels
+          .addAll(results.where((test) => test.type == type).toList());
+
+      double totalBalance = 0;
+      List<double> spendingsHistory = [];
+      List<double> dates = [];
+
+      Map<String, double> assetCount = {};
+      List<CoinBalanceModel> assetBalance = [];
+      double assetPricePaid = 0;
+      for (final filteredModel in filteredModels) {
+        totalBalance += (filteredModel.amount * filteredModel.price);
+        spendingsHistory.add(totalBalance);
+        dates.add(filteredModel.date.millisecondsSinceEpoch + 0.0);
+        assetPricePaid += (filteredModel.amount * filteredModel.price);
+        if (assetCount.containsKey(filteredModel.assetId)) {
+          assetCount.update(
+              filteredModel.assetId, (value) => value + filteredModel.amount);
+        } else {
+          assetCount[filteredModel.assetId] = filteredModel.amount;
+        }
+      }
+
+      assetBalance = assetCount.entries
+          .map(
+              (key) => CoinBalanceModel(coinAmount: key.value, coinId: key.key))
+          .toList();
+
+      List<CoinWorthModel> assetWorth = [];
+      for (final assetBalances in assetBalance) {
+        final cryptoData = await cryptoRepository.getSingleCryptoModel(
+            coinId: assetBalances.coinId);
+
+        assetWorth.add(CoinWorthModel(
+            coinUrl: cryptoData.image!,
+            coinAmount: assetBalances.coinAmount,
+            marketPrice: cryptoData.currentPrice! + 0.0,
+            coinId: assetBalances.coinId));
+      }
+      double accountWorth = 0;
+
+      for (final assetWorths in assetWorth) {
+        accountWorth += (assetWorths.coinAmount * assetWorths.marketPrice);
+      }
+      double accountIncome = accountWorth - assetPricePaid;
+
+      final cryptoModel = await cryptoRepository.getCrypto();
+
+      List<CryptoInfoModel> sortedModels = List.from(cryptoModel)
+        ..sort((a, b) {
+          return a.priceChangePercentage24H!
+              .compareTo(b.priceChangePercentage24H!);
+        });
+      List<CryptoInfoModel> reversed = sortedModels.reversed.toList();
       emit(CryptoFirebaseState(
-          coinPricePaid: coinPricePaid,
+          cryptoInfomodel: cryptoModel,
+          sortedList: sortedModels,
+          reversed: reversed,
+          transactionsModel: filteredModels,
+          saldoModel: filteredModels,
+          status: Status.success,
           accountIncome: accountIncome,
           accountWorth: accountWorth,
-          coinBalanceModel: coinBalance,
-          coinWorthModel: coinWorth,
-          saldoModel: results,
-          status: Status.success,
+          coinPricePaid: assetPricePaid,
           totalBalance: totalBalance,
-          coinSpend: coinSpendings,
-          dates: dates, cryptoInfomodel: cryptoModel, reversed: reversed, sortedList: sortedModels));
+          coinBalanceModel: assetBalance,
+          coinWorthModel: assetWorth,
+          coinSpend: spendingsHistory,
+          dates: dates));
     });
   }
 }
