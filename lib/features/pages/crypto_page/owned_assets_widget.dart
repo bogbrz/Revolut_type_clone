@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
 import 'package:portfolio/domain/models/coin_worth_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
@@ -14,7 +15,7 @@ class OwnedAssetsWidget extends StatelessWidget {
   });
   final List<CoinBalanceModel>? coinBalanceModel;
   final List<CoinWorthModel>? coinWorthModel;
-  final List<CryptoTransactionHistoryModel>? stockExtraData;
+  final List<AllTransactionsModel>? stockExtraData;
   final List<StockWorthModel>? stockWorthModel;
 
   @override
@@ -38,7 +39,7 @@ class OwnedAssetsWidget extends StatelessWidget {
                     return ListTile(
                       leading: Image.network(
                         coinWorthModel?[index].coinUrl ??
-                            stockExtraData![index].coinImageUrl,
+                            stockExtraData![index].imageUrl!,
                         height: MediaQuery.of(context).size.height * 0.06,
                         width: MediaQuery.of(context).size.width * 0.15,
                       ),

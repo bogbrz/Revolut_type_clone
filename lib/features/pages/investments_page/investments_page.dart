@@ -48,7 +48,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
           stockMarketRepository:
               StockMarketRepository(dataSource: StockMarketDataSource()),
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getInvestTransactions(),
+        ..getInvestTransactions(type: "stock"),
       child: AnimateGradient(
           reverse: true,
           controller: animationController,

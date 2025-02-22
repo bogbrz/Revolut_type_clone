@@ -17,7 +17,7 @@ class InterestWidgets extends StatelessWidget {
     return BlocProvider(
       create: (context) => InterestsCubit(
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getInterestsData(),
+        ..getInterestsData(type: "interest"),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: BlocBuilder<InterestsCubit, InterestsState>(

@@ -43,7 +43,6 @@ class _SavingsPageState extends State<SavingsPage>
 
   @override
   Widget build(BuildContext context) {
-   
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -54,7 +53,7 @@ class _SavingsPageState extends State<SavingsPage>
         BlocProvider(
           create: (context) => InterestsCubit(
               repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-            ..getInterestsData(),
+            ..getInterestsData(type: "interest"),
         ),
       ],
       child: AnimateGradient(

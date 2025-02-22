@@ -39,7 +39,7 @@ class _AccountPageState extends State<AccountPage>
     return BlocProvider(
       create: (context) => AccountPageCubit(
           repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getAccountData(),
+        ..getAccountData(type: "personal"),
       child: AnimateGradient(
         reverse: true,
         controller: animationController,

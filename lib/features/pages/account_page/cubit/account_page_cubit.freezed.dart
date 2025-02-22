@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AccountPageState {
-  List<AccountTransactionHistoryModel>? get saldo =>
-      throw _privateConstructorUsedError;
+  List<AllTransactionsModel>? get saldo => throw _privateConstructorUsedError;
   double? get totalBalance => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
 
@@ -35,9 +34,7 @@ abstract class $AccountPageStateCopyWith<$Res> {
       _$AccountPageStateCopyWithImpl<$Res, AccountPageState>;
   @useResult
   $Res call(
-      {List<AccountTransactionHistoryModel>? saldo,
-      double? totalBalance,
-      Status status});
+      {List<AllTransactionsModel>? saldo, double? totalBalance, Status status});
 }
 
 /// @nodoc
@@ -63,7 +60,7 @@ class _$AccountPageStateCopyWithImpl<$Res, $Val extends AccountPageState>
       saldo: freezed == saldo
           ? _value.saldo
           : saldo // ignore: cast_nullable_to_non_nullable
-              as List<AccountTransactionHistoryModel>?,
+              as List<AllTransactionsModel>?,
       totalBalance: freezed == totalBalance
           ? _value.totalBalance
           : totalBalance // ignore: cast_nullable_to_non_nullable
@@ -85,9 +82,7 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<AccountTransactionHistoryModel>? saldo,
-      double? totalBalance,
-      Status status});
+      {List<AllTransactionsModel>? saldo, double? totalBalance, Status status});
 }
 
 /// @nodoc
@@ -111,7 +106,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       saldo: freezed == saldo
           ? _value._saldo
           : saldo // ignore: cast_nullable_to_non_nullable
-              as List<AccountTransactionHistoryModel>?,
+              as List<AllTransactionsModel>?,
       totalBalance: freezed == totalBalance
           ? _value.totalBalance
           : totalBalance // ignore: cast_nullable_to_non_nullable
@@ -128,14 +123,14 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required final List<AccountTransactionHistoryModel>? saldo,
+      {required final List<AllTransactionsModel>? saldo,
       required this.totalBalance,
       required this.status})
       : _saldo = saldo;
 
-  final List<AccountTransactionHistoryModel>? _saldo;
+  final List<AllTransactionsModel>? _saldo;
   @override
-  List<AccountTransactionHistoryModel>? get saldo {
+  List<AllTransactionsModel>? get saldo {
     final value = _saldo;
     if (value == null) return null;
     if (_saldo is EqualUnmodifiableListView) return _saldo;
@@ -179,12 +174,12 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements AccountPageState {
   const factory _Initial(
-      {required final List<AccountTransactionHistoryModel>? saldo,
+      {required final List<AllTransactionsModel>? saldo,
       required final double? totalBalance,
       required final Status status}) = _$InitialImpl;
 
   @override
-  List<AccountTransactionHistoryModel>? get saldo;
+  List<AllTransactionsModel>? get saldo;
   @override
   double? get totalBalance;
   @override

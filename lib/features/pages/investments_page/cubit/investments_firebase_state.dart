@@ -3,7 +3,7 @@ part of 'investments_firebase_cubit.dart';
 @freezed
 class InvestmentsFirebaseState with _$InvestmentsFirebaseState {
   const factory InvestmentsFirebaseState({
-    required List<CryptoTransactionHistoryModel>? transcationsModel,
+    required List<AllTransactionsModel>? transcationsModel,
     required List<StockWorthModel>? stockWorth,
     required Status status,
      required List<double>? stockSpend,

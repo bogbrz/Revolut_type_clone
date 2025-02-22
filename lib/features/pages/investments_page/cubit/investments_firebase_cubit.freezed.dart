@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$InvestmentsFirebaseState {
-  List<CryptoTransactionHistoryModel>? get transcationsModel =>
+  List<AllTransactionsModel>? get transcationsModel =>
       throw _privateConstructorUsedError;
   List<StockWorthModel>? get stockWorth => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
@@ -43,7 +43,7 @@ abstract class $InvestmentsFirebaseStateCopyWith<$Res> {
       _$InvestmentsFirebaseStateCopyWithImpl<$Res, InvestmentsFirebaseState>;
   @useResult
   $Res call(
-      {List<CryptoTransactionHistoryModel>? transcationsModel,
+      {List<AllTransactionsModel>? transcationsModel,
       List<StockWorthModel>? stockWorth,
       Status status,
       List<double>? stockSpend,
@@ -86,7 +86,7 @@ class _$InvestmentsFirebaseStateCopyWithImpl<$Res,
       transcationsModel: freezed == transcationsModel
           ? _value.transcationsModel
           : transcationsModel // ignore: cast_nullable_to_non_nullable
-              as List<CryptoTransactionHistoryModel>?,
+              as List<AllTransactionsModel>?,
       stockWorth: freezed == stockWorth
           ? _value.stockWorth
           : stockWorth // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<CryptoTransactionHistoryModel>? transcationsModel,
+      {List<AllTransactionsModel>? transcationsModel,
       List<StockWorthModel>? stockWorth,
       Status status,
       List<double>? stockSpend,
@@ -176,7 +176,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       transcationsModel: freezed == transcationsModel
           ? _value._transcationsModel
           : transcationsModel // ignore: cast_nullable_to_non_nullable
-              as List<CryptoTransactionHistoryModel>?,
+              as List<AllTransactionsModel>?,
       stockWorth: freezed == stockWorth
           ? _value._stockWorth
           : stockWorth // ignore: cast_nullable_to_non_nullable
@@ -221,7 +221,7 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 class _$InitialImpl implements _Initial {
   const _$InitialImpl(
-      {required final List<CryptoTransactionHistoryModel>? transcationsModel,
+      {required final List<AllTransactionsModel>? transcationsModel,
       required final List<StockWorthModel>? stockWorth,
       required this.status,
       required final List<double>? stockSpend,
@@ -237,9 +237,9 @@ class _$InitialImpl implements _Initial {
         _dates = dates,
         _stockBalanceModel = stockBalanceModel;
 
-  final List<CryptoTransactionHistoryModel>? _transcationsModel;
+  final List<AllTransactionsModel>? _transcationsModel;
   @override
-  List<CryptoTransactionHistoryModel>? get transcationsModel {
+  List<AllTransactionsModel>? get transcationsModel {
     final value = _transcationsModel;
     if (value == null) return null;
     if (_transcationsModel is EqualUnmodifiableListView)
@@ -354,20 +354,20 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements InvestmentsFirebaseState {
   const factory _Initial(
-      {required final List<CryptoTransactionHistoryModel>? transcationsModel,
-      required final List<StockWorthModel>? stockWorth,
-      required final Status status,
-      required final List<double>? stockSpend,
-      required final List<double>? dates,
-      required final double? totalBalance,
-      required final double? accountWorth,
-      required final double? accountIncome,
-      required final double? stockPricePaid,
-      required final List<CoinBalanceModel>?
-          stockBalanceModel}) = _$InitialImpl;
+          {required final List<AllTransactionsModel>? transcationsModel,
+          required final List<StockWorthModel>? stockWorth,
+          required final Status status,
+          required final List<double>? stockSpend,
+          required final List<double>? dates,
+          required final double? totalBalance,
+          required final double? accountWorth,
+          required final double? accountIncome,
+          required final double? stockPricePaid,
+          required final List<CoinBalanceModel>? stockBalanceModel}) =
+      _$InitialImpl;
 
   @override
-  List<CryptoTransactionHistoryModel>? get transcationsModel;
+  List<AllTransactionsModel>? get transcationsModel;
   @override
   List<StockWorthModel>? get stockWorth;
   @override

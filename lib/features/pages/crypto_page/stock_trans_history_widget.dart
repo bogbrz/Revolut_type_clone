@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 
 class StockTransHistoryWidget extends StatelessWidget {
   const StockTransHistoryWidget({super.key, required this.stockModels});
 
-  final List<CryptoTransactionHistoryModel>? stockModels;
+  final List<AllTransactionsModel>? stockModels;
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +34,15 @@ class StockTransHistoryWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final model = stockModels![index];
                   return ListTile(
-                    leading: Image.network(model.coinImageUrl),
+                    leading: Image.network(model.imageUrl!),
                     title: Row(
                       children: [
-                        Text(model.coinId),
+                        Text(model.assetId),
                         Text(model.operation),
                       ],
                     ),
-                    subtitle: Text(model.date.toDate().toString()),
-                    trailing: Text(model.coinAmount.toString()),
+                    subtitle: Text(model.date.toString()),
+                    trailing: Text(model.amount.toString()),
                     onTap: () {},
                   );
                 },

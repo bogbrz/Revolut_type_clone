@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
 import 'package:portfolio/domain/models/coin_worth_model.dart';
 import 'package:portfolio/domain/models/crypto_transactions_model.dart';
@@ -31,7 +32,7 @@ class InvestmentsFirebaseCubit extends Cubit<InvestmentsFirebaseState> {
             dates: null,
             totalBalance: null));
 
-  Future<void> getInvestTransactions() async {
+  Future<void> getInvestTransactions({required String type}) async {
     emit(InvestmentsFirebaseState(
         stockPricePaid: null,
         accountIncome: null,
@@ -45,7 +46,10 @@ class InvestmentsFirebaseCubit extends Cubit<InvestmentsFirebaseState> {
         totalBalance: null));
 
     streamSubscription =
-        repository.getInvestTransaction().listen((results) async {
+        repository.getAllTransactionByType().listen((results) async {
+      List<AllTransactionsModel> filteredModels = [];
+      filteredModels
+          .addAll(results.where((result) => result.type == type).toList());
       double totalBalance = 0;
       List<double> stockSpendings = [];
       List<double> dates = [];
@@ -54,16 +58,15 @@ class InvestmentsFirebaseCubit extends Cubit<InvestmentsFirebaseState> {
       List<CoinBalanceModel> stockBalance = [];
 
       double stockPricePaid = 0;
-      for (final result in results) {
-        totalBalance += ((result.coinAmount * result.coinPrice));
+      for (final result in filteredModels) {
+        totalBalance += ((result.amount * result.price));
         stockSpendings.add(totalBalance);
         dates.add(result.date.millisecondsSinceEpoch + 0.0);
-        stockPricePaid += (result.coinAmount * result.coinPrice);
-        if (stockCount.containsKey(result.coinId)) {
-          stockCount.update(
-              result.coinId, (value) => value + result.coinAmount);
+        stockPricePaid += (result.amount * result.price);
+        if (stockCount.containsKey(result.assetId)) {
+          stockCount.update(result.assetId, (value) => value + result.amount);
         } else {
-          stockCount[result.coinId] = result.coinAmount;
+          stockCount[result.assetId] = result.amount;
         }
       }
       stockBalance = stockCount.entries
@@ -93,7 +96,7 @@ class InvestmentsFirebaseCubit extends Cubit<InvestmentsFirebaseState> {
           stockPricePaid: stockPricePaid,
           accountIncome: accountIncome,
           accountWorth: accountWorth,
-          transcationsModel: results,
+          transcationsModel: filteredModels,
           status: Status.success,
           stockSpend: stockSpendings,
           stockWorth: stockWorth,

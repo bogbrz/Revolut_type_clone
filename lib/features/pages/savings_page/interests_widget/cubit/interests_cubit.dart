@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 
 part 'interests_state.dart';
@@ -24,7 +25,7 @@ class InterestsCubit extends Cubit<InterestsState> {
             interestsThisMonth: null,
           ),
         );
-  Future<void> getInterestsData() async {
+  Future<void> getInterestsData({required String type}) async {
     emit(
       InterestsState(
         totalBalance: null,
@@ -35,19 +36,20 @@ class InterestsCubit extends Cubit<InterestsState> {
         status: Status.loading,
       ),
     );
-    streamSubscription = repository.getSavingsTransactions().listen((results) {
+    streamSubscription = repository.getAllTransactionByType().listen((results) {
       double totalBalance = 0;
       double totalInterests = 0;
       double interestsThisMonth = 0;
       List<double> balanceHistory = [];
       List<double> balanceDates = [];
+      List<AllTransactionsModel> filteredModels = [];
+      filteredModels
+          .addAll(results.where((test) => test.type == type).toList());
 
-      for (final result in results) {
-        if (result.interests) {
-          totalInterests += result.amount;
-        }
-        if (result.interests &&
-            result.date.toDate().month == DateTime.timestamp().month) {
+      for (final result in filteredModels) {
+        totalInterests += result.amount;
+
+        if (result.date.month == DateTime.timestamp().month) {
           interestsThisMonth += result.amount;
         }
         totalBalance += result.amount;
