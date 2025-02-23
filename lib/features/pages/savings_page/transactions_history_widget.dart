@@ -65,8 +65,8 @@ class TransactionsHistoryWidget extends StatelessWidget {
                                       ? UniconsLine.arrow_up
                                       : UniconsLine.arrow_down),
                               title: Text(state.models?[index].operation ?? ""),
-                              trailing:
-                                  Text("${state.models?[index].amount} USD"),
+                              trailing: Text(
+                                  "${state.models![index].amount * state.models![index].price} USD"),
                               subtitle:
                                   Text(state.models![index].date.toString()),
                             );

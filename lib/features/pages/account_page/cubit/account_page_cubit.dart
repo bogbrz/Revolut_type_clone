@@ -26,8 +26,8 @@ class AccountPageCubit extends Cubit<AccountPageState> {
       filteredModels
           .addAll(results.where((result) => result.type == type).toList());
       double totalBalance = 0;
-      for (final result in results) {
-        totalBalance += result.amount;
+      for (final filteredModel in filteredModels) {
+        totalBalance += (filteredModel.amount * filteredModel.price);
       }
       emit(AccountPageState(
           saldo: filteredModels,

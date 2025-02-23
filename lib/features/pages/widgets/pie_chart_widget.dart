@@ -5,7 +5,18 @@ import 'package:unicons/unicons.dart';
 class PieChartWidget extends StatefulWidget {
   PieChartWidget({
     super.key,
+    required this.totalBalance,
+    required this.savingsTotal,
+    required this.investmentsTotal,
+    required this.cryptoTotal,
+    required this.cash,
   });
+
+  final double totalBalance;
+  final double savingsTotal;
+  final double investmentsTotal;
+  final double cryptoTotal;
+  final double cash;
 
   @override
   State<PieChartWidget> createState() => _PieChartWidgetState();
@@ -15,8 +26,14 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   var touchedSectionIndex = -1;
   @override
   Widget build(BuildContext context) {
+    final List<double> list = [
+      widget.savingsTotal,
+      widget.investmentsTotal,
+      widget.cryptoTotal,
+      widget.cash
+    ];
     List<ListTile> assetsWidgets() {
-      return List.generate(5, (i) {
+      return List.generate(list.length, (i) {
         final isTouched = i == touchedSectionIndex;
         final iconSize = isTouched ? 35.0 : 25.0;
         final touchedColor = Colors.black;
@@ -38,26 +55,11 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 size: iconSize,
               ),
               title: Text("Savings", style: TextStyle(fontSize: fontSize)),
-              trailing: Text("123", style: TextStyle(fontSize: fontSize)),
-            );
-          case 1:
-            return ListTile(
-              onTap: () {
-                setState(() {
-                  touchedSectionIndex = i;
-                });
-              },
-              selected: isTouched,
-              selectedColor: touchedColor,
-              leading: Icon(
-                UniconsLine.paperclip,
-                size: iconSize,
-              ),
-              title: Text("Related accounts",
+              trailing: Text(list[i].toStringAsFixed(2),
                   style: TextStyle(fontSize: fontSize)),
-              trailing: Text("123", style: TextStyle(fontSize: fontSize)),
             );
-          case 2:
+
+          case 1:
             return ListTile(
               onTap: () {
                 setState(() {
@@ -71,9 +73,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 size: iconSize,
               ),
               title: Text("Investments", style: TextStyle(fontSize: fontSize)),
-              trailing: Text("123", style: TextStyle(fontSize: fontSize)),
+              trailing: Text(list[i].toStringAsFixed(2),
+                  style: TextStyle(fontSize: fontSize)),
             );
-          case 3:
+          case 2:
             return ListTile(
               onTap: () {
                 setState(() {
@@ -89,9 +92,10 @@ class _PieChartWidgetState extends State<PieChartWidget> {
               ),
               title:
                   Text("Cryptocurrency", style: TextStyle(fontSize: fontSize)),
-              trailing: Text("123", style: TextStyle(fontSize: fontSize)),
+              trailing: Text(list[i].toStringAsFixed(2),
+                  style: TextStyle(fontSize: fontSize)),
             );
-          case 4:
+          case 3:
             return ListTile(
               onTap: () {
                 setState(() {
@@ -107,7 +111,8 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                 size: iconSize,
               ),
               title: Text("Cash", style: TextStyle(fontSize: fontSize)),
-              trailing: Text("123", style: TextStyle(fontSize: fontSize)),
+              trailing: Text(list[i].toStringAsFixed(2),
+                  style: TextStyle(fontSize: fontSize)),
             );
           default:
             throw Exception('Oh no');
@@ -116,7 +121,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
     }
 
     List<PieChartSectionData> showingSections() {
-      return List.generate(5, (i) {
+      return List.generate(4, (i) {
         final isTouched = i == touchedSectionIndex;
         final fontSize = isTouched ? 20.0 : 15.0;
         final badgeWidgetSize = isTouched ? 35.0 : 25.0;
@@ -132,12 +137,13 @@ class _PieChartWidgetState extends State<PieChartWidget> {
             return PieChartSectionData(
                 radius: radius,
                 borderSide: BorderSide(width: borderWidth),
-                title: "15%",
+                title:
+                    ((list[i] * 100) / widget.totalBalance).toStringAsFixed(2),
                 titleStyle: TextStyle(
                     fontSize: fontSize,
                     color: fontColor,
                     fontWeight: fontWeight),
-                value: 15,
+                value: list[i] / widget.totalBalance,
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
@@ -147,28 +153,13 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                       color: fontColor,
                     )),
                 color: Colors.deepOrange);
+
           case 1:
             return PieChartSectionData(
                 radius: radius,
                 borderSide: BorderSide(width: borderWidth),
-                title: "35%",
-                badgePositionPercentageOffset: 0.8,
-                badgeWidget: IconButton(
-                    onPressed: () {},
-                    icon: Icon(UniconsLine.paperclip,
-                        size: badgeWidgetSize, color: fontColor)),
-                titleStyle: TextStyle(
-                  fontSize: fontSize,
-                  color: fontColor,
-                  fontWeight: fontWeight,
-                ),
-                value: 35,
-                color: Colors.redAccent);
-          case 2:
-            return PieChartSectionData(
-                radius: radius,
-                borderSide: BorderSide(width: borderWidth),
-                title: "25%",
+                title:
+                    ((list[i] * 100) / widget.totalBalance).toStringAsFixed(2),
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
@@ -178,13 +169,14 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                     fontSize: fontSize,
                     color: fontColor,
                     fontWeight: fontWeight),
-                value: 25,
+                value: list[i] / widget.totalBalance,
                 color: Colors.purple);
-          case 3:
+          case 2:
             return PieChartSectionData(
                 radius: radius,
                 borderSide: BorderSide(width: borderWidth),
-                title: "5%",
+                title:
+                    ((list[i] * 100) / widget.totalBalance).toStringAsFixed(2),
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
@@ -197,12 +189,13 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                     fontSize: fontSize,
                     color: fontColor,
                     fontWeight: fontWeight),
-                value: 5);
-          case 4:
+                value: list[i] / widget.totalBalance);
+          case 3:
             return PieChartSectionData(
                 radius: radius,
                 borderSide: BorderSide(width: borderWidth),
-                title: "10%",
+                title:
+                    ((list[i] * 100) / widget.totalBalance).toStringAsFixed(2),
                 badgePositionPercentageOffset: 0.8,
                 badgeWidget: IconButton(
                     onPressed: () {},
@@ -212,7 +205,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
                     fontSize: fontSize,
                     color: fontColor,
                     fontWeight: fontWeight),
-                value: 10,
+                value: list[i] / widget.totalBalance,
                 color: Colors.lightBlue);
           default:
             throw Exception('Oh no');
@@ -221,7 +214,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
     }
 
     return Column(
-      spacing: MediaQuery.of(context).size.height * 0.05,
+      spacing: MediaQuery.of(context).size.height * 0.1,
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -247,7 +240,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
               sections: showingSections(),
             )),
             title: Text(
-              "Assets distribution",
+              "Assets distribution\n${widget.totalBalance.toStringAsFixed(2)} \$",
               style: Theme.of(context).textTheme.headlineLarge,
             ),
           ),
@@ -269,4 +262,3 @@ class _PieChartWidgetState extends State<PieChartWidget> {
     );
   }
 }
-

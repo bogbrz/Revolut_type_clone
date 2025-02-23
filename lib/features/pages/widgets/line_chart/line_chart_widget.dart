@@ -107,7 +107,7 @@ class LineChartWidget extends StatelessWidget {
                           dotData: FlDotData(
                             show: false,
                           ),
-                          isCurved: true,
+                          isCurved: false,
                           spots: mock == true &&
                                   coinId == null &&
                                   lineChartMode == LineChartMode.mock

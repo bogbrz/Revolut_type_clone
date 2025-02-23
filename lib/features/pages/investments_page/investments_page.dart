@@ -113,7 +113,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                               children: [
                                                 Text(
                                                   textAlign: TextAlign.center,
-                                                  "Investments\n${state.accountWorth}\$",
+                                                  "Investments\n${state.accountWorth!.toStringAsFixed(2)}\$",
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .headlineLarge,
@@ -123,7 +123,7 @@ class _InvestmentsPageState extends State<InvestmentsPage>
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                        "${state.accountIncome}\$"),
+                                                        "${state.accountIncome!.toStringAsFixed(2)}\$"),
                                                     Icon(Icons.arrow_drop_down),
                                                     Text(
                                                         "${((state.accountIncome! * 100) / state.stockPricePaid!).toStringAsFixed(2)}%"),

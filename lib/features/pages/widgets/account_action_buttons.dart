@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/features/pages/deposit_page.dart';
-import 'package:portfolio/features/pages/savings_details_page.dart';
+import 'package:portfolio/features/pages/savings_page/savings_details_page.dart';
+
 
 class AccountActionButtons extends StatelessWidget {
   const AccountActionButtons({
