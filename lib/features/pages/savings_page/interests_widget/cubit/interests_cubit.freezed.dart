@@ -22,6 +22,7 @@ mixin _$InterestsState {
   List<double>? get balanceHistory => throw _privateConstructorUsedError;
   List<double>? get balanceDates => throw _privateConstructorUsedError;
   Status get status => throw _privateConstructorUsedError;
+  List<AllTransactionsModel>? get models => throw _privateConstructorUsedError;
 
   /// Create a copy of InterestsState
   /// with the given fields replaced by the non-null parameter values.
@@ -42,7 +43,8 @@ abstract class $InterestsStateCopyWith<$Res> {
       double? interestsThisMonth,
       List<double>? balanceHistory,
       List<double>? balanceDates,
-      Status status});
+      Status status,
+      List<AllTransactionsModel>? models});
 }
 
 /// @nodoc
@@ -66,6 +68,7 @@ class _$InterestsStateCopyWithImpl<$Res, $Val extends InterestsState>
     Object? balanceHistory = freezed,
     Object? balanceDates = freezed,
     Object? status = null,
+    Object? models = freezed,
   }) {
     return _then(_value.copyWith(
       totalBalance: freezed == totalBalance
@@ -92,6 +95,10 @@ class _$InterestsStateCopyWithImpl<$Res, $Val extends InterestsState>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      models: freezed == models
+          ? _value.models
+          : models // ignore: cast_nullable_to_non_nullable
+              as List<AllTransactionsModel>?,
     ) as $Val);
   }
 }
@@ -110,7 +117,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       double? interestsThisMonth,
       List<double>? balanceHistory,
       List<double>? balanceDates,
-      Status status});
+      Status status,
+      List<AllTransactionsModel>? models});
 }
 
 /// @nodoc
@@ -132,6 +140,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? balanceHistory = freezed,
     Object? balanceDates = freezed,
     Object? status = null,
+    Object? models = freezed,
   }) {
     return _then(_$InitialImpl(
       totalBalance: freezed == totalBalance
@@ -158,6 +167,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as Status,
+      models: freezed == models
+          ? _value._models
+          : models // ignore: cast_nullable_to_non_nullable
+              as List<AllTransactionsModel>?,
     ));
   }
 }
@@ -171,9 +184,11 @@ class _$InitialImpl implements _Initial {
       required this.interestsThisMonth,
       required final List<double>? balanceHistory,
       required final List<double>? balanceDates,
-      required this.status})
+      required this.status,
+      required final List<AllTransactionsModel>? models})
       : _balanceHistory = balanceHistory,
-        _balanceDates = balanceDates;
+        _balanceDates = balanceDates,
+        _models = models;
 
   @override
   final double? totalBalance;
@@ -203,10 +218,19 @@ class _$InitialImpl implements _Initial {
 
   @override
   final Status status;
+  final List<AllTransactionsModel>? _models;
+  @override
+  List<AllTransactionsModel>? get models {
+    final value = _models;
+    if (value == null) return null;
+    if (_models is EqualUnmodifiableListView) return _models;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'InterestsState(totalBalance: $totalBalance, totalInterests: $totalInterests, interestsThisMonth: $interestsThisMonth, balanceHistory: $balanceHistory, balanceDates: $balanceDates, status: $status)';
+    return 'InterestsState(totalBalance: $totalBalance, totalInterests: $totalInterests, interestsThisMonth: $interestsThisMonth, balanceHistory: $balanceHistory, balanceDates: $balanceDates, status: $status, models: $models)';
   }
 
   @override
@@ -224,7 +248,8 @@ class _$InitialImpl implements _Initial {
                 .equals(other._balanceHistory, _balanceHistory) &&
             const DeepCollectionEquality()
                 .equals(other._balanceDates, _balanceDates) &&
-            (identical(other.status, status) || other.status == status));
+            (identical(other.status, status) || other.status == status) &&
+            const DeepCollectionEquality().equals(other._models, _models));
   }
 
   @override
@@ -235,7 +260,8 @@ class _$InitialImpl implements _Initial {
       interestsThisMonth,
       const DeepCollectionEquality().hash(_balanceHistory),
       const DeepCollectionEquality().hash(_balanceDates),
-      status);
+      status,
+      const DeepCollectionEquality().hash(_models));
 
   /// Create a copy of InterestsState
   /// with the given fields replaced by the non-null parameter values.
@@ -253,7 +279,8 @@ abstract class _Initial implements InterestsState {
       required final double? interestsThisMonth,
       required final List<double>? balanceHistory,
       required final List<double>? balanceDates,
-      required final Status status}) = _$InitialImpl;
+      required final Status status,
+      required final List<AllTransactionsModel>? models}) = _$InitialImpl;
 
   @override
   double? get totalBalance;
@@ -267,6 +294,8 @@ abstract class _Initial implements InterestsState {
   List<double>? get balanceDates;
   @override
   Status get status;
+  @override
+  List<AllTransactionsModel>? get models;
 
   /// Create a copy of InterestsState
   /// with the given fields replaced by the non-null parameter values.

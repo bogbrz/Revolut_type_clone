@@ -17,6 +17,7 @@ class InterestsCubit extends Cubit<InterestsState> {
     required this.repository,
   }) : super(
           InterestsState(
+            models: null,
             totalBalance: null,
             totalInterests: null,
             balanceDates: null,
@@ -27,7 +28,7 @@ class InterestsCubit extends Cubit<InterestsState> {
         );
   Future<void> getInterestsData({required String type}) async {
     emit(
-      InterestsState(
+      InterestsState(  models: null,
         totalBalance: null,
         totalInterests: null,
         interestsThisMonth: null,
@@ -58,6 +59,7 @@ class InterestsCubit extends Cubit<InterestsState> {
       }
 
       emit(InterestsState(
+          models: filteredModels,
           totalBalance: totalBalance,
           totalInterests: totalInterests,
           interestsThisMonth: interestsThisMonth,
@@ -67,6 +69,7 @@ class InterestsCubit extends Cubit<InterestsState> {
     })
       ..onError((error) {
         emit(InterestsState(
+            models: null,
             totalBalance: null,
             totalInterests: null,
             interestsThisMonth: null,

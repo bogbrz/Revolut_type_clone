@@ -12,7 +12,7 @@ import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/automation_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
-import 'package:portfolio/features/pages/widgets/transactions_history_widget/transactions_history_widget.dart';
+import 'package:portfolio/features/pages/savings_page/transactions_history_widget.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({
@@ -119,7 +119,7 @@ class _AccountPageState extends State<AccountPage>
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           TransactionsHistoryWidget(
-                            pageType: PageType.account,
+                            type: "personal",
                           ),
                           AutomationWidget(),
                           AssetsListWidget()

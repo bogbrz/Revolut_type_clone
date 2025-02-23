@@ -9,6 +9,7 @@ class InterestsState with _$InterestsState {
     required List<double>? balanceHistory,
     required List<double>? balanceDates,
     required Status status,
+    required List<AllTransactionsModel>? models
 
 
   }) = _Initial;

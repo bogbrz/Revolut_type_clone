@@ -16,7 +16,7 @@ import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/saving_action_buttons.dart';
 import 'package:portfolio/features/pages/savings_page/saving_goal_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
-import 'package:portfolio/features/pages/widgets/transactions_history_widget/transactions_history_widget.dart';
+import 'package:portfolio/features/pages/savings_page/transactions_history_widget.dart';
 
 class SavingsPage extends StatefulWidget {
   const SavingsPage({
@@ -37,9 +37,6 @@ class _SavingsPageState extends State<SavingsPage>
     animationController.resync(this);
     super.initState();
   }
-
-  final int currentValue = 2137;
-  final int goalValue = 38000;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +119,7 @@ class _SavingsPageState extends State<SavingsPage>
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           TransactionsHistoryWidget(
-                            pageType: PageType.savings,
+                            type: "interest",
                           ),
                           InterestWidgets(),
                           BlocBuilder<InterestsCubit, InterestsState>(
