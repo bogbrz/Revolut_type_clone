@@ -3,7 +3,7 @@ import 'package:portfolio/domain/models/news_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsDetailsPage extends StatelessWidget {
-  NewsDetailsPage({super.key, required this.articles});
+ const NewsDetailsPage({super.key, required this.articles});
   final Article articles;
 
   @override

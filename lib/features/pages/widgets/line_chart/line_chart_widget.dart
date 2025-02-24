@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
@@ -56,9 +57,8 @@ class LineChartWidget extends StatelessWidget {
       FlSpot(22, 14.9)
     ];
     return BlocProvider(
-      create: (context) => LineChartBloc(
-          cryptoRepository:
-              CryptoRepository(cryptoDataSource: CryptoDataSource()))
+      create: (context) => getIt<LineChartBloc>(
+         )
         ..add(ChartInitial(id: coinId?? "bitcoin" , days: 1)),
       child: BlocBuilder<LineChartBloc, LineChartState>(
         builder: (context, state) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio/domain/data_sources/news_data_source.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
+
 import 'package:portfolio/domain/models/news_model.dart';
-import 'package:portfolio/domain/repositories/news_repository.dart';
+
 import 'package:portfolio/features/pages/news_page/bloc/news_page_bloc.dart';
 import 'package:portfolio/features/pages/news_page/news_details_page.dart';
 
@@ -12,8 +13,8 @@ class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => NewsPageBloc(
-          newsRepository: NewsRepository(newsDataSource: NewsDataSource()))
+      create: (_) => getIt<NewsPageBloc>(
+        )
         ..add(NewsInitial(topic: topic == null ? "Business" : topic!)),
       child: Scaffold(
         appBar: AppBar(

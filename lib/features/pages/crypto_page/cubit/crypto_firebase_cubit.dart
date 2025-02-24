@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
@@ -13,6 +14,7 @@ import 'package:portfolio/domain/repositories/firebase_repository.dart';
 part 'crypto_firebase_state.dart';
 part 'crypto_firebase_cubit.freezed.dart';
 
+@injectable
 class CryptoFirebaseCubit extends Cubit<CryptoFirebaseState> {
   StreamSubscription? streamSubscription;
   final FirebaseRepository repository;

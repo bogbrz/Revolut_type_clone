@@ -24,6 +24,7 @@ mixin _$NetworthPageState {
   double? get investmentsTotal => throw _privateConstructorUsedError;
   double? get cryptoTotal => throw _privateConstructorUsedError;
   double? get cash => throw _privateConstructorUsedError;
+  double? get incomeThisMonth => throw _privateConstructorUsedError;
 
   /// Create a copy of NetworthPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -46,7 +47,8 @@ abstract class $NetworthPageStateCopyWith<$Res> {
       double? savingsTotal,
       double? investmentsTotal,
       double? cryptoTotal,
-      double? cash});
+      double? cash,
+      double? incomeThisMonth});
 }
 
 /// @nodoc
@@ -72,6 +74,7 @@ class _$NetworthPageStateCopyWithImpl<$Res, $Val extends NetworthPageState>
     Object? investmentsTotal = freezed,
     Object? cryptoTotal = freezed,
     Object? cash = freezed,
+    Object? incomeThisMonth = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -106,6 +109,10 @@ class _$NetworthPageStateCopyWithImpl<$Res, $Val extends NetworthPageState>
           ? _value.cash
           : cash // ignore: cast_nullable_to_non_nullable
               as double?,
+      incomeThisMonth: freezed == incomeThisMonth
+          ? _value.incomeThisMonth
+          : incomeThisMonth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -126,7 +133,8 @@ abstract class _$$InitialImplCopyWith<$Res>
       double? savingsTotal,
       double? investmentsTotal,
       double? cryptoTotal,
-      double? cash});
+      double? cash,
+      double? incomeThisMonth});
 }
 
 /// @nodoc
@@ -150,6 +158,7 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? investmentsTotal = freezed,
     Object? cryptoTotal = freezed,
     Object? cash = freezed,
+    Object? incomeThisMonth = freezed,
   }) {
     return _then(_$InitialImpl(
       status: null == status
@@ -184,6 +193,10 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.cash
           : cash // ignore: cast_nullable_to_non_nullable
               as double?,
+      incomeThisMonth: freezed == incomeThisMonth
+          ? _value.incomeThisMonth
+          : incomeThisMonth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -199,7 +212,8 @@ class _$InitialImpl implements _Initial {
       required this.savingsTotal,
       required this.investmentsTotal,
       required this.cryptoTotal,
-      required this.cash})
+      required this.cash,
+      required this.incomeThisMonth})
       : _totalBalanceHistory = totalBalanceHistory,
         _totalBalanceDates = totalBalanceDates;
 
@@ -237,10 +251,12 @@ class _$InitialImpl implements _Initial {
   final double? cryptoTotal;
   @override
   final double? cash;
+  @override
+  final double? incomeThisMonth;
 
   @override
   String toString() {
-    return 'NetworthPageState(status: $status, totalBalance: $totalBalance, totalBalanceHistory: $totalBalanceHistory, totalBalanceDates: $totalBalanceDates, savingsTotal: $savingsTotal, investmentsTotal: $investmentsTotal, cryptoTotal: $cryptoTotal, cash: $cash)';
+    return 'NetworthPageState(status: $status, totalBalance: $totalBalance, totalBalanceHistory: $totalBalanceHistory, totalBalanceDates: $totalBalanceDates, savingsTotal: $savingsTotal, investmentsTotal: $investmentsTotal, cryptoTotal: $cryptoTotal, cash: $cash, incomeThisMonth: $incomeThisMonth)';
   }
 
   @override
@@ -261,7 +277,9 @@ class _$InitialImpl implements _Initial {
                 other.investmentsTotal == investmentsTotal) &&
             (identical(other.cryptoTotal, cryptoTotal) ||
                 other.cryptoTotal == cryptoTotal) &&
-            (identical(other.cash, cash) || other.cash == cash));
+            (identical(other.cash, cash) || other.cash == cash) &&
+            (identical(other.incomeThisMonth, incomeThisMonth) ||
+                other.incomeThisMonth == incomeThisMonth));
   }
 
   @override
@@ -274,7 +292,8 @@ class _$InitialImpl implements _Initial {
       savingsTotal,
       investmentsTotal,
       cryptoTotal,
-      cash);
+      cash,
+      incomeThisMonth);
 
   /// Create a copy of NetworthPageState
   /// with the given fields replaced by the non-null parameter values.
@@ -294,7 +313,8 @@ abstract class _Initial implements NetworthPageState {
       required final double? savingsTotal,
       required final double? investmentsTotal,
       required final double? cryptoTotal,
-      required final double? cash}) = _$InitialImpl;
+      required final double? cash,
+      required final double? incomeThisMonth}) = _$InitialImpl;
 
   @override
   Status get status;
@@ -312,6 +332,8 @@ abstract class _Initial implements NetworthPageState {
   double? get cryptoTotal;
   @override
   double? get cash;
+  @override
+  double? get incomeThisMonth;
 
   /// Create a copy of NetworthPageState
   /// with the given fields replaced by the non-null parameter values.

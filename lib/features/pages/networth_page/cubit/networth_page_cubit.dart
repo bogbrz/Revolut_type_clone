@@ -2,12 +2,14 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 
 part 'networth_page_cubit.freezed.dart';
 part 'networth_page_state.dart';
 
+@injectable
 class NetworthPageCubit extends Cubit<NetworthPageState> {
   StreamSubscription? streamSubscription;
   final FirebaseRepository repository;
@@ -15,6 +17,7 @@ class NetworthPageCubit extends Cubit<NetworthPageState> {
   NetworthPageCubit({required this.repository})
       : super(
           NetworthPageState(
+            incomeThisMonth: null,
             savingsTotal: null,
             status: Status.initial,
             cash: null,
@@ -28,6 +31,7 @@ class NetworthPageCubit extends Cubit<NetworthPageState> {
 
   Future<void> getTransactions() async {
     emit(NetworthPageState(
+        incomeThisMonth: null,
         status: Status.loading,
         totalBalance: null,
         totalBalanceHistory: null,
@@ -45,11 +49,15 @@ class NetworthPageCubit extends Cubit<NetworthPageState> {
       double investmentsTotal = 0;
       double cryptoTotal = 0;
       double cash = 0;
+      double incomeThisMonth = 0;
 
       for (final result in results) {
         totalBalance += (result.amount * result.price);
         totalBalanceDates.add(result.date.millisecondsSinceEpoch + 0.0);
         totalBalanceHistory.add(totalBalance);
+        if (result.date.month == DateTime.timestamp().month) {
+          incomeThisMonth += (result.amount * result.price);
+        }
 
         if (result.type == "personal") {
           cash += (result.amount * result.price);
@@ -62,8 +70,8 @@ class NetworthPageCubit extends Cubit<NetworthPageState> {
         }
       }
 
-     
       emit(NetworthPageState(
+          incomeThisMonth: incomeThisMonth,
           status: Status.success,
           totalBalance: totalBalance,
           totalBalanceHistory: totalBalanceHistory,
@@ -75,6 +83,7 @@ class NetworthPageCubit extends Cubit<NetworthPageState> {
     })
       ..onError((error) {
         emit(NetworthPageState(
+            incomeThisMonth: null,
             status: Status.failure,
             totalBalance: null,
             totalBalanceHistory: null,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
@@ -27,25 +28,23 @@ class InvestmentsPage extends StatefulWidget {
 }
 
 class _InvestmentsPageState extends State<InvestmentsPage>
-    with TickerProviderStateMixin {
+    with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   final slidingUpPanelController = SlidingUpPanelController();
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     animationController.repeat();
     super.initState();
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InvestmentsFirebaseCubit(
-          stockMarketRepository:
-              StockMarketRepository(dataSource: StockMarketDataSource()),
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
+      create: (context) => getIt<InvestmentsFirebaseCubit>(
+         )
         ..getInvestTransactions(type: "stock"),
       child: AnimateGradient(
           reverse: true,

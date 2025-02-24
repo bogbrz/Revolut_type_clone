@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:portfolio/app/core/enums.dart';
-import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
-import 'package:portfolio/domain/repositories/firebase_repository.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
+
 import 'package:portfolio/features/pages/account_page/cubit/account_page_cubit.dart';
 
 import 'package:portfolio/features/pages/widgets/action_buttons_widget.dart';
@@ -24,22 +24,29 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final slidingUpPanelController = SlidingUpPanelController();
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
+
+
   @override
   void initState() {
     animationController.repeat();
     super.initState();
+
+  
   }
+
+  @override
+    bool get wantKeepAlive => true;
+ 
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AccountPageCubit(
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getAccountData(type: "personal"),
+      create: (context) =>
+          getIt<AccountPageCubit>()..getAccountData(type: "personal"),
       child: AnimateGradient(
         reverse: true,
         controller: animationController,
@@ -115,8 +122,8 @@ class _AccountPageState extends State<AccountPage>
                               }
                             },
                           ),
-                         ActionButtonsWidget(
-                            pageType: PageType.account,
+                          ActionButtonsWidget(
+                              pageType: PageType.account,
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           TransactionsHistoryWidget(

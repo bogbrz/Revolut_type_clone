@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
@@ -30,10 +31,12 @@ class CryptoPage extends StatefulWidget {
   State<CryptoPage> createState() => _CryptoPageState();
 }
 
-class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
+class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final slidingUpPanelController = SlidingUpPanelController();
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
+       @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     animationController.repeat();
@@ -43,10 +46,8 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CryptoFirebaseCubit(
-          cryptoRepository:
-              CryptoRepository(cryptoDataSource: CryptoDataSource()),
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
+      create: (context) => getIt<CryptoFirebaseCubit>(
+         )
         ..getTransactionsByType(type: "crypto"),
       child: AnimateGradient(
           reverse: true,

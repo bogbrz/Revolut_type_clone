@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/savings_page/interests_widget/cubit/interests_cubit.dart';
@@ -15,8 +16,8 @@ class TransactionsHistoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InterestsCubit(
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
+      create: (context) => getIt<InterestsCubit>(
+       )
         ..getInterestsData(type: type),
       child: Container(
         decoration: BoxDecoration(

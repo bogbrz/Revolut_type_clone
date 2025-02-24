@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
-import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
-import 'package:portfolio/domain/repositories/firebase_repository.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
+
 import 'package:portfolio/features/pages/savings_page/interests_widget/cubit/interests_cubit.dart';
 
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
@@ -15,9 +15,8 @@ class InterestWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InterestsCubit(
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getInterestsData(type: "interest"),
+      create: (context) =>
+          getIt<InterestsCubit>()..getInterestsData(type: "interest"),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: BlocBuilder<InterestsCubit, InterestsState>(

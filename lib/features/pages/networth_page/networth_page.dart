@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/networth_page/cubit/networth_page_cubit.dart';
 import 'package:portfolio/features/pages/widgets/action_buttons_widget.dart';
 import 'package:portfolio/features/pages/widgets/pie_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
-
 
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
@@ -24,10 +24,12 @@ class NetWorthPage extends StatefulWidget {
 }
 
 class _NetWorthPageState extends State<NetWorthPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final slidingUpPanelController = SlidingUpPanelController();
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     animationController.repeat();
@@ -46,9 +48,7 @@ class _NetWorthPageState extends State<NetWorthPage>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NetworthPageCubit(
-          repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-        ..getTransactions(),
+      create: (context) => getIt<NetworthPageCubit>()..getTransactions(),
       child: AnimateGradient(
         reverse: true,
         controller: animationController,
@@ -113,9 +113,12 @@ class _NetWorthPageState extends State<NetWorthPage>
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text("-0,45\$"),
-                                                  Icon(Icons.arrow_drop_down),
-                                                  Text("-0,45%"),
+                                                  Text(
+                                                      "${state.incomeThisMonth}\$"),
+                                                  Icon(state.incomeThisMonth! >
+                                                          0
+                                                      ? Icons.arrow_upward
+                                                      : Icons.arrow_drop_down),
                                                 ],
                                               )
                                             ],
@@ -133,7 +136,7 @@ class _NetWorthPageState extends State<NetWorthPage>
                                     ),
                                   ),
                                   ActionButtonsWidget(
-                                    pageType: PageType.netWorth,
+                                      pageType: PageType.netWorth,
                                       slidingUpPanelController:
                                           slidingUpPanelController),
                                   PieChartWidget(

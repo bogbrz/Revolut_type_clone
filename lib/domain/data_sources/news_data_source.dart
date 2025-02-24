@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:portfolio/domain/models/news_model.dart';
 
 import 'package:portfolio/env.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class NewsDataSource {
   static final newsKey = Env.key1;
 

@@ -11,5 +11,6 @@ class NetworthPageState with _$NetworthPageState {
     required double? investmentsTotal,
     required double? cryptoTotal,
     required double? cash,
+    required double? incomeThisMonth,
   }) = _Initial;
 }

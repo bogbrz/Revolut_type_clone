@@ -2,15 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
-import 'package:portfolio/domain/repositories/firebase_repository.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
+
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
 
 class SetGoalPage extends StatefulWidget {
   const SetGoalPage(
       {super.key, required this.currentDate, required this.currentGoal});
   final int? currentGoal;
-  final Timestamp? currentDate;
+  final DateTime? currentDate;
   @override
   State<SetGoalPage> createState() => _SetGoalPageState();
 }
@@ -40,8 +40,8 @@ class _SetGoalPageState extends State<SetGoalPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SavingsPageCubit(
-          repository: FirebaseRepository(dataSource: FirebaseDataSource())),
+      create: (context) => getIt<SavingsPageCubit>(
+          ),
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -76,7 +76,7 @@ class _SetGoalPageState extends State<SetGoalPage> {
                         ),
                       ),
                       Text(
-                          "${_newDate == null && widget.currentDate != null ? widget.currentDate!.toDate() : formatDate(date: _newDate)}"),
+                          "${_newDate == null && widget.currentDate != null ? widget.currentDate : formatDate(date: _newDate)}"),
                     ],
                   ),
                   Row(

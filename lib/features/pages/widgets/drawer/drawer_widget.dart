@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 
@@ -14,9 +15,8 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => DrawerCubit(
-          firebaseRepository:
-              FirebaseRepository(dataSource: FirebaseDataSource()))
+      create: (context) => getIt<DrawerCubit>(
+         )
         ..getPersonalInfo(),
       child: Drawer(
         backgroundColor: const Color.fromARGB(98, 0, 0, 0),

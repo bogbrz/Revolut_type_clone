@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';
 import 'package:portfolio/domain/models/savings_saldo_model.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class FirebaseDataSource {
   final dataBase = FirebaseFirestore.instance;
 
@@ -38,7 +39,7 @@ class FirebaseDataSource {
               (doc) => SavingsSaldoModel(
                   interestRate: doc["interests_percentage"],
                   savingsGoal: doc["savings goal"],
-                  goalDate: doc["goal_date"]),
+                  goalDate: doc["goal_date"].toDate()),
             )
             .toList());
   }

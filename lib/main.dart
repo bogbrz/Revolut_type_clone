@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/app/app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized ();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  configureDependencies();
+
   runApp(const MyApp());
 }
-
-
-

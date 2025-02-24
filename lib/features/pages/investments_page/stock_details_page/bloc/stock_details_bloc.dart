@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
@@ -9,7 +10,7 @@ import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
 part 'stock_details_event.dart';
 part 'stock_details_state.dart';
-
+@injectable
 class StockDetailsBloc extends Bloc<StockDetailsEvent, StockDetailsState> {
   final StockMarketRepository repository;
   StockDetailsBloc({required this.repository})

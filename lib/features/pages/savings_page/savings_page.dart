@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/app/core/enums.dart';
-import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
-import 'package:portfolio/domain/repositories/firebase_repository.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
+
 
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
 import 'package:portfolio/features/pages/savings_page/interests_widget/cubit/interests_cubit.dart';
@@ -29,10 +29,13 @@ class SavingsPage extends StatefulWidget {
 }
 
 class _SavingsPageState extends State<SavingsPage>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   final slidingUpPanelController = SlidingUpPanelController();
   late final AnimationController animationController =
       AnimationController(vsync: this, duration: Duration(seconds: 5));
+
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     animationController.resync(this);
@@ -44,14 +47,11 @@ class _SavingsPageState extends State<SavingsPage>
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SavingsPageCubit(
-              repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-            ..getSaldoData(),
+          create: (context) => getIt<SavingsPageCubit>()..getSaldoData(),
         ),
         BlocProvider(
-          create: (context) => InterestsCubit(
-              repository: FirebaseRepository(dataSource: FirebaseDataSource()))
-            ..getInterestsData(type: "interest"),
+          create: (context) =>
+              getIt<InterestsCubit>()..getInterestsData(type: "interest"),
         ),
       ],
       child: AnimateGradient(
@@ -117,7 +117,7 @@ class _SavingsPageState extends State<SavingsPage>
                             ),
                           ),
                           ActionButtonsWidget(
-                            pageType: PageType.savings,
+                              pageType: PageType.savings,
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           TransactionsHistoryWidget(

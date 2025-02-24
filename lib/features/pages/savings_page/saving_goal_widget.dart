@@ -43,7 +43,7 @@ class SavingGoalWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Goal > ${state.saldo?[0].goalDate?.toDate().toString()}",
+                        "Goal > ${state.saldo?[0].goalDate?.toString()}",
                         textAlign: TextAlign.left,
                       ),
                     ],

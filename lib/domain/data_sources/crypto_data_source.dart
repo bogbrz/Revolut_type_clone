@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/domain/models/crypto_details_model.dart';
 
 import 'package:portfolio/domain/models/crypto_history_model.dart';
@@ -7,6 +8,7 @@ import 'package:portfolio/domain/models/single_crypto_model.dart';
 
 import 'package:portfolio/env.dart';
 
+@injectable
 class CryptoDataSource {
   static final cryptoKey = Env.key1;
   final String baseUrl = "https://api.coingecko.com/api/v3/";

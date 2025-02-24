@@ -3,9 +3,6 @@ import 'package:portfolio/domain/models/time_stamp_serializer.dart';
 part 'all_transactions_model.freezed.dart';
 part 'all_transactions_model.g.dart';
 
-
-
-
 @freezed
 class AllTransactionsModel with _$AllTransactionsModel {
   factory AllTransactionsModel({

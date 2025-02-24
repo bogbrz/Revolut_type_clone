@@ -3,7 +3,8 @@ import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';
 import 'package:portfolio/domain/models/savings_saldo_model.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class FirebaseRepository {
   final FirebaseDataSource dataSource;
   FirebaseRepository({required this.dataSource});

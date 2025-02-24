@@ -4,7 +4,8 @@ import 'package:portfolio/domain/models/crypto_history_model.dart';
 
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/domain/models/single_crypto_model.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class CryptoRepository {
   CryptoRepository({required this.cryptoDataSource});
   final CryptoDataSource cryptoDataSource;

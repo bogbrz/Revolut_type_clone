@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
@@ -12,6 +13,7 @@ import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 part 'investments_firebase_state.dart';
 part 'investments_firebase_cubit.freezed.dart';
 
+@injectable
 class InvestmentsFirebaseCubit extends Cubit<InvestmentsFirebaseState> {
   final FirebaseRepository repository;
   final StockMarketRepository stockMarketRepository;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
@@ -23,9 +24,8 @@ class StockDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     int segment = 2;
     return BlocProvider(
-        create: (context) => StockDetailsBloc(
-            repository:
-                StockMarketRepository(dataSource: StockMarketDataSource()))
+        create: (context) => getIt<StockDetailsBloc>(
+           )
           ..add(StockDetailsInitial(
               symbol: model.symbol ?? "", interval: "1day")),
         child: Scaffold(
