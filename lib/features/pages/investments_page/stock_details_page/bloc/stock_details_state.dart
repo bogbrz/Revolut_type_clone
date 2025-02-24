@@ -1,6 +1,6 @@
 part of 'stock_details_bloc.dart';
 
-enum Status { initial, loading, success, failure }
+
 
 @immutable
 sealed class StockDetailsState {

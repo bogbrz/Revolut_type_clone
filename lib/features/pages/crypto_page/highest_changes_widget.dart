@@ -1,36 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
-import 'package:portfolio/features/pages/crypto_page/bloc/crypto_page_bloc.dart';
+
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 
 class HighestChangesWidget extends StatefulWidget {
-  const HighestChangesWidget({super.key, required this.images});
-  final List<AssetImage> images;
+  const HighestChangesWidget({super.key,required this.sortedList, required this.reversed });
+ final List<CryptoInfoModel?> reversed;
+final List<CryptoInfoModel?> sortedList;
   @override
   State<HighestChangesWidget> createState() => _HighestChangesWidgetState();
 }
+
 
 class _HighestChangesWidgetState extends State<HighestChangesWidget> {
   int selectedSegment = 0;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CryptoPageBloc, CryptoPageState>(
-      builder: (context, state) {
-        switch (state.status) {
-          case Status.initial:
-            return Center(
-              child: Text("Waiting for data"),
-            );
-          case Status.loading:
-            return Center(child: CircularProgressIndicator());
-          case Status.failure:
-            return Center(
-              child: Text("Error"),
-            );
-          case Status.success:
+  
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Container(
@@ -82,8 +70,8 @@ class _HighestChangesWidgetState extends State<HighestChangesWidget> {
                                 MediaQuery.of(context).size.width * 0.4),
                         itemCount: 6,
                         itemBuilder: (context, index) {
-                          final lowestModel = state.sortedList;
-                          final highestModel = state.reversed;
+                          final lowestModel = widget.sortedList;
+                          final highestModel = widget.reversed;
                           final choosedSorting =
                               selectedSegment == 0 ? highestModel : lowestModel;
                           return InkWell(
@@ -132,8 +120,7 @@ class _HighestChangesWidgetState extends State<HighestChangesWidget> {
                 ),
               ),
             );
-        }
-      },
-    );
+        
+     
   }
 }

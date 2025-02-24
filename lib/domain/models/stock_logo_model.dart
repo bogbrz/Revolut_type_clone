@@ -1,47 +1,29 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'stock_logo_model.freezed.dart';
+part 'stock_logo_model.g.dart';
 
-class StockLogoModel {
-    Meta? meta;
-    String? url;
+@freezed
+class StockLogoModel with _$StockLogoModel {
+  const factory StockLogoModel({
+    Meta? meta,
+    String? url,
+  }) = _StockLogoModel;
 
-    StockLogoModel({
-        this.meta,
-        this.url,
-    });
-
-    factory StockLogoModel.fromJson(Map<String, dynamic> json) => StockLogoModel(
-        meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
-        url: json["url"],
-    );
-
-   
+  factory StockLogoModel.fromJson(Map<String, dynamic> json) =>
+      _$StockLogoModelFromJson(json);
 }
 
-class Meta {
-    String? symbol;
-    String? name;
-    String? currency;
-    String? exchange;
-    String? micCode;
-    String? exchangeTimezone;
+@freezed
+class Meta with _$Meta {
+  const factory Meta({
+    String? symbol,
+    String? name,
+    String? currency,
+    String? exchange,
+    String? micCode,
+    String? exchangeTimezone,
+  }) = _Meta;
 
-    Meta({
-        this.symbol,
-        this.name,
-        this.currency,
-        this.exchange,
-        this.micCode,
-        this.exchangeTimezone,
-    });
-
-    factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-        symbol: json["symbol"],
-        name: json["name"],
-        currency: json["currency"],
-        exchange: json["exchange"],
-        micCode: json["mic_code"],
-        exchangeTimezone: json["exchange_timezone"],
-    );
-
-  
+  factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
 }

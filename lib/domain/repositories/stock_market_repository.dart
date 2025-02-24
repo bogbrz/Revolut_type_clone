@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
 import 'package:portfolio/domain/models/stock_price_model.dart';
-import 'package:portfolio/domain/models/stock_profile_model.dart';
 import 'package:portfolio/domain/models/stock_time_series_model.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class StockMarketRepository {
   final StockMarketDataSource dataSource;
 

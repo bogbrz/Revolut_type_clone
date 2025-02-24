@@ -4,10 +4,10 @@ class CryptoInfoModel {
   String? name;
   String? image;
   double? currentPrice;
-  int? marketCap;
-  int? marketCapRank;
-  int? fullyDilutedValuation;
-  int? totalVolume;
+  double? marketCap;
+  double? marketCapRank;
+  double? fullyDilutedValuation;
+  double? totalVolume;
   double? high24H;
   double? low24H;
   double? priceChange24H;
@@ -62,10 +62,10 @@ class CryptoInfoModel {
         name: json["name"],
         image: json["image"],
         currentPrice: json["current_price"]?.toDouble(),
-        marketCap: json["market_cap"],
-        marketCapRank: json["market_cap_rank"],
-        fullyDilutedValuation: json["fully_diluted_valuation"],
-        totalVolume: json["total_volume"],
+        marketCap: json["market_cap"]?.toDouble(),
+        marketCapRank: json["market_cap_rank"]?.toDouble(),
+        fullyDilutedValuation: json["fully_diluted_valuation"]?.toDouble(),
+        totalVolume: json["total_volume"]?.toDouble(),
         high24H: json["high_24h"]?.toDouble(),
         low24H: json["low_24h"]?.toDouble(),
         priceChange24H: json["price_change_24h"]?.toDouble(),

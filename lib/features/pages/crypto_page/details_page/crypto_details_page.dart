@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
@@ -74,7 +75,44 @@ class CryptoDetailsPage extends StatelessWidget {
                                             Text(
                                                 "${state.detailsModel?.marketData?.currentPrice?.usd?.toStringAsFixed(2) ?? ""} USD"),
                                             Text(
-                                              "${segment == 0 ? state.detailsModel?.marketData?.priceChangePercentage24H!.toStringAsFixed(2) ?? "" : segment == 1 ? state.detailsModel?.marketData?.priceChangePercentage7D!.toStringAsFixed(2) ?? "" : segment == 2 ? state.detailsModel?.marketData?.priceChangePercentage30D!.toStringAsFixed(2) ?? "" : segment == 3 ? state.detailsModel?.marketData?.priceChangePercentage200D!.toStringAsFixed(2) ?? "" : state.detailsModel?.marketData?.priceChangePercentage1Y!.toStringAsFixed(2) ?? ""}",
+                                              segment == 0
+                                                  ? state
+                                                          .detailsModel
+                                                          ?.marketData
+                                                          ?.priceChangePercentage24H!
+                                                          .toStringAsFixed(2) ??
+                                                      ""
+                                                  : segment == 1
+                                                      ? state
+                                                              .detailsModel
+                                                              ?.marketData
+                                                              ?.priceChangePercentage7D!
+                                                              .toStringAsFixed(
+                                                                  2) ??
+                                                          ""
+                                                      : segment == 2
+                                                          ? state
+                                                                  .detailsModel
+                                                                  ?.marketData
+                                                                  ?.priceChangePercentage30D!
+                                                                  .toStringAsFixed(
+                                                                      2) ??
+                                                              ""
+                                                          : segment == 3
+                                                              ? state
+                                                                      .detailsModel
+                                                                      ?.marketData
+                                                                      ?.priceChangePercentage200D!
+                                                                      .toStringAsFixed(
+                                                                          2) ??
+                                                                  ""
+                                                              : state
+                                                                      .detailsModel
+                                                                      ?.marketData
+                                                                      ?.priceChangePercentage1Y!
+                                                                      .toStringAsFixed(
+                                                                          2) ??
+                                                                  "",
                                               style: TextStyle(
                                                   color: segment == 0 &&
                                                               state
@@ -120,6 +158,7 @@ class CryptoDetailsPage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8, vertical: 32),
                                     child: LineChartWidget(
+                                      lineChartMode: LineChartMode.basic,
                                       mock: false,
                                       coinId: id,
                                       prices: state.prices,
@@ -229,7 +268,7 @@ class NewsletterWidget extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.35,
             child: NewsInfoWidget(

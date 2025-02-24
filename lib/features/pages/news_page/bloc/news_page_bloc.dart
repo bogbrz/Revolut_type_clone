@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:portfolio/domain/models/news_model.dart';
 import 'package:portfolio/domain/repositories/news_repository.dart';
 
 part 'news_page_event.dart';
 part 'news_page_state.dart';
-
+@injectable
 class NewsPageBloc extends Bloc<NewsPageEvent, NewsPageState> {
   final NewsRepository newsRepository;
   NewsPageBloc({required this.newsRepository})

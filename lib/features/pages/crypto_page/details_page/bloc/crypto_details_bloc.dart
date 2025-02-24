@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
+import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/crypto_details_model.dart';
 
 import 'package:portfolio/domain/models/crypto_history_model.dart';
@@ -8,7 +10,7 @@ import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
 part 'crypto_details_event.dart';
 part 'crypto_details_state.dart';
-
+@injectable
 class CryptoDetailsBloc
     extends Bloc<CryptoDetailsPageEvent, CryptoDetailsPageState> {
   final CryptoRepository cryptoRepository;
@@ -37,7 +39,7 @@ class CryptoDetailsBloc
       try {
         final detailsModel =
             await cryptoRepository.getCryptoDetails(id: event.id);
-        print("EXTRA: ${detailsModel.marketData}");
+   
         // final detailsModel =
         //     await cryptoRepository.getCryptoDetails(id: event.id);
 
@@ -62,7 +64,7 @@ class CryptoDetailsBloc
             detailsModel: detailsModel,
             error: false));
       } catch (e) {
-        print("${e.toString()}");
+       
         emit(CryptoPageLoadFaliure(
           
             prices: [],

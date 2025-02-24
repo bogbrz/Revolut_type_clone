@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
 import 'package:portfolio/domain/models/stock_price_model.dart';
-import 'package:portfolio/domain/models/stock_profile_model.dart';
 import 'package:portfolio/domain/models/stock_time_series_model.dart';
 import 'package:portfolio/env.dart';
-
+import 'package:injectable/injectable.dart';
+@injectable
 class StockMarketDataSource {
   static final stockKey = Env.key3;
 

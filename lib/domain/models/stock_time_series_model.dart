@@ -1,78 +1,45 @@
-class StockTimeSeriesModel {
-  Meta? meta;
-  List<Value>? values;
-  String? status;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  StockTimeSeriesModel({
-    this.meta,
-    this.values,
-    this.status,
-  });
+part 'stock_time_series_model.freezed.dart';
+part 'stock_time_series_model.g.dart';
+
+@freezed
+class StockTimeSeriesModel with _$StockTimeSeriesModel {
+  const factory StockTimeSeriesModel({
+    Meta? meta,
+    List<Value>? values,
+    String? status,
+  }) = _StockTimeSeriesModel;
 
   factory StockTimeSeriesModel.fromJson(Map<String, dynamic> json) =>
-      StockTimeSeriesModel(
-        meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
-        values: json["values"] == null
-            ? []
-            : List<Value>.from(json["values"]!.map((x) => Value.fromJson(x))),
-        status: json["status"],
-      );
+      _$StockTimeSeriesModelFromJson(json);
 }
 
-class Meta {
-  String? symbol;
-  String? interval;
-  String? currency;
-  String? exchangeTimezone;
-  String? exchange;
-  String? micCode;
-  String? type;
+@freezed
+class Meta with _$Meta {
+  const factory Meta({
+    String? symbol,
+    String? interval,
+    String? currency,
+    String? exchangeTimezone,
+    String? exchange,
+    String? micCode,
+    String? type,
+  }) = _Meta;
 
-  Meta({
-    this.symbol,
-    this.interval,
-    this.currency,
-    this.exchangeTimezone,
-    this.exchange,
-    this.micCode,
-    this.type,
-  });
-
-  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-        symbol: json["symbol"],
-        interval: json["interval"],
-        currency: json["currency"],
-        exchangeTimezone: json["exchange_timezone"],
-        exchange: json["exchange"],
-        micCode: json["mic_code"],
-        type: json["type"],
-      );
+  factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
 }
 
-class Value {
-  DateTime? datetime;
-  String? open;
-  String? high;
-  String? low;
-  String? close;
-  String? volume;
+@freezed
+class Value with _$Value {
+  const factory Value({
+    DateTime? datetime,
+    String? open,
+    String? high,
+    String? low,
+    String? close,
+    String? volume,
+  }) = _Value;
 
-  Value({
-    this.datetime,
-    this.open,
-    this.high,
-    this.low,
-    this.close,
-    this.volume,
-  });
-
-  factory Value.fromJson(Map<String, dynamic> json) => Value(
-        datetime:
-            json["datetime"] == null ? null : DateTime.parse(json["datetime"]),
-        open: json["open"],
-        high: json["high"],
-        low: json["low"],
-        close: json["close"],
-        volume: json["volume"],
-      );
+  factory Value.fromJson(Map<String, dynamic> json) => _$ValueFromJson(json);
 }

@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:portfolio/domain/models/stock_list_model.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/domain/models/stock_logo_model.dart';
 import 'package:portfolio/domain/models/stock_price_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
 part 'single_stock_event.dart';
 part 'single_stock_state.dart';
-
+@injectable
 class SingleStockBloc extends Bloc<SingleStockEvent, SingleStockState> {
   final StockMarketRepository stockMarketRepository;
   SingleStockBloc({required this.stockMarketRepository})

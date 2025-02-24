@@ -1,6 +1,6 @@
 part of 'crypto_details_bloc.dart';
 
-enum Status { initial, loading, success, failure }
+
 
 @immutable
 sealed class CryptoDetailsPageState {

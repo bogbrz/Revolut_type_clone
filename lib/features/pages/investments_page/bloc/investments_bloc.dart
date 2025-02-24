@@ -1,11 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:portfolio/domain/models/stock_list_model.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';
 
 part 'investments_event.dart';
 part 'investments_state.dart';
-
+@injectable
 class InvestmentsBloc extends Bloc<InvestmentsEvent, InvestmentsState> {
   final StockMarketRepository stockMarketRepository;
   InvestmentsBloc({required this.stockMarketRepository})

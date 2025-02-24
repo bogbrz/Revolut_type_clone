@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:portfolio/domain/models/account_saldo_model.dart';
-import 'package:portfolio/domain/models/account_transaction_history_model.dart';
+import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/personal_info_model.dart';
-
+import 'package:portfolio/domain/models/savings_saldo_model.dart';
+import 'package:injectable/injectable.dart';
+@injectable
 class FirebaseDataSource {
   final dataBase = FirebaseFirestore.instance;
 
@@ -26,37 +27,52 @@ class FirebaseDataSource {
             .toList());
   }
 
-  Stream<List<AccountSaldoModel>> getAccountSaldoData() {
+// SAVINGS ACCOUNT
+  Stream<List<SavingsSaldoModel>> getSavingsData() {
     return dataBase
         .collection("Users")
         .doc("JeK52txUc6cwKGEF9Yjk")
-        .collection("personal_account")
+        .collection("saving account")
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map(
-              (doc) => AccountSaldoModel(
-                worth: doc["worth"],
-              
-              ),
-            )
-            .toList());
-  }
-Stream<List<AccountTransactionHistoryModel>> getAccountTransactionHistory() {
-    return dataBase
-        .collection("Users")
-        .doc("JeK52txUc6cwKGEF9Yjk")
-        .collection("personal_account").doc("saldo").collection("transaction history")
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map(
-              (doc) => AccountTransactionHistoryModel(
-                date: doc["date"],
-                amount: doc["amount"],
-                operation: doc["operation"],
-              
-              ),
+              (doc) => SavingsSaldoModel(
+                  interestRate: doc["interests_percentage"],
+                  savingsGoal: doc["savings goal"],
+                  goalDate: doc["goal_date"].toDate()),
             )
             .toList());
   }
 
+  Future<void> updateSavingGoal(
+      {required Timestamp? date, required int? goal}) {
+    return dataBase
+        .collection("Users")
+        .doc("JeK52txUc6cwKGEF9Yjk")
+        .collection("saving account")
+        .doc("saldo")
+        .update({"savings goal": goal, "goal_date": date});
+  }
+
+  // ALL TRANSACTIONS
+  Stream<List<AllTransactionsModel>> getAllTransactions() {
+    return dataBase
+        .collection("Users")
+        .doc("JeK52txUc6cwKGEF9Yjk")
+        .collection("transactions")
+        .orderBy("date")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map(
+              (doc) => AllTransactionsModel(
+                  type: doc["type"],
+                  date: doc["date"].toDate(),
+                  amount: doc["amount"] + 0.0,
+                  operation: doc["operation"],
+                  assetId: doc["asset_id"],
+                  imageUrl: doc["image_url"],
+                  price: doc["price"] + 0.0),
+            )
+            .toList());
+  }
 }

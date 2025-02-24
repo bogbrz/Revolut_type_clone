@@ -33,6 +33,8 @@ abstract class $DrawerStateCopyWith<$Res> {
       _$DrawerStateCopyWithImpl<$Res, DrawerState>;
   @useResult
   $Res call({PersonalInfoModel? model, Status status});
+
+  $PersonalInfoModelCopyWith<$Res>? get model;
 }
 
 /// @nodoc
@@ -64,6 +66,20 @@ class _$DrawerStateCopyWithImpl<$Res, $Val extends DrawerState>
               as Status,
     ) as $Val);
   }
+
+  /// Create a copy of DrawerState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PersonalInfoModelCopyWith<$Res>? get model {
+    if (_value.model == null) {
+      return null;
+    }
+
+    return $PersonalInfoModelCopyWith<$Res>(_value.model!, (value) {
+      return _then(_value.copyWith(model: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -75,6 +91,9 @@ abstract class _$$InitialImplCopyWith<$Res>
   @override
   @useResult
   $Res call({PersonalInfoModel? model, Status status});
+
+  @override
+  $PersonalInfoModelCopyWith<$Res>? get model;
 }
 
 /// @nodoc

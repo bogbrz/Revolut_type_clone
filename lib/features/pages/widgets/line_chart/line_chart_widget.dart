@@ -3,13 +3,13 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
-import 'package:portfolio/domain/models/crypto_history_model.dart';
 import 'package:portfolio/domain/models/datetime_model.dart';
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
 
 import 'package:portfolio/features/pages/widgets/line_chart/bloc/line_chart_bloc.dart';
-import 'package:unicons/unicons.dart';
 
 class LineChartWidget extends StatelessWidget {
   const LineChartWidget({
@@ -20,6 +20,7 @@ class LineChartWidget extends StatelessWidget {
     this.prices,
     this.unixTime,
     required this.mock,
+    required this.lineChartMode,
     this.timeSeries,
     super.key,
   });
@@ -31,6 +32,7 @@ class LineChartWidget extends StatelessWidget {
   final List<DateTime>? dateTime;
   final double? scale;
   final List<DataModel?>? timeSeries;
+  final LineChartMode lineChartMode;
 
   final bool mock;
 
@@ -55,10 +57,9 @@ class LineChartWidget extends StatelessWidget {
       FlSpot(22, 14.9)
     ];
     return BlocProvider(
-      create: (context) => LineChartBloc(
-          cryptoRepository:
-              CryptoRepository(cryptoDataSource: CryptoDataSource()))
-        ..add(ChartInitial(id: coinId == null ? "bitcoin" : coinId, days: 1)),
+      create: (context) => getIt<LineChartBloc>(
+         )
+        ..add(ChartInitial(id: coinId?? "bitcoin" , days: 1)),
       child: BlocBuilder<LineChartBloc, LineChartState>(
         builder: (context, state) {
           switch (state.status) {
@@ -106,10 +107,15 @@ class LineChartWidget extends StatelessWidget {
                           dotData: FlDotData(
                             show: false,
                           ),
-                          isCurved: true,
-                          spots: mock == true && coinId == null
+                          isCurved: false,
+                          spots: mock == true &&
+                                  coinId == null &&
+                                  lineChartMode == LineChartMode.mock
                               ? mockList
-                              : mock == false && coinId == null
+                              : mock == false &&
+                                      coinId == null &&
+                                      timeSeries != null &&
+                                      lineChartMode == LineChartMode.stock
                                   ? List.generate(timeSeries!.length, (index) {
                                       return FlSpot(
                                           timeSeries![index]!
@@ -118,10 +124,18 @@ class LineChartWidget extends StatelessWidget {
                                               .toDouble(),
                                           timeSeries![index]!.price);
                                     })
-                                  : List.generate(state.prices.length, (index) {
-                                      return FlSpot(state.unixTime[index],
-                                          state.prices[index]);
-                                    }))
+                                  : mock == false &&
+                                          coinId == null &&
+                                          lineChartMode == LineChartMode.savings
+                                      ? List.generate(prices!.length, (index) {
+                                          return FlSpot(
+                                              unixTime![index], prices![index]);
+                                        })
+                                      : List.generate(state.prices.length,
+                                          (index) {
+                                          return FlSpot(state.unixTime[index],
+                                              state.prices[index]);
+                                        }))
                     ],
                   )),
                 ),

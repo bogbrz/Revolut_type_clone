@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:portfolio/domain/data_sources/stock_market_data_source.dart';
-import 'package:portfolio/domain/models/stock_list_model.dart';
-import 'package:portfolio/domain/repositories/stock_market_repository.dart';
+import 'package:portfolio/app/injection/injection_container.dart';
+
 import 'package:portfolio/features/pages/investments_page/single_stock_widget/bloc/single_stock_bloc.dart';
-import 'package:portfolio/features/pages/investments_page/stock_details_page/stock_details_page.dart';
 
 class SingleStockWidget extends StatelessWidget {
   const SingleStockWidget(
@@ -15,9 +13,8 @@ class SingleStockWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SingleStockBloc(
-          stockMarketRepository:
-              StockMarketRepository(dataSource: StockMarketDataSource()))
+      create: (context) => getIt<SingleStockBloc>(
+         )
         ..add(SingleStockInitial(symbol: symbol)),
       child: BlocBuilder<SingleStockBloc, SingleStockState>(
         builder: (context, state) {
