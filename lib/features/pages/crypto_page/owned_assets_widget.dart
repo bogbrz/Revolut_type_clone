@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
 import 'package:portfolio/domain/models/coin_worth_model.dart';
-import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/models/stock_worth_model.dart';
 
 class OwnedAssetsWidget extends StatelessWidget {
@@ -44,7 +43,7 @@ class OwnedAssetsWidget extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.15,
                       ),
                       title: Text(
-                          "${coinWorthModel?[index].coinId ?? stockWorthModel![index].symbol}"),
+                          coinWorthModel?[index].coinId ?? stockWorthModel![index].symbol),
                       subtitle: Text(
                           coinWorthModel?[index].coinAmount.toString() ??
                               stockWorthModel![index].stockAmount.toString()),

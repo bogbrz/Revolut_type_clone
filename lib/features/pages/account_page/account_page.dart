@@ -7,7 +7,7 @@ import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/account_page/cubit/account_page_cubit.dart';
 
-import 'package:portfolio/features/pages/widgets/account_action_buttons.dart';
+import 'package:portfolio/features/pages/widgets/action_buttons_widget.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/automation_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
@@ -115,7 +115,8 @@ class _AccountPageState extends State<AccountPage>
                               }
                             },
                           ),
-                          AccountActionButtons(
+                         ActionButtonsWidget(
+                            pageType: PageType.account,
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           TransactionsHistoryWidget(

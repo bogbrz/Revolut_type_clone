@@ -5,8 +5,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
 import 'package:portfolio/domain/models/coin_balance_model.dart';
-import 'package:portfolio/domain/models/coin_worth_model.dart';
-import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 import 'package:portfolio/domain/models/stock_worth_model.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/domain/repositories/stock_market_repository.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/domain/models/all_transactions_model.dart';
-import 'package:portfolio/domain/models/crypto_transactions_model.dart';
 
 class OperatonsHistoryWidget extends StatelessWidget {
   const OperatonsHistoryWidget(

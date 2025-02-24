@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:portfolio/domain/models/time_stamp_serializer.dart';
 part 'all_transactions_model.freezed.dart';

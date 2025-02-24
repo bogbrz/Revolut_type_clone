@@ -108,13 +108,13 @@ class NewsTile extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  "${article.title}",
+                  article.title,
                   style: Theme.of(context).textTheme.headlineSmall,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "${article.description}",
+                  article.description,
                   style: Theme.of(context).textTheme.bodySmall,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

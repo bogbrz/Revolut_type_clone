@@ -62,8 +62,7 @@ class NetworthPageCubit extends Cubit<NetworthPageState> {
         }
       }
 
-      print(totalBalanceDates);
-      print(totalBalanceHistory);
+     
       emit(NetworthPageState(
           status: Status.success,
           totalBalance: totalBalance,

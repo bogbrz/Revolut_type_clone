@@ -4,7 +4,6 @@ import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/savings_page/interests_widget/cubit/interests_cubit.dart';
-import 'package:portfolio/features/pages/savings_page/interests_widget/interests_widget.dart';
 
 import 'package:unicons/unicons.dart';
 

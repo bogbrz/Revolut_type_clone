@@ -8,12 +8,13 @@ import 'package:portfolio/domain/repositories/firebase_repository.dart';
 
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
 import 'package:portfolio/features/pages/savings_page/interests_widget/cubit/interests_cubit.dart';
+import 'package:portfolio/features/pages/widgets/action_buttons_widget.dart';
 import 'package:portfolio/features/pages/widgets/assets_list_widget.dart';
 import 'package:portfolio/features/pages/widgets/automation_widget.dart';
 
 import 'package:portfolio/features/pages/savings_page/interests_widget/interests_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
-import 'package:portfolio/features/pages/widgets/saving_action_buttons.dart';
+
 import 'package:portfolio/features/pages/savings_page/saving_goal_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 import 'package:portfolio/features/pages/savings_page/transactions_history_widget.dart';
@@ -115,7 +116,8 @@ class _SavingsPageState extends State<SavingsPage>
                               ),
                             ),
                           ),
-                          SavingActionButtons(
+                          ActionButtonsWidget(
+                            pageType: PageType.savings,
                               slidingUpPanelController:
                                   slidingUpPanelController),
                           TransactionsHistoryWidget(

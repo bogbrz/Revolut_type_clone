@@ -48,11 +48,11 @@ class NewsDetailsPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "${articles.title}",
+                        articles.title,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Text(
-                        "${articles.description}",
+                       articles.description,
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],

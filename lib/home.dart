@@ -35,10 +35,10 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       NetWorthPage(),
-                      InvestmentsPage(),
                       AccountPage(),
                       SavingsPage(),
                       CryptoPage(),
+                      InvestmentsPage(),
                     ],
                   );
                 }

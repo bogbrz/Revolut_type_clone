@@ -12,9 +12,10 @@ import 'package:portfolio/features/pages/crypto_page/all_assets_widget.dart';
 
 import 'package:portfolio/features/pages/crypto_page/cubit/crypto_firebase_cubit.dart';
 import 'package:portfolio/features/pages/crypto_page/main_crypto_widget.dart';
-import 'package:portfolio/features/pages/crypto_page/crypto_action_buttons.dart';
+
 import 'package:portfolio/features/pages/crypto_page/highest_changes_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/owned_assets_widget.dart';
+import 'package:portfolio/features/pages/widgets/action_buttons_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
 import 'package:portfolio/features/pages/crypto_page/operatons_history_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
@@ -141,7 +142,8 @@ class _CryptoPageState extends State<CryptoPage> with TickerProviderStateMixin {
                                           ],
                                         )),
                                   ),
-                                  CryptoActionButtons(
+                                  ActionButtonsWidget(
+                                      pageType: PageType.crypto,
                                       slidingUpPanelController:
                                           slidingUpPanelController),
                                   OwnedAssetsWidget(

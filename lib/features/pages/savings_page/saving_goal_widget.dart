@@ -51,7 +51,7 @@ class SavingGoalWidget extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${totalBalance} out of ${state.saldo?[0].savingsGoal}",
+                        "$totalBalance out of ${state.saldo?[0].savingsGoal}",
                         textAlign: TextAlign.left,
                       ),
                     ],

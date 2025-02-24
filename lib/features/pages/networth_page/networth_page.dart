@@ -6,9 +6,10 @@ import 'package:portfolio/app/core/enums.dart';
 import 'package:portfolio/domain/data_sources/firebase_data_source.dart';
 import 'package:portfolio/domain/repositories/firebase_repository.dart';
 import 'package:portfolio/features/pages/networth_page/cubit/networth_page_cubit.dart';
+import 'package:portfolio/features/pages/widgets/action_buttons_widget.dart';
 import 'package:portfolio/features/pages/widgets/pie_chart_widget.dart';
 import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.dart';
-import 'package:portfolio/features/pages/widgets/networth_action_buttons.dart';
+
 
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
@@ -132,6 +133,7 @@ class _NetWorthPageState extends State<NetWorthPage>
                                     ),
                                   ),
                                   ActionButtonsWidget(
+                                    pageType: PageType.netWorth,
                                       slidingUpPanelController:
                                           slidingUpPanelController),
                                   PieChartWidget(

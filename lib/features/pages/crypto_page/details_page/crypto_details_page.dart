@@ -268,7 +268,7 @@ class NewsletterWidget extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 0.35,
             child: NewsInfoWidget(

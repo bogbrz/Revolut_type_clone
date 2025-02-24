@@ -59,7 +59,7 @@ class LineChartWidget extends StatelessWidget {
       create: (context) => LineChartBloc(
           cryptoRepository:
               CryptoRepository(cryptoDataSource: CryptoDataSource()))
-        ..add(ChartInitial(id: coinId == null ? "bitcoin" : coinId, days: 1)),
+        ..add(ChartInitial(id: coinId?? "bitcoin" , days: 1)),
       child: BlocBuilder<LineChartBloc, LineChartState>(
         builder: (context, state) {
           switch (state.status) {
