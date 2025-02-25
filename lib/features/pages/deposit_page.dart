@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class DepositPage extends StatelessWidget {
   DepositPage({super.key});
   final controller = TextEditingController();

@@ -1,8 +1,11 @@
 
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
-
+@RoutePage()
 class AllCryptoListPage extends StatelessWidget {
   const AllCryptoListPage({super.key, required this.models});
   final List<CryptoInfoModel?> models;
@@ -40,8 +43,8 @@ class AllCryptoListPage extends StatelessWidget {
               final model = models[index];
               return ListTile(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CryptoDetailsPage(id: model!.id!)));
+                   context.pushRoute(CryptoDetailsRoute(id: model!.id!));
+                 
                 },
                 leading: Image.network( model?.image ?? ""),
               

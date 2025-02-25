@@ -15,9 +15,7 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DrawerCubit>(
-         )
-        ..getPersonalInfo(),
+      create: (context) => getIt<DrawerCubit>()..getPersonalInfo(),
       child: Drawer(
         backgroundColor: const Color.fromARGB(98, 0, 0, 0),
         child: Padding(
@@ -43,20 +41,46 @@ class DrawerWidget extends StatelessWidget {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            child: Image.network(
-                              state.model?.imageUrl ?? "",
-                              fit: BoxFit.scaleDown,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 8),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              child: Image.network(
+                                state.model?.imageUrl ?? "",
+                                fit: BoxFit.scaleDown,
+                                scale: 1.5,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  MediaQuery.of(context).size.width * 0.25),
                             ),
-                            radius: MediaQuery.of(context).size.width * 0.25,
-                          ),
-                          Text(state.model?.name ?? ""),
-                          Text(state.model?.phoneNumber.toString() ?? ""),
-                          Text(state.model?.email ?? ""),
-                          Text(state.model?.nationality ?? ""),
-                        ],
+                            Row(
+                              children: [
+                                Text(
+                                    textAlign: TextAlign.justify,
+                                    "Name: ${state.model?.name ?? ""}"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                    "Phone: ${state.model?.phoneNumber.toString() ?? ""}"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text("Email: ${state.model?.email ?? ""}"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                    "country: ${state.model?.nationality ?? ""}"),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       Column(
                         children: [

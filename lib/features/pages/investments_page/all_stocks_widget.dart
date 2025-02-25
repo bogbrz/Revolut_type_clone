@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/injection/injection_container.dart';
-
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 
 import 'package:portfolio/features/pages/investments_page/bloc/investments_bloc.dart';
 import 'package:portfolio/features/pages/investments_page/single_stock_widget/single_stock_widget.dart';
@@ -15,9 +16,7 @@ class AllStocksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<InvestmentsBloc>(
-        )
-        ..add(InvestmentsInitial()),
+      create: (context) => getIt<InvestmentsBloc>()..add(InvestmentsInitial()),
       child: BlocBuilder<InvestmentsBloc, InvestmentsState>(
           builder: (context, state) {
         switch (state.status) {
@@ -59,10 +58,9 @@ class AllStocksWidget extends StatelessWidget {
                           onTap: state.model?.data == null
                               ? null
                               : () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => StockDetailsPage(
-                                            model: state.model!.data![index],
-                                          )));
+                                  context.pushRoute(StockDetailsRoute(
+                                    model: state.model!.data![index],
+                                  ));
                                 },
                           child: SingleStockWidget(
                             name: state.model?.data?[index].name ?? "",

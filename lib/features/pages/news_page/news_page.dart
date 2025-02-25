@@ -1,12 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/injection/injection_container.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 
 import 'package:portfolio/domain/models/news_model.dart';
 
 import 'package:portfolio/features/pages/news_page/bloc/news_page_bloc.dart';
 import 'package:portfolio/features/pages/news_page/news_details_page.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class NewsPage extends StatelessWidget {
   const NewsPage({super.key, required this.topic});
   final String? topic;
@@ -45,11 +48,10 @@ class NewsPage extends StatelessWidget {
                             padding: const EdgeInsets.all(16.0),
                             child: InkWell(
                               onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => NewsDetailsPage(
-                                          articles:
-                                              state.model!.articles[index],
-                                        )));
+                                    context.pushRoute(NewsDetailsRoute(
+                                    articles: state.model!.articles[index],
+                                  ));
+                              
                               },
                               child: NewsTile(
                                 articles: state.model!.articles[index],

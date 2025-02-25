@@ -18,7 +18,8 @@ import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/savings_page/saving_goal_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 import 'package:portfolio/features/pages/savings_page/transactions_history_widget.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class SavingsPage extends StatefulWidget {
   const SavingsPage({
     super.key,

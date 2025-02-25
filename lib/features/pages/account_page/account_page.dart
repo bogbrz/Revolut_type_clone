@@ -1,4 +1,5 @@
 import 'package:animate_gradient/animate_gradient.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
@@ -13,7 +14,7 @@ import 'package:portfolio/features/pages/widgets/automation_widget.dart';
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
 import 'package:portfolio/features/pages/savings_page/transactions_history_widget.dart';
-
+@RoutePage()
 class AccountPage extends StatefulWidget {
   const AccountPage({
     super.key,

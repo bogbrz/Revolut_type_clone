@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +6,9 @@ import 'package:intl/intl.dart';
 import 'package:portfolio/app/injection/injection_container.dart';
 
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
+import 'package:auto_route/annotations.dart';
 
+@RoutePage()
 class SetGoalPage extends StatefulWidget {
   const SetGoalPage(
       {super.key, required this.currentDate, required this.currentGoal});
@@ -40,8 +43,7 @@ class _SetGoalPageState extends State<SetGoalPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<SavingsPageCubit>(
-          ),
+      create: (context) => getIt<SavingsPageCubit>(),
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
@@ -103,7 +105,7 @@ class _SetGoalPageState extends State<SetGoalPage> {
                                 goal: controller.text.isEmpty
                                     ? widget.currentGoal!
                                     : int.parse(controller.text));
-                            Navigator.of(context).pop();
+                            context.maybePop();
                           },
                           child: Text(
                             "Confirm",

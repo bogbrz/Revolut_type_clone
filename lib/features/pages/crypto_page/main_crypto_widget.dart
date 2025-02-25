@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
@@ -48,11 +50,7 @@ class TileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => CryptoDetailsPage(id: model!.id!),
-          ),
-        );
+        context.pushRoute(CryptoDetailsRoute(id: model!.id!));
       },
       child: Container(
         margin: EdgeInsets.only(

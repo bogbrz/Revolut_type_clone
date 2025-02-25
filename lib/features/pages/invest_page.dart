@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class InvestPage extends StatefulWidget {
   const InvestPage({super.key});
 

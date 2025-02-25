@@ -1,6 +1,9 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/domain/data_sources/crypto_data_source.dart';
 
 import 'package:portfolio/domain/repositories/crypto_repository.dart';
@@ -15,7 +18,7 @@ import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.da
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 import 'package:unicons/unicons.dart';
-
+@RoutePage()
 class CryptoDetailsPage extends StatelessWidget {
   const CryptoDetailsPage({super.key, required this.id});
 
@@ -255,10 +258,8 @@ class NewsletterWidget extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => NewsPage(
-                            topic: id,
-                          )));
+                   context.pushRoute(NewsRoute(topic:id ));
+                 
                 },
                 child: Text(
                   "Show all",

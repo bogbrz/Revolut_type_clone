@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/domain/models/news_model.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class NewsDetailsPage extends StatelessWidget {
  const NewsDetailsPage({super.key, required this.articles});
   final Article articles;

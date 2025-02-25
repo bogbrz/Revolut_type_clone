@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 import 'package:portfolio/app/core/enums.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/features/pages/deposit_page.dart';
 import 'package:portfolio/features/pages/invest_page.dart';
 
@@ -24,14 +26,16 @@ class ActionButtonsWidget extends StatelessWidget {
           children: [
             IconButton.filledTonal(
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  if (pageType == PageType.account ||
-                      pageType == PageType.savings) {
-                    return DepositPage();
-                  }
-                  return InvestPage();
-                }));
+                if (pageType == PageType.account ||
+                    pageType == PageType.savings) {
+                  context.navigateTo(DepositRoute());
+                } else if ((pageType == PageType.crypto ||
+                    pageType == PageType.invest ||
+                    pageType == PageType.netWorth)) {
+                  context.navigateTo(InvestRoute());
+                } else {
+                  context.maybePop();
+                }
               },
               icon: pageType == PageType.account || pageType == PageType.savings
                   ? Icon(Icons.add)
@@ -71,8 +75,7 @@ class ActionButtonsWidget extends StatelessWidget {
               onPressed: () {
                 pageType == PageType.netWorth || pageType == PageType.invest
                     ? slidingUpPanelController.anchor()
-                    : Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => SavingsDetailsPage()));
+                    : context.pushRoute(SavingsDetailsRoute());
               },
               icon: Icon(pageType == PageType.account
                   ? Icons.account_balance

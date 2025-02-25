@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/features/pages/savings_page/cubit/savings_page_cubit.dart';
 import 'package:portfolio/features/pages/savings_page/set_goal_page.dart';
 
@@ -25,11 +27,10 @@ class SavingGoalWidget extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => SetGoalPage(
-                        currentDate: state.saldo?[0].goalDate,
-                        currentGoal: state.saldo?[0].savingsGoal,
-                      )));
+              context.pushRoute(SetGoalRoute(
+                currentDate: state.saldo?[0].goalDate,
+                currentGoal: state.saldo?[0].savingsGoal,
+              ));
             },
             child: Container(
               padding: const EdgeInsets.all(16),

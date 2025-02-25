@@ -17,7 +17,8 @@ import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.da
 
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:portfolio/features/pages/widgets/sliding_panel_widget.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class InvestmentsPage extends StatefulWidget {
   const InvestmentsPage({
     super.key,

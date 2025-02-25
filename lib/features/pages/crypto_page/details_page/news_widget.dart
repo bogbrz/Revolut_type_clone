@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/domain/data_sources/news_data_source.dart';
 import 'package:portfolio/domain/models/news_model.dart';
 import 'package:portfolio/domain/repositories/news_repository.dart';
@@ -15,7 +17,6 @@ class NewsInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
- 
     return BlocProvider(
       create: (context) => NewsPageBloc(
           newsRepository: NewsRepository(newsDataSource: NewsDataSource()))
@@ -52,11 +53,9 @@ class NewsInfoWidget extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => NewsDetailsPage(
-                                            articles:
-                                                state.model!.articles[index],
-                                          )));
+                                  context.pushRoute(NewsDetailsRoute(
+                                    articles: state.model!.articles[index],
+                                  ));
                                 },
                                 child: SmallTile(
                                   isSmall: true,

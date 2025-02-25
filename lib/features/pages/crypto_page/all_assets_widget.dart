@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/app/routes/auto_router.gr.dart';
 import 'package:portfolio/domain/models/crypto_info_model.dart';
 import 'package:portfolio/features/pages/crypto_page/details_page/crypto_details_page.dart';
 
@@ -39,9 +41,8 @@ class AllAssetsWidget extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => CryptoDetailsPage(
-                                  id: cryptoInfoModel![index]!.id!)));
+                          context.pushRoute(CryptoDetailsRoute(
+                              id: cryptoInfoModel![index]!.id!));
                         },
                         child: Column(
                           children: [
@@ -72,10 +73,8 @@ class AllAssetsWidget extends StatelessWidget {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AllCryptoListPage(
-                                models: cryptoInfoModel!,
-                              )));
+                      context.pushRoute(
+                          AllCryptoListRoute(models: cryptoInfoModel!));
                     },
                     child: Text("View all"))
               ],
@@ -124,8 +123,9 @@ class AllCryptoListPage extends StatelessWidget {
               final model = models[index];
               return ListTile(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CryptoDetailsPage(id: model!.id!)));
+                     context.pushRoute(CryptoDetailsRoute(
+                            id: model!.id!));
+             
                 },
                 leading: Image.network(model?.image ?? ""),
                 title: Text(

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:portfolio/app/core/enums.dart';
@@ -12,7 +13,8 @@ import 'package:portfolio/features/pages/widgets/line_chart/line_chart_widget.da
 import 'package:portfolio/features/pages/widgets/page_end_text_widget.dart';
 import 'package:segmented_button_slide/segmented_button_slide.dart';
 import 'package:unicons/unicons.dart';
-
+import 'package:auto_route/annotations.dart';
+@RoutePage()
 class StockDetailsPage extends StatelessWidget {
   const StockDetailsPage({
     super.key,
