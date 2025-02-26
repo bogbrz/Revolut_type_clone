@@ -1,16 +1,7 @@
-# portfolio
+# Revolut type clone app
 
-A new Flutter project.
+Revoult type clone app written in flutter.
 
-## Getting Started
+![Screenshot_1740599136](https://github.com/user-attachments/assets/876ff1c6-6cbf-4557-8065-6badd091b978) ![Screenshot_1740599151](https://github.com/user-attachments/assets/c19c3bdf-6b0e-41af-b1b6-f718fcff5674) ![Screenshot_1740599598](https://github.com/user-attachments/assets/49555409-4830-4338-a3cc-5874100080ed)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
